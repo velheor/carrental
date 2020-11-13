@@ -6,6 +6,7 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'war'
 }
 
 allprojects {
@@ -16,6 +17,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'war'
 
     repositories {
         mavenCentral()
@@ -23,6 +25,9 @@ subprojects {
 
     test {
         useJUnitPlatform()
+    }
+    dependencies {
+        compile group: 'org.springframework', name: 'spring-context', version: "${springVersion}"
     }
 }
 
