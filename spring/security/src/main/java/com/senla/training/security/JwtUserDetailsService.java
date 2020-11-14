@@ -1,7 +1,5 @@
 package com.senla.training.security;
 
-import com.senla.training.dao.api.IUserDAO;
-import com.senla.training.domain.User;
 import com.senla.training.security.jwt.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
