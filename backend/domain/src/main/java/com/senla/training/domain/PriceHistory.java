@@ -7,19 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "price_history")
-public class PriceHistory {
+public class PriceHistory implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "price", nullable = false)
-    private double price;
+    private Double price;
 
     @Basic
     @Column(name = "price_date", nullable = false)
@@ -29,19 +30,19 @@ public class PriceHistory {
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
     private Car car;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -7,12 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.Collection;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Model {
+@Table(name = "models")
+public class Model implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -25,7 +27,7 @@ public class Model {
     @Column(name = "manufacturer_country", nullable = false, length = 45)
     private String manufacturerCountry;
 
-    @OneToMany(mappedBy = "modelsByModelsId")
+    @OneToMany(mappedBy = "model")
     private List<Car> cars;
 
     @ManyToOne

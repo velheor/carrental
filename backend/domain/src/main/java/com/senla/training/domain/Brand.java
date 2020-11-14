@@ -5,11 +5,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Brand {
+@Table(name = "brands")
+public class Brand implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
@@ -18,7 +21,7 @@ public class Brand {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @OneToMany(mappedBy = "brands")
+    @OneToMany(mappedBy = "brand")
     private List<Model> models;
 
     public int getId() {

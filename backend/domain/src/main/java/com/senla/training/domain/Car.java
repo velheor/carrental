@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Car {
+@Table(name = "cars")
+public class Car implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

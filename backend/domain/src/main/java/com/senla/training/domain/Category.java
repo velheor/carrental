@@ -7,11 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Category {
+@Table(name = "categories")
+public class Category implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -20,14 +23,14 @@ public class Category {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "category")
     private List<Car> cars;
 
     @ManyToOne
     @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "category")
     private List<Category> categories;
 
     public int getId() {

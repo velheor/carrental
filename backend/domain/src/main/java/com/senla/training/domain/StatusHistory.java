@@ -7,14 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "status_history")
-public class StatusHistory {
+public class StatusHistory implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 45)
@@ -28,11 +29,11 @@ public class StatusHistory {
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
     private Rent rent;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

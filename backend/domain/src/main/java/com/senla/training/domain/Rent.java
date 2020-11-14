@@ -7,15 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Rent {
+@Table(name = "rents")
+public class Rent implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "from_date", nullable = false)
@@ -45,14 +48,14 @@ public class Rent {
     @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
     private Car car;
 
-    @OneToMany(mappedBy = "rents")
+    @OneToMany(mappedBy = "rent")
     private List<StatusHistory> statusHistoryList;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
