@@ -1,5 +1,7 @@
 package com.senla.training.security;
 
+import com.senla.training.IUserDAO;
+import com.senla.training.domain.User;
 import com.senla.training.security.jwt.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDAO.findByCriteriaObject("name", username);
+        User user = userDAO.findOneByCriteria("name", username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User with username: " + username + " not found");

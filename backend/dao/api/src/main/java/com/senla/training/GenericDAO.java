@@ -37,7 +37,5 @@ public interface GenericDAO<T extends Serializable> {
 
     List<T> findAndSort(Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-    List<T> findContain(String field, Object criteria);
-
-    List<T> findBetweenNumbers(String field, Number firstNumber, Number secondNumber);
+    List<T> findContain(String field, String criteria);
 }
