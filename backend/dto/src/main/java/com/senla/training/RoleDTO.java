@@ -1,3 +1,5 @@
+package com.senla.training;
+
 import java.util.List;
 
 public class RoleDTO {

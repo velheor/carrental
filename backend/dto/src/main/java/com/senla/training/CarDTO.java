@@ -1,3 +1,5 @@
+package com.senla.training;
+
 import java.sql.Date;
 import java.util.List;
 

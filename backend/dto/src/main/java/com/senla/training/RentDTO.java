@@ -1,7 +1,9 @@
+package com.senla.training;
+
 import java.sql.Date;
 import java.util.List;
 
-public class StatusHistoryDTO {
+public class RentDTO {
     private Integer id;
 
     private Date fromDate;
