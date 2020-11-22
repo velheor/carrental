@@ -1,8 +1,10 @@
-package com.senla.training.domain;
+package com.senla.training;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +21,8 @@ public class Brand implements Serializable {
 
     @Basic
     @Column(name = "name", nullable = false, length = 45)
-    private String name;
+    @Enumerated(value = EnumType.STRING)
+    private BrandName name;
 
     @OneToMany(mappedBy = "brand")
     private List<Model> models;
@@ -32,11 +35,11 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public BrandName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(BrandName name) {
         this.name = name;
     }
 

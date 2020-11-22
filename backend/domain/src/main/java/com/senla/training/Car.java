@@ -1,8 +1,10 @@
-package com.senla.training.domain;
+package com.senla.training;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,11 +28,13 @@ public class Car implements Serializable {
 
     @Basic
     @Column(name = "car_type", nullable = false, length = 25)
-    private String carType;
+    @Enumerated(value = EnumType.STRING)
+    private CarType carType;
 
     @Basic
-    @Column(name = "fuel_type", nullable = false, length = 45)
-    private String fuelType;
+    @Column(name = "fuel_type", nullable = false, length = 25)
+    @Enumerated(value = EnumType.STRING)
+    private FuelType fuelType;
 
     @Basic
     @Column(name = "production_date", nullable = false)
@@ -58,19 +62,19 @@ public class Car implements Serializable {
         this.id = id;
     }
 
-    public String getCarType() {
+    public CarType getCarType() {
         return carType;
     }
 
-    public void setCarType(String carType) {
+    public void setCarType(CarType carType) {
         this.carType = carType;
     }
 
-    public String getFuelType() {
+    public FuelType getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(String fuelType) {
+    public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
     }
 

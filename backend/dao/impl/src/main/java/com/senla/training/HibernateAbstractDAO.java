@@ -35,7 +35,7 @@ public abstract class HibernateAbstractDAO<T extends Serializable> implements Ge
     }
 
     @Override
-    public List<T> findAll() {
+    public  List<T> findAll() {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(getType());
         Root<T> c = q.from(getType());

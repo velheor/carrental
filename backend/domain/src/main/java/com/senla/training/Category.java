@@ -1,4 +1,4 @@
-package com.senla.training.domain;
+package com.senla.training;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
