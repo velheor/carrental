@@ -1,7 +1,5 @@
 package com.senla.training;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "roles")
@@ -28,18 +24,10 @@ public class Role implements Serializable {
     @Basic
     @Column(name = "name", nullable = false, length = 45)
     @Enumerated(value = EnumType.STRING)
-    private String name;
+    private ERole name;
 
-    @Basic
-    @Column(name = "permission")
-    private final Set<Permission> permissions;
-
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
-
-    public Role(Set<Permission> permissions) {
-        this.permissions = permissions;
-    }
 
     public Long getId() {
         return id;
@@ -49,11 +37,11 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public ERole getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(ERole name) {
         this.name = name;
     }
 
@@ -63,15 +51,5 @@ public class Role implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public Set<Permission> getPermissions() {
-        return permissions;
-    }
-
-    public Set<SimpleGrantedAuthority> getAuthorities() {
-        return getPermissions().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toSet());
     }
 }

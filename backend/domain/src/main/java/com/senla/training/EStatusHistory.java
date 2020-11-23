@@ -1,6 +1,6 @@
 package com.senla.training;
 
-public enum StatusHistoryName {
+public enum EStatusHistory {
     ACTIVE,
     CANCEL,
     START,

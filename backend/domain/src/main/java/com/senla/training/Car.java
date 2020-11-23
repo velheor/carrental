@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,12 +30,12 @@ public class Car implements Serializable {
     @Basic
     @Column(name = "car_type", nullable = false, length = 25)
     @Enumerated(value = EnumType.STRING)
-    private CarType carType;
+    private ECarType carType;
 
     @Basic
     @Column(name = "fuel_type", nullable = false, length = 25)
     @Enumerated(value = EnumType.STRING)
-    private FuelType fuelType;
+    private EFuelType fuelType;
 
     @Basic
     @Column(name = "production_date", nullable = false)
@@ -44,7 +45,7 @@ public class Car implements Serializable {
     @Column(name = "transmission", nullable = false)
     private Boolean transmission;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
     private Category category;
 
@@ -62,19 +63,19 @@ public class Car implements Serializable {
         this.id = id;
     }
 
-    public CarType getCarType() {
+    public ECarType getCarType() {
         return carType;
     }
 
-    public void setCarType(CarType carType) {
+    public void setCarType(ECarType carType) {
         this.carType = carType;
     }
 
-    public FuelType getFuelType() {
+    public EFuelType getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(FuelType fuelType) {
+    public void setFuelType(EFuelType fuelType) {
         this.fuelType = fuelType;
     }
 

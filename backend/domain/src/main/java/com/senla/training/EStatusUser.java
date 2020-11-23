@@ -1,5 +1,5 @@
 package com.senla.training;
 
-public enum Status {
+public enum EStatusUser {
     ACTIVE, BANNED
 }

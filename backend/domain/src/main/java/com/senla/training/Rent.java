@@ -3,11 +3,14 @@ package com.senla.training;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -22,29 +25,33 @@ public class Rent implements Serializable {
 
     @Basic
     @Column(name = "from_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fromDate;
 
     @Basic
     @Column(name = "to_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date toDate;
 
     @Basic
     @Column(name = "checkin_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date checkinDate;
 
     @Basic
     @Column(name = "checkout_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date checkoutDate;
 
     @Basic
     @Column(name = "total_price", nullable = false, precision = 0)
     private Double totalPrice;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
     private Car car;
 

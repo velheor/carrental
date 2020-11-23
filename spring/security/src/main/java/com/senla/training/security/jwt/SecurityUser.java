@@ -1,7 +1,7 @@
 package com.senla.training.security.jwt;
 
+import com.senla.training.EStatusUser;
 import com.senla.training.Role;
-import com.senla.training.Status;
 import com.senla.training.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,12 +28,18 @@ public class SecurityUser implements UserDetails {
     public static UserDetails fromUser(User user) {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                user.getStatus().equals(Status.ACTIVE),
-                mapToGrantedAuthorities(user.getRoles())
-        );
+                user.getStatusUser().equals(EStatusUser.ACTIVE),
+                user.getStatusUser().equals(EStatusUser.ACTIVE),
+                user.getStatusUser().equals(EStatusUser.ACTIVE),
+                user.getStatusUser().equals(EStatusUser.ACTIVE),
+                mapToGrantedAuthorities(user.getRoles()));
+    }
+
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
+        return userRoles.stream()
+                .map(role ->
+                        new SimpleGrantedAuthority(role.getName().toString())
+                ).collect(Collectors.toList());
     }
 
     @Override
@@ -69,12 +75,5 @@ public class SecurityUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive;
-    }
-
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
-        return userRoles.stream()
-                .map(role ->
-                        new SimpleGrantedAuthority(role.getName())
-                ).collect(Collectors.toList());
     }
 }

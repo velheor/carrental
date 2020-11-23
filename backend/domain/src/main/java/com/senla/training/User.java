@@ -45,7 +45,7 @@ public class User implements Serializable {
     @Basic
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false, length = 45)
-    private Status status;
+    private EStatusUser statusUser;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -96,12 +96,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public Status getStatus() {
-        return status;
+    public EStatusUser getStatusUser() {
+        return statusUser;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatusUser(EStatusUser statusUser) {
+        this.statusUser = statusUser;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class User implements Serializable {
                 getFirstName().equals(user.getFirstName()) &&
                 getSecondName().equals(user.getSecondName()) &&
                 getEmail().equals(user.getEmail()) &&
-                getStatus().equals(user.getStatus()) &&
+                getStatusUser().equals(user.getStatusUser()) &&
                 Objects.equals(getPassword(), user.getPassword()) &&
                 Objects.equals(getRoles(), user.getRoles()) &&
                 Objects.equals(getRents(), user.getRents());

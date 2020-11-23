@@ -5,7 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -22,9 +24,9 @@ public class Brand implements Serializable {
     @Basic
     @Column(name = "name", nullable = false, length = 45)
     @Enumerated(value = EnumType.STRING)
-    private BrandName name;
+    private EBrand name;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Model> models;
 
     public int getId() {
@@ -35,11 +37,11 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public BrandName getName() {
+    public EBrand getName() {
         return name;
     }
 
-    public void setName(BrandName name) {
+    public void setName(EBrand name) {
         this.name = name;
     }
 

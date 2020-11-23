@@ -3,6 +3,7 @@ package com.senla.training;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +27,7 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category")
     private List<Car> cars;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
     private Category category;
 

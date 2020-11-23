@@ -1,6 +1,6 @@
 package com.senla.training;
 
-public enum BrandName {
+public enum EBrand {
     ACURA,
     AUDI,
     BMW,
