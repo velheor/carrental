@@ -1,0 +1,4 @@
+dependencies {
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+    compile project(':backend:domain'), project(':backend:dto')
+}
