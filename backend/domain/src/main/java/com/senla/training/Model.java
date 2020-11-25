@@ -17,22 +17,22 @@ import java.util.List;
 import java.util.Objects;
 
 @NamedEntityGraph(
-        name = "userWithRolesAndRents",
+        name = "modelWithCarsAndBrand",
         attributeNodes = {
-                @NamedAttributeNode("rents"),
-                @NamedAttributeNode("roles")
+                @NamedAttributeNode("cars"),
+                @NamedAttributeNode("brand")
         })
 @NamedEntityGraph(
         name = "userWithRolesAndRentsAndCar",
         attributeNodes = {
-                @NamedAttributeNode(value = "rents", subgraph = "rentsWithCar"),
-                @NamedAttributeNode("roles")
+                @NamedAttributeNode(value = "cars", subgraph = "carsWithModel"),
+                @NamedAttributeNode("brand")
         },
         subgraphs = {
                 @NamedSubgraph(
-                        name = "rentsWithCar",
+                        name = "carsWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                                @NamedAttributeNode(value = "model")
                         }
                 )
         }

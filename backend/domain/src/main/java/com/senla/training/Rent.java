@@ -23,20 +23,22 @@ import java.util.Objects;
         name = "rentWithUsersAndCars",
         attributeNodes = {
                 @NamedAttributeNode("users"),
-                @NamedAttributeNode("cars")
+                @NamedAttributeNode("car"),
+                @NamedAttributeNode("statusHistoryList")
         }
 )
 @NamedEntityGraph(
         name = "rentWithUsersAndCarsAndModels",
         attributeNodes = {
                 @NamedAttributeNode("users"),
-                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+                @NamedAttributeNode(value = "car", subgraph = "carWithModel"),
+                @NamedAttributeNode("statusHistoryList")
         },
         subgraphs = {
                 @NamedSubgraph(
                         name = "carWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                                @NamedAttributeNode(value = "model")
                         }
                 )
         }

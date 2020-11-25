@@ -20,12 +20,12 @@ import java.sql.Date;
 import java.util.Objects;
 
 @NamedEntityGraph(
-        name = "statusHistoryWithRents",
+        name = "statusHistoryWithRent",
         attributeNodes = {
                 @NamedAttributeNode("rent"),
         })
 @NamedEntityGraph(
-        name = "statusHistoryWithRentsAndCar",
+        name = "statusHistoryWithRentAndCar",
         attributeNodes = {
                 @NamedAttributeNode(value = "rent", subgraph = "rentWithCar"),
         },

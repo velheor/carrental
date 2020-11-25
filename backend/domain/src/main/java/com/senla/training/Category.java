@@ -35,7 +35,7 @@ import java.util.Objects;
                 @NamedSubgraph(
                         name = "carWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+                                @NamedAttributeNode("model")
                         }
                 )
         }
