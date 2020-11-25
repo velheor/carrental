@@ -7,12 +7,39 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "categoryWithCarsAndCategoryAndCategories",
+        attributeNodes = {
+                @NamedAttributeNode("cars"),
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("categories")
+        }
+)
+@NamedEntityGraph(
+        name = "categoryWithCarsAndCategoryAndCategoriesAndModels",
+        attributeNodes = {
+                @NamedAttributeNode(value = "cars", subgraph = "carWithModel"),
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("categories"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "carWithModel",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "categories")
 public class Category implements Serializable {

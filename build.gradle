@@ -31,6 +31,15 @@ subprojects {
     }
 }
 
+dependencies {
+    war.doLast {
+        copy {
+            from war.archiveFile
+            into "G:/Ide/apache-tomcat-9.0.38/webapps"
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 }

@@ -1,4 +1,4 @@
 package com.senla.training;
 
-public interface ICategoryDAO extends GenericDAO<Category> {
+public interface ICategoryDAO extends IGenericDAO<Category> {
 }

@@ -5,19 +5,35 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "userWithRolesAndRentsAndCar",
+        attributeNodes = {
+                @NamedAttributeNode(value = "rents", subgraph = "rentsWithCar"),
+                @NamedAttributeNode("roles")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "rentsWithCar",
+                        attributeNodes = {
+                                @NamedAttributeNode("car")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -47,7 +63,6 @@ public class User implements Serializable {
     @Column(name = "status", nullable = false, length = 45)
     private EStatusUser statusUser;
 
-    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

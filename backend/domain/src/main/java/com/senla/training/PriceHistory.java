@@ -7,11 +7,34 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "priceHistoryWithCar",
+        attributeNodes = {
+                @NamedAttributeNode(value = "car")
+        }
+)
+@NamedEntityGraph(
+        name = "priceHistoryWithCarAndModel",
+        attributeNodes = {
+                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "carWithModel",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {
@@ -60,7 +83,7 @@ public class PriceHistory implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PriceHistory that = (PriceHistory) o;
-        return id == that.id &&
+        return id.equals(that.id) &&
                 Double.compare(that.price, price) == 0 &&
                 Objects.equals(priceDate, that.priceDate);
     }

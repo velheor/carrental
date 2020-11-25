@@ -1,10 +1,9 @@
 package com.senla.training;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public interface GenericDAO<T extends Serializable> {
+public interface IGenericDAO<T> {
     T findById(int id);
 
     List<T> findAll();
@@ -15,7 +14,7 @@ public interface GenericDAO<T extends Serializable> {
 
     void delete(T entity);
 
-    void deleteById(int entityId);
+    void deleteById(int id);
 
     List<T> sortWithDirection(String field, Direction direction);
 

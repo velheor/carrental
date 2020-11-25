@@ -1,4 +1,4 @@
 package com.senla.training;
 
-public interface IPriceHistory extends GenericDAO<PriceHistory> {
+public interface IPriceHistory extends IGenericDAO<PriceHistory> {
 }

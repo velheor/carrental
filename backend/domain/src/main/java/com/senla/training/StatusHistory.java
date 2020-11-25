@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +19,25 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "statusHistoryWithRents",
+        attributeNodes = {
+                @NamedAttributeNode("rent"),
+        })
+@NamedEntityGraph(
+        name = "statusHistoryWithRentsAndCar",
+        attributeNodes = {
+                @NamedAttributeNode(value = "rent", subgraph = "rentWithCar"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "rentWithCar",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "car")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "status_history")
 public class StatusHistory implements Serializable {

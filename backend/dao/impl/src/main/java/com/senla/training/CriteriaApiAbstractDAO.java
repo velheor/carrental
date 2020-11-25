@@ -7,20 +7,19 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public abstract class HibernateAbstractDAO<T extends Serializable> implements GenericDAO<T> {
+public abstract class CriteriaApiAbstractDAO<T> {
 
     private final Class<T> type;
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public HibernateAbstractDAO() {
+    CriteriaApiAbstractDAO() {
         this.type = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
@@ -29,48 +28,8 @@ public abstract class HibernateAbstractDAO<T extends Serializable> implements Ge
         return this.type;
     }
 
-    @Override
-    public T findById(int id) {
-        return entityManager.find(getType(), id);
-    }
-
-    @Override
-    public  List<T> findAll() {
-        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> q = cb.createQuery(getType());
-        Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c));
-    }
-
-    @Override
-    public T create(T entity) {
-        entityManager.persist(entity);
-        return entity;
-    }
-
-    @Override
-    public T update(T entity) {
-        return entityManager.merge(entity);
-    }
-
-    @Override
-    public void delete(T entity) {
-        entityManager.remove(entity);
-    }
-
-    @Override
-    public void deleteById(int entityId) {
-        delete(findById(entityId));
-    }
-
-    @Override
-    public List<T> sortWithDirection(String field, Direction direction) {
-        return getListOfObjects(sortByCriteriaQuery(Map.of(field, direction)));
-    }
-
-    @Override
-    public List<T> sortWithDirection(Map<String, Direction> fieldDirectionMap) {
-        return getListOfObjects(sortByCriteriaQuery(fieldDirectionMap));
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
     protected CriteriaQuery<T> sortByCriteriaQuery(Map<String, Direction> fieldDirectionMap) {
@@ -87,21 +46,6 @@ public abstract class HibernateAbstractDAO<T extends Serializable> implements Ge
             }
         });
         return q.orderBy(orders);
-    }
-
-    @Override
-    public T findOneByCriteria(String field, Object criteria) {
-        return entityManager.createQuery(findCriteriaQuery(field, criteria)).getSingleResult();
-    }
-
-    @Override
-    public List<T> findAllByCriteria(String field, Object criteria) {
-        return entityManager.createQuery(findCriteriaQuery(field, criteria)).getResultList();
-    }
-
-    @Override
-    public List<T> findAllByCriteria(Map<String, Object> fieldCriteriaMap) {
-        return entityManager.createQuery(findCriteriaQuery(fieldCriteriaMap)).getResultList();
     }
 
     protected CriteriaQuery<T> findCriteriaQuery(String field, Object criteria) {
@@ -121,41 +65,25 @@ public abstract class HibernateAbstractDAO<T extends Serializable> implements Ge
         return q.select(c).where(predicates.toArray(new Predicate[]{}));
     }
 
-    @Override
-    public List<T> findByNotNull(String field) {
+    protected CriteriaQuery<T> findByNotNullCriteriaQuery(String field) {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(getType());
         Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c).where(cb.isNotNull(c.get(field))));
+        return q.select(c).where(cb.isNotNull(c.get(field)));
     }
 
-    @Override
-    public List<T> findByNull(String field) {
+    protected CriteriaQuery<T> findByNullCriteriaQuery(String field) {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(getType());
         Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c).where(cb.isNull(c.get(field))));
+        return q.select(c).where(cb.isNotNull(c.get(field)));
     }
 
-    @Override
-    public List<T> findLessThan(String field, Number number) {
+    protected CriteriaQuery<T> findLessThanCriteriaQuery(String field, Number number) {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(getType());
         Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c).where(cb.lt(c.get(field), number)));
-    }
-
-    @Override
-    public List<T> findGreaterThan(String field, Number number) {
-        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> q = cb.createQuery(getType());
-        Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c).where(cb.gt(c.get(field), number)));
-    }
-
-    @Override
-    public List<T> findAndSort(Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-        return getListOfObjects(findAndSortByCriteria(fieldDirectionMap, fieldCriteriaMap).distinct(true));
+        return q.select(c).where(cb.lt(c.get(field), number));
     }
 
     protected CriteriaQuery<T> findAndSortByCriteria(Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
@@ -171,14 +99,6 @@ public abstract class HibernateAbstractDAO<T extends Serializable> implements Ge
             }
         });
         return q.orderBy(orders);
-    }
-
-    @Override
-    public List<T> findContain(String field, String criteria) {
-        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> q = cb.createQuery(getType());
-        Root<T> c = q.from(getType());
-        return getListOfObjects(q.select(c).where(cb.like(c.get(field), criteria)));
     }
 
     protected List<T> getListOfObjects(CriteriaQuery<T> criteriaQuery) {

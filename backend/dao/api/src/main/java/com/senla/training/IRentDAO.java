@@ -1,4 +1,4 @@
 package com.senla.training;
 
-public interface IRentDAO extends GenericDAO<Rent> {
+public interface IRentDAO extends IGenericDAO<Rent> {
 }

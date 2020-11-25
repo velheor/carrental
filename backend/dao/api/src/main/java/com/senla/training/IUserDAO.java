@@ -1,4 +1,4 @@
 package com.senla.training;
 
-public interface IUserDAO extends GenericDAO<User> {
+public interface IUserDAO extends IGenericDAO<User> {
 }

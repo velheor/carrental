@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,6 +19,38 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "carWithModelAndCategoryAndPriceHistoryAndRents",
+        attributeNodes = {
+                @NamedAttributeNode("model"),
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("priceHistory"),
+                @NamedAttributeNode("rents")
+        }
+)
+@NamedEntityGraph(
+        name = "carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser",
+        attributeNodes = {
+                @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("priceHistory"),
+                @NamedAttributeNode(value = "rents", subgraph = "rentsWithUser")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "modelWithBrand",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "brand")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "rentsWithUser",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "user")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {
@@ -23,7 +58,7 @@ public class Car implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "models_id", referencedColumnName = "id", nullable = false)
     private Model model;
 
@@ -100,7 +135,7 @@ public class Car implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return id == car.id &&
+        return id.equals(car.id) &&
                 transmission == car.transmission &&
                 Objects.equals(carType, car.carType) &&
                 Objects.equals(fuelType, car.fuelType) &&

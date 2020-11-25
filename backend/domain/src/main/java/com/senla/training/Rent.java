@@ -7,6 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,6 +19,28 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "rentWithUsersAndCars",
+        attributeNodes = {
+                @NamedAttributeNode("users"),
+                @NamedAttributeNode("cars")
+        }
+)
+@NamedEntityGraph(
+        name = "rentWithUsersAndCarsAndModels",
+        attributeNodes = {
+                @NamedAttributeNode("users"),
+                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "carWithModel",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "rents")
 public class Rent implements Serializable {

@@ -17,4 +17,6 @@ findProject(':backend:service:impl')?.name = 'serviceImpl'
 include 'backend:domain'
 include 'spring:security'
 include 'spring:mvc'
+include 'backend:utils'
+findProject(':backend:utils')?.name = 'utils'
 

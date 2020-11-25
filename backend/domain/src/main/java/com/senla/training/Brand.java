@@ -7,13 +7,20 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@NamedEntityGraph(
+        name = "brandWithModels",
+        attributeNodes = {
+                @NamedAttributeNode("models"),
+        }
+)
 @Entity
 @Table(name = "brands")
 public class Brand implements Serializable {

@@ -1,4 +1,4 @@
 package com.senla.training;
 
-public interface IModelDAO extends GenericDAO<Model> {
+public interface IModelDAO extends IGenericDAO<Model> {
 }
