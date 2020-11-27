@@ -1,8 +1,6 @@
 package com.senla.training.config;
 
 import com.senla.training.security.jwt.JwtConfigurer;
-import com.senla.training.security.jwt.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/api/v1/auth/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

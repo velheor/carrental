@@ -23,16 +23,16 @@ import java.util.Objects;
                 @NamedAttributeNode("brand")
         })
 @NamedEntityGraph(
-        name = "userWithRolesAndRentsAndCar",
+        name = "modelWithCarsAndBrandAndModels",
         attributeNodes = {
-                @NamedAttributeNode(value = "cars", subgraph = "carsWithModel"),
-                @NamedAttributeNode("brand")
+                @NamedAttributeNode(value = "cars"),
+                @NamedAttributeNode(value = "brand", subgraph = "brandWithModels")
         },
         subgraphs = {
                 @NamedSubgraph(
-                        name = "carsWithModel",
+                        name = "brandWithModels",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "model")
+                                @NamedAttributeNode(value = "models")
                         }
                 )
         }

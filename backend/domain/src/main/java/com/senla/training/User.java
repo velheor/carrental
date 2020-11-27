@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @NamedEntityGraph(
         name = "userWithRolesAndRentsAndCar",
@@ -63,13 +65,14 @@ public class User implements Serializable {
     @Column(name = "status", nullable = false, length = 45)
     private EStatusUser statusUser;
 
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Rent> rents;
+    private Set<Rent> rents;
 
     public Integer getId() {
         return id;
@@ -139,19 +142,19 @@ public class User implements Serializable {
         return Objects.hash(getId(), getFirstName(), getSecondName(), getEmail(), getPassword(), getRoles(), getRents());
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public List<Rent> getRents() {
+    public Set<Rent> getRents() {
         return rents;
     }
 
-    public void setRents(List<Rent> rents) {
+    public void setRents(Set<Rent> rents) {
         this.rents = rents;
     }
 }

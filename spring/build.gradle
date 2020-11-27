@@ -1,0 +1,3 @@
+dependencies {
+    compile project(':spring:hibernate'), project(':spring:mvc'), project(':spring:security')
+}

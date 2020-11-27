@@ -12,7 +12,7 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @NamedEntityGraph(
@@ -30,7 +30,7 @@ import java.util.Objects;
                 @NamedSubgraph(
                         name = "carWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                                @NamedAttributeNode(value = "model")
                         }
                 )
         }
@@ -39,7 +39,7 @@ import java.util.Objects;
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Integer id;
 
     @Basic
@@ -51,7 +51,7 @@ public class PriceHistory implements Serializable {
     private Date priceDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Car car;
 
     public Integer getId() {

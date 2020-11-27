@@ -66,7 +66,7 @@ public class UserController {
         return userService.findAllByCriteria(field, criteria);
     }
 
-    @GetMapping("/findAllByCriteria")
+    @GetMapping("/findAllByCriteriaMap")
     public List<UserDTO> findAllByCriteria(@RequestParam Map<String, Object> fieldCriteriaMap) {
         return userService.findAllByCriteria(fieldCriteriaMap);
     }

@@ -15,7 +15,7 @@ import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ import java.util.Objects;
         attributeNodes = {
                 @NamedAttributeNode("model"),
                 @NamedAttributeNode("category"),
-                @NamedAttributeNode("priceHistory"),
+                @NamedAttributeNode("priceHistories"),
                 @NamedAttributeNode("rents")
         }
 )
@@ -33,7 +33,7 @@ import java.util.Objects;
         attributeNodes = {
                 @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
                 @NamedAttributeNode("category"),
-                @NamedAttributeNode("priceHistory"),
+                @NamedAttributeNode("priceHistories"),
                 @NamedAttributeNode(value = "rents", subgraph = "rentsWithUser")
         },
         subgraphs = {

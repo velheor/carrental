@@ -21,15 +21,17 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
-@PropertySource({"classpath:application.properties"})
+@PropertySource({"classpath:token.properties"})
 public class JwtTokenProvider {
 
     private final UserDetailsService userDetailsService;
 
     @Value("${jwt.secret}")
     private String secretKey;
+
     @Value("${jwt.header}")
     private String authorizationHeader;
+
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 

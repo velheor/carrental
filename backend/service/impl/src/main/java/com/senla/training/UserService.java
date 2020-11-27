@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserService extends GenericService<UserDTO, User> {
+public class UserService extends GenericService<UserDTO, User> implements IUserService {
 
     private final IUserDAO userDAO;
 

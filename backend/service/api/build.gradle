@@ -1,3 +1,3 @@
 dependencies {
-    compile project(':backend:dao:daoImpl'), project(':backend:dto')
+    compile project(':backend:dao'), project(':backend:dto')
 }

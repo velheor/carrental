@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @NamedEntityGraph(
@@ -42,7 +42,7 @@ import java.util.Objects;
 @Table(name = "status_history")
 public class StatusHistory implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Integer id;
 
     @Basic
@@ -56,7 +56,7 @@ public class StatusHistory implements Serializable {
     private Date statusDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private Rent rent;
 
     public Integer getId() {

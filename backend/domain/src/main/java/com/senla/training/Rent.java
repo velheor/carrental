@@ -15,14 +15,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @NamedEntityGraph(
         name = "rentWithUsersAndCars",
         attributeNodes = {
-                @NamedAttributeNode("users"),
+                @NamedAttributeNode("user"),
                 @NamedAttributeNode("car"),
                 @NamedAttributeNode("statusHistoryList")
         }
@@ -30,7 +30,7 @@ import java.util.Objects;
 @NamedEntityGraph(
         name = "rentWithUsersAndCarsAndModels",
         attributeNodes = {
-                @NamedAttributeNode("users"),
+                @NamedAttributeNode("user"),
                 @NamedAttributeNode(value = "car", subgraph = "carWithModel"),
                 @NamedAttributeNode("statusHistoryList")
         },
@@ -71,7 +71,7 @@ public class Rent implements Serializable {
     private Date checkoutDate;
 
     @Basic
-    @Column(name = "total_price", nullable = false, precision = 0)
+    @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)

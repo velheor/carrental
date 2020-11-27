@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 
 public class SecurityUser implements UserDetails {
     private final String username;
@@ -35,7 +35,7 @@ public class SecurityUser implements UserDetails {
                 mapToGrantedAuthorities(user.getRoles()));
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<Role> userRoles) {
         return userRoles.stream()
                 .map(role ->
                         new SimpleGrantedAuthority(role.getName().toString())

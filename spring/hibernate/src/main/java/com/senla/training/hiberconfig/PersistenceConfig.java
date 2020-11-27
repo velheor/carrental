@@ -20,11 +20,15 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({"classpath:application.properties"})
+@PropertySource({"classpath:hibernate.properties"})
 @ComponentScan({"com.senla.training"})
 public class PersistenceConfig {
-    @Autowired
     private Environment env;
+
+    @Autowired
+    PersistenceConfig(Environment env) {
+        this.env = env;
+    }
 
     public PersistenceConfig() {
         super();
@@ -34,7 +38,7 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.senla.training.domain");
+        em.setPackagesToScan("com.senla.training");
         em.setPersistenceUnitName("org.hibernate.jpa.HibernatePersistenceProvider");
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(false);

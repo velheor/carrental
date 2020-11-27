@@ -1,24 +1,16 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'java'
     id 'war'
 }
 
 allprojects {
+    apply plugin: 'java'
+    apply plugin: 'war'
     group = 'com.senla.training'
-    version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = '1.8'
+    sourceCompatibility = '12'
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'war'
-
     repositories {
         mavenCentral()
     }
@@ -31,13 +23,20 @@ subprojects {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
+
     war.doLast {
         copy {
             from war.archiveFile
             into "G:/Ide/apache-tomcat-9.0.38/webapps"
         }
     }
+
+    compile project(':spring'), project(':backend')
 }
 
 test {
