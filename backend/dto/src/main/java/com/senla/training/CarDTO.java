@@ -6,11 +6,11 @@ import java.util.List;
 public class CarDTO {
     private Integer id;
 
-    private ModelDTO model;
+    private Model model;
 
-    private String carType;
+    private ECarType carType;
 
-    private String fuelType;
+    private EFuelType fuelType;
 
     private Date productionDate;
 
@@ -30,27 +30,27 @@ public class CarDTO {
         this.id = id;
     }
 
-    public ModelDTO getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void setModel(ModelDTO model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 
-    public String getCarType() {
+    public ECarType getCarType() {
         return carType;
     }
 
-    public void setCarType(String carType) {
+    public void setCarType(ECarType carType) {
         this.carType = carType;
     }
 
-    public String getFuelType() {
+    public EFuelType getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(String fuelType) {
+    public void setFuelType(EFuelType fuelType) {
         this.fuelType = fuelType;
     }
 

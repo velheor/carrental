@@ -17,23 +17,23 @@ public abstract class GenericService<DTO, Entity> implements IGenericService<DTO
     }
 
     @Override
-    public DTO convertEntityToDTO(Entity book) {
-        return ObjectMapperUtils.map(book, getTypeDTO());
+    public DTO convertEntityToDTO(Entity entity) {
+        return ObjectMapperUtils.map(entity, getTypeDTO());
     }
 
     @Override
-    public List<DTO> convertEntityToDTO(List<Entity> books) {
-        return ObjectMapperUtils.mapAll(books, getTypeDTO());
+    public List<? extends DTO> convertEntityToDTO(List<Entity> entities) {
+        return ObjectMapperUtils.mapAll(entities, getTypeDTO());
     }
 
     @Override
-    public Entity convertDTOtoEntity(DTO bookDTO) {
-        return ObjectMapperUtils.map(bookDTO, getTypeEntity());
+    public Entity convertDTOtoEntity(DTO dto) {
+        return ObjectMapperUtils.map(dto, getTypeEntity());
     }
 
     @Override
-    public List<Entity> convertDTOtoEntity(List<DTO> bookDTOList) {
-        return ObjectMapperUtils.mapAll(bookDTOList, getTypeEntity());
+    public List<Entity> convertDTOtoEntity(List<DTO> dtoList) {
+        return ObjectMapperUtils.mapAll(dtoList, getTypeEntity());
     }
 
     public Class<DTO> getTypeDTO() {

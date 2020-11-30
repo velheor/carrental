@@ -1,12 +1,16 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
@@ -38,8 +42,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {
-    @Id
-    @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @EmbeddedId
     private Integer id;
 
     @Basic
@@ -50,8 +53,10 @@ public class PriceHistory implements Serializable {
     @Column(name = "price_date", nullable = false)
     private Date priceDate;
 
+    @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JsonBackReference
     private Car car;
 
     public Integer getId() {

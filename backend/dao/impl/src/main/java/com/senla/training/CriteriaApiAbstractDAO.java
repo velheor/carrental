@@ -48,10 +48,6 @@ public abstract class CriteriaApiAbstractDAO<T> {
         return q.orderBy(orders);
     }
 
-    protected CriteriaQuery<T> findCriteriaQuery(String field, Object criteria) {
-        return findCriteriaQuery(Map.of(field, criteria));
-    }
-
     protected CriteriaQuery<T> findCriteriaQuery(Map<String, Object> fieldCriteriaMap) {
         List<Predicate> predicates = new ArrayList<>();
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
@@ -84,6 +80,13 @@ public abstract class CriteriaApiAbstractDAO<T> {
         CriteriaQuery<T> q = cb.createQuery(getType());
         Root<T> c = q.from(getType());
         return q.select(c).where(cb.lt(c.get(field), number));
+    }
+
+    protected CriteriaQuery<T> findGreaterThanCriteriaQuery(String field, Number number) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> q = cb.createQuery(getType());
+        Root<T> c = q.from(getType());
+        return q.select(c).where(cb.gt(c.get(field), number));
     }
 
     protected CriteriaQuery<T> findAndSortByCriteria(Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {

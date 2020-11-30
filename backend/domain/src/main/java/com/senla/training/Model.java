@@ -1,5 +1,8 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,12 +19,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@NamedEntityGraph(
-        name = "modelWithCarsAndBrand",
-        attributeNodes = {
-                @NamedAttributeNode("cars"),
-                @NamedAttributeNode("brand")
-        })
 @NamedEntityGraph(
         name = "modelWithCarsAndBrandAndModels",
         attributeNodes = {
@@ -53,10 +50,12 @@ public class Model implements Serializable {
     private String manufacturerCountry;
 
     @OneToMany(mappedBy = "model")
+    @JsonBackReference
     private List<Car> cars;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brands_id", referencedColumnName = "id", nullable = false)
+    @JsonManagedReference
     private Brand brand;
 
     public Integer getId() {
@@ -88,7 +87,7 @@ public class Model implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Model model = (Model) o;
-        return id == model.id &&
+        return id.equals(model.id) &&
                 Objects.equals(name, model.name) &&
                 Objects.equals(manufacturerCountry, model.manufacturerCountry);
     }

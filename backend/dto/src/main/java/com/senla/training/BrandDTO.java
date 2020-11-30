@@ -3,25 +3,25 @@ package com.senla.training;
 import java.util.List;
 
 public class BrandDTO {
-    private int id;
+    private Integer id;
 
-    private String name;
+    private EBrand name;
 
     private List<ModelDTO> models;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
+    public EBrand getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(EBrand name) {
         this.name = name;
     }
 

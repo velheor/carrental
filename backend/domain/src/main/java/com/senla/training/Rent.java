@@ -1,5 +1,7 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,13 +78,16 @@ public class Rent implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
+    @JsonManagedReference
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
+    @JsonManagedReference
     private Car car;
 
     @OneToMany(mappedBy = "rent")
+    @JsonManagedReference
     private List<StatusHistory> statusHistoryList;
 
     public Integer getId() {

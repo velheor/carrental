@@ -3,18 +3,10 @@ package com.senla.training;
 import java.util.List;
 import java.util.Map;
 
-public interface IGenericDAO<T> {
+public interface IGenericDAO<T> extends ICrudDAO<T> {
     T findById(int id);
 
     List<T> findAll();
-
-    T create(T entity);
-
-    T update(T entity);
-
-    void delete(T entity);
-
-    void deleteById(int id);
 
     List<T> sortWithDirection(String field, Direction direction);
 

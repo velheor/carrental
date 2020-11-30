@@ -1,5 +1,7 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +20,7 @@ import java.util.List;
 @NamedEntityGraph(
         name = "roleWithUsers",
         attributeNodes = {
-                @NamedAttributeNode("users")
+                @NamedAttributeNode(value = "users")
         }
 )
 @Entity
@@ -34,6 +36,7 @@ public class Role implements Serializable {
     private ERole name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonBackReference
     private List<User> users;
 
     public Long getId() {

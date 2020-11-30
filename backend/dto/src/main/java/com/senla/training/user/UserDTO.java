@@ -1,6 +1,6 @@
-package com.senla.training;
+package com.senla.training.user;
 
-import java.util.List;
+import com.senla.training.EStatusUser;
 
 public class UserDTO {
     private Integer id;
@@ -14,10 +14,6 @@ public class UserDTO {
     private String password;
 
     private EStatusUser statusUser;
-
-    private List<RoleDTO> roles;
-
-    private List<RentDTO> rents;
 
     public Integer getId() {
         return id;
@@ -65,21 +61,5 @@ public class UserDTO {
 
     public void setStatusUser(EStatusUser statusUser) {
         this.statusUser = statusUser;
-    }
-
-    public List<RoleDTO> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<RoleDTO> roles) {
-        this.roles = roles;
-    }
-
-    public List<RentDTO> getRents() {
-        return rents;
-    }
-
-    public void setRents(List<RentDTO> rents) {
-        this.rents = rents;
     }
 }

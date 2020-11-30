@@ -1,5 +1,8 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,21 +20,39 @@ import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @NamedEntityGraph(
-        name = "userWithRolesAndRentsAndCar",
+        name = "userWithRole",
         attributeNodes = {
-                @NamedAttributeNode(value = "rents", subgraph = "rentsWithCar"),
-                @NamedAttributeNode("roles")
+                @NamedAttributeNode(value = "roles")
+        }
+)
+@NamedEntityGraph(
+        name = "userWithRolesAndRentsAndCarAndCategoryAndModelAndBrand",
+        attributeNodes = {
+                @NamedAttributeNode(value = "roles"),
+                @NamedAttributeNode(value = "rents", subgraph = "rentsWithCar")
         },
         subgraphs = {
                 @NamedSubgraph(
                         name = "rentsWithCar",
                         attributeNodes = {
-                                @NamedAttributeNode("car")
+                                @NamedAttributeNode(value = "car", subgraph = "carWithCategoryAndModel")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "carWithCategoryAndModel",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "category"),
+                                @NamedAttributeNode(value = "model", subgraph = "modelWithBrand")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "modelWithBrand",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "brand")
                         }
                 )
         }
@@ -69,9 +90,11 @@ public class User implements Serializable {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    @JsonManagedReference
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private Set<Rent> rents;
 
     public Integer getId() {

@@ -1,17 +1,19 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,26 +25,12 @@ import java.util.Objects;
         name = "statusHistoryWithRent",
         attributeNodes = {
                 @NamedAttributeNode("rent"),
-        })
-@NamedEntityGraph(
-        name = "statusHistoryWithRentAndCar",
-        attributeNodes = {
-                @NamedAttributeNode(value = "rent", subgraph = "rentWithCar"),
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "rentWithCar",
-                        attributeNodes = {
-                                @NamedAttributeNode(value = "car")
-                        }
-                )
         }
 )
 @Entity
 @Table(name = "status_history")
 public class StatusHistory implements Serializable {
-    @Id
-    @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @EmbeddedId
     private Integer id;
 
     @Basic
@@ -55,8 +43,10 @@ public class StatusHistory implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date statusDate;
 
+    @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Rent rent;
 
     public Integer getId() {

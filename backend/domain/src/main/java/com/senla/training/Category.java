@@ -1,5 +1,9 @@
 package com.senla.training;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
@@ -17,31 +22,43 @@ import java.util.List;
 import java.util.Objects;
 
 @NamedEntityGraph(
-        name = "categoryWithCarsAndCategoryAndCategories",
-        attributeNodes = {
-                @NamedAttributeNode("cars"),
-                @NamedAttributeNode("category"),
-                @NamedAttributeNode("categories")
-        }
-)
-@NamedEntityGraph(
         name = "categoryWithCarsAndCategoryAndCategoriesAndModels",
         attributeNodes = {
                 @NamedAttributeNode(value = "cars", subgraph = "carWithModel"),
-                @NamedAttributeNode("category"),
-                @NamedAttributeNode("categories"),
+                @NamedAttributeNode(value = "category", subgraph = "categoryWithCar"),
+                @NamedAttributeNode(value = "categories", subgraph = "categoriesWithCategoryAndCar")
         },
         subgraphs = {
                 @NamedSubgraph(
+                        name = "categoriesWithCategoryAndCar",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "category", subgraph = "categoryWithCar"),
+                                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "categoryWithCar",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "cars", subgraph = "carWithModel")
+                        }
+                ),
+                @NamedSubgraph(
                         name = "carWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode("model")
+                                @NamedAttributeNode(value = "model", subgraph = "modelWithBrand")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "modelWithBrand",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "brand")
                         }
                 )
         }
 )
 @Entity
 @Table(name = "categories")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "category"})
 public class Category implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
@@ -52,13 +69,16 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Car> cars;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
+    @JsonManagedReference
     private Category category;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Category> categories;
 
     public int getId() {
@@ -82,7 +102,7 @@ public class Category implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category that = (Category) o;
-        return id == that.id &&
+        return id.equals(that.id) &&
                 Objects.equals(name, that.name);
     }
 

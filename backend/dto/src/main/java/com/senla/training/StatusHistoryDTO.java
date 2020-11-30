@@ -6,21 +6,11 @@ import java.util.List;
 public class StatusHistoryDTO {
     private Integer id;
 
-    private Date fromDate;
+    private EStatusHistory name;
 
-    private Date toDate;
+    private Date statusDate;
 
-    private Date checkinDate;
-
-    private Date checkoutDate;
-
-    private Double totalPrice;
-
-    private UserDTO user;
-
-    private CarDTO car;
-
-    private List<StatusHistoryDTO> statusHistoryList;
+    private RentDTO rent;
 
     public Integer getId() {
         return id;
@@ -30,67 +20,27 @@ public class StatusHistoryDTO {
         this.id = id;
     }
 
-    public Date getFromDate() {
-        return fromDate;
+    public EStatusHistory getName() {
+        return name;
     }
 
-    public void setFromDate(Date fromDate) {
-        this.fromDate = fromDate;
+    public void setName(EStatusHistory name) {
+        this.name = name;
     }
 
-    public Date getToDate() {
-        return toDate;
+    public Date getStatusDate() {
+        return statusDate;
     }
 
-    public void setToDate(Date toDate) {
-        this.toDate = toDate;
+    public void setStatusDate(Date statusDate) {
+        this.statusDate = statusDate;
     }
 
-    public Date getCheckinDate() {
-        return checkinDate;
+    public RentDTO getRent() {
+        return rent;
     }
 
-    public void setCheckinDate(Date checkinDate) {
-        this.checkinDate = checkinDate;
-    }
-
-    public Date getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(Date checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
-
-    public CarDTO getCar() {
-        return car;
-    }
-
-    public void setCar(CarDTO car) {
-        this.car = car;
-    }
-
-    public List<StatusHistoryDTO> getStatusHistoryList() {
-        return statusHistoryList;
-    }
-
-    public void setStatusHistoryList(List<StatusHistoryDTO> statusHistoryList) {
-        this.statusHistoryList = statusHistoryList;
+    public void setRent(RentDTO rent) {
+        this.rent = rent;
     }
 }

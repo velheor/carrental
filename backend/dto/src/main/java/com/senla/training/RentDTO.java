@@ -1,6 +1,8 @@
 package com.senla.training;
 
-import java.sql.Date;
+import com.senla.training.user.UserWithRolesDTO;
+
+import java.util.Date;
 import java.util.List;
 
 public class RentDTO {
@@ -16,7 +18,7 @@ public class RentDTO {
 
     private Double totalPrice;
 
-    private UserDTO user;
+    private UserWithRolesDTO user;
 
     private CarDTO car;
 
@@ -70,11 +72,11 @@ public class RentDTO {
         this.totalPrice = totalPrice;
     }
 
-    public UserDTO getUser() {
+    public UserWithRolesDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserWithRolesDTO user) {
         this.user = user;
     }
 
