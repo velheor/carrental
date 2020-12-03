@@ -1,9 +1,6 @@
-package com.senla.training;
-
-import com.senla.training.user.UserWithRolesDTO;
+package com.senla.training.rent;
 
 import java.util.Date;
-import java.util.List;
 
 public class RentDTO {
     private Integer id;
@@ -17,12 +14,6 @@ public class RentDTO {
     private Date checkoutDate;
 
     private Double totalPrice;
-
-    private UserWithRolesDTO user;
-
-    private CarDTO car;
-
-    private List<StatusHistoryDTO> statusHistoryList;
 
     public Integer getId() {
         return id;
@@ -70,29 +61,5 @@ public class RentDTO {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public UserWithRolesDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserWithRolesDTO user) {
-        this.user = user;
-    }
-
-    public CarDTO getCar() {
-        return car;
-    }
-
-    public void setCar(CarDTO car) {
-        this.car = car;
-    }
-
-    public List<StatusHistoryDTO> getStatusHistoryList() {
-        return statusHistoryList;
-    }
-
-    public void setStatusHistoryList(List<StatusHistoryDTO> statusHistoryList) {
-        this.statusHistoryList = statusHistoryList;
     }
 }

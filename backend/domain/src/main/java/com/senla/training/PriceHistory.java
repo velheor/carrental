@@ -1,7 +1,6 @@
 package com.senla.training;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -28,13 +27,20 @@ import java.util.Objects;
 @NamedEntityGraph(
         name = "priceHistoryWithCarAndModel",
         attributeNodes = {
-                @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+                @NamedAttributeNode(value = "car", subgraph = "carWithModelAndCategory"),
         },
         subgraphs = {
                 @NamedSubgraph(
                         name = "carWithModel",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "model")
+                                @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+                                @NamedAttributeNode(value = "category")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "modelWithBrand",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "brand")
                         }
                 )
         }

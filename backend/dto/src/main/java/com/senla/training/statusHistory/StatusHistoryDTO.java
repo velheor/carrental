@@ -1,7 +1,8 @@
-package com.senla.training;
+package com.senla.training.statusHistory;
+
+import com.senla.training.EStatusHistory;
 
 import java.sql.Date;
-import java.util.List;
 
 public class StatusHistoryDTO {
     private Integer id;
@@ -9,8 +10,6 @@ public class StatusHistoryDTO {
     private EStatusHistory name;
 
     private Date statusDate;
-
-    private RentDTO rent;
 
     public Integer getId() {
         return id;
@@ -34,13 +33,5 @@ public class StatusHistoryDTO {
 
     public void setStatusDate(Date statusDate) {
         this.statusDate = statusDate;
-    }
-
-    public RentDTO getRent() {
-        return rent;
-    }
-
-    public void setRent(RentDTO rent) {
-        this.rent = rent;
     }
 }

@@ -1,6 +1,4 @@
-package com.senla.training;
-
-import java.util.List;
+package com.senla.training.model;
 
 public class ModelDTO {
     private Integer id;
@@ -8,10 +6,6 @@ public class ModelDTO {
     private String name;
 
     private String manufacturerCountry;
-
-    private List<CarDTO> cars;
-
-    private BrandDTO brand;
 
     public Integer getId() {
         return id;
@@ -35,21 +29,5 @@ public class ModelDTO {
 
     public void setManufacturerCountry(String manufacturerCountry) {
         this.manufacturerCountry = manufacturerCountry;
-    }
-
-    public List<CarDTO> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<CarDTO> cars) {
-        this.cars = cars;
-    }
-
-    public BrandDTO getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandDTO brand) {
-        this.brand = brand;
     }
 }

@@ -28,7 +28,7 @@ import java.util.List;
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 45)
@@ -39,11 +39,11 @@ public class Role implements Serializable {
     @JsonBackReference
     private List<User> users;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

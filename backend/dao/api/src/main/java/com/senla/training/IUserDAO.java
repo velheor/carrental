@@ -3,7 +3,7 @@ package com.senla.training;
 import java.util.List;
 import java.util.Map;
 
-interface IUserDAO extends ICrudDAO<User> {
+public interface IUserDAO extends ICrudDAO<User> {
     User findByIdUserWithRole(int id);
 
     List<User> findAllUserWithRole();

@@ -4,7 +4,7 @@ import com.senla.training.role.RoleDTO;
 
 import java.util.Set;
 
-public class UserWithRolesDTO extends UserDTO {
+public class UserWithRoleDTO extends UserDTO {
     private Set<RoleDTO> roles;
 
     public Set<RoleDTO> getRoles() {

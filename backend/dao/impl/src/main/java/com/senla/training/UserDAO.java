@@ -15,7 +15,7 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
 
     @Override
     public List<User> findAllUserWithRole() {
-        super.setEntityGraphName("userWithRole");
+        super.setEntityGraphName("userWithRolesAndRentsAndCarAndCategoryAndModelAndBrand");
         return super.findAll();
     }
 

@@ -1,6 +1,7 @@
 package com.senla.training;
 
-import com.senla.training.user.UserWithRolesDTO;
+import com.senla.training.user.UserDTO;
+import com.senla.training.user.UserWithRoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,78 +28,78 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserWithRolesDTO getByIdWithRoleDTO(@PathVariable("id") Integer id) {
+    public UserWithRoleDTO getByIdWithRoleDTO(@PathVariable("id") Integer id) {
         return userService.findByIdUserWithRoleDTO(id);
     }
 
     @GetMapping
-    public List<UserWithRolesDTO> findAllUserWithRoleDTO() {
+    public List<UserWithRoleDTO> findAllUserWithRoleDTO() {
         return userService.findAllUserWithRoleDTO();
     }
 
     @GetMapping("/sort")
-    public List<UserWithRolesDTO> sortWithDirectionUserWithRoleDTO(@RequestParam Map<String, Direction> allParams) {
+    public List<UserWithRoleDTO> sortWithDirectionUserWithRoleDTO(@RequestParam Map<String, Direction> allParams) {
         return userService.sortWithDirectionUserWithRoleDTO(allParams);
     }
 
     @PutMapping
-    public UserWithRolesDTO updateUserWithRoleDTO(@RequestBody UserWithRolesDTO userWithRolesDTO) {
-        return userService.update(userWithRolesDTO);
+    public UserWithRoleDTO updateUserWithRoleDTO(@RequestBody UserWithRoleDTO userWithRoleDTO) {
+        return userService.updateUserWithRoleDTO(userWithRoleDTO);
     }
 
     @PostMapping
-    public UserWithRolesDTO saveUserWithRoleDTO(@RequestBody UserWithRolesDTO userWithRolesDTO) {
-        return userService.create(userWithRolesDTO);
+    public UserWithRoleDTO saveUserWithRoleDTO(@RequestBody UserWithRoleDTO userWithRoleDTO) {
+        return userService.createUserWithRoleDTO(userWithRoleDTO);
     }
 
     @DeleteMapping
-    public UserWithRolesDTO deleteUserWithRoleDTO(@RequestBody UserWithRolesDTO userWithRolesDTO) {
-        userService.delete(userWithRolesDTO);
-        return userWithRolesDTO;
+    public UserWithRoleDTO deleteUserWithRoleDTO(@RequestBody UserWithRoleDTO userWithRoleDTO) {
+        userService.deleteUserWithRoleDTO(userWithRoleDTO);
+        return userWithRoleDTO;
     }
 
     @GetMapping("/findOneByCriteria")
-    public UserWithRolesDTO findOneByCriteriaUserWithRoleDTO(@RequestParam String field, @RequestParam Object criteria) {
+    public UserWithRoleDTO findOneByCriteriaUserWithRoleDTO(@RequestParam String field, @RequestParam Object criteria) {
         return userService.findOneByCriteriaUserWithRoleDTO(field, criteria);
     }
 
     @GetMapping("/findAllByCriteria")
-    public List<UserWithRolesDTO> findAllByCriteriaUserWithRoleDTO(@RequestParam String field, @RequestParam Object criteria) {
+    public List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(@RequestParam String field, @RequestParam Object criteria) {
         return userService.findAllByCriteriaUserWithRoleDTO(field, criteria);
     }
 
     @GetMapping("/findAllByCriteriaMap")
-    public List<UserWithRolesDTO> findAllByCriteriaUserWithRoleDTO(@RequestParam Map<String, Object> fieldCriteriaMap) {
+    public List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(@RequestParam Map<String, Object> fieldCriteriaMap) {
         return userService.findAllByCriteriaUserWithRoleDTO(fieldCriteriaMap);
     }
 
     @GetMapping("/findByNotNull")
-    public List<UserWithRolesDTO> findByNotNullUserWithRoleDTO(@RequestParam String field) {
+    public List<UserWithRoleDTO> findByNotNullUserWithRoleDTO(@RequestParam String field) {
         return userService.findByNotNullUserWithRoleDTO(field);
     }
 
     @GetMapping("/findByNull")
-    public List<UserWithRolesDTO> findByNullUserWithRoleDTO(@RequestParam String field) {
+    public List<UserWithRoleDTO> findByNullUserWithRoleDTO(@RequestParam String field) {
         return userService.findByNullUserWithRoleDTO(field);
     }
 
     @GetMapping("/finLessThan")
-    public List<UserWithRolesDTO> findLessThanUserWithRoleDTO(@RequestParam String field, Number number) {
+    public List<UserWithRoleDTO> findLessThanUserWithRoleDTO(@RequestParam String field, Number number) {
         return userService.findLessThanUserWithRoleDTO(field, number);
     }
 
     @GetMapping("/findGreaterThan")
-    public List<UserWithRolesDTO> findGreaterThanUserWithRoleDTO(@RequestParam String field, Number number) {
+    public List<UserWithRoleDTO> findGreaterThanUserWithRoleDTO(@RequestParam String field, Number number) {
         return userService.findGreaterThanUserWithRoleDTO(field, number);
     }
 
     @GetMapping("/findAndSort")
-    public List<UserWithRolesDTO> findAndSortUserWithRoleDTO(@RequestParam Map<String, Direction> fieldDirectionMap, @RequestParam Map<String, Object> fieldCriteriaMap) {
+    public List<UserWithRoleDTO> findAndSortUserWithRoleDTO(@RequestParam Map<String, Direction> fieldDirectionMap, @RequestParam Map<String, Object> fieldCriteriaMap) {
         return userService.findAndSortUserWithRoleDTO(fieldDirectionMap, fieldCriteriaMap);
     }
 
     @GetMapping("/findContain")
-    public List<UserWithRolesDTO> findContainUserWithRoleDTO(String field, String criteria) {
+    public List<UserWithRoleDTO> findContainUserWithRoleDTO(String field, String criteria) {
         return userService.findContainUserWithRoleDTO(field, criteria);
     }
 }

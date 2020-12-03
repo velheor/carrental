@@ -22,25 +22,24 @@ import java.util.List;
 import java.util.Objects;
 
 @NamedEntityGraph(
-        name = "rentWithUsersAndCars",
+        name = "rentWithUserStatusHistoryCarModelBrand",
         attributeNodes = {
                 @NamedAttributeNode("user"),
-                @NamedAttributeNode("car"),
-                @NamedAttributeNode("statusHistoryList")
-        }
-)
-@NamedEntityGraph(
-        name = "rentWithUsersAndCarsAndModels",
-        attributeNodes = {
-                @NamedAttributeNode("user"),
-                @NamedAttributeNode(value = "car", subgraph = "carWithModel"),
-                @NamedAttributeNode("statusHistoryList")
+                @NamedAttributeNode("statusHistoryList"),
+                @NamedAttributeNode(value = "car", subgraph = "carWithModelCategory")
         },
         subgraphs = {
                 @NamedSubgraph(
-                        name = "carWithModel",
+                        name = "carWithModelAndCategory",
                         attributeNodes = {
-                                @NamedAttributeNode(value = "model")
+                                @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+                                @NamedAttributeNode(value = "category")
+                        }
+                ),
+                @NamedSubgraph(
+                        name = "modelWithBrand",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "brand")
                         }
                 )
         }
@@ -143,7 +142,7 @@ public class Rent implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rent rent = (Rent) o;
-        return id == rent.id &&
+        return id.equals(rent.id) &&
                 Double.compare(rent.totalPrice, totalPrice) == 0 &&
                 Objects.equals(fromDate, rent.fromDate) &&
                 Objects.equals(toDate, rent.toDate) &&

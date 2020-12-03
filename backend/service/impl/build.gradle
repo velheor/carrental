@@ -1,3 +1,5 @@
 dependencies {
     compile project(':backend:service:serviceApi'), project(':backend:utils')
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
+
 }

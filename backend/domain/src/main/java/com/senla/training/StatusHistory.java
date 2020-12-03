@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -24,13 +25,14 @@ import java.util.Objects;
 @NamedEntityGraph(
         name = "statusHistoryWithRent",
         attributeNodes = {
-                @NamedAttributeNode("rent"),
+                @NamedAttributeNode("rent")
         }
 )
 @Entity
 @Table(name = "status_history")
 public class StatusHistory implements Serializable {
-    @EmbeddedId
+    @Id
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Integer id;
 
     @Basic
@@ -43,9 +45,8 @@ public class StatusHistory implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date statusDate;
 
-    @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonBackReference
     private Rent rent;
 
@@ -78,7 +79,7 @@ public class StatusHistory implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatusHistory that = (StatusHistory) o;
-        return id == that.id &&
+        return id.equals(that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(statusDate, that.statusDate);
     }

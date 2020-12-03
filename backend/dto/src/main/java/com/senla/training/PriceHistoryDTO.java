@@ -1,5 +1,7 @@
 package com.senla.training;
 
+import com.senla.training.car.CarDTO;
+
 import java.util.Date;
 
 public class PriceHistoryDTO {
