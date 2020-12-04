@@ -7,15 +7,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    private final JwtTokenFilter jwtTokenFilter;
+public class JwtConfigurer
+    extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+  private final JwtTokenFilter jwtTokenFilter;
 
-    public JwtConfigurer(JwtTokenFilter jwtTokenFilter) {
-        this.jwtTokenFilter = jwtTokenFilter;
-    }
+  public JwtConfigurer(JwtTokenFilter jwtTokenFilter) {
+    this.jwtTokenFilter = jwtTokenFilter;
+  }
 
-    @Override
-    public void configure(HttpSecurity httpSecurity) {
-        httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+  @Override
+  public void configure(HttpSecurity httpSecurity) {
+    httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+  }
 }
