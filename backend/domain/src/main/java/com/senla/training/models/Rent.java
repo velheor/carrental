@@ -14,30 +14,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@NamedEntityGraph(
-    name = "rentWithUserStatusHistoryCarModelBrand",
-    attributeNodes = {
-      @NamedAttributeNode("user"),
-      @NamedAttributeNode("statusHistoryList"),
-      @NamedAttributeNode(value = "car", subgraph = "carWithModelCategory")
-    },
-    subgraphs = {
-      @NamedSubgraph(
-          name = "carWithModelAndCategory",
-          attributeNodes = {
-            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            @NamedAttributeNode(value = "category")
-          }),
-      @NamedSubgraph(
-          name = "modelWithBrand",
-          attributeNodes = {@NamedAttributeNode(value = "brand")})
-    })
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "rentWithUserStatusHistoryCarModelBrand",
+      attributeNodes = {
+        @NamedAttributeNode("user"),
+        @NamedAttributeNode("statusHistoryList"),
+        @NamedAttributeNode(value = "car", subgraph = "carWithModelCategory")
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "carWithModelAndCategory",
+            attributeNodes = {
+              @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+              @NamedAttributeNode(value = "category")
+            }),
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      })
+})
 @Entity
 @Table(name = "rents")
 public class Rent implements Serializable {

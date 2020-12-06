@@ -92,7 +92,7 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
     return createTypedQuery(super.findContainCriteriaQuery(fieldCriterionMap)).getResultList();
   }
 
-  protected TypedQuery<T> createTypedQuery(CriteriaQuery<T> criteriaQuery) {
+  private TypedQuery<T> createTypedQuery(CriteriaQuery<T> criteriaQuery) {
     EntityGraph entityGraph = super.getEntityManager().getEntityGraph(entityGraphName);
     TypedQuery<T> typedQuery = super.getEntityManager().createQuery(criteriaQuery);
     typedQuery.setHint("javax.persistence.fetchgraph", entityGraph);

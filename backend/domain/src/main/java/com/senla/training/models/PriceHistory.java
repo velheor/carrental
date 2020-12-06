@@ -13,28 +13,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "priceHistoryWithCar",
-    attributeNodes = {@NamedAttributeNode(value = "car")})
-@NamedEntityGraph(
-    name = "priceHistoryWithCarAndModel",
-    attributeNodes = {
-      @NamedAttributeNode(value = "car", subgraph = "carWithModelAndCategory"),
-    },
-    subgraphs = {
-      @NamedSubgraph(
-          name = "carWithModel",
-          attributeNodes = {
-            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            @NamedAttributeNode(value = "category")
-          }),
-      @NamedSubgraph(
-          name = "modelWithBrand",
-          attributeNodes = {@NamedAttributeNode(value = "brand")})
-    })
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "priceHistoryWithCarAndModel",
+      attributeNodes = {
+        @NamedAttributeNode(value = "car", subgraph = "carWithModelAndCategory"),
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "carWithModel",
+            attributeNodes = {
+              @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+              @NamedAttributeNode(value = "category")
+            }),
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      })
+})
 @Entity
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {

@@ -38,17 +38,7 @@ public abstract class CriteriaApiAbstractDAO<T> {
     List<Order> orders = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
-    Root<T> c = q.from(getType());
-    q.select(c);
-    fieldDirectionMap.forEach(
-        (field, direction) -> {
-          if (direction.equals(Direction.ASC)) {
-            orders.add(cb.asc(c.get(field)));
-          } else {
-            orders.add(cb.desc(c.get(field)));
-          }
-        });
-    return q.orderBy(orders);
+    return getSortedCriteriaQuery(fieldDirectionMap, orders, cb, q);
   }
 
   protected CriteriaQuery<T> findCriteriaQuery(Map<String, Object> fieldCriteriaMap) {
@@ -57,9 +47,7 @@ public abstract class CriteriaApiAbstractDAO<T> {
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
     for (Map.Entry<String, Object> entry : fieldCriteriaMap.entrySet()) {
-      String field = entry.getKey();
-      Object criteria = entry.getValue();
-      predicates.add(cb.equal(c.get(field), criteria));
+      predicates.add(cb.equal(c.get(entry.getKey()), entry.getValue()));
     }
     return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
@@ -88,9 +76,7 @@ public abstract class CriteriaApiAbstractDAO<T> {
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
     for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
-      String field = entry.getKey();
-      Number number = entry.getValue();
-      predicates.add(cb.lt(c.get(field), number));
+      predicates.add(cb.lt(c.get(entry.getKey()), entry.getValue()));
     }
     return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
@@ -101,9 +87,7 @@ public abstract class CriteriaApiAbstractDAO<T> {
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
     for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
-      String field = entry.getKey();
-      Number number = entry.getValue();
-      predicates.add(cb.gt(c.get(field), number));
+      predicates.add(cb.gt(c.get(entry.getKey()), entry.getValue()));
     }
     return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
@@ -113,7 +97,16 @@ public abstract class CriteriaApiAbstractDAO<T> {
     List<Order> orders = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = findCriteriaQuery(fieldCriteriaMap);
+    return getSortedCriteriaQuery(fieldDirectionMap, orders, cb, q);
+  }
+
+  private CriteriaQuery<T> getSortedCriteriaQuery(
+      Map<String, Direction> fieldDirectionMap,
+      List<Order> orders,
+      CriteriaBuilder cb,
+      CriteriaQuery<T> q) {
     Root<T> c = q.from(getType());
+    q.select(c);
     fieldDirectionMap.forEach(
         (field, direction) -> {
           if (direction.equals(Direction.ASC)) {

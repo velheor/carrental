@@ -84,7 +84,7 @@ public class UserController {
     return userService.findByNullUserWithRolesDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
+  @GetMapping("/findLessThan")
   public List<UserWithRolesDTO> findLessThanUserWithRolesDTO(
       @RequestParam Map<String, Number> fieldNumberMap) {
     return userService.findLessThanUserWithRolesDTO(fieldNumberMap);
