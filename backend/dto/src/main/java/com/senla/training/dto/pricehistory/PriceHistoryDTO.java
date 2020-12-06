@@ -1,4 +1,4 @@
-package com.senla.training.dto;
+package com.senla.training.dto.pricehistory;
 
 import java.util.Date;
 

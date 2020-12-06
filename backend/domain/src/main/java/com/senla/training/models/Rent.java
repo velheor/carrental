@@ -27,14 +27,13 @@ import javax.persistence.TemporalType;
       attributeNodes = {
         @NamedAttributeNode("user"),
         @NamedAttributeNode("statusHistoryList"),
-        @NamedAttributeNode(value = "car", subgraph = "carWithModelCategory")
+        @NamedAttributeNode(value = "car", subgraph = "carWithModel")
       },
       subgraphs = {
         @NamedSubgraph(
-            name = "carWithModelAndCategory",
+            name = "carWithModel",
             attributeNodes = {
               @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-              @NamedAttributeNode(value = "category")
             }),
         @NamedSubgraph(
             name = "modelWithBrand",

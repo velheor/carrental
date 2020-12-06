@@ -1,6 +1,6 @@
 package com.senla.training.dto.car;
 
-import com.senla.training.dto.PriceHistoryDTO;
+import com.senla.training.dto.pricehistory.PriceHistoryDTO;
 import com.senla.training.dto.category.CategoryDTO;
 import java.util.List;
 

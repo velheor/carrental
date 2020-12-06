@@ -19,16 +19,15 @@ import javax.persistence.Table;
 
 @NamedEntityGraphs({
   @NamedEntityGraph(
-      name = "priceHistoryWithCarAndModel",
+      name = "priceHistoryWithCarModelBrand",
       attributeNodes = {
-        @NamedAttributeNode(value = "car", subgraph = "carWithModelAndCategory"),
+        @NamedAttributeNode(value = "car", subgraph = "carWithModel"),
       },
       subgraphs = {
         @NamedSubgraph(
             name = "carWithModel",
             attributeNodes = {
               @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-              @NamedAttributeNode(value = "category")
             }),
         @NamedSubgraph(
             name = "modelWithBrand",
