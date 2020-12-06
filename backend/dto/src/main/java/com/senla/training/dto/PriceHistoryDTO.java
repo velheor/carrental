@@ -1,6 +1,5 @@
 package com.senla.training.dto;
 
-import com.senla.training.dto.car.CarDTO;
 import java.util.Date;
 
 public class PriceHistoryDTO {
@@ -9,8 +8,6 @@ public class PriceHistoryDTO {
   private Double price;
 
   private Date priceDate;
-
-  private CarDTO car;
 
   public Integer getId() {
     return id;
@@ -34,13 +31,5 @@ public class PriceHistoryDTO {
 
   public void setPriceDate(Date priceDate) {
     this.priceDate = priceDate;
-  }
-
-  public CarDTO getCar() {
-    return car;
-  }
-
-  public void setCar(CarDTO car) {
-    this.car = car;
   }
 }

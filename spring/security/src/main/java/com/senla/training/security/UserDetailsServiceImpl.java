@@ -3,6 +3,7 @@ package com.senla.training.security;
 import com.senla.training.dao.api.IUserDAO;
 import com.senla.training.models.User;
 import com.senla.training.security.jwt.SecurityUser;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    User user = userDAO.findOneByCriteriaUserWithRole("email", email);
+    User user = userDAO.findOneByCriteriaUserWithRoles(Map.of("email", email));
     if (user == null) {
       throw new UsernameNotFoundException("User doesn't exists");
     }

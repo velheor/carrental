@@ -1,6 +1,5 @@
 package com.senla.training.dto.car;
 
-import com.senla.training.dto.model.ModelWithBrandDTO;
 import com.senla.training.models.enums.ECarType;
 import com.senla.training.models.enums.EFuelType;
 import java.util.Date;
@@ -15,8 +14,6 @@ public class CarDTO {
   private Date productionDate;
 
   private Boolean transmission;
-
-  private ModelWithBrandDTO model;
 
   public Long getId() {
     return id;
@@ -56,13 +53,5 @@ public class CarDTO {
 
   public void setTransmission(Boolean transmission) {
     this.transmission = transmission;
-  }
-
-  public ModelWithBrandDTO getModel() {
-    return model;
-  }
-
-  public void setModel(ModelWithBrandDTO model) {
-    this.model = model;
   }
 }

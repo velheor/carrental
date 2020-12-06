@@ -20,12 +20,7 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
 
   @Override
   public T findById(int id) {
-    return findOneByCriteria("id", id);
-  }
-
-  @Override
-  public List<T> findAll() {
-    return createTypedQuery(super.findAllCriteriaQuery()).getResultList();
+    return findOneByCriteria(Map.of("id", id));
   }
 
   @Override
@@ -50,49 +45,39 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
   }
 
   @Override
-  public List<T> sortWithDirection(String field, Direction direction) {
-    return sortWithDirection(Map.of(field, direction));
-  }
-
-  @Override
-  public List<T> sortWithDirection(Map<String, Direction> fieldDirectionMap) {
+  public List<T> findAllAndSortWithDirection(Map<String, Direction> fieldDirectionMap) {
     return createTypedQuery(super.sortWithDirectionCriteriaQuery(fieldDirectionMap))
         .getResultList();
   }
 
   @Override
-  public T findOneByCriteria(String field, Object criteria) {
-    return createTypedQuery(super.findCriteriaQuery(Map.of(field, criteria))).getSingleResult();
+  public T findOneByCriteria(Map<String, Object> fieldCriterionMap) {
+    return createTypedQuery(super.findCriteriaQuery(fieldCriterionMap)).getSingleResult();
   }
 
   @Override
-  public List<T> findAllByCriteria(String field, Object criteria) {
-    return createTypedQuery(super.findCriteriaQuery(Map.of(field, criteria))).getResultList();
+  public List<T> findAllByCriteria(Map<String, Object> fieldCriterionMap) {
+    return createTypedQuery(super.findCriteriaQuery(fieldCriterionMap)).getResultList();
   }
 
   @Override
-  public List<T> findAllByCriteria(Map<String, Object> fieldCriteriaMap) {
-    return createTypedQuery(super.findCriteriaQuery((fieldCriteriaMap))).getResultList();
+  public List<T> findByNotNull(List<String> fields) {
+    return createTypedQuery(super.findByNotNullCriteriaQuery(fields)).getResultList();
   }
 
   @Override
-  public List<T> findByNotNull(String field) {
-    return createTypedQuery(super.findByNotNullCriteriaQuery(field)).getResultList();
+  public List<T> findByNull(List<String> fields) {
+    return createTypedQuery(super.findByNullCriteriaQuery(fields)).getResultList();
   }
 
   @Override
-  public List<T> findByNull(String field) {
-    return createTypedQuery(super.findByNullCriteriaQuery(field)).getResultList();
+  public List<T> findLessThan(Map<String, Number> fieldNumberMap) {
+    return createTypedQuery(super.findLessThanCriteriaQuery(fieldNumberMap)).getResultList();
   }
 
   @Override
-  public List<T> findLessThan(String field, Number number) {
-    return createTypedQuery(super.findLessThanCriteriaQuery(field, number)).getResultList();
-  }
-
-  @Override
-  public List<T> findGreaterThan(String field, Number number) {
-    return createTypedQuery(super.findGreaterThanCriteriaQuery(field, number)).getResultList();
+  public List<T> findGreaterThan(Map<String, Number> fieldNumberMap) {
+    return createTypedQuery(super.findGreaterThanCriteriaQuery(fieldNumberMap)).getResultList();
   }
 
   @Override
@@ -103,8 +88,8 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
   }
 
   @Override
-  public List<T> findContain(String field, String criteria) {
-    return createTypedQuery(super.findContainCriteriaQuery(field, criteria)).getResultList();
+  public List<T> findContain(Map<String, String> fieldCriterionMap) {
+    return createTypedQuery(super.findContainCriteriaQuery(fieldCriterionMap)).getResultList();
   }
 
   protected TypedQuery<T> createTypedQuery(CriteriaQuery<T> criteriaQuery) {

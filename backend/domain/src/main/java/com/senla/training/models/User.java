@@ -19,35 +19,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedSubgraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "userWithRole",
-    attributeNodes = {@NamedAttributeNode(value = "roles")})
-@NamedEntityGraph(
-    name = "userWithRolesAndRentsAndCarAndCategoryAndModelAndBrand",
-    attributeNodes = {
-      @NamedAttributeNode(value = "roles"),
-      @NamedAttributeNode(value = "rents", subgraph = "rentsWithCar")
-    },
-    subgraphs = {
-      @NamedSubgraph(
-          name = "rentsWithCar",
-          attributeNodes = {
-            @NamedAttributeNode(value = "car", subgraph = "carWithCategoryAndModel")
-          }),
-      @NamedSubgraph(
-          name = "carWithCategoryAndModel",
-          attributeNodes = {
-            @NamedAttributeNode(value = "category"),
-            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand")
-          }),
-      @NamedSubgraph(
-          name = "modelWithBrand",
-          attributeNodes = {@NamedAttributeNode(value = "brand")})
-    })
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "userWithRoles",
+      attributeNodes = {@NamedAttributeNode(value = "roles")})
+})
 @Entity
 @Table(name = "users")
 public class User implements Serializable {

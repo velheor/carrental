@@ -1,9 +1,9 @@
 package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.IUserDAO;
-import com.senla.training.dto.user.UserWithRoleDTO;
+import com.senla.training.dto.user.UserDTO;
+import com.senla.training.dto.user.UserWithRolesDTO;
 import com.senla.training.models.User;
-import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.IUserService;
 import java.util.List;
@@ -19,109 +19,97 @@ public class UserService implements IUserService {
   private final ObjectMapperUtils objectMapperUtils;
 
   @Autowired
-  UserService(IUserDAO userDAO, ObjectMapperUtils objectMapperUtils) {
+  public UserService(IUserDAO userDAO, ObjectMapperUtils objectMapperUtils) {
     this.userDAO = userDAO;
     this.objectMapperUtils = objectMapperUtils;
   }
 
   @Override
-  public UserWithRoleDTO findByIdUserWithRoleDTO(int id) {
-    return objectMapperUtils.map(userDAO.findByIdUserWithRole(id), UserWithRoleDTO.class);
+  public UserWithRolesDTO findByIdUserWithRolesDTO(int id) {
+    return objectMapperUtils.map(userDAO.findByIdUserWithRoles(id), UserWithRolesDTO.class);
   }
 
   @Override
-  public List<UserWithRoleDTO> findAllUserWithRoleDTO() {
-    return objectMapperUtils.mapAll(userDAO.findAllUserWithRole(), UserWithRoleDTO.class);
+  public List<UserWithRolesDTO> findAllAndSortWithDirectionUserWithRolesDTO(
+      Map<String, String> fieldDirectionMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findAllAndSortWithDirectionUserWithRoles(
+            DirectionAdapter.converterMap(fieldDirectionMap)),
+        UserWithRolesDTO.class);
   }
 
   @Override
-  public UserWithRoleDTO createUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO) {
+  public UserWithRolesDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap) {
     return objectMapperUtils.map(
-        userDAO.create(objectMapperUtils.map(userWithRoleDTO, User.class)), UserWithRoleDTO.class);
+        userDAO.findOneByCriteriaUserWithRoles(fieldCriterionMap), UserWithRolesDTO.class);
   }
 
   @Override
-  public UserWithRoleDTO updateUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO) {
+  public List<UserWithRolesDTO> findAllByCriteriaUserWithRolesDTO(
+      Map<String, Object> fieldCriterionMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findAllByCriteriaUserWithRoles(fieldCriterionMap), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findByNotNullUserWithRolesDTO(List<String> fields) {
+    return objectMapperUtils.mapAll(
+        userDAO.findByNotNullUserWithRoles(fields), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findByNullUserWithRolesDTO(List<String> fields) {
+    return objectMapperUtils.mapAll(
+        userDAO.findByNullUserWithRoles(fields), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findLessThanUserWithRolesDTO(Map<String, Number> fieldNumberMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findLessThanUserWithRoles(fieldNumberMap), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findGreaterThanUserWithRolesDTO(
+      Map<String, Number> fieldNumberMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findGreaterThanUserWithRoles(fieldNumberMap), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findAndSortUserWithRolesDTO(
+      Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findAndSortUserWithRoles(
+            DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
+        UserWithRolesDTO.class);
+  }
+
+  @Override
+  public List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap) {
+    return objectMapperUtils.mapAll(
+        userDAO.findContainUserWithRoles(fieldStringMap), UserWithRolesDTO.class);
+  }
+
+  @Override
+  public UserDTO create(UserDTO entityDTO) {
     return objectMapperUtils.map(
-        userDAO.update(objectMapperUtils.map(userWithRoleDTO, User.class)), UserWithRoleDTO.class);
+        userDAO.create(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
   }
 
   @Override
-  public void deleteUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO) {
-    userDAO.delete(objectMapperUtils.map(userWithRoleDTO, User.class));
+  public UserDTO update(UserDTO entityDTO) {
+    return objectMapperUtils.map(
+        userDAO.update(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
+  }
+
+  @Override
+  public void delete(UserDTO entityDTO) {
+    userDAO.delete(objectMapperUtils.map(entityDTO, User.class));
   }
 
   @Override
   public void deleteById(int id) {
     userDAO.deleteById(id);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> sortWithDirectionUserWithRoleDTO(String field, Direction direction) {
-    return objectMapperUtils.mapAll(
-        userDAO.sortWithDirectionUserWithRole(field, direction), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> sortWithDirectionUserWithRoleDTO(
-      Map<String, Direction> fieldDirectionMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.sortWithDirectionUserWithRole(fieldDirectionMap), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public UserWithRoleDTO findOneByCriteriaUserWithRoleDTO(String field, Object criteria) {
-    return objectMapperUtils.map(
-        userDAO.findOneByCriteriaUserWithRole(field, criteria), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(String field, Object criteria) {
-    return objectMapperUtils.mapAll(
-        userDAO.findAllByCriteriaUserWithRole(field, criteria), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(
-      Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.findAllByCriteriaUserWithRole(fieldCriteriaMap), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findByNotNullUserWithRoleDTO(String field) {
-    return objectMapperUtils.mapAll(
-        userDAO.findByNotNullUserWithRole(field), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findByNullUserWithRoleDTO(String field) {
-    return objectMapperUtils.mapAll(userDAO.findByNullUserWithRole(field), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findLessThanUserWithRoleDTO(String field, Number number) {
-    return objectMapperUtils.mapAll(
-        userDAO.findLessThanUserWithRole(field, number), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findGreaterThanUserWithRoleDTO(String field, Number number) {
-    return objectMapperUtils.mapAll(
-        userDAO.findGreaterThanUserWithRole(field, number), UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findAndSortUserWithRoleDTO(
-      Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.findAndSortUserWithRole(fieldDirectionMap, fieldCriteriaMap),
-        UserWithRoleDTO.class);
-  }
-
-  @Override
-  public List<UserWithRoleDTO> findContainUserWithRoleDTO(String field, String criteria) {
-    return objectMapperUtils.mapAll(
-        userDAO.findContainUserWithRole(field, criteria), UserWithRoleDTO.class);
   }
 }

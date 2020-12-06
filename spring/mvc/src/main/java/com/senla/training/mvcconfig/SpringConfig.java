@@ -1,4 +1,4 @@
-package com.senla.training;
+package com.senla.training.mvcconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

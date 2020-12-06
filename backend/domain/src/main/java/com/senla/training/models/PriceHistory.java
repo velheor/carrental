@@ -6,12 +6,11 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
@@ -39,7 +38,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {
-  @EmbeddedId private Integer id;
+  @Id
+  @Column(name = "id", nullable = false, insertable = false, updatable = false)
+  private Integer id;
 
   @Basic
   @Column(name = "price", nullable = false)
@@ -49,9 +50,8 @@ public class PriceHistory implements Serializable {
   @Column(name = "price_date", nullable = false)
   private Date priceDate;
 
-  @MapsId("id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", referencedColumnName = "id")
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
   @JsonBackReference
   private Car car;
 

@@ -1,43 +1,30 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.user.UserWithRoleDTO;
-import com.senla.training.models.enums.Direction;
+import com.senla.training.dto.user.UserDTO;
+import com.senla.training.dto.user.UserWithRolesDTO;
 import java.util.List;
 import java.util.Map;
 
-public interface IUserService {
-  UserWithRoleDTO createUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO);
+public interface IUserService extends IGenericService<UserDTO> {
+  UserWithRolesDTO findByIdUserWithRolesDTO(int id);
 
-  UserWithRoleDTO updateUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO);
+  List<UserWithRolesDTO> findAllAndSortWithDirectionUserWithRolesDTO(
+      Map<String, String> fieldDirectionMap);
 
-  void deleteUserWithRoleDTO(UserWithRoleDTO userWithRoleDTO);
+  UserWithRolesDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
 
-  void deleteById(int id);
+  List<UserWithRolesDTO> findAllByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
 
-  UserWithRoleDTO findByIdUserWithRoleDTO(int id);
+  List<UserWithRolesDTO> findByNotNullUserWithRolesDTO(List<String> fields);
 
-  List<UserWithRoleDTO> findAllUserWithRoleDTO();
+  List<UserWithRolesDTO> findByNullUserWithRolesDTO(List<String> fields);
 
-  List<UserWithRoleDTO> sortWithDirectionUserWithRoleDTO(String field, Direction direction);
+  List<UserWithRolesDTO> findLessThanUserWithRolesDTO(Map<String, Number> fieldNumberMap);
 
-  List<UserWithRoleDTO> sortWithDirectionUserWithRoleDTO(Map<String, Direction> fieldDirectionMap);
+  List<UserWithRolesDTO> findGreaterThanUserWithRolesDTO(Map<String, Number> fieldNumberMap);
 
-  UserWithRoleDTO findOneByCriteriaUserWithRoleDTO(String field, Object criteria);
+  List<UserWithRolesDTO> findAndSortUserWithRolesDTO(
+      Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(String field, Object criteria);
-
-  List<UserWithRoleDTO> findAllByCriteriaUserWithRoleDTO(Map<String, Object> fieldCriteriaMap);
-
-  List<UserWithRoleDTO> findByNotNullUserWithRoleDTO(String field);
-
-  List<UserWithRoleDTO> findByNullUserWithRoleDTO(String field);
-
-  List<UserWithRoleDTO> findLessThanUserWithRoleDTO(String field, Number number);
-
-  List<UserWithRoleDTO> findGreaterThanUserWithRoleDTO(String field, Number number);
-
-  List<UserWithRoleDTO> findAndSortUserWithRoleDTO(
-      Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
-  List<UserWithRoleDTO> findContainUserWithRoleDTO(String field, String criteria);
+  List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
 }

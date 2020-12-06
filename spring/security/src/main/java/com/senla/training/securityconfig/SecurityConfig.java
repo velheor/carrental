@@ -1,4 +1,4 @@
-package com.senla.training.config;
+package com.senla.training.securityconfig;
 
 import com.senla.training.security.jwt.JwtConfigurer;
 import org.springframework.context.annotation.Bean;

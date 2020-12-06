@@ -16,16 +16,15 @@ public class ObjectMapperUtils {
     this.modelMapper = modelMapper;
   }
 
+  public ModelMapper getModelMapper() {
+    return modelMapper;
+  }
+
   public <D, T> List<D> mapAll(final Collection<T> entityList, Class<D> outCLass) {
     return entityList.stream().map(entity -> map(entity, outCLass)).collect(Collectors.toList());
   }
 
   public <D, T> D map(final T entity, Class<D> outClass) {
     return modelMapper.map(entity, outClass);
-  }
-
-  public <S, D> D map(final S source, D destination) {
-    modelMapper.map(source, destination);
-    return destination;
   }
 }

@@ -7,28 +7,22 @@ import java.util.Map;
 public interface IGenericDAO<T> extends ICrudDAO<T> {
   T findById(int id);
 
-  List<T> findAll();
+  List<T> findAllAndSortWithDirection(Map<String, Direction> fieldDirectionMap);
 
-  List<T> sortWithDirection(String field, Direction direction);
+  T findOneByCriteria(Map<String, Object> fieldCriterionMap);
 
-  List<T> sortWithDirection(Map<String, Direction> fieldDirectionMap);
+  List<T> findAllByCriteria(Map<String, Object> fieldCriterionMap);
 
-  T findOneByCriteria(String field, Object criteria);
+  List<T> findByNotNull(List<String> fields);
 
-  List<T> findAllByCriteria(String field, Object criteria);
+  List<T> findByNull(List<String> fields);
 
-  List<T> findAllByCriteria(Map<String, Object> fieldCriteriaMap);
+  List<T> findLessThan(Map<String, Number> fieldNumberMap);
 
-  List<T> findByNotNull(String field);
-
-  List<T> findByNull(String field);
-
-  List<T> findLessThan(String field, Number number);
-
-  List<T> findGreaterThan(String field, Number number);
+  List<T> findGreaterThan(Map<String, Number> fieldNumberMap);
 
   List<T> findAndSort(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<T> findContain(String field, String criteria);
+  List<T> findContain(Map<String, String> fieldConMap);
 }

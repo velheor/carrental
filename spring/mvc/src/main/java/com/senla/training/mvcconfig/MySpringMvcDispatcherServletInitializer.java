@@ -1,6 +1,6 @@
-package com.senla.training;
+package com.senla.training.mvcconfig;
 
-import com.senla.training.config.SecurityConfig;
+import com.senla.training.securityconfig.SecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MySpringMvcDispatcherServletInitializer

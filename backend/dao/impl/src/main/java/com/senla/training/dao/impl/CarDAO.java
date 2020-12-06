@@ -10,81 +10,69 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CarDAO extends EntityGraphAbstractDAO<Car> implements ICarDAO {
   @Override
-  public Car findByIdCarWithCategory(int id) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
+  public Car findByIdCarWithModelCategoryPriceHistoryBrand(int id) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
     return super.findById(id);
   }
 
   @Override
-  public List<Car> findAllCarWithCategory() {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findAll();
+  public List<Car> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Direction> fieldDirectionMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findAllAndSortWithDirection(fieldDirectionMap);
   }
 
   @Override
-  public List<Car> sortWithDirectionCarWithCategory(String field, Direction direction) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.sortWithDirection(field, direction);
+  public Car findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Object> fieldCriteriaMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findOneByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Car> sortWithDirectionCarWithCategory(Map<String, Direction> fieldDirectionMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.sortWithDirection(fieldDirectionMap);
-  }
-
-  @Override
-  public Car findOneByCriteriaCarWithCategory(String field, Object criteria) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findOneByCriteria(field, criteria);
-  }
-
-  @Override
-  public List<Car> findAllByCriteriaCarWithCategory(String field, Object criteria) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findAllByCriteria(field, criteria);
-  }
-
-  @Override
-  public List<Car> findAllByCriteriaCarWithCategory(Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
+  public List<Car> findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Object> fieldCriteriaMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
     return super.findAllByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Car> findByNotNullCarWithCategory(String field) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findByNotNull(field);
+  public List<Car> findByNotNullCarWithModelCategoryPriceHistoryBrand(List<String> fields) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findByNotNull(fields);
   }
 
   @Override
-  public List<Car> findByNullCarWithCategory(String field) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findByNull(field);
+  public List<Car> findByNullCarWithModelCategoryPriceHistoryBrand(List<String> fields) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findByNull(fields);
   }
 
   @Override
-  public List<Car> findLessThanCarWithCategory(String field, Number number) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findLessThan(field, number);
+  public List<Car> findLessThanCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Number> fieldNumberMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findLessThan(fieldNumberMap);
   }
 
   @Override
-  public List<Car> findGreaterThanCarWithCategory(String field, Number number) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findGreaterThan(field, number);
+  public List<Car> findGreaterThanCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Number> fieldNumberMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findGreaterThan(fieldNumberMap);
   }
 
   @Override
-  public List<Car> findAndSortCarWithCategory(
+  public List<Car> findAndSortCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
   }
 
   @Override
-  public List<Car> findContainCarWithCategory(String field, String criteria) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser");
-    return super.findContain(field, criteria);
+  public List<Car> findContainCarWithModelCategoryPriceHistoryBrand(
+      Map<String, String> fieldStringMap) {
+    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
+    return super.findContain(fieldStringMap);
   }
 }

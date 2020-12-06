@@ -6,30 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public interface IUserDAO extends ICrudDAO<User> {
-  User findByIdUserWithRole(int id);
+  User findByIdUserWithRoles(int id);
 
-  List<User> findAllUserWithRole();
+  List<User> findAllAndSortWithDirectionUserWithRoles(Map<String, Direction> fieldDirectionMap);
 
-  List<User> sortWithDirectionUserWithRole(String field, Direction direction);
+  User findOneByCriteriaUserWithRoles(Map<String, Object> fieldCriterionMap);
 
-  List<User> sortWithDirectionUserWithRole(Map<String, Direction> fieldDirectionMap);
+  List<User> findAllByCriteriaUserWithRoles(Map<String, Object> fieldCriterionMap);
 
-  User findOneByCriteriaUserWithRole(String field, Object criteria);
+  List<User> findByNotNullUserWithRoles(List<String> fields);
 
-  List<User> findAllByCriteriaUserWithRole(String field, Object criteria);
+  List<User> findByNullUserWithRoles(List<String> fields);
 
-  List<User> findAllByCriteriaUserWithRole(Map<String, Object> fieldCriteriaMap);
+  List<User> findLessThanUserWithRoles(Map<String, Number> fieldNumberMap);
 
-  List<User> findByNotNullUserWithRole(String field);
+  List<User> findGreaterThanUserWithRoles(Map<String, Number> fieldNumberMap);
 
-  List<User> findByNullUserWithRole(String field);
-
-  List<User> findLessThanUserWithRole(String field, Number number);
-
-  List<User> findGreaterThanUserWithRole(String field, Number number);
-
-  List<User> findAndSortUserWithRole(
+  List<User> findAndSortUserWithRoles(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<User> findContainUserWithRole(String field, String criteria);
+  List<User> findContainUserWithRoles(Map<String, String> fieldStringMap);
 }

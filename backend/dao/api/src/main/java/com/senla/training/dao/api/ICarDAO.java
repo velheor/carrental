@@ -6,30 +6,27 @@ import java.util.List;
 import java.util.Map;
 
 public interface ICarDAO extends IGenericDAO<Car> {
-  Car findByIdCarWithCategory(int id);
+  Car findByIdCarWithModelCategoryPriceHistoryBrand(int id);
 
-  List<Car> findAllCarWithCategory();
+  List<Car> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Direction> fieldDirectionMap);
 
-  List<Car> sortWithDirectionCarWithCategory(String field, Direction direction);
+  Car findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(Map<String, Object> fieldCriteriaMap);
 
-  List<Car> sortWithDirectionCarWithCategory(Map<String, Direction> fieldDirectionMap);
+  List<Car> findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Object> fieldCriteriaMap);
 
-  Car findOneByCriteriaCarWithCategory(String field, Object criteria);
+  List<Car> findByNotNullCarWithModelCategoryPriceHistoryBrand(List<String> fields);
 
-  List<Car> findAllByCriteriaCarWithCategory(String field, Object criteria);
+  List<Car> findByNullCarWithModelCategoryPriceHistoryBrand(List<String> fields);
 
-  List<Car> findAllByCriteriaCarWithCategory(Map<String, Object> fieldCriteriaMap);
+  List<Car> findLessThanCarWithModelCategoryPriceHistoryBrand(Map<String, Number> fieldNumberMap);
 
-  List<Car> findByNotNullCarWithCategory(String field);
+  List<Car> findGreaterThanCarWithModelCategoryPriceHistoryBrand(
+      Map<String, Number> fieldNumberMap);
 
-  List<Car> findByNullCarWithCategory(String field);
-
-  List<Car> findLessThanCarWithCategory(String field, Number number);
-
-  List<Car> findGreaterThanCarWithCategory(String field, Number number);
-
-  List<Car> findAndSortCarWithCategory(
+  List<Car> findAndSortCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Car> findContainCarWithCategory(String field, String criteria);
+  List<Car> findContainCarWithModelCategoryPriceHistoryBrand(Map<String, String> fieldStringMap);
 }

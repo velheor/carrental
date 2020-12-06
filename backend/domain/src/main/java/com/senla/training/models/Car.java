@@ -19,29 +19,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "carWithModelAndCategoryAndPriceHistoryAndRents",
-    attributeNodes = {
-      @NamedAttributeNode("model"),
-      @NamedAttributeNode("category"),
-      @NamedAttributeNode("priceHistoryList"),
-      @NamedAttributeNode("rents")
-    })
-@NamedEntityGraph(
-    name = "carWithModelAndCategoryAndPriceHistoryAndRentsAndModelAndUser",
-    attributeNodes = {
-      @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-      @NamedAttributeNode("category"),
-    },
-    subgraphs = {
-      @NamedSubgraph(
-          name = "modelWithBrand",
-          attributeNodes = {@NamedAttributeNode(value = "brand")})
-    })
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
+      attributeNodes = {
+        @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+        @NamedAttributeNode("category"),
+        @NamedAttributeNode("priceHistoryList")
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      })
+})
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {

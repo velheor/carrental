@@ -33,11 +33,6 @@ public abstract class CriteriaApiAbstractDAO<T> {
     return entityManager;
   }
 
-  protected CriteriaQuery<T> findAllCriteriaQuery() {
-    CriteriaQuery<T> q = entityManager.getCriteriaBuilder().createQuery(getType());
-    return q.select(q.from(getType()));
-  }
-
   protected CriteriaQuery<T> sortWithDirectionCriteriaQuery(
       Map<String, Direction> fieldDirectionMap) {
     List<Order> orders = new ArrayList<>();
@@ -69,32 +64,48 @@ public abstract class CriteriaApiAbstractDAO<T> {
     return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
-  protected CriteriaQuery<T> findByNotNullCriteriaQuery(String field) {
+  protected CriteriaQuery<T> findByNotNullCriteriaQuery(List<String> fields) {
+    List<Predicate> predicates = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(cb.isNotNull(c.get(field)));
+    fields.forEach(field -> predicates.add(cb.isNotNull(c.get(field))));
+    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
-  protected CriteriaQuery<T> findByNullCriteriaQuery(String field) {
+  protected CriteriaQuery<T> findByNullCriteriaQuery(List<String> fields) {
+    List<Predicate> predicates = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(cb.isNotNull(c.get(field)));
+    fields.forEach(field -> predicates.add(cb.isNull(c.get(field))));
+    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
-  protected CriteriaQuery<T> findLessThanCriteriaQuery(String field, Number number) {
+  protected CriteriaQuery<T> findLessThanCriteriaQuery(Map<String, Number> fieldNumberMap) {
+    List<Predicate> predicates = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(cb.lt(c.get(field), number));
+    for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
+      String field = entry.getKey();
+      Number number = entry.getValue();
+      predicates.add(cb.lt(c.get(field), number));
+    }
+    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
-  protected CriteriaQuery<T> findGreaterThanCriteriaQuery(String field, Number number) {
+  protected CriteriaQuery<T> findGreaterThanCriteriaQuery(Map<String, Number> fieldNumberMap) {
+    List<Predicate> predicates = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(cb.gt(c.get(field), number));
+    for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
+      String field = entry.getKey();
+      Number number = entry.getValue();
+      predicates.add(cb.gt(c.get(field), number));
+    }
+    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
   protected CriteriaQuery<T> findAndSortCriteriaQuery(
@@ -114,10 +125,16 @@ public abstract class CriteriaApiAbstractDAO<T> {
     return q.orderBy(orders);
   }
 
-  protected CriteriaQuery<T> findContainCriteriaQuery(String field, String criteria) {
+  protected CriteriaQuery<T> findContainCriteriaQuery(Map<String, String> fieldStringMap) {
+    List<Predicate> predicates = new ArrayList<>();
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(cb.like(c.get(field), criteria));
+    for (Map.Entry<String, String> entry : fieldStringMap.entrySet()) {
+      String field = entry.getKey();
+      String contain = entry.getValue();
+      predicates.add(cb.like(c.get(field), contain));
+    }
+    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 }
