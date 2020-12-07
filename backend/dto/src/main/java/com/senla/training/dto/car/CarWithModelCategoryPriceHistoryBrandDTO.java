@@ -1,7 +1,7 @@
 package com.senla.training.dto.car;
 
-import com.senla.training.dto.pricehistory.PriceHistoryDTO;
 import com.senla.training.dto.category.CategoryDTO;
+import com.senla.training.dto.pricehistory.PriceHistoryDTO;
 import java.util.List;
 
 public class CarWithModelCategoryPriceHistoryBrandDTO extends CarWithModelBrandDTO {

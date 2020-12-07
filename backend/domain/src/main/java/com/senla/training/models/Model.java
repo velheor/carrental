@@ -14,15 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraph(
     name = "modelWithBrand",
-    attributeNodes = {
-      @NamedAttributeNode(value = "brand")
-    })
+    attributeNodes = {@NamedAttributeNode(value = "brand")})
 @Entity
 @Table(name = "models")
 public class Model implements Serializable {

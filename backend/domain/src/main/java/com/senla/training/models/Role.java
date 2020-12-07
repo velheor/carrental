@@ -19,9 +19,9 @@ import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-        @NamedEntityGraph(
-                name = "roleWithUsers",
-                attributeNodes = {@NamedAttributeNode(value = "users")})
+  @NamedEntityGraph(
+      name = "roleWithUsers",
+      attributeNodes = {@NamedAttributeNode(value = "users")})
 })
 @Entity
 @Table(name = "roles")
