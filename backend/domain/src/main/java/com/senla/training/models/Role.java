@@ -15,11 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "roleWithUsers",
-    attributeNodes = {@NamedAttributeNode(value = "users")})
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "roleWithUsers",
+                attributeNodes = {@NamedAttributeNode(value = "users")})
+})
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
