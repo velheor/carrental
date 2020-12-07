@@ -19,11 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraph(
-    name = "categoryWithCategoriesCarsModelBrand",
-    attributeNodes = {
-      @NamedAttributeNode(value = "categories"),
-      @NamedAttributeNode(value = "cars", subgraph = "carsWithModel")
-    },
+    name = "categoryWithCarsModelBrand",
+    attributeNodes = {@NamedAttributeNode(value = "cars", subgraph = "carsWithModel")},
     subgraphs = {
       @NamedSubgraph(
           name = "carsWithModel",

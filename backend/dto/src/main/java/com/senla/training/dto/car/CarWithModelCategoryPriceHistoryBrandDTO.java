@@ -5,7 +5,6 @@ import com.senla.training.dto.pricehistory.PriceHistoryDTO;
 import java.util.List;
 
 public class CarWithModelCategoryPriceHistoryBrandDTO extends CarWithModelBrandDTO {
-
   private CategoryDTO category;
 
   private List<PriceHistoryDTO> priceHistoryList;

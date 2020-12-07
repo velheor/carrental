@@ -1,39 +1,36 @@
 package com.senla.training.service.api;
 
 import com.senla.training.dto.category.CategoryDTO;
-import com.senla.training.dto.category.CategoryWithCategoriesCarsModelBrandDTO;
+import com.senla.training.dto.category.CategoryWithCarsModelBrandDTO;
 import java.util.List;
 import java.util.Map;
 
 public interface ICategoryService extends IGenericService<CategoryDTO> {
-  CategoryWithCategoriesCarsModelBrandDTO findByIdCategoryWithCategoriesCarsModelBrandDTO(int id);
+  CategoryWithCarsModelBrandDTO findByIdCategoryWithCarsModelBrandDTO(int id);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrandDTO(
-          Map<String, String> fieldDirectionMap);
+  List<CategoryWithCarsModelBrandDTO> findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
+      Map<String, String> fieldDirectionMap);
 
-  CategoryWithCategoriesCarsModelBrandDTO findOneByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
+  CategoryWithCarsModelBrandDTO findOneByCriteriaCategoryWithCarsModelBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAllByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-          Map<String, Object> fieldCriteriaMap);
+  List<CategoryWithCarsModelBrandDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
+      Map<String, Object> fieldCriteriaMap);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO>
-      findByNotNullCategoryWithCategoriesCarsModelBrandDTO(List<String> fields);
-
-  List<CategoryWithCategoriesCarsModelBrandDTO> findByNullCategoryWithCategoriesCarsModelBrandDTO(
+  List<CategoryWithCarsModelBrandDTO> findByNotNullCategoryWithCarsModelBrandDTO(
       List<String> fields);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO> findLessThanCategoryWithCategoriesCarsModelBrandDTO(
+  List<CategoryWithCarsModelBrandDTO> findByNullCategoryWithCarsModelBrandDTO(List<String> fields);
+
+  List<CategoryWithCarsModelBrandDTO> findLessThanCategoryWithCarsModelBrandDTO(
       Map<String, Number> fieldNumberMap);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO>
-      findGreaterThanCategoryWithCategoriesCarsModelBrandDTO(Map<String, Number> fieldNumberMap);
+  List<CategoryWithCarsModelBrandDTO> findGreaterThanCategoryWithCarsModelBrandDTO(
+      Map<String, Number> fieldNumberMap);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO> findAndSortCategoryWithCategoriesCarsModelBrandDTO(
+  List<CategoryWithCarsModelBrandDTO> findAndSortCategoryWithCarsModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<CategoryWithCategoriesCarsModelBrandDTO> findContainCategoryWithCategoriesCarsModelBrandDTO(
+  List<CategoryWithCarsModelBrandDTO> findContainCategoryWithCarsModelBrandDTO(
       Map<String, String> fieldStringMap);
 }

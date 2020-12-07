@@ -2,7 +2,7 @@ package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.ICategoryDAO;
 import com.senla.training.dto.category.CategoryDTO;
-import com.senla.training.dto.category.CategoryWithCategoriesCarsModelBrandDTO;
+import com.senla.training.dto.category.CategoryWithCarsModelBrandDTO;
 import com.senla.training.models.Category;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.ICategoryService;
@@ -24,89 +24,84 @@ public class CategoryService implements ICategoryService {
   }
 
   @Override
-  public CategoryWithCategoriesCarsModelBrandDTO findByIdCategoryWithCategoriesCarsModelBrandDTO(
-      int id) {
+  public CategoryWithCarsModelBrandDTO findByIdCategoryWithCarsModelBrandDTO(int id) {
     return objectMapperUtils.map(
-        categoryDAO.findByIdCategoryWithCategoriesCarsModelBrand(id),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findByIdCategoryWithCarsModelBrand(id), CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrandDTO(
+  public List<CategoryWithCarsModelBrandDTO>
+      findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
           Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrand(
+        categoryDAO.findAllAndSortWithDirectionCategoryWithCarsModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public CategoryWithCategoriesCarsModelBrandDTO
-      findOneByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-          Map<String, Object> fieldCriteriaMap) {
+  public CategoryWithCarsModelBrandDTO findOneByCriteriaCategoryWithCarsModelBrandDTO(
+      Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
-        categoryDAO.findOneByCriteriaCategoryWithCategoriesCarsModelBrand(fieldCriteriaMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findOneByCriteriaCategoryWithCarsModelBrand(fieldCriteriaMap),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAllByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-          Map<String, Object> fieldCriteriaMap) {
+  public List<CategoryWithCarsModelBrandDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
+      Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findAllByCriteriaCategoryWithCategoriesCarsModelBrand(fieldCriteriaMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findAllByCriteriaCategoryWithCarsModelBrand(fieldCriteriaMap),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findByNotNullCategoryWithCategoriesCarsModelBrandDTO(List<String> fields) {
+  public List<CategoryWithCarsModelBrandDTO> findByNotNullCategoryWithCarsModelBrandDTO(
+      List<String> fields) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findByNotNullCategoryWithCategoriesCarsModelBrand(fields),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findByNotNullCategoryWithCarsModelBrand(fields),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findByNullCategoryWithCategoriesCarsModelBrandDTO(List<String> fields) {
+  public List<CategoryWithCarsModelBrandDTO> findByNullCategoryWithCarsModelBrandDTO(
+      List<String> fields) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findByNullCategoryWithCategoriesCarsModelBrand(fields),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findByNullCategoryWithCarsModelBrand(fields),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findLessThanCategoryWithCategoriesCarsModelBrandDTO(Map<String, Number> fieldNumberMap) {
+  public List<CategoryWithCarsModelBrandDTO> findLessThanCategoryWithCarsModelBrandDTO(
+      Map<String, Number> fieldNumberMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findLessThanCategoryWithCategoriesCarsModelBrand(fieldNumberMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findLessThanCategoryWithCarsModelBrand(fieldNumberMap),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findGreaterThanCategoryWithCategoriesCarsModelBrandDTO(Map<String, Number> fieldNumberMap) {
+  public List<CategoryWithCarsModelBrandDTO> findGreaterThanCategoryWithCarsModelBrandDTO(
+      Map<String, Number> fieldNumberMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findGreaterThanCategoryWithCategoriesCarsModelBrand(fieldNumberMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findGreaterThanCategoryWithCarsModelBrand(fieldNumberMap),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAndSortCategoryWithCategoriesCarsModelBrandDTO(
-          Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
+  public List<CategoryWithCarsModelBrandDTO> findAndSortCategoryWithCarsModelBrandDTO(
+      Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findAndSortCategoryWithCategoriesCarsModelBrand(
+        categoryDAO.findAndSortCategoryWithCarsModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findContainCategoryWithCategoriesCarsModelBrandDTO(Map<String, String> fieldStringMap) {
+  public List<CategoryWithCarsModelBrandDTO> findContainCategoryWithCarsModelBrandDTO(
+      Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findContainCategoryWithCategoriesCarsModelBrand(fieldStringMap),
-        CategoryWithCategoriesCarsModelBrandDTO.class);
+        categoryDAO.findContainCategoryWithCarsModelBrand(fieldStringMap),
+        CategoryWithCarsModelBrandDTO.class);
   }
 
   @Override

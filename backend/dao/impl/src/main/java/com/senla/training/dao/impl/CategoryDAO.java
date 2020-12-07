@@ -10,69 +10,67 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CategoryDAO extends EntityGraphAbstractDAO<Category> implements ICategoryDAO {
   @Override
-  public Category findByIdCategoryWithCategoriesCarsModelBrand(int id) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+  public Category findByIdCategoryWithCarsModelBrand(int id) {
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findById(id);
   }
 
   @Override
-  public List<Category> findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrand(
+  public List<Category> findAllAndSortWithDirectionCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findAllAndSortWithDirection(fieldDirectionMap);
   }
 
   @Override
-  public Category findOneByCriteriaCategoryWithCategoriesCarsModelBrand(
+  public Category findOneByCriteriaCategoryWithCarsModelBrand(
       Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findOneByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Category> findAllByCriteriaCategoryWithCategoriesCarsModelBrand(
+  public List<Category> findAllByCriteriaCategoryWithCarsModelBrand(
       Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findAllByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Category> findByNotNullCategoryWithCategoriesCarsModelBrand(List<String> fields) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+  public List<Category> findByNotNullCategoryWithCarsModelBrand(List<String> fields) {
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findByNotNull(fields);
   }
 
   @Override
-  public List<Category> findByNullCategoryWithCategoriesCarsModelBrand(List<String> fields) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+  public List<Category> findByNullCategoryWithCarsModelBrand(List<String> fields) {
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findByNull(fields);
   }
 
   @Override
-  public List<Category> findLessThanCategoryWithCategoriesCarsModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+  public List<Category> findLessThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap) {
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findLessThan(fieldNumberMap);
   }
 
   @Override
-  public List<Category> findGreaterThanCategoryWithCategoriesCarsModelBrand(
+  public List<Category> findGreaterThanCategoryWithCarsModelBrand(
       Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findGreaterThan(fieldNumberMap);
   }
 
   @Override
-  public List<Category> findAndSortCategoryWithCategoriesCarsModelBrand(
+  public List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
   }
 
   @Override
-  public List<Category> findContainCategoryWithCategoriesCarsModelBrand(
-      Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("categoryWithCategoriesCarsModelBrand");
+  public List<Category> findContainCategoryWithCarsModelBrand(Map<String, String> fieldStringMap) {
+    super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findContain(fieldStringMap);
   }
 }

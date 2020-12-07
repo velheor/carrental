@@ -6,30 +6,25 @@ import java.util.List;
 import java.util.Map;
 
 public interface ICategoryDAO extends IGenericDAO<Category> {
-  Category findByIdCategoryWithCategoriesCarsModelBrand(int id);
+  Category findByIdCategoryWithCarsModelBrand(int id);
 
-  List<Category> findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrand(
+  List<Category> findAllAndSortWithDirectionCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap);
 
-  Category findOneByCriteriaCategoryWithCategoriesCarsModelBrand(
-      Map<String, Object> fieldCriteriaMap);
+  Category findOneByCriteriaCategoryWithCarsModelBrand(Map<String, Object> fieldCriteriaMap);
 
-  List<Category> findAllByCriteriaCategoryWithCategoriesCarsModelBrand(
-      Map<String, Object> fieldCriteriaMap);
+  List<Category> findAllByCriteriaCategoryWithCarsModelBrand(Map<String, Object> fieldCriteriaMap);
 
-  List<Category> findByNotNullCategoryWithCategoriesCarsModelBrand(List<String> fields);
+  List<Category> findByNotNullCategoryWithCarsModelBrand(List<String> fields);
 
-  List<Category> findByNullCategoryWithCategoriesCarsModelBrand(List<String> fields);
+  List<Category> findByNullCategoryWithCarsModelBrand(List<String> fields);
 
-  List<Category> findLessThanCategoryWithCategoriesCarsModelBrand(
-      Map<String, Number> fieldNumberMap);
+  List<Category> findLessThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap);
 
-  List<Category> findGreaterThanCategoryWithCategoriesCarsModelBrand(
-      Map<String, Number> fieldNumberMap);
+  List<Category> findGreaterThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap);
 
-  List<Category> findAndSortCategoryWithCategoriesCarsModelBrand(
+  List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Category> findContainCategoryWithCategoriesCarsModelBrand(
-      Map<String, String> fieldStringMap);
+  List<Category> findContainCategoryWithCarsModelBrand(Map<String, String> fieldStringMap);
 }

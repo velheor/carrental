@@ -1,7 +1,7 @@
 package com.senla.training.controllers;
 
 import com.senla.training.dto.category.CategoryDTO;
-import com.senla.training.dto.category.CategoryWithCategoriesCarsModelBrandDTO;
+import com.senla.training.dto.category.CategoryWithCarsModelBrandDTO;
 import com.senla.training.service.api.ICategoryService;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +28,15 @@ public class CategoryController {
   }
 
   @GetMapping("/{id}")
-  public CategoryWithCategoriesCarsModelBrandDTO getByIdCategoryWithCategoriesCarsModelBrand(
+  public CategoryWithCarsModelBrandDTO getByIdCategoryWithCarsModelBrand(
       @PathVariable("id") Integer id) {
-    return categoryService.findByIdCategoryWithCategoriesCarsModelBrandDTO(id);
+    return categoryService.findByIdCategoryWithCarsModelBrandDTO(id);
   }
 
   @GetMapping
-  public List<CategoryWithCategoriesCarsModelBrandDTO> sortWithDirectionUsersWithRoles(
+  public List<CategoryWithCarsModelBrandDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
-    return categoryService.findAllAndSortWithDirectionCategoryWithCategoriesCarsModelBrandDTO(
-        allParams);
+    return categoryService.findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(allParams);
   }
 
   @PutMapping
@@ -59,66 +58,56 @@ public class CategoryController {
   @DeleteMapping("/{id}")
   public CategoryDTO deleteById(@PathVariable("id") Integer id) {
     categoryService.deleteById(id);
-    return categoryService.findByIdCategoryWithCategoriesCarsModelBrandDTO(id);
+    return categoryService.findByIdCategoryWithCarsModelBrandDTO(id);
   }
 
   @GetMapping("/findOneByCriteria")
-  public CategoryWithCategoriesCarsModelBrandDTO
-      findOneByCriteriaCategoryWithCategoriesCarsModelBrand(
-          @RequestParam Map<String, Object> fieldCriterionMap) {
-    return categoryService.findOneByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-        fieldCriterionMap);
+  public CategoryWithCarsModelBrandDTO findOneByCriteriaCategoryWithCarsModelBrand(
+      @RequestParam Map<String, Object> fieldCriterionMap) {
+    return categoryService.findOneByCriteriaCategoryWithCarsModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAllByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam Map<String, Object> fieldCriterionMap) {
-    return categoryService.findAllByCriteriaCategoryWithCategoriesCarsModelBrandDTO(
-        fieldCriterionMap);
+  public List<CategoryWithCarsModelBrandDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
+      @RequestParam Map<String, Object> fieldCriterionMap) {
+    return categoryService.findAllByCriteriaCategoryWithCarsModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findByNotNullCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam("field") List<String> fields) {
-    return categoryService.findByNotNullCategoryWithCategoriesCarsModelBrandDTO(fields);
+  public List<CategoryWithCarsModelBrandDTO> findByNotNullCategoryWithCarsModelBrandDTO(
+      @RequestParam("field") List<String> fields) {
+    return categoryService.findByNotNullCategoryWithCarsModelBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findByNullCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam("field") List<String> fields) {
-    return categoryService.findByNullCategoryWithCategoriesCarsModelBrandDTO(fields);
+  public List<CategoryWithCarsModelBrandDTO> findByNullCategoryWithCarsModelBrandDTO(
+      @RequestParam("field") List<String> fields) {
+    return categoryService.findByNullCategoryWithCarsModelBrandDTO(fields);
   }
 
   @GetMapping("/finLessThan")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findLessThanCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam Map<String, Number> fieldNumberMap) {
-    return categoryService.findLessThanCategoryWithCategoriesCarsModelBrandDTO(fieldNumberMap);
+  public List<CategoryWithCarsModelBrandDTO> findLessThanCategoryWithCarsModelBrandDTO(
+      @RequestParam Map<String, Number> fieldNumberMap) {
+    return categoryService.findLessThanCategoryWithCarsModelBrandDTO(fieldNumberMap);
   }
 
   @GetMapping("/findGreaterThan")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findGreaterThanCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam Map<String, Number> fieldNumberMap) {
-    return categoryService.findGreaterThanCategoryWithCategoriesCarsModelBrandDTO(fieldNumberMap);
+  public List<CategoryWithCarsModelBrandDTO> findGreaterThanCategoryWithCarsModelBrandDTO(
+      @RequestParam Map<String, Number> fieldNumberMap) {
+    return categoryService.findGreaterThanCategoryWithCarsModelBrandDTO(fieldNumberMap);
   }
 
   @GetMapping("/findAndSort")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findAndSortCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam Map<String, String> fieldDirectionMap,
-          @RequestParam Map<String, Object> fieldCriteriaMap) {
-    return categoryService.findAndSortCategoryWithCategoriesCarsModelBrandDTO(
+  public List<CategoryWithCarsModelBrandDTO> findAndSortCategoryWithCarsModelBrandDTO(
+      @RequestParam Map<String, String> fieldDirectionMap,
+      @RequestParam Map<String, Object> fieldCriteriaMap) {
+    return categoryService.findAndSortCategoryWithCarsModelBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
 
   @GetMapping("/findContain")
-  public List<CategoryWithCategoriesCarsModelBrandDTO>
-      findContainCategoryWithCategoriesCarsModelBrandDTO(
-          @RequestParam Map<String, String> fieldStringMap) {
-    return categoryService.findContainCategoryWithCategoriesCarsModelBrandDTO(fieldStringMap);
+  public List<CategoryWithCarsModelBrandDTO> findContainCategoryWithCarsModelBrandDTO(
+      @RequestParam Map<String, String> fieldStringMap) {
+    return categoryService.findContainCategoryWithCarsModelBrandDTO(fieldStringMap);
   }
 }
