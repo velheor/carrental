@@ -21,12 +21,12 @@ import javax.persistence.Table;
 @NamedEntityGraph(
     name = "categoryWithCategoriesCarsModelBrand",
     attributeNodes = {
-      @NamedAttributeNode(value = "cars", subgraph = "carWithModel"),
-      @NamedAttributeNode(value = "categories")
+      @NamedAttributeNode(value = "categories"),
+      @NamedAttributeNode(value = "cars", subgraph = "carsWithModel")
     },
     subgraphs = {
       @NamedSubgraph(
-          name = "carWithModel",
+          name = "carsWithModel",
           attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
       @NamedSubgraph(
           name = "modelWithBrand",

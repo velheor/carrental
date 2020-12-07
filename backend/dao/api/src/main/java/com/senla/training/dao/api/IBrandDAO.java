@@ -6,24 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public interface IBrandDAO extends IGenericDAO<Brand> {
-  Brand findByIdBrandWithModel(int id);
+  Brand findByIdBrandWithModels(int id);
 
-  List<Brand> findAllAndSortWithDirectionBrandWithModel(Map<String, Direction> fieldDirectionMap);
+  List<Brand> findAllAndSortWithDirectionBrandWithModels(Map<String, Direction> fieldDirectionMap);
 
-  Brand findOneByCriteriaBrandWithModel(Map<String, Object> fieldCriteriaMap);
+  Brand findOneByCriteriaBrandWithModels(Map<String, Object> fieldCriteriaMap);
 
-  List<Brand> findAllByCriteriaBrandWithModel(Map<String, Object> fieldCriteriaMap);
+  List<Brand> findAllByCriteriaBrandWithModels(Map<String, Object> fieldCriteriaMap);
 
-  List<Brand> findByNotNullBrandWithModel(List<String> fields);
+  List<Brand> findByNotNullBrandWithModels(List<String> fields);
 
-  List<Brand> findByNullBrandWithModel(List<String> fields);
+  List<Brand> findByNullBrandWithModels(List<String> fields);
 
-  List<Brand> findLessThanBrandWithModel(Map<String, Number> fieldNumberMap);
+  List<Brand> findLessThanBrandWithModels(Map<String, Number> fieldNumberMap);
 
-  List<Brand> findGreaterThanBrandWithModel(Map<String, Number> fieldNumberMap);
+  List<Brand> findGreaterThanBrandWithModels(Map<String, Number> fieldNumberMap);
 
-  List<Brand> findAndSortBrandWithModel(
+  List<Brand> findAndSortBrandWithModels(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Brand> findContainBrandWithModel(Map<String, String> fieldStringMap);
+  List<Brand> findContainBrandWithModels(Map<String, String> fieldStringMap);
 }

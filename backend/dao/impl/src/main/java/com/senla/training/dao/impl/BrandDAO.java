@@ -10,64 +10,64 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BrandDAO extends EntityGraphAbstractDAO<Brand> implements IBrandDAO {
   @Override
-  public Brand findByIdBrandWithModel(int id) {
-    super.setEntityGraphName("brandWithModel");
+  public Brand findByIdBrandWithModels(int id) {
+    super.setEntityGraphName("brandWithModels");
     return super.findById(id);
   }
 
   @Override
-  public List<Brand> findAllAndSortWithDirectionBrandWithModel(
+  public List<Brand> findAllAndSortWithDirectionBrandWithModels(
       Map<String, Direction> fieldDirectionMap) {
-    super.setEntityGraphName("brandWithModel");
+    super.setEntityGraphName("brandWithModels");
     return super.findAllAndSortWithDirection(fieldDirectionMap);
   }
 
   @Override
-  public Brand findOneByCriteriaBrandWithModel(Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("brandWithModel");
+  public Brand findOneByCriteriaBrandWithModels(Map<String, Object> fieldCriteriaMap) {
+    super.setEntityGraphName("brandWithModels");
     return super.findOneByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Brand> findAllByCriteriaBrandWithModel(Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findAllByCriteriaBrandWithModels(Map<String, Object> fieldCriteriaMap) {
+    super.setEntityGraphName("brandWithModels");
     return super.findAllByCriteria(fieldCriteriaMap);
   }
 
   @Override
-  public List<Brand> findByNotNullBrandWithModel(List<String> fields) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findByNotNullBrandWithModels(List<String> fields) {
+    super.setEntityGraphName("brandWithModels");
     return super.findByNotNull(fields);
   }
 
   @Override
-  public List<Brand> findByNullBrandWithModel(List<String> fields) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findByNullBrandWithModels(List<String> fields) {
+    super.setEntityGraphName("brandWithModels");
     return super.findByNull(fields);
   }
 
   @Override
-  public List<Brand> findLessThanBrandWithModel(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findLessThanBrandWithModels(Map<String, Number> fieldNumberMap) {
+    super.setEntityGraphName("brandWithModels");
     return super.findLessThan(fieldNumberMap);
   }
 
   @Override
-  public List<Brand> findGreaterThanBrandWithModel(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findGreaterThanBrandWithModels(Map<String, Number> fieldNumberMap) {
+    super.setEntityGraphName("brandWithModels");
     return super.findGreaterThan(fieldNumberMap);
   }
 
   @Override
-  public List<Brand> findAndSortBrandWithModel(
+  public List<Brand> findAndSortBrandWithModels(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    super.setEntityGraphName("brandWithModel");
+    super.setEntityGraphName("brandWithModels");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
   }
 
   @Override
-  public List<Brand> findContainBrandWithModel(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("brandWithModel");
+  public List<Brand> findContainBrandWithModels(Map<String, String> fieldStringMap) {
+    super.setEntityGraphName("brandWithModels");
     return super.findContain(fieldStringMap);
   }
 }
