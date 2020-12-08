@@ -1,5 +1,5 @@
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
 
-    compile project(':backend:domain')
+    implementation project(':backend:domain')
 }

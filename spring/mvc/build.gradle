@@ -3,5 +3,5 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
 
-    compile project(':spring:security')
+    implementation project(':spring:security')
 }

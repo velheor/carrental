@@ -22,3 +22,6 @@ include 'spring'
 include 'spring:hibernate'
 include 'spring:security'
 include 'spring:mvc'
+include 'backend:exception'
+findProject(':backend:exception')?.name = 'exception'
+

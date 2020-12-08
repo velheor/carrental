@@ -1,5 +1,6 @@
 dependencies {
-    compile project(':backend:controller'), project(':backend:dao'),
-            project(':backend:domain'), project(':backend:dto'),
-            project(':backend:service'), project(':backend:utils')
+    implementation project(':backend:domain'), project(':backend:dto'),
+            project(':backend:controller'), project(':backend:dao'),
+            project(':backend:service'), project(':backend:utils'),
+            project(':backend:exception')
 }

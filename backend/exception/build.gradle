@@ -1,0 +1,5 @@
+dependencies {
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.5.RELEASE'
+}

@@ -5,5 +5,5 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.21.Final'
 
-    compile project(':backend:dao:daoApi')
+    implementation project(':backend:dao:daoApi'), project(':backend:domain')
 }
