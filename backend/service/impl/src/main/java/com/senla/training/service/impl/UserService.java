@@ -93,11 +93,11 @@ public class UserService implements IUserService {
 
   @Override
   public UserDTO create(UserDTO entityDTO) {
-    if (this.checkForUniqueEmail(entityDTO.getEmail())) {
-      return objectMapperUtils.map(
-          userDAO.create(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
+    if (this.checkForExistEmail(entityDTO.getEmail())) {
+      return null;
     }
-    return new UserDTO();
+    return objectMapperUtils.map(
+        userDAO.create(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
   }
 
   @Override
@@ -113,10 +113,18 @@ public class UserService implements IUserService {
 
   @Override
   public void deleteById(int id) {
-    userDAO.deleteById(id);
+    if (this.checkForExistId(id)) {
+      userDAO.deleteById(id);
+    }
   }
 
-  public Boolean checkForUniqueEmail(String email) {
+  @Override
+  public Boolean checkForExistEmail(String email) {
     return userDAO.findByEmailUserWithRoles(email) != null;
+  }
+
+  @Override
+  public Boolean checkForExistId(Integer id) {
+    return userDAO.findByIdUserWithRoles(id) != null;
   }
 }

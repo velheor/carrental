@@ -27,4 +27,8 @@ public interface IUserService extends IGenericService<UserDTO> {
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
   List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
+
+  Boolean checkForExistEmail(String email);
+
+  Boolean checkForExistId(Integer id);
 }

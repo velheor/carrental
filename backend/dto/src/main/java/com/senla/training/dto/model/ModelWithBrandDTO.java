@@ -5,7 +5,7 @@ import com.senla.training.dto.brand.BrandDTO;
 public class ModelWithBrandDTO extends ModelDTO {
   private BrandDTO brand;
 
-  ModelWithBrandDTO() {}
+  public ModelWithBrandDTO() {}
 
   public BrandDTO getBrand() {
     return brand;
