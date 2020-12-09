@@ -81,6 +81,8 @@ public class Car implements Serializable {
   @JsonBackReference
   private List<Rent> rents;
 
+  public Car() {}
+
   public Integer getId() {
     return id;
   }

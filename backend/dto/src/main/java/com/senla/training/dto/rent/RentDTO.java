@@ -15,6 +15,8 @@ public class RentDTO {
 
   private Double totalPrice;
 
+  public RentDTO() {}
+
   public Integer getId() {
     return id;
   }

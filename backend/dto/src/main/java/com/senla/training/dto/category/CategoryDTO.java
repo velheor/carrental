@@ -5,6 +5,8 @@ public class CategoryDTO {
 
   private String name;
 
+  public CategoryDTO() {}
+
   public Integer getId() {
     return id;
   }

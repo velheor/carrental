@@ -85,6 +85,8 @@ public class Rent implements Serializable {
   @JsonManagedReference
   private List<StatusHistory> statusHistoryList;
 
+  public Rent() {}
+
   public Integer getId() {
     return id;
   }

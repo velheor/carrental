@@ -39,6 +39,8 @@ public class Role implements Serializable {
   @JsonBackReference
   private List<User> users;
 
+  public Role() {}
+
   public Integer getId() {
     return id;
   }

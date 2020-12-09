@@ -15,6 +15,8 @@ public class CarDTO {
 
   private Boolean transmission;
 
+  public CarDTO() {}
+
   public Long getId() {
     return id;
   }

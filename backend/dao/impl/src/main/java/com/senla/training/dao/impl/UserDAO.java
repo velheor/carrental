@@ -70,4 +70,10 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
     super.setEntityGraphName("userWithRoles");
     return super.findContain(fieldStringMap);
   }
+
+  @Override
+  public User findByEmailUserWithRoles(String email) {
+    super.setEntityGraphName("userWithRoles");
+    return this.findOneByCriteriaUserWithRoles(Map.of("email", email));
+  }
 }

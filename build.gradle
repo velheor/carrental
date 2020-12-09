@@ -11,14 +11,19 @@ allprojects {
     sourceCompatibility = '12'
 }
 
+test {
+    useJUnitPlatform()
+}
+
 subprojects {
+    test {
+        useJUnitPlatform()
+    }
+
     repositories {
         mavenCentral()
     }
 
-    test {
-        useJUnitPlatform()
-    }
     dependencies {
         compile group: 'org.springframework', name: 'spring-context', version: "${springVersion}"
     }
@@ -29,7 +34,6 @@ repositories {
 }
 
 dependencies {
-
     war.doLast {
         copy {
             from war.archiveFile
@@ -37,9 +41,6 @@ dependencies {
         }
     }
 
-    compile project(':spring'), project(':backend')
+    implementation project(':spring'), project(':backend')
 }
 
-test {
-    useJUnitPlatform()
-}

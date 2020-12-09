@@ -7,6 +7,8 @@ public class BrandDTO {
 
   private EBrand name;
 
+  public BrandDTO() {}
+
   public Long getId() {
     return id;
   }

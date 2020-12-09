@@ -5,6 +5,8 @@ import com.senla.training.dto.model.ModelWithBrandDTO;
 public class CarWithModelBrandDTO extends CarDTO {
   private ModelWithBrandDTO model;
 
+  public CarWithModelBrandDTO() {}
+
   public ModelWithBrandDTO getModel() {
     return model;
   }

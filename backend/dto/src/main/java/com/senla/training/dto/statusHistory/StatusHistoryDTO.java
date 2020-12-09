@@ -10,6 +10,8 @@ public class StatusHistoryDTO {
 
   private Date statusDate;
 
+  public StatusHistoryDTO() {}
+
   public Integer getId() {
     return id;
   }

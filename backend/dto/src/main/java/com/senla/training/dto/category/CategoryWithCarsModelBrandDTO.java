@@ -6,6 +6,8 @@ import java.util.List;
 public class CategoryWithCarsModelBrandDTO extends CategoryDTO {
   private List<CarWithModelBrandDTO> cars;
 
+  public CategoryWithCarsModelBrandDTO() {}
+
   public List<CarWithModelBrandDTO> getCars() {
     return cars;
   }

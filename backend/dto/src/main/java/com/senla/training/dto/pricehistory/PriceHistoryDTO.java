@@ -9,6 +9,8 @@ public class PriceHistoryDTO {
 
   private Date priceDate;
 
+  public PriceHistoryDTO() {}
+
   public Integer getId() {
     return id;
   }

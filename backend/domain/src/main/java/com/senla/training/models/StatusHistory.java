@@ -45,6 +45,8 @@ public class StatusHistory implements Serializable {
   @JsonBackReference
   private Rent rent;
 
+  public StatusHistory() {}
+
   public Integer getId() {
     return id;
   }

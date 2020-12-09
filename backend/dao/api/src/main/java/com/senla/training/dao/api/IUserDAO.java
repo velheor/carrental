@@ -26,4 +26,6 @@ public interface IUserDAO extends ICrudDAO<User> {
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
   List<User> findContainUserWithRoles(Map<String, String> fieldStringMap);
+
+  User findByEmailUserWithRoles(String email);
 }

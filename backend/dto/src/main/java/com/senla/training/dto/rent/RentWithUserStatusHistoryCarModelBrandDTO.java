@@ -11,6 +11,8 @@ public class RentWithUserStatusHistoryCarModelBrandDTO extends RentDTO {
 
   private CarWithModelBrandDTO car;
 
+  public RentWithUserStatusHistoryCarModelBrandDTO() {}
+
   public UserDTO getUser() {
     return user;
   }

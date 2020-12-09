@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
+  @NamedEntityGraph(name = "user"),
   @NamedEntityGraph(
       name = "userWithRoles",
       attributeNodes = {@NamedAttributeNode(value = "roles")})
@@ -68,6 +69,27 @@ public class User implements Serializable {
   @OneToMany(mappedBy = "user")
   @JsonBackReference
   private Set<Rent> rents;
+
+  public User() {}
+
+  public User(
+      Integer id,
+      String firstName,
+      String secondName,
+      String email,
+      String password,
+      EStatusUser statusUser,
+      Set<Role> roles,
+      Set<Rent> rents) {
+    this.id = id;
+    this.firstName = firstName;
+    this.secondName = secondName;
+    this.email = email;
+    this.password = password;
+    this.statusUser = statusUser;
+    this.roles = roles;
+    this.rents = rents;
+  }
 
   public Integer getId() {
     return id;
@@ -126,10 +148,10 @@ public class User implements Serializable {
         && getFirstName().equals(user.getFirstName())
         && getSecondName().equals(user.getSecondName())
         && getEmail().equals(user.getEmail())
-        && getStatusUser().equals(user.getStatusUser())
-        && Objects.equals(getPassword(), user.getPassword())
-        && Objects.equals(getRoles(), user.getRoles())
-        && Objects.equals(getRents(), user.getRents());
+        && getPassword().equals(user.getPassword())
+        && getStatusUser() == user.getStatusUser()
+        && getRoles().equals(user.getRoles())
+        && getRents().equals(user.getRents());
   }
 
   @Override
@@ -140,6 +162,7 @@ public class User implements Serializable {
         getSecondName(),
         getEmail(),
         getPassword(),
+        getStatusUser(),
         getRoles(),
         getRents());
   }

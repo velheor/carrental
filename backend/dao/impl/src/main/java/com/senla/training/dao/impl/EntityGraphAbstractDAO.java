@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityGraph;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -52,7 +53,11 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
 
   @Override
   public T findOneByCriteria(Map<String, Object> fieldCriterionMap) {
-    return createTypedQuery(super.findCriteriaQuery(fieldCriterionMap)).getSingleResult();
+    try {
+      return createTypedQuery(super.findCriteriaQuery(fieldCriterionMap)).getSingleResult();
+    } catch (NoResultException e) {
+      throw new NullPointerException("Not found");
+    }
   }
 
   @Override

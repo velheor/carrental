@@ -44,6 +44,8 @@ public class Model implements Serializable {
   @JsonManagedReference
   private Brand brand;
 
+  public Model() {}
+
   public Integer getId() {
     return id;
   }

@@ -4,6 +4,8 @@ import com.senla.training.dto.model.ModelDTO;
 import java.util.List;
 
 public class BrandWithModelsDTO extends BrandDTO {
+  public BrandWithModelsDTO() {}
+
   private List<ModelDTO> models;
 
   public List<ModelDTO> getModels() {

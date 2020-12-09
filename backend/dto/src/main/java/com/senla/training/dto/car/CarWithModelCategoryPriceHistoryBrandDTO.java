@@ -13,6 +13,8 @@ public class CarWithModelCategoryPriceHistoryBrandDTO extends CarWithModelBrandD
     return category;
   }
 
+  public CarWithModelCategoryPriceHistoryBrandDTO() {}
+
   public void setCategory(CategoryDTO category) {
     this.category = category;
   }

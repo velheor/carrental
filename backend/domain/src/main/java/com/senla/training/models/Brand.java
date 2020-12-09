@@ -36,6 +36,8 @@ public class Brand implements Serializable {
   @JsonBackReference
   private List<Model> models;
 
+  public Brand() {}
+
   public Integer getId() {
     return id;
   }

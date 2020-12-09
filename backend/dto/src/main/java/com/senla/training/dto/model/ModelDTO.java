@@ -7,6 +7,8 @@ public class ModelDTO {
 
   private String manufacturerCountry;
 
+  public ModelDTO() {}
+
   public Integer getId() {
     return id;
   }

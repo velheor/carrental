@@ -54,6 +54,8 @@ public class PriceHistory implements Serializable {
   @JsonBackReference
   private Car car;
 
+  public PriceHistory() {}
+
   public Integer getId() {
     return id;
   }

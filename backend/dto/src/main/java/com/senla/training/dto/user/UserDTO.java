@@ -15,6 +15,23 @@ public class UserDTO {
 
   private EStatusUser statusUser;
 
+  public UserDTO() {}
+
+  public UserDTO(
+      Integer id,
+      String firstName,
+      String secondName,
+      String email,
+      String password,
+      EStatusUser statusUser) {
+    this.id = id;
+    this.firstName = firstName;
+    this.secondName = secondName;
+    this.email = email;
+    this.password = password;
+    this.statusUser = statusUser;
+  }
+
   public Integer getId() {
     return id;
   }

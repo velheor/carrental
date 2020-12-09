@@ -53,6 +53,8 @@ public class Category implements Serializable {
   @JsonManagedReference
   private List<Category> categories;
 
+  public Category() {}
+
   public int getId() {
     return id;
   }
