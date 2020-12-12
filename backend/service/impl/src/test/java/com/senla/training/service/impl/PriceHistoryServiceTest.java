@@ -3,6 +3,8 @@ package com.senla.training.service.impl;
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IPriceHistoryDAO;
 import com.senla.training.dto.pricehistory.PriceHistoryWithCarModelBrandDTO;
@@ -325,14 +327,55 @@ class PriceHistoryServiceTest {
   }
 
   @Test
-  void create() {}
+  void create() {
+    given(priceHistoryDAO.create(priceHistory)).willReturn(priceHistory);
+    given(objectMapperUtils.map(priceHistoryWithCarModelBrandDTO, PriceHistory.class))
+        .willReturn(priceHistory);
+    assertEquals(
+        priceHistoryWithCarModelBrandDTO,
+        priceHistoryService.create(priceHistoryWithCarModelBrandDTO));
+
+    given(priceHistoryDAO.create(priceHistory)).willReturn(null);
+    assertNull(priceHistoryService.create(priceHistoryWithCarModelBrandDTO));
+
+    given(priceHistoryDAO.create(priceHistory)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> priceHistoryService.create(priceHistoryWithCarModelBrandDTO));
+  }
 
   @Test
-  void update() {}
+  void update() {
+    given(priceHistoryDAO.update(priceHistory)).willReturn(priceHistory);
+    given(objectMapperUtils.map(priceHistoryWithCarModelBrandDTO, PriceHistory.class))
+        .willReturn(priceHistory);
+    assertEquals(
+        priceHistoryWithCarModelBrandDTO,
+        priceHistoryService.update(priceHistoryWithCarModelBrandDTO));
+
+    given(priceHistoryDAO.update(priceHistory)).willReturn(null);
+    assertNull(priceHistoryService.update(priceHistoryWithCarModelBrandDTO));
+
+    given(priceHistoryDAO.update(priceHistory)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> priceHistoryService.update(priceHistoryWithCarModelBrandDTO));
+  }
 
   @Test
-  void delete() {}
+  void delete() {
+    given(objectMapperUtils.map(priceHistoryWithCarModelBrandDTO, PriceHistory.class))
+        .willReturn(priceHistory);
+    priceHistoryService.delete(priceHistoryWithCarModelBrandDTO);
+    verify(priceHistoryDAO, atLeastOnce()).delete(priceHistory);
+
+    given(priceHistoryDAO.update(priceHistory)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> priceHistoryService.update(priceHistoryWithCarModelBrandDTO));
+  }
 
   @Test
-  void deleteById() {}
+  void deleteById() {
+    int id = 1;
+    priceHistoryService.deleteById(id);
+    verify(priceHistoryDAO, atLeastOnce()).deleteById(id);
+  }
 }

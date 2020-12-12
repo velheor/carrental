@@ -112,14 +112,14 @@ public class RentService implements IRentService {
 
   @Override
   public RentDTO create(RentDTO entityDTO) {
-    return objectMapperUtils.map(
-        rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
+    rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class));
+    return entityDTO;
   }
 
   @Override
   public RentDTO update(RentDTO entityDTO) {
-    return objectMapperUtils.map(
-        rentDAO.update(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
+    rentDAO.update(objectMapperUtils.map(entityDTO, Rent.class));
+    return entityDTO;
   }
 
   @Override

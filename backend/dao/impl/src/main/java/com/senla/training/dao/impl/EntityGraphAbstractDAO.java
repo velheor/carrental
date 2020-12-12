@@ -42,7 +42,7 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
 
   @Override
   public void deleteById(int id) {
-    delete(findById(id));
+    this.delete(this.findById(id));
   }
 
   @Override

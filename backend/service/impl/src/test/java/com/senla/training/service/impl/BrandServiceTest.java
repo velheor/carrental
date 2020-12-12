@@ -3,27 +3,26 @@ package com.senla.training.service.impl;
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IBrandDAO;
 import com.senla.training.dto.brand.BrandWithModelsDTO;
 import com.senla.training.models.Brand;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 class BrandServiceTest {
-  @InjectMocks
-  private BrandService brandService;
-  @Mock
-  private IBrandDAO brandDAO;
+  @InjectMocks private BrandService brandService;
+  @Mock private IBrandDAO brandDAO;
   @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final Brand brand;
@@ -65,276 +64,222 @@ class BrandServiceTest {
   @Test
   void findByIdBrandWithModelsDTO() {
     given(brandDAO.findByIdBrandWithModels(1)).willReturn(brand);
-    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTO);
-    assertEquals(
-            brandWithModelsDTO,
-            brandService.findByIdBrandWithModelsDTO(1));
+    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class)).willReturn(brandWithModelsDTO);
+    assertEquals(brandWithModelsDTO, brandService.findByIdBrandWithModelsDTO(1));
 
     given(brandDAO.findByIdBrandWithModels(1)).willReturn(null);
     assertNull(brandService.findByIdBrandWithModelsDTO(1));
 
     given(brandDAO.findByIdBrandWithModels(1)).willThrow(Exception.class);
-    assertThrows(
-            Exception.class, () -> brandService.findByIdBrandWithModelsDTO(1));
+    assertThrows(Exception.class, () -> brandService.findByIdBrandWithModelsDTO(1));
   }
 
   @Test
   void findAllAndSortWithDirectionBrandWithModelsDTO() {
-    given(
-            brandDAO.findAllAndSortWithDirectionBrandWithModels(
-                    fieldDirectionMap))
-            .willReturn(brands);
+    given(brandDAO.findAllAndSortWithDirectionBrandWithModels(fieldDirectionMap))
+        .willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findAllAndSortWithDirectionBrandWithModelsDTO(
-                    fieldDirectionStringMap));
+        brandWithModelsDTOList,
+        brandService.findAllAndSortWithDirectionBrandWithModelsDTO(fieldDirectionStringMap));
 
-    given(
-            brandDAO.findAllAndSortWithDirectionBrandWithModels(
-                    fieldDirectionMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
+    given(brandDAO.findAllAndSortWithDirectionBrandWithModels(fieldDirectionMap))
+        .willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
-            new ArrayList<>(),
-            brandService.findAllAndSortWithDirectionBrandWithModelsDTO(
-                    fieldDirectionStringMap));
+        new ArrayList<>(),
+        brandService.findAllAndSortWithDirectionBrandWithModelsDTO(fieldDirectionStringMap));
 
-    given(
-            brandDAO.findAllAndSortWithDirectionBrandWithModels(
-                    fieldDirectionMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findAllAndSortWithDirectionBrandWithModels(fieldDirectionMap))
+        .willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () ->
-                    brandService.findAllAndSortWithDirectionBrandWithModelsDTO(
-                            fieldDirectionStringMap));
+        Exception.class,
+        () -> brandService.findAllAndSortWithDirectionBrandWithModelsDTO(fieldDirectionStringMap));
   }
 
   @Test
   void findOneByCriteriaBrandWithModelsDTO() {
-    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap))
-            .willReturn(brand);
-    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTO);
+    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(brand);
+    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class)).willReturn(brandWithModelsDTO);
     assertEquals(
-            brandWithModelsDTO,
-            brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+        brandWithModelsDTO, brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
-    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap))
-            .willReturn(null);
-    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class))
-            .willReturn(null);
-    assertNull(
-            brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(null);
+    given(objectMapperUtils.map(brand, BrandWithModelsDTO.class)).willReturn(null);
+    assertNull(brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
-    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap)).willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () ->
-                    brandService.findOneByCriteriaBrandWithModelsDTO(
-                            fieldCriterionMap));
+        Exception.class, () -> brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
   }
 
   @Test
   void findAllByCriteriaBrandWithModelsDTO() {
-    given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap))
-            .willReturn(brands);
+    given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+        brandWithModelsDTOList,
+        brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
     given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
+        .willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
-            new ArrayList<>(),
-            brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+        new ArrayList<>(), brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
-    given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap)).willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () ->
-                    brandService.findAllByCriteriaBrandWithModelsDTO(
-                            fieldCriterionMap));
+        Exception.class, () -> brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
   }
 
   @Test
   void findByNotNullBrandWithModelsDTO() {
-    given(brandDAO.findByNotNullBrandWithModels(fields))
-            .willReturn(brands);
+    given(brandDAO.findByNotNullBrandWithModels(fields)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
-    assertEquals(
-            brandWithModelsDTOList,
-            brandService.findByNotNullBrandWithModelsDTO(fields));
+        .willReturn(brandWithModelsDTOList);
+    assertEquals(brandWithModelsDTOList, brandService.findByNotNullBrandWithModelsDTO(fields));
 
-    given(brandDAO.findByNotNullBrandWithModels(fields))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
-    deepEquals(
-            new ArrayList<>(),
-            brandService.findByNotNullBrandWithModelsDTO(fields));
+    given(brandDAO.findByNotNullBrandWithModels(fields)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
+    deepEquals(new ArrayList<>(), brandService.findByNotNullBrandWithModelsDTO(fields));
 
-    given(brandDAO.findByNotNullBrandWithModels(fields))
-            .willThrow(Exception.class);
-    assertThrows(
-            Exception.class,
-            () -> brandService.findByNotNullBrandWithModelsDTO(fields));
+    given(brandDAO.findByNotNullBrandWithModels(fields)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> brandService.findByNotNullBrandWithModelsDTO(fields));
   }
 
   @Test
   void findByNullBrandWithModelsDTO() {
-    given(brandDAO.findByNullBrandWithModels(fields))
-            .willReturn(brands);
+    given(brandDAO.findByNullBrandWithModels(fields)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
-    assertEquals(
-            brandWithModelsDTOList,
-            brandService.findByNullBrandWithModelsDTO(fields));
+        .willReturn(brandWithModelsDTOList);
+    assertEquals(brandWithModelsDTOList, brandService.findByNullBrandWithModelsDTO(fields));
 
-    given(brandDAO.findByNullBrandWithModels(fields))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
-    deepEquals(
-            new ArrayList<>(), brandService.findByNullBrandWithModelsDTO(fields));
+    given(brandDAO.findByNullBrandWithModels(fields)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
+    deepEquals(new ArrayList<>(), brandService.findByNullBrandWithModelsDTO(fields));
 
-    given(brandDAO.findByNullBrandWithModels(fields))
-            .willThrow(Exception.class);
-    assertThrows(
-            Exception.class,
-            () -> brandService.findByNullBrandWithModelsDTO(fields));
+    given(brandDAO.findByNullBrandWithModels(fields)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> brandService.findByNullBrandWithModelsDTO(fields));
   }
 
   @Test
   void findLessThanBrandWithModelsDTO() {
-    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap))
-            .willReturn(brands);
+    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
+        brandWithModelsDTOList, brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
 
-    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
-    deepEquals(
-            new ArrayList<>(),
-            brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
+    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
+    deepEquals(new ArrayList<>(), brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
 
-    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findLessThanBrandWithModels(fieldNumberMap)).willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () -> brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
+        Exception.class, () -> brandService.findLessThanBrandWithModelsDTO(fieldNumberMap));
   }
 
   @Test
   void findGreaterThanBrandWithModelsDTO() {
-    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap))
-            .willReturn(brands);
+    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
+        brandWithModelsDTOList, brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
 
-    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
-    deepEquals(
-            new ArrayList<>(),
-            brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
+    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
+    deepEquals(new ArrayList<>(), brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
 
-    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findGreaterThanBrandWithModels(fieldNumberMap)).willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () -> brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
+        Exception.class, () -> brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap));
   }
 
   @Test
   void findContainBrandWithModelsDTO() {
-    given(brandDAO.findContainBrandWithModels(fieldContainMap))
-            .willReturn(brands);
+    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findContainBrandWithModelsDTO(fieldContainMap));
+        brandWithModelsDTOList, brandService.findContainBrandWithModelsDTO(fieldContainMap));
 
-    given(brandDAO.findContainBrandWithModels(fieldContainMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
-    deepEquals(
-            new ArrayList<>(),
-            brandService.findContainBrandWithModelsDTO(fieldContainMap));
+    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
+    deepEquals(new ArrayList<>(), brandService.findContainBrandWithModelsDTO(fieldContainMap));
 
-    given(brandDAO.findContainBrandWithModels(fieldContainMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () -> brandService.findContainBrandWithModelsDTO(fieldContainMap));
+        Exception.class, () -> brandService.findContainBrandWithModelsDTO(fieldContainMap));
   }
 
   @Test
   void findAndSortBrandWithModelsDTO() {
-    given(
-            brandDAO.findAndSortBrandWithModels(
-                    fieldDirectionMap, fieldCriterionMap))
-            .willReturn(brands);
+    given(brandDAO.findAndSortBrandWithModels(fieldDirectionMap, fieldCriterionMap))
+        .willReturn(brands);
     given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(brandWithModelsDTOList);
+        .willReturn(brandWithModelsDTOList);
     assertEquals(
-            brandWithModelsDTOList,
-            brandService.findAndSortBrandWithModelsDTO(
-                    fieldDirectionStringMap, fieldCriterionMap));
+        brandWithModelsDTOList,
+        brandService.findAndSortBrandWithModelsDTO(fieldDirectionStringMap, fieldCriterionMap));
 
-    given(
-            brandDAO.findAndSortBrandWithModels(
-                    fieldDirectionMap, fieldCriterionMap))
-            .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class))
-            .willReturn(new ArrayList<>());
+    given(brandDAO.findAndSortBrandWithModels(fieldDirectionMap, fieldCriterionMap))
+        .willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(brands, BrandWithModelsDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
-            new ArrayList<>(),
-            brandService.findAndSortBrandWithModelsDTO(
-                    fieldDirectionStringMap, fieldCriterionMap));
+        new ArrayList<>(),
+        brandService.findAndSortBrandWithModelsDTO(fieldDirectionStringMap, fieldCriterionMap));
 
-    given(
-            brandDAO.findAndSortBrandWithModels(
-                    fieldDirectionMap, fieldCriterionMap))
-            .willThrow(Exception.class);
+    given(brandDAO.findAndSortBrandWithModels(fieldDirectionMap, fieldCriterionMap))
+        .willThrow(Exception.class);
     assertThrows(
-            Exception.class,
-            () ->
-                    brandService.findAndSortBrandWithModelsDTO(
-                            fieldDirectionStringMap, fieldCriterionMap));
+        Exception.class,
+        () ->
+            brandService.findAndSortBrandWithModelsDTO(fieldDirectionStringMap, fieldCriterionMap));
   }
 
   @Test
-  void create() {}
+  void create() {
+    given(brandDAO.create(brand)).willReturn(brand);
+    given(objectMapperUtils.map(brandWithModelsDTO, Brand.class)).willReturn(brand);
+    assertEquals(brandWithModelsDTO, brandService.create(brandWithModelsDTO));
+
+    given(brandDAO.create(brand)).willReturn(null);
+    assertNull(brandService.create(brandWithModelsDTO));
+
+    given(brandDAO.create(brand)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> brandService.create(brandWithModelsDTO));
+  }
 
   @Test
-  void update() {}
+  void update() {
+    given(brandDAO.update(brand)).willReturn(brand);
+    given(objectMapperUtils.map(brandWithModelsDTO, Brand.class)).willReturn(brand);
+    assertEquals(brandWithModelsDTO, brandService.update(brandWithModelsDTO));
+
+    given(brandDAO.update(brand)).willReturn(null);
+    assertNull(brandService.update(brandWithModelsDTO));
+
+    given(brandDAO.update(brand)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> brandService.update(brandWithModelsDTO));
+  }
 
   @Test
-  void delete() {}
+  void delete() {
+    given(objectMapperUtils.map(brandWithModelsDTO, Brand.class)).willReturn(brand);
+    brandService.delete(brandWithModelsDTO);
+    verify(brandDAO, atLeastOnce()).delete(brand);
+
+    given(brandDAO.update(brand)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> brandService.update(brandWithModelsDTO));
+  }
 
   @Test
-  void deleteById() {}
+  void deleteById() {
+    int id = 1;
+    brandService.deleteById(id);
+    verify(brandDAO, atLeastOnce()).deleteById(id);
+  }
 }

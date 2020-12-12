@@ -112,14 +112,14 @@ public class CarService implements ICarService {
 
   @Override
   public CarDTO create(CarDTO entityDTO) {
-    return objectMapperUtils.map(
-        carDAO.create(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    carDAO.create(objectMapperUtils.map(entityDTO, Car.class));
+    return entityDTO;
   }
 
   @Override
   public CarDTO update(CarDTO entityDTO) {
-    return objectMapperUtils.map(
-        carDAO.update(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    carDAO.update(objectMapperUtils.map(entityDTO, Car.class));
+    return entityDTO;
   }
 
   @Override

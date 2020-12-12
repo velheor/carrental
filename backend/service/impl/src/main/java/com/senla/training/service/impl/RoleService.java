@@ -92,14 +92,14 @@ public class RoleService implements IRoleService {
 
   @Override
   public RoleDTO create(RoleDTO entityDTO) {
-    return objectMapperUtils.map(
-        roleDAO.create(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+    roleDAO.create(objectMapperUtils.map(entityDTO, Role.class));
+    return entityDTO;
   }
 
   @Override
   public RoleDTO update(RoleDTO entityDTO) {
-    return objectMapperUtils.map(
-        roleDAO.update(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+    roleDAO.update(objectMapperUtils.map(entityDTO, Role.class));
+    return entityDTO;
   }
 
   @Override

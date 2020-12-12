@@ -3,6 +3,8 @@ package com.senla.training.service.impl;
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IRoleDAO;
 import com.senla.training.dto.role.RoleWithUsersDTO;
@@ -218,14 +220,45 @@ class RoleServiceTest {
   }
 
   @Test
-  void create() {}
+  void create() {
+    given(roleDAO.create(role)).willReturn(role);
+    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
+    assertEquals(roleWithUsersDTO, roleService.create(roleWithUsersDTO));
+
+    given(roleDAO.create(role)).willReturn(null);
+    assertNull(roleService.create(roleWithUsersDTO));
+
+    given(roleDAO.create(role)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> roleService.create(roleWithUsersDTO));
+  }
 
   @Test
-  void update() {}
+  void update() {
+    given(roleDAO.update(role)).willReturn(role);
+    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
+    assertEquals(roleWithUsersDTO, roleService.update(roleWithUsersDTO));
+
+    given(roleDAO.update(role)).willReturn(null);
+    assertNull(roleService.update(roleWithUsersDTO));
+
+    given(roleDAO.update(role)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> roleService.update(roleWithUsersDTO));
+  }
 
   @Test
-  void delete() {}
+  void delete() {
+    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
+    roleService.delete(roleWithUsersDTO);
+    verify(roleDAO, atLeastOnce()).delete(role);
+
+    given(roleDAO.update(role)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> roleService.update(roleWithUsersDTO));
+  }
 
   @Test
-  void deleteById() {}
+  void deleteById() {
+    int id = 1;
+    roleService.deleteById(id);
+    verify(roleDAO, atLeastOnce()).deleteById(id);
+  }
 }

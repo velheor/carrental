@@ -3,6 +3,8 @@ package com.senla.training.service.impl;
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IRentDAO;
 import com.senla.training.dto.rent.RentWithUserStatusHistoryCarModelBrandDTO;
@@ -322,14 +324,55 @@ class RentServiceTest {
   }
 
   @Test
-  void create() {}
+  void create() {
+    given(rentDAO.create(rent)).willReturn(rent);
+    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+        .willReturn(rent);
+    assertEquals(
+        rentWithUserStatusHistoryCarModelBrandDTO,
+        rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+
+    given(rentDAO.create(rent)).willReturn(null);
+    assertNull(rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+
+    given(rentDAO.create(rent)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+  }
 
   @Test
-  void update() {}
+  void update() {
+    given(rentDAO.update(rent)).willReturn(rent);
+    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+        .willReturn(rent);
+    assertEquals(
+        rentWithUserStatusHistoryCarModelBrandDTO,
+        rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+
+    given(rentDAO.update(rent)).willReturn(null);
+    assertNull(rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+
+    given(rentDAO.update(rent)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+  }
 
   @Test
-  void delete() {}
+  void delete() {
+    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+        .willReturn(rent);
+    rentService.delete(rentWithUserStatusHistoryCarModelBrandDTO);
+    verify(rentDAO, atLeastOnce()).delete(rent);
+
+    given(rentDAO.update(rent)).willThrow(Exception.class);
+    assertThrows(
+        Exception.class, () -> rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+  }
 
   @Test
-  void deleteById() {}
+  void deleteById() {
+    int id = 1;
+    rentService.deleteById(id);
+    verify(rentDAO, atLeastOnce()).deleteById(id);
+  }
 }

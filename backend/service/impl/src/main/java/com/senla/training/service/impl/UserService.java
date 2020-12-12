@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
-
   private final IUserDAO userDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -96,14 +95,14 @@ public class UserService implements IUserService {
     if (this.checkForExistEmail(entityDTO.getEmail())) {
       return null;
     }
-    return objectMapperUtils.map(
-        userDAO.create(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
+    userDAO.create(objectMapperUtils.map(entityDTO, User.class));
+    return entityDTO;
   }
 
   @Override
   public UserDTO update(UserDTO entityDTO) {
-    return objectMapperUtils.map(
-        userDAO.update(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
+    userDAO.update(objectMapperUtils.map(entityDTO, User.class));
+    return entityDTO;
   }
 
   @Override
@@ -113,18 +112,11 @@ public class UserService implements IUserService {
 
   @Override
   public void deleteById(int id) {
-    if (this.checkForExistId(id)) {
-      userDAO.deleteById(id);
-    }
+    userDAO.deleteById(id);
   }
 
   @Override
   public Boolean checkForExistEmail(String email) {
     return userDAO.findByEmailUserWithRoles(email) != null;
-  }
-
-  @Override
-  public Boolean checkForExistId(Integer id) {
-    return userDAO.findByIdUserWithRoles(id) != null;
   }
 }

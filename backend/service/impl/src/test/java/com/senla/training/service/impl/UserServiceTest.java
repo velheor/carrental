@@ -2,6 +2,7 @@ package com.senla.training.service.impl;
 
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
@@ -253,9 +254,15 @@ class UserServiceTest {
 
   @Test
   void update() {
+    given(userDAO.update(user)).willReturn(user);
     given(objectMapperUtils.map(userWithRolesDTO, User.class)).willReturn(user);
-    userService.update(userWithRolesDTO);
-    verify(userDAO, atLeastOnce()).update(user);
+    assertEquals(userWithRolesDTO, userService.update(userWithRolesDTO));
+
+    given(userDAO.update(user)).willReturn(null);
+    assertNull(userService.update(userWithRolesDTO));
+
+    given(userDAO.update(user)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.update(userWithRolesDTO));
   }
 
   @Test
@@ -263,12 +270,30 @@ class UserServiceTest {
     given(objectMapperUtils.map(userWithRolesDTO, User.class)).willReturn(user);
     userService.delete(userWithRolesDTO);
     verify(userDAO, atLeastOnce()).delete(user);
+
+    given(userDAO.update(user)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.update(userWithRolesDTO));
   }
 
   @Test
   void deleteById() {
-    given(userDAO.findByIdUserWithRoles(1)).willReturn(user);
-    userService.deleteById(1);
-    verify(userDAO, atLeastOnce()).deleteById(1);
+    int id = 1;
+    given(userDAO.findByIdUserWithRoles(id)).willReturn(user);
+    userService.deleteById(id);
+    verify(userDAO, atLeastOnce()).deleteById(id);
+  }
+
+  @Test
+  void checkForExistEmail() {
+    String email = "test@gmail.com";
+    given(userDAO.findByEmailUserWithRoles(email)).willReturn(user);
+    userService.checkForExistEmail(email);
+    verify(userDAO, atLeastOnce()).findByEmailUserWithRoles(email);
+
+    given(userDAO.findByEmailUserWithRoles(email)).willReturn(null);
+    assertFalse(userService.checkForExistEmail(email));
+
+    given(userDAO.findByEmailUserWithRoles(email)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.checkForExistEmail(email));
   }
 }

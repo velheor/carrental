@@ -102,16 +102,14 @@ public class StatusHistoryService implements IStatusHistoryService {
 
   @Override
   public StatusHistoryDTO create(StatusHistoryDTO entityDTO) {
-    return objectMapperUtils.map(
-        statusHistoryDAO.create(objectMapperUtils.map(entityDTO, StatusHistory.class)),
-        StatusHistoryDTO.class);
+    statusHistoryDAO.create(objectMapperUtils.map(entityDTO, StatusHistory.class));
+    return entityDTO;
   }
 
   @Override
   public StatusHistoryDTO update(StatusHistoryDTO entityDTO) {
-    return objectMapperUtils.map(
-        statusHistoryDAO.update(objectMapperUtils.map(entityDTO, StatusHistory.class)),
-        StatusHistoryDTO.class);
+    statusHistoryDAO.update(objectMapperUtils.map(entityDTO, StatusHistory.class));
+    return entityDTO;
   }
 
   @Override

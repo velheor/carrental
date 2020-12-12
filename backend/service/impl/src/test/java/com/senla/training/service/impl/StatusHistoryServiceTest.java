@@ -3,6 +3,8 @@ package com.senla.training.service.impl;
 import static java.util.Objects.deepEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IStatusHistoryDAO;
 import com.senla.training.dto.statusHistory.StatusHistoryWithRentDTO;
@@ -295,14 +297,48 @@ class StatusHistoryServiceTest {
   }
 
   @Test
-  void create() {}
+  void create() {
+    given(statusHistoryDAO.create(statusHistory)).willReturn(statusHistory);
+    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+        .willReturn(statusHistory);
+    assertEquals(statusHistoryWithRentDTO, statusHistoryService.create(statusHistoryWithRentDTO));
+
+    given(statusHistoryDAO.create(statusHistory)).willReturn(null);
+    assertNull(statusHistoryService.create(statusHistoryWithRentDTO));
+
+    given(statusHistoryDAO.create(statusHistory)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> statusHistoryService.create(statusHistoryWithRentDTO));
+  }
 
   @Test
-  void update() {}
+  void update() {
+    given(statusHistoryDAO.update(statusHistory)).willReturn(statusHistory);
+    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+        .willReturn(statusHistory);
+    assertEquals(statusHistoryWithRentDTO, statusHistoryService.update(statusHistoryWithRentDTO));
+
+    given(statusHistoryDAO.update(statusHistory)).willReturn(null);
+    assertNull(statusHistoryService.update(statusHistoryWithRentDTO));
+
+    given(statusHistoryDAO.update(statusHistory)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryWithRentDTO));
+  }
 
   @Test
-  void delete() {}
+  void delete() {
+    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+        .willReturn(statusHistory);
+    statusHistoryService.delete(statusHistoryWithRentDTO);
+    verify(statusHistoryDAO, atLeastOnce()).delete(statusHistory);
+
+    given(statusHistoryDAO.update(statusHistory)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryWithRentDTO));
+  }
 
   @Test
-  void deleteById() {}
+  void deleteById() {
+    int id = 1;
+    statusHistoryService.deleteById(id);
+    verify(statusHistoryDAO, atLeastOnce()).deleteById(id);
+  }
 }
