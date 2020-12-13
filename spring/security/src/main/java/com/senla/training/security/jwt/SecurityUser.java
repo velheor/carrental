@@ -1,10 +1,13 @@
 package com.senla.training.security.jwt;
 
+import com.senla.training.dto.role.RoleDTO;
+import com.senla.training.dto.user.UserWithRolesDTO;
 import com.senla.training.models.Role;
 import com.senla.training.models.User;
 import com.senla.training.models.enums.EStatusUser;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +30,7 @@ public class SecurityUser implements UserDetails {
     this.isActive = isActive;
   }
 
-  public static UserDetails fromUser(User user) {
+  public static UserDetails fromUser(UserWithRolesDTO user) {
     return new org.springframework.security.core.userdetails.User(
         user.getEmail(),
         user.getPassword(),
@@ -38,9 +41,9 @@ public class SecurityUser implements UserDetails {
         mapToGrantedAuthorities(user.getRoles()));
   }
 
-  private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<Role> userRoles) {
+  private static List<GrantedAuthority> mapToGrantedAuthorities(Set<RoleDTO> userRoles) {
     return userRoles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
+        .map(role -> new SimpleGrantedAuthority(role.getName()))
         .collect(Collectors.toList());
   }
 

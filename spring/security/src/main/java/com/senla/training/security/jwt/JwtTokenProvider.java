@@ -1,12 +1,18 @@
 package com.senla.training.security.jwt;
 
+import com.senla.training.dto.role.RoleDTO;
+import com.senla.training.models.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,9 +50,9 @@ public class JwtTokenProvider {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
   }
 
-  public String createToken(String username, String role) {
+  public String createToken(String username, Set<RoleDTO> roles) {
     Claims claims = Jwts.claims().setSubject(username);
-    claims.put("role", role);
+    claims.put("role", getRoleNames(roles));
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInMilliseconds * 1000);
 
@@ -79,5 +85,15 @@ public class JwtTokenProvider {
 
   public String resolveToken(HttpServletRequest request) {
     return request.getHeader(authorizationHeader);
+  }
+
+  private List<String> getRoleNames(Set<RoleDTO> userRoles) {
+    List<String> result = new ArrayList<>();
+
+    userRoles.forEach(role -> {
+      result.add(role.getName());
+    });
+
+    return result;
   }
 }

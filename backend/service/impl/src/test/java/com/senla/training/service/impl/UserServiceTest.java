@@ -258,8 +258,9 @@ class UserServiceTest {
     given(objectMapperUtils.map(userWithRolesDTO, User.class)).willReturn(user);
     assertEquals(userWithRolesDTO, userService.update(userWithRolesDTO));
 
-    given(userDAO.update(user)).willReturn(null);
-    assertNull(userService.update(userWithRolesDTO));
+    given(objectMapperUtils.map(userWithRolesDTO, User.class)).willReturn(null);
+    given(userDAO.update(null)).willReturn(null);
+    assertNull(userService.update(null));
 
     given(userDAO.update(user)).willThrow(Exception.class);
     assertThrows(Exception.class, () -> userService.update(userWithRolesDTO));

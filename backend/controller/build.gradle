@@ -1,5 +1,5 @@
 dependencies {
     compile group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
     implementation project(':backend:service:serviceApi'), project(':backend:service:serviceImpl'),
-            project(':backend:dto')
+            project(':backend:dto'), project(':spring:security')
 }

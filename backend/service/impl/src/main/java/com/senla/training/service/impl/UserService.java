@@ -119,4 +119,10 @@ public class UserService implements IUserService {
   public Boolean checkForExistEmail(String email) {
     return userDAO.findByEmailUserWithRoles(email) != null;
   }
+
+  @Override
+  public UserWithRolesDTO findByEmailUserWithRolesDTO(String email) {
+    return objectMapperUtils.map(
+            userDAO.findByEmailUserWithRoles(email), UserWithRolesDTO.class);
+  }
 }
