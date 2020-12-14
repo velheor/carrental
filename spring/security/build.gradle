@@ -8,5 +8,5 @@ dependencies {
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
     implementation project(':backend:dto'), project(':backend:domain'),
-            project(':backend:service:serviceApi'), project(':backend:service:serviceImpl')
+            project(':backend:dao:daoApi'), project(':backend:dao:daoImpl')
 }

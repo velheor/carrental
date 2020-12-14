@@ -2,6 +2,8 @@ package com.senla.training.service.api;
 
 import com.senla.training.dto.user.UserDTO;
 import com.senla.training.dto.user.UserWithRolesDTO;
+import com.senla.training.dto.user.UserWithTokenDTO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +30,5 @@ public interface IUserService extends IGenericService<UserDTO> {
 
   List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
 
-  Boolean checkForExistEmail(String email);
-
-  UserWithRolesDTO findByEmailUserWithRolesDTO(String email);
+  UserWithTokenDTO getUserWithTokenDTO(UserWithTokenDTO userWithTokenDTO);
 }

@@ -1,6 +1,8 @@
 package com.senla.training.dao.impl;
 
 import com.senla.training.models.enums.Direction;
+import org.springframework.stereotype.Repository;
+
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+@Repository
 public abstract class CriteriaApiAbstractDAO<T> {
 
   private final Class<T> type;

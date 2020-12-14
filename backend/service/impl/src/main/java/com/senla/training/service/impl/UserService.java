@@ -1,26 +1,47 @@
 package com.senla.training.service.impl;
 
+import com.senla.training.constants.EmailValidator;
 import com.senla.training.dao.api.IUserDAO;
 import com.senla.training.dto.user.UserDTO;
 import com.senla.training.dto.user.UserWithRolesDTO;
+import com.senla.training.dto.user.UserWithTokenDTO;
 import com.senla.training.models.User;
 import com.senla.training.objectmapper.ObjectMapperUtils;
+import com.senla.training.security.jwt.JwtTokenProvider;
 import com.senla.training.service.api.IUserService;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService implements IUserService {
   private final IUserDAO userDAO;
-
   private final ObjectMapperUtils objectMapperUtils;
+  private final JwtTokenProvider jwtTokenProvider;
+  private final PasswordEncoder passwordEncoder;
+  private final AuthenticationManager authenticationManager;
 
   @Autowired
-  public UserService(IUserDAO userDAO, ObjectMapperUtils objectMapperUtils) {
+  public UserService(
+      IUserDAO userDAO,
+      ObjectMapperUtils objectMapperUtils,
+      JwtTokenProvider jwtTokenProvider,
+      PasswordEncoder passwordEncoder,
+      AuthenticationManager authenticationManager) {
     this.userDAO = userDAO;
     this.objectMapperUtils = objectMapperUtils;
+    this.jwtTokenProvider = jwtTokenProvider;
+    this.passwordEncoder = passwordEncoder;
+    this.authenticationManager = authenticationManager;
   }
 
   @Override
@@ -92,9 +113,10 @@ public class UserService implements IUserService {
 
   @Override
   public UserDTO create(UserDTO entityDTO) {
-    if (this.checkForExistEmail(entityDTO.getEmail())) {
+    if (this.isValidEmail(entityDTO.getEmail())) {
       return null;
     }
+    entityDTO.setPassword(passwordEncoder.encode(entityDTO.getPassword()));
     userDAO.create(objectMapperUtils.map(entityDTO, User.class));
     return entityDTO;
   }
@@ -116,13 +138,24 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public Boolean checkForExistEmail(String email) {
+  public UserWithTokenDTO getUserWithTokenDTO(UserWithTokenDTO userWithTokenDTO) {
+    authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(
+            userWithTokenDTO.getEmail(), userWithTokenDTO.getPassword()));
+    UserWithRolesDTO user = objectMapperUtils.map(userDAO.findByEmailUserWithRoles(userWithTokenDTO.getEmail()), UserWithRolesDTO.class);
+    userWithTokenDTO.setToken(jwtTokenProvider.createToken(user.getEmail(), user.getRoles()));
+    return userWithTokenDTO;
+  }
+
+  protected Boolean isValidEmail(String email){
+    return !this.checkForExistEmail(email) && !checkForRegexEmail(email);
+  }
+
+  protected Boolean checkForExistEmail(String email) {
     return userDAO.findByEmailUserWithRoles(email) != null;
   }
 
-  @Override
-  public UserWithRolesDTO findByEmailUserWithRolesDTO(String email) {
-    return objectMapperUtils.map(
-            userDAO.findByEmailUserWithRoles(email), UserWithRolesDTO.class);
+  protected Boolean checkForRegexEmail(String email) {
+    return Pattern.compile(EmailValidator.emailRegex).matcher(email).matches();
   }
 }

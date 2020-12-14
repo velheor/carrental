@@ -1,13 +1,11 @@
 package com.senla.training.security.jwt;
 
 import com.senla.training.dto.role.RoleDTO;
-import com.senla.training.models.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -90,9 +88,8 @@ public class JwtTokenProvider {
   private List<String> getRoleNames(Set<RoleDTO> userRoles) {
     List<String> result = new ArrayList<>();
 
-    userRoles.forEach(role -> {
-      result.add(role.getName());
-    });
+    userRoles.forEach(
+        role -> result.add(role.getName()));
 
     return result;
   }

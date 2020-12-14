@@ -3,6 +3,8 @@ package com.senla.training.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.EStatusUser;
+import org.springframework.lang.NonNull;
+
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
