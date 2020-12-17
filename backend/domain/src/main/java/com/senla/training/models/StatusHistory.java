@@ -1,6 +1,5 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.senla.training.models.enums.EStatusHistory;
 import java.io.Serializable;
 import java.util.Date;
@@ -22,9 +21,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "statusHistoryWithRent",
-      attributeNodes = {@NamedAttributeNode(value = "rent")})
+    @NamedEntityGraph(
+        name = "statusHistoryWithRent",
+        attributeNodes = {@NamedAttributeNode(value = "rent")})
 })
 @Entity
 @Table(name = "status_history")
@@ -46,10 +45,10 @@ public class StatusHistory implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-  @JsonBackReference
   private Rent rent;
 
-  public StatusHistory() {}
+  public StatusHistory() {
+  }
 
   public Integer getId() {
     return id;

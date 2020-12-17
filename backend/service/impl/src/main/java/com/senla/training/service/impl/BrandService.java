@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class BrandService implements IBrandService {
+
   private final IBrandDAO brandDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -71,13 +72,6 @@ public class BrandService implements IBrandService {
         brandDAO.findAndSortBrandWithModels(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
         BrandDTO.class);
-  }
-
-  @Override
-  public List<BrandDTO> findContainBrandWithModelsDTO(
-      Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        brandDAO.findContainBrandWithModels(fieldStringMap), BrandDTO.class);
   }
 
   @Override

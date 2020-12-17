@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CarDAO extends EntityGraphAbstractDAO<Car> implements ICarDAO {
+
   @Override
   public Car findByIdCarWithModelCategoryPriceHistoryBrand(int id) {
     super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
@@ -53,12 +54,5 @@ public class CarDAO extends EntityGraphAbstractDAO<Car> implements ICarDAO {
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<Car> findContainCarWithModelCategoryPriceHistoryBrand(
-      Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
-    return super.findContain(fieldStringMap);
   }
 }

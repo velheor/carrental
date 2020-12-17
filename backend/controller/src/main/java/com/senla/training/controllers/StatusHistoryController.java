@@ -90,10 +90,4 @@ public class StatusHistoryController {
     return statusHistoryService.findAndSortStatusHistoryWithRentDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
-
-  @GetMapping("/findContain")
-  public List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return statusHistoryService.findContainStatusHistoryWithRentDTO(fieldStringMap);
-  }
 }

@@ -1,6 +1,5 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.EStatusUser;
 import java.io.Serializable;
 import java.util.Objects;
@@ -68,7 +67,6 @@ public class User implements Serializable {
   private Set<Role> roles;
 
   @OneToMany(mappedBy = "user")
-  @JsonManagedReference
   private Set<Rent> rents;
 
   public User() {

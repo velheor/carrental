@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IPriceHistoryDAO extends IGenericDAO<PriceHistory> {
+
   PriceHistory findByIdPriceHistoryWithCarModelBrand(int id);
 
   List<PriceHistory> findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
@@ -23,5 +24,4 @@ public interface IPriceHistoryDAO extends IGenericDAO<PriceHistory> {
   List<PriceHistory> findAndSortPriceHistoryWithCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<PriceHistory> findContainPriceHistoryWithCarModelBrand(Map<String, String> fieldStringMap);
 }

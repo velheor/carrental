@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface IPriceHistoryService extends IGenericService<PriceHistoryDTO> {
+
   PriceHistoryDTO findByIdPriceHistoryWithCarModelBrandDTO(int id);
 
   List<PriceHistoryDTO>
-      findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
-          Map<String, String> fieldDirectionMap);
+  findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
+      Map<String, String> fieldDirectionMap);
 
   PriceHistoryDTO findOneByCriteriaPriceHistoryWithCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap);
@@ -25,7 +26,4 @@ public interface IPriceHistoryService extends IGenericService<PriceHistoryDTO> {
 
   List<PriceHistoryDTO> findAndSortPriceHistoryWithCarModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
-  List<PriceHistoryDTO> findContainPriceHistoryWithCarModelBrandDTO(
-      Map<String, String> fieldStringMap);
 }

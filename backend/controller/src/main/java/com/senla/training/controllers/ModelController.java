@@ -90,9 +90,4 @@ public class ModelController {
     return modelService.findAndSortModelWithBrandDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<ModelDTO> findContainModelWithBrandDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return modelService.findContainModelWithBrandDTO(fieldStringMap);
-  }
 }

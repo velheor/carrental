@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IStatusHistoryDAO extends IGenericDAO<StatusHistory> {
+
   StatusHistory findByIdStatusHistoryWithRent(int id);
 
   List<StatusHistory> findAllAndSortWithDirectionStatusHistoryWithRent(
@@ -21,6 +22,4 @@ public interface IStatusHistoryDAO extends IGenericDAO<StatusHistory> {
 
   List<StatusHistory> findAndSortStatusHistoryWithRent(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
-  List<StatusHistory> findContainStatusHistoryWithRent(Map<String, String> fieldStringMap);
 }

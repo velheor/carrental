@@ -1,6 +1,5 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.ECarType;
 import com.senla.training.models.enums.EFuelType;
 import java.io.Serializable;
@@ -24,21 +23,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
-      attributeNodes = {
-        @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-        @NamedAttributeNode("category"),
-        @NamedAttributeNode("priceHistoryList")
-      },
-      subgraphs = {
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
-      }),
-  @NamedEntityGraph(
-      name = "carWithRents",
-      attributeNodes = {@NamedAttributeNode(value = "rents")})
+    @NamedEntityGraph(
+        name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
+        attributeNodes = {
+            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+            @NamedAttributeNode("category"),
+            @NamedAttributeNode("priceHistoryList")
+        },
+        subgraphs = {
+            @NamedSubgraph(
+                name = "modelWithBrand",
+                attributeNodes = {@NamedAttributeNode(value = "brand")})
+        }),
+    @NamedEntityGraph(
+        name = "carWithRents",
+        attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "cars")
@@ -47,11 +46,6 @@ public class Car implements Serializable {
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "models_id", referencedColumnName = "id", nullable = false)
-  @JsonManagedReference
-  private Model model;
 
   @Basic
   @Column(name = "car_type", nullable = false, length = 25)
@@ -72,19 +66,21 @@ public class Car implements Serializable {
   private Boolean transmission;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
-  @JsonManagedReference
+  @JoinColumn(name = "models_id", referencedColumnName = "id", nullable = false)
+  private Model model;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
   private Category category;
 
   @OneToMany(mappedBy = "car")
-  @JsonManagedReference
   private List<PriceHistory> priceHistoryList;
 
   @OneToMany(mappedBy = "car")
-  @JsonManagedReference
   private List<Rent> rents;
 
-  public Car() {}
+  public Car() {
+  }
 
   public Integer getId() {
     return id;

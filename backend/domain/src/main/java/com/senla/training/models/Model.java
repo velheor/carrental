@@ -43,12 +43,10 @@ public class Model implements Serializable {
   private String manufacturerCountry;
 
   @OneToMany(mappedBy = "model")
-  @JsonManagedReference
   private List<Car> cars;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "brands_id", referencedColumnName = "id", nullable = false)
-  @JsonBackReference
   private Brand brand;
 
   public Model() {}

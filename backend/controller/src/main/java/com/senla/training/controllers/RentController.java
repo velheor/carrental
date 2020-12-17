@@ -99,10 +99,4 @@ public class RentController {
         fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<RentDTO>
-  findContainRentWithUserStatusHistoryCarModelBrandDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return rentService.findContainRentWithUserStatusHistoryCarModelBrandDTO(fieldStringMap);
-  }
 }

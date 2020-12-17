@@ -90,9 +90,4 @@ public class RoleController {
     return roleService.findAndSortRoleWithUsersDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<RoleDTO> findContainRoleWithUsersDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return roleService.findContainRoleWithUsersDTO(fieldStringMap);
-  }
 }

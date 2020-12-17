@@ -17,7 +17,8 @@ public abstract class CriteriaApiAbstractDAO<T> {
 
   private final Class<T> type;
 
-  @PersistenceContext private EntityManager entityManager;
+  @PersistenceContext
+  private EntityManager entityManager;
 
   CriteriaApiAbstractDAO() {
     this.type =
@@ -47,21 +48,21 @@ public abstract class CriteriaApiAbstractDAO<T> {
     Root<T> c = q.from(getType());
     return q.select(c)
         .where(
-            this.getPredicateFindByCriteria(cb, c, fieldCriteriaMap).toArray(new Predicate[] {}));
+            this.getPredicateFindByCriteria(cb, c, fieldCriteriaMap).toArray(new Predicate[]{}));
   }
 
   protected CriteriaQuery<T> findByNotNullCriteriaQuery(List<String> fields) {
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(getPredicateByNotNull(cb, c, fields).toArray(new Predicate[] {}));
+    return q.select(c).where(getPredicateByNotNull(cb, c, fields).toArray(new Predicate[]{}));
   }
 
   protected CriteriaQuery<T> findByNullCriteriaQuery(List<String> fields) {
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(this.getPredicateByNull(cb, c, fields).toArray(new Predicate[] {}));
+    return q.select(c).where(this.getPredicateByNull(cb, c, fields).toArray(new Predicate[]{}));
   }
 
   protected CriteriaQuery<T> findAndSortCriteriaQuery(
@@ -70,19 +71,6 @@ public abstract class CriteriaApiAbstractDAO<T> {
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = findCriteriaQuery(fieldCriteriaMap);
     return getSortedCriteriaQuery(fieldDirectionMap, orders, cb, q);
-  }
-
-  protected CriteriaQuery<T> findContainCriteriaQuery(Map<String, String> fieldStringMap) {
-    List<Predicate> predicates = new ArrayList<>();
-    CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-    CriteriaQuery<T> q = cb.createQuery(getType());
-    Root<T> c = q.from(getType());
-    for (Map.Entry<String, String> entry : fieldStringMap.entrySet()) {
-      String field = entry.getKey();
-      String contain = entry.getValue();
-      predicates.add(cb.like(c.get(field), contain));
-    }
-    return q.select(c).where(predicates.toArray(new Predicate[] {}));
   }
 
   private List<Predicate> getPredicateFindByCriteria(
@@ -104,24 +92,6 @@ public abstract class CriteriaApiAbstractDAO<T> {
   private List<Predicate> getPredicateByNull(CriteriaBuilder cb, Root<T> c, List<String> fields) {
     List<Predicate> predicates = new ArrayList<>();
     fields.forEach(field -> predicates.add(cb.isNull(c.get(field))));
-    return predicates;
-  }
-
-  private List<Predicate> getPredicateLT(
-      CriteriaBuilder cb, Root<T> c, Map<String, Number> fieldNumberMap) {
-    List<Predicate> predicates = new ArrayList<>();
-    for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
-      predicates.add(cb.lt(c.get(entry.getKey()), entry.getValue()));
-    }
-    return predicates;
-  }
-
-  private List<Predicate> getPredicateGT(
-      CriteriaBuilder cb, Root<T> c, Map<String, Number> fieldNumberMap) {
-    List<Predicate> predicates = new ArrayList<>();
-    for (Map.Entry<String, Number> entry : fieldNumberMap.entrySet()) {
-      predicates.add(cb.gt(c.get(entry.getKey()), entry.getValue()));
-    }
     return predicates;
   }
 

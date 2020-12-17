@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class PriceHistoryService implements IPriceHistoryService {
+
   private final IPriceHistoryDAO priceHistoryDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -33,8 +34,8 @@ public class PriceHistoryService implements IPriceHistoryService {
 
   @Override
   public List<PriceHistoryDTO>
-      findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
-          Map<String, String> fieldDirectionMap) {
+  findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
+      Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap)),
@@ -79,14 +80,6 @@ public class PriceHistoryService implements IPriceHistoryService {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        PriceHistoryDTO.class);
-  }
-
-  @Override
-  public List<PriceHistoryDTO> findContainPriceHistoryWithCarModelBrandDTO(
-      Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        priceHistoryDAO.findContainPriceHistoryWithCarModelBrand(fieldStringMap),
         PriceHistoryDTO.class);
   }
 

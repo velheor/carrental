@@ -84,9 +84,4 @@ public class BrandController {
     return brandService.findAndSortBrandWithModelsDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<BrandDTO> findContainBrandWithModelsDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return brandService.findContainBrandWithModelsDTO(fieldStringMap);
-  }
 }

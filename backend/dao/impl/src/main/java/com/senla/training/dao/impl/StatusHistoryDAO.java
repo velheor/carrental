@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class StatusHistoryDAO extends EntityGraphAbstractDAO<StatusHistory>
     implements IStatusHistoryDAO {
+
   @Override
   public StatusHistory findByIdStatusHistoryWithRent(int id) {
     super.setEntityGraphName("statusHistoryWithRent");
@@ -54,11 +55,5 @@ public class StatusHistoryDAO extends EntityGraphAbstractDAO<StatusHistory>
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("statusHistoryWithRent");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<StatusHistory> findContainStatusHistoryWithRent(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("statusHistoryWithRent");
-    return super.findContain(fieldStringMap);
   }
 }

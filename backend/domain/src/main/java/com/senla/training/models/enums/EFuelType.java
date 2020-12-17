@@ -1,7 +1,9 @@
 package com.senla.training.models.enums;
 
 public enum EFuelType {
-  GASOLINE,
   DIESEL,
-  ELECTRIC
+  ELECTRIC,
+  HYBRID,
+  PETROL,
+  GAS
 }

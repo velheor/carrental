@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IRoleService extends IGenericService<RoleDTO> {
+
   RoleDTO findByIdRoleWithUsersDTO(int id);
 
   List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
@@ -21,5 +22,4 @@ public interface IRoleService extends IGenericService<RoleDTO> {
   List<RoleDTO> findAndSortRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<RoleDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap);
 }

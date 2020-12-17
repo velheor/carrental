@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RentDAO extends EntityGraphAbstractDAO<Rent> implements IRentDAO {
+
   @Override
   public Rent findByIdRentWithUserStatusHistoryCarModelBrand(int id) {
     super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");
@@ -53,12 +54,5 @@ public class RentDAO extends EntityGraphAbstractDAO<Rent> implements IRentDAO {
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<Rent> findContainRentWithUserStatusHistoryCarModelBrand(
-      Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");
-    return super.findContain(fieldStringMap);
   }
 }

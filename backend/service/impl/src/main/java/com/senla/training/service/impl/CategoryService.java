@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class CategoryService implements ICategoryService {
+
   private final ICategoryDAO categoryDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -32,8 +33,8 @@ public class CategoryService implements ICategoryService {
 
   @Override
   public List<CategoryDTO>
-      findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
-          Map<String, String> fieldDirectionMap) {
+  findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
+      Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         categoryDAO.findAllAndSortWithDirectionCategoryWithCarsModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap)),
@@ -78,14 +79,6 @@ public class CategoryService implements ICategoryService {
     return objectMapperUtils.mapAll(
         categoryDAO.findAndSortCategoryWithCarsModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        CategoryDTO.class);
-  }
-
-  @Override
-  public List<CategoryDTO> findContainCategoryWithCarsModelBrandDTO(
-      Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        categoryDAO.findContainCategoryWithCarsModelBrand(fieldStringMap),
         CategoryDTO.class);
   }
 

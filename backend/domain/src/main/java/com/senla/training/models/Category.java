@@ -59,16 +59,13 @@ public class Category implements Serializable {
   private String name;
 
   @OneToMany(mappedBy = "category")
-  @JsonBackReference
   private List<Car> cars;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
-  @JsonBackReference
   private Category category;
 
   @OneToMany(mappedBy = "category")
-  @JsonManagedReference
   private List<Category> categories;
 
   public Category() {}

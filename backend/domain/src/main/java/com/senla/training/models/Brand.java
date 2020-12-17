@@ -34,7 +34,6 @@ public class Brand implements Serializable {
   private EBrand name;
 
   @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-  @JsonManagedReference
   private List<Model> models;
 
   public Brand() {

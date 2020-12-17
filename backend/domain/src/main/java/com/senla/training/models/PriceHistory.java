@@ -52,7 +52,6 @@ public class PriceHistory implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-  @JsonBackReference
   private Car car;
 
   public PriceHistory() {}

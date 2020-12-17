@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IRoleDAO extends ICrudDAO<Role> {
+
   Role findByIdRoleWithUsers(int id);
 
   List<Role> findAllAndSortWithDirectionRoleWithUsers(Map<String, Direction> fieldDirectionMap);
@@ -21,5 +22,4 @@ public interface IRoleDAO extends ICrudDAO<Role> {
   List<Role> findAndSortRoleWithUsers(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Role> findContainRoleWithUsers(Map<String, String> fieldStringMap);
 }

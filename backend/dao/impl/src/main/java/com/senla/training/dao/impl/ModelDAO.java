@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ModelDAO extends EntityGraphAbstractDAO<Model> implements IModelDAO {
+
   @Override
   public Model findByIdModelWithBrand(int id) {
     super.setEntityGraphName("modelWithBrand");
@@ -51,11 +52,5 @@ public class ModelDAO extends EntityGraphAbstractDAO<Model> implements IModelDAO
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("modelWithBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<Model> findContainModelWithBrand(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("modelWithBrand");
-    return super.findContain(fieldStringMap);
   }
 }

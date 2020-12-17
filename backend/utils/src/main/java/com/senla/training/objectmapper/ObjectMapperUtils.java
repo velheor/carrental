@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ObjectMapperUtils {
+
   private final ModelMapper modelMapper;
 
   @Autowired

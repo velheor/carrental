@@ -55,12 +55,6 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
   }
 
   @Override
-  public List<User> findContainUserWithRoles(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("userWithRoles");
-    return super.findContain(fieldStringMap);
-  }
-
-  @Override
   public User findByEmailUserWithRoles(String email) {
     super.setEntityGraphName("userWithRoles");
     return this.findOneByCriteriaUserWithRoles(Map.of("email", email));
@@ -71,5 +65,4 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
     super.setEntityGraphName("userWithRents");
     return this.findOneByCriteriaUserWithRoles(Map.of("email", email));
   }
-
 }

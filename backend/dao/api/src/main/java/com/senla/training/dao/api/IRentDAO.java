@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IRentDAO extends ICrudDAO<Rent> {
+
   Rent findByIdRentWithUserStatusHistoryCarModelBrand(int id);
 
   List<Rent> findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrand(
@@ -24,5 +25,4 @@ public interface IRentDAO extends ICrudDAO<Rent> {
   List<Rent> findAndSortRentWithUserStatusHistoryCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Rent> findContainRentWithUserStatusHistoryCarModelBrand(Map<String, String> fieldStringMap);
 }

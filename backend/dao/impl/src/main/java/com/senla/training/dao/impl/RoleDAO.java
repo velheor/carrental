@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RoleDAO extends EntityGraphAbstractDAO<Role> implements IRoleDAO {
+
   @Override
   public Role findByIdRoleWithUsers(int id) {
     super.setEntityGraphName("roleWithUsers");
@@ -51,11 +52,5 @@ public class RoleDAO extends EntityGraphAbstractDAO<Role> implements IRoleDAO {
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("roleWithUsers");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<Role> findContainRoleWithUsers(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("roleWithUsers");
-    return super.findContain(fieldStringMap);
   }
 }

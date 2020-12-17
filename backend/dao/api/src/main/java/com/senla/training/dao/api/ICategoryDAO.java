@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ICategoryDAO extends IGenericDAO<Category> {
+
   Category findByIdCategoryWithCarsModelBrand(int id);
 
   List<Category> findAllAndSortWithDirectionCategoryWithCarsModelBrand(
@@ -22,5 +23,4 @@ public interface ICategoryDAO extends IGenericDAO<Category> {
   List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Category> findContainCategoryWithCarsModelBrand(Map<String, String> fieldStringMap);
 }

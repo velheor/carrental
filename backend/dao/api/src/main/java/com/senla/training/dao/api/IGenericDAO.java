@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGenericDAO<T> extends ICrudDAO<T> {
+
   T findById(int id);
 
   List<T> findAllAndSortWithDirection(Map<String, Direction> fieldDirectionMap);
@@ -20,5 +21,4 @@ public interface IGenericDAO<T> extends ICrudDAO<T> {
   List<T> findAndSort(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<T> findContain(Map<String, String> fieldConMap);
 }

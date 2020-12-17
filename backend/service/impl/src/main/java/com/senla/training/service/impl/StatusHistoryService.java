@@ -79,14 +79,6 @@ public class StatusHistoryService implements IStatusHistoryService {
   }
 
   @Override
-  public List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
-      Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        statusHistoryDAO.findContainStatusHistoryWithRent(fieldStringMap),
-        StatusHistoryDTO.class);
-  }
-
-  @Override
   public StatusHistoryDTO create(StatusHistoryDTO entityDTO) {
     statusHistoryDAO.create(objectMapperUtils.map(entityDTO, StatusHistory.class));
     return entityDTO;

@@ -82,11 +82,6 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
         .getResultList();
   }
 
-  @Override
-  public List<T> findContain(Map<String, String> fieldCriterionMap) {
-    return createTypedQuery(super.findContainCriteriaQuery(fieldCriterionMap)).getResultList();
-  }
-
   private TypedQuery<T> createTypedQuery(CriteriaQuery<T> criteriaQuery) {
     EntityGraph entityGraph = super.getEntityManager().getEntityGraph(entityGraphName);
     TypedQuery<T> typedQuery = super.getEntityManager().createQuery(criteriaQuery);

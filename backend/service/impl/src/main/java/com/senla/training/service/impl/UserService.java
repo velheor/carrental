@@ -92,12 +92,6 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public List<UserDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.findContainUserWithRoles(fieldStringMap), UserDTO.class);
-  }
-
-  @Override
   public UserDTO create(UserDTO entityDTO) {
     if (this.isValidEmail(entityDTO.getEmail())) {
       return null;

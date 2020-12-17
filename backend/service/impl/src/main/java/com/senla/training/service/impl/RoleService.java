@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class RoleService implements IRoleService {
+
   private final IRoleDAO roleDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -70,12 +71,6 @@ public class RoleService implements IRoleService {
         roleDAO.findAndSortRoleWithUsers(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
         RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findContainRoleWithUsers(fieldStringMap), RoleDTO.class);
   }
 
   @Override

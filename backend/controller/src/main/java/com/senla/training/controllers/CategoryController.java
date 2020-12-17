@@ -92,9 +92,4 @@ public class CategoryController {
         fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<CategoryDTO> findContainCategoryWithCarsModelBrandDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return categoryService.findContainCategoryWithCarsModelBrandDTO(fieldStringMap);
-  }
 }

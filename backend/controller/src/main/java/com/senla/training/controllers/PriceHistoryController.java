@@ -91,9 +91,4 @@ public class PriceHistoryController {
         fieldDirectionMap, fieldCriteriaMap);
   }
 
-  @GetMapping("/findContain")
-  public List<PriceHistoryDTO> findContainPriceHistoryWithCarModelBrandDTO(
-      @RequestParam Map<String, String> fieldStringMap) {
-    return priceHistoryService.findContainPriceHistoryWithCarModelBrandDTO(fieldStringMap);
-  }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IBrandDAO extends IGenericDAO<Brand> {
+
   Brand findByIdBrandWithModels(int id);
 
   List<Brand> findAllAndSortWithDirectionBrandWithModels(Map<String, Direction> fieldDirectionMap);
@@ -21,5 +22,4 @@ public interface IBrandDAO extends IGenericDAO<Brand> {
   List<Brand> findAndSortBrandWithModels(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<Brand> findContainBrandWithModels(Map<String, String> fieldStringMap);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IStatusHistoryService extends IGenericService<StatusHistoryDTO> {
+
   StatusHistoryDTO findByIdStatusHistoryWithRentDTO(int id);
 
   List<StatusHistoryDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
@@ -23,6 +24,4 @@ public interface IStatusHistoryService extends IGenericService<StatusHistoryDTO>
   List<StatusHistoryDTO> findAndSortStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
-      Map<String, String> fieldStringMap);
 }

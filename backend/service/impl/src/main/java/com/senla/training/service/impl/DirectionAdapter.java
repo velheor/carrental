@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DirectionAdapter {
+
   public static Map<String, Direction> converterMap(Map<String, String> fieldDirectionStringMap) {
     HashMap<String, Direction> fieldDirectionMap = new HashMap<>();
     fieldDirectionStringMap.forEach(

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface IUserService extends IGenericService<UserDTO> {
+
   UserDTO findByIdUserWithRolesDTO(int id);
 
   List<UserDTO> findAllAndSortWithDirectionUserWithRolesDTO(
@@ -22,8 +23,6 @@ public interface IUserService extends IGenericService<UserDTO> {
 
   List<UserDTO> findAndSortUserWithRolesDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
-  List<UserDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
 
   UserWithTokenDTO getUserWithTokenDTO(UserWithTokenDTO userWithTokenDTO);
 

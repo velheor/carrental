@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IBrandService extends IGenericService<BrandDTO> {
+
   BrandDTO findByIdBrandWithModelsDTO(int id);
 
   List<BrandDTO> findAllAndSortWithDirectionBrandWithModelsDTO(
@@ -22,5 +23,4 @@ public interface IBrandService extends IGenericService<BrandDTO> {
   List<BrandDTO> findAndSortBrandWithModelsDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<BrandDTO> findContainBrandWithModelsDTO(Map<String, String> fieldStringMap);
 }

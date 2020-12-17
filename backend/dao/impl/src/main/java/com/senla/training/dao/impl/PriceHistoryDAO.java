@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PriceHistoryDAO extends EntityGraphAbstractDAO<PriceHistory>
     implements IPriceHistoryDAO {
+
   @Override
   public PriceHistory findByIdPriceHistoryWithCarModelBrand(int id) {
     super.setEntityGraphName("priceHistoryWithCarModelBrand");
@@ -54,12 +55,5 @@ public class PriceHistoryDAO extends EntityGraphAbstractDAO<PriceHistory>
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("priceHistoryWithCarModelBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<PriceHistory> findContainPriceHistoryWithCarModelBrand(
-      Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("priceHistoryWithCarModelBrand");
-    return super.findContain(fieldStringMap);
   }
 }

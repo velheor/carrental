@@ -75,16 +75,13 @@ public class Rent implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
-  @JsonBackReference
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
-  @JsonBackReference
   private Car car;
 
   @OneToMany(mappedBy = "rent")
-  @JsonManagedReference
   private List<StatusHistory> statusHistoryList;
 
   public Rent() {}

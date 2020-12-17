@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CategoryDAO extends EntityGraphAbstractDAO<Category> implements ICategoryDAO {
+
   @Override
   public Category findByIdCategoryWithCarsModelBrand(int id) {
     super.setEntityGraphName("categoryWithCarsModelBrand");
@@ -53,11 +54,5 @@ public class CategoryDAO extends EntityGraphAbstractDAO<Category> implements ICa
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("categoryWithCarsModelBrand");
     return super.findAndSort(fieldDirectionMap, fieldCriteriaMap);
-  }
-
-  @Override
-  public List<Category> findContainCategoryWithCarsModelBrand(Map<String, String> fieldStringMap) {
-    super.setEntityGraphName("categoryWithCarsModelBrand");
-    return super.findContain(fieldStringMap);
   }
 }
