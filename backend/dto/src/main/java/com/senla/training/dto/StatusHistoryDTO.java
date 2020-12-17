@@ -1,16 +1,19 @@
-package com.senla.training.dto.statusHistory;
+package com.senla.training.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.senla.training.models.enums.EStatusHistory;
 import java.sql.Date;
 
 public class StatusHistoryDTO {
+
   private Integer id;
 
   private EStatusHistory name;
 
   private Date statusDate;
 
-  public StatusHistoryDTO() {}
+  @JsonBackReference
+  private RentDTO rent;
 
   public Integer getId() {
     return id;
@@ -34,5 +37,13 @@ public class StatusHistoryDTO {
 
   public void setStatusDate(Date statusDate) {
     this.statusDate = statusDate;
+  }
+
+  public RentDTO getRent() {
+    return rent;
+  }
+
+  public void setRent(RentDTO rent) {
+    this.rent = rent;
   }
 }

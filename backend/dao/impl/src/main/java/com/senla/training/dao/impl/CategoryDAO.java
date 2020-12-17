@@ -49,19 +49,6 @@ public class CategoryDAO extends EntityGraphAbstractDAO<Category> implements ICa
   }
 
   @Override
-  public List<Category> findLessThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("categoryWithCarsModelBrand");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Category> findGreaterThanCategoryWithCarsModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("categoryWithCarsModelBrand");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("categoryWithCarsModelBrand");

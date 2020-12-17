@@ -1,11 +1,15 @@
-package com.senla.training.dto.user;
+package com.senla.training.dto;
 
 public class UserWithTokenDTO {
+
   private String email;
 
   private String password;
 
   private String token;
+
+  public UserWithTokenDTO() {
+  }
 
   public String getEmail() {
     return email;
@@ -22,8 +26,6 @@ public class UserWithTokenDTO {
   public void setPassword(String password) {
     this.password = password;
   }
-
-  public UserWithTokenDTO() {}
 
   public String getToken() {
     return token;

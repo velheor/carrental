@@ -1,13 +1,22 @@
-package com.senla.training.dto.model;
+package com.senla.training.dto;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 
 public class ModelDTO {
+
   private Integer id;
 
   private String name;
 
   private String manufacturerCountry;
 
-  public ModelDTO() {}
+  @JsonManagedReference
+  private List<CarDTO> cars;
+
+  @JsonBackReference
+  private BrandDTO brand;
 
   public Integer getId() {
     return id;
@@ -31,5 +40,21 @@ public class ModelDTO {
 
   public void setManufacturerCountry(String manufacturerCountry) {
     this.manufacturerCountry = manufacturerCountry;
+  }
+
+  public List<CarDTO> getCars() {
+    return cars;
+  }
+
+  public void setCars(List<CarDTO> cars) {
+    this.cars = cars;
+  }
+
+  public BrandDTO getBrand() {
+    return brand;
+  }
+
+  public void setBrand(BrandDTO brand) {
+    this.brand = brand;
   }
 }
