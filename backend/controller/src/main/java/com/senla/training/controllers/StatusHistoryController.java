@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.statusHistory.StatusHistoryDTO;
-import com.senla.training.dto.statusHistory.StatusHistoryWithRentDTO;
+import com.senla.training.dto.StatusHistoryDTO;
 import com.senla.training.service.api.IStatusHistoryService;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +27,12 @@ public class StatusHistoryController {
   }
 
   @GetMapping("/{id}")
-  public StatusHistoryWithRentDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
+  public StatusHistoryDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return statusHistoryService.findByIdStatusHistoryWithRentDTO(id);
   }
 
   @GetMapping
-  public List<StatusHistoryWithRentDTO> sortWithDirectionUsersWithRoles(
+  public List<StatusHistoryDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return statusHistoryService.findAllAndSortWithDirectionStatusHistoryWithRentDTO(allParams);
   }
@@ -61,43 +60,31 @@ public class StatusHistoryController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public StatusHistoryWithRentDTO findOneByCriteriaUserWithRoles(
+  public StatusHistoryDTO findOneByCriteriaUserWithRoles(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return statusHistoryService.findOneByCriteriaStatusHistoryWithRentDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<StatusHistoryWithRentDTO> findAllByCriteriaStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findAllByCriteriaStatusHistoryWithRentDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return statusHistoryService.findAllByCriteriaStatusHistoryWithRentDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<StatusHistoryWithRentDTO> findByNotNullStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findByNotNullStatusHistoryWithRentDTO(
       @RequestParam("field") List<String> fields) {
     return statusHistoryService.findByNotNullStatusHistoryWithRentDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<StatusHistoryWithRentDTO> findByNullStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findByNullStatusHistoryWithRentDTO(
       @RequestParam("field") List<String> fields) {
     return statusHistoryService.findByNullStatusHistoryWithRentDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
-  public List<StatusHistoryWithRentDTO> findLessThanStatusHistoryWithRentDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return statusHistoryService.findLessThanStatusHistoryWithRentDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<StatusHistoryWithRentDTO> findGreaterThanStatusHistoryWithRentDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return statusHistoryService.findGreaterThanStatusHistoryWithRentDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<StatusHistoryWithRentDTO> findAndSortStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findAndSortStatusHistoryWithRentDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return statusHistoryService.findAndSortStatusHistoryWithRentDTO(
@@ -105,7 +92,7 @@ public class StatusHistoryController {
   }
 
   @GetMapping("/findContain")
-  public List<StatusHistoryWithRentDTO> findContainStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
       @RequestParam Map<String, String> fieldStringMap) {
     return statusHistoryService.findContainStatusHistoryWithRentDTO(fieldStringMap);
   }

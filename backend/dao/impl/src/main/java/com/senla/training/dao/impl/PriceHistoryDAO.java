@@ -50,20 +50,6 @@ public class PriceHistoryDAO extends EntityGraphAbstractDAO<PriceHistory>
   }
 
   @Override
-  public List<PriceHistory> findLessThanPriceHistoryWithCarModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("priceHistoryWithCarModelBrand");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<PriceHistory> findGreaterThanPriceHistoryWithCarModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("priceHistoryWithCarModelBrand");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<PriceHistory> findAndSortPriceHistoryWithCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("priceHistoryWithCarModelBrand");

@@ -14,24 +14,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "categoryWithCarsModelBrand",
-    attributeNodes = {@NamedAttributeNode(value = "cars", subgraph = "carsWithModel")},
-    subgraphs = {
-      @NamedSubgraph(
-          name = "carsWithModel",
-          attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
-      @NamedSubgraph(
-          name = "modelWithBrand",
-          attributeNodes = {@NamedAttributeNode(value = "brand")})
-    })
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "categoryWithCarsModelBrand",
+      attributeNodes = {@NamedAttributeNode(value = "cars", subgraph = "carsWithModel")},
+      subgraphs = {
+        @NamedSubgraph(
+            name = "carsWithModel",
+            attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      }),
+  @NamedEntityGraph(
+      name = "categoryWithCategoriesCarsModelBrand",
+      attributeNodes = {
+        @NamedAttributeNode(value = "categories"),
+        @NamedAttributeNode(value = "cars", subgraph = "carsWithModel")
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "carsWithModel",
+            attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      })
+})
 @Entity
 @Table(name = "categories")
 public class Category implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
@@ -73,8 +91,12 @@ public class Category implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Category that = (Category) o;
     return id.equals(that.id) && Objects.equals(name, that.name);
   }

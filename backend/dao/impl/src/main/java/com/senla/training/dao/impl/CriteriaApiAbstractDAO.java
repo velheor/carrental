@@ -1,8 +1,6 @@
 package com.senla.training.dao.impl;
 
 import com.senla.training.models.enums.Direction;
-import org.springframework.stereotype.Repository;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,6 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-@Repository
 public abstract class CriteriaApiAbstractDAO<T> {
 
   private final Class<T> type;
@@ -65,22 +62,6 @@ public abstract class CriteriaApiAbstractDAO<T> {
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
     return q.select(c).where(this.getPredicateByNull(cb, c, fields).toArray(new Predicate[] {}));
-  }
-
-  protected CriteriaQuery<T> findLessThanCriteriaQuery(Map<String, Number> fieldNumberMap) {
-    CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-    CriteriaQuery<T> q = cb.createQuery(getType());
-    Root<T> c = q.from(getType());
-    return q.select(c)
-        .where(this.getPredicateLT(cb, c, fieldNumberMap).toArray(new Predicate[] {}));
-  }
-
-  protected CriteriaQuery<T> findGreaterThanCriteriaQuery(Map<String, Number> fieldNumberMap) {
-    CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-    CriteriaQuery<T> q = cb.createQuery(getType());
-    Root<T> c = q.from(getType());
-    return q.select(c)
-        .where(this.getPredicateGT(cb, c, fieldNumberMap).toArray(new Predicate[] {}));
   }
 
   protected CriteriaQuery<T> findAndSortCriteriaQuery(

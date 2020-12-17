@@ -18,10 +18,6 @@ public interface IRoleDAO extends ICrudDAO<Role> {
 
   List<Role> findByNullRoleWithUsers(List<String> fields);
 
-  List<Role> findLessThanRoleWithUsers(Map<String, Number> fieldNumberMap);
-
-  List<Role> findGreaterThanRoleWithUsers(Map<String, Number> fieldNumberMap);
-
   List<Role> findAndSortRoleWithUsers(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

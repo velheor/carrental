@@ -7,7 +7,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IRentDAO;
-import com.senla.training.dto.rent.RentWithUserStatusHistoryCarModelBrandDTO;
+import com.senla.training.dto.RentDTO;
 import com.senla.training.models.Rent;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
@@ -26,50 +26,48 @@ class RentServiceTest {
   @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final Rent rent;
-  private final RentWithUserStatusHistoryCarModelBrandDTO rentWithUserStatusHistoryCarModelBrandDTO;
+  private final RentDTO rentDTO;
 
   private final List<Rent> rents;
-  private final List<RentWithUserStatusHistoryCarModelBrandDTO>
-      rentWithUserStatusHistoryCarModelBrandDTOList;
+  private final List<RentDTO>
+      rentDTOList;
 
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, Number> fieldNumberMap;
   private final Map<String, String> fieldContainMap;
 
   public RentServiceTest() {
     MockitoAnnotations.initMocks(this);
 
     rent = new Rent();
-    rentWithUserStatusHistoryCarModelBrandDTO = new RentWithUserStatusHistoryCarModelBrandDTO();
+    rentDTO = new RentDTO();
 
     rents = new ArrayList<>();
-    rentWithUserStatusHistoryCarModelBrandDTOList = new ArrayList<>();
+    rentDTOList = new ArrayList<>();
 
     rents.add(rent);
     rents.add(new Rent());
 
-    rentWithUserStatusHistoryCarModelBrandDTOList.add(rentWithUserStatusHistoryCarModelBrandDTO);
-    rentWithUserStatusHistoryCarModelBrandDTOList.add(
-        new RentWithUserStatusHistoryCarModelBrandDTO());
+    rentDTOList.add(rentDTO);
+    rentDTOList.add(
+        new RentDTO());
 
     fieldDirectionStringMap = new HashMap<>();
     fieldCriterionMap = new HashMap<>();
     fieldDirectionMap = new HashMap<>();
     fields = new ArrayList<>();
-    fieldNumberMap = new HashMap<>();
     fieldContainMap = new HashMap<>();
   }
 
   @Test
   void findByIdRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findByIdRentWithUserStatusHistoryCarModelBrand(1)).willReturn(rent);
-    given(objectMapperUtils.map(rent, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTO);
+    given(objectMapperUtils.map(rent, RentDTO.class))
+        .willReturn(rentDTO);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTO,
+        rentDTO,
         rentService.findByIdRentWithUserStatusHistoryCarModelBrandDTO(1));
     given(rentDAO.findByIdRentWithUserStatusHistoryCarModelBrand(1)).willReturn(null);
     assertNull(rentService.findByIdRentWithUserStatusHistoryCarModelBrandDTO(1));
@@ -84,10 +82,10 @@ class RentServiceTest {
             rentDAO.findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrand(
                 fieldDirectionMap))
         .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
             fieldDirectionStringMap));
 
@@ -95,7 +93,7 @@ class RentServiceTest {
             rentDAO.findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrand(
                 fieldDirectionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -117,15 +115,15 @@ class RentServiceTest {
   void findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findOneByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriterionMap))
         .willReturn(rent);
-    given(objectMapperUtils.map(rent, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTO);
+    given(objectMapperUtils.map(rent, RentDTO.class))
+        .willReturn(rentDTO);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTO,
+        rentDTO,
         rentService.findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(fieldCriterionMap));
 
     given(rentDAO.findOneByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriterionMap))
         .willReturn(null);
-    given(objectMapperUtils.map(rent, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.map(rent, RentDTO.class))
         .willReturn(null);
     assertNull(
         rentService.findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(fieldCriterionMap));
@@ -143,15 +141,15 @@ class RentServiceTest {
   void findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findAllByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriterionMap))
         .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(fieldCriterionMap));
 
     given(rentDAO.findAllByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -169,15 +167,15 @@ class RentServiceTest {
   @Test
   void findByNotNullRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findByNotNullRentWithUserStatusHistoryCarModelBrand(fields)).willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(fields));
 
     given(rentDAO.findByNotNullRentWithUserStatusHistoryCarModelBrand(fields))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -193,15 +191,15 @@ class RentServiceTest {
   @Test
   void findByNullRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findByNullRentWithUserStatusHistoryCarModelBrand(fields)).willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findByNullRentWithUserStatusHistoryCarModelBrandDTO(fields));
 
     given(rentDAO.findByNullRentWithUserStatusHistoryCarModelBrand(fields))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(), rentService.findByNullRentWithUserStatusHistoryCarModelBrandDTO(fields));
@@ -214,68 +212,18 @@ class RentServiceTest {
   }
 
   @Test
-  void findLessThanRentWithUserStatusHistoryCarModelBrandDTO() {
-    given(rentDAO.findLessThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
-    assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
-        rentService.findLessThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-
-    given(rentDAO.findLessThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        rentService.findLessThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-
-    given(rentDAO.findLessThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> rentService.findLessThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-  }
-
-  @Test
-  void findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO() {
-    given(rentDAO.findGreaterThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
-    assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
-        rentService.findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-
-    given(rentDAO.findGreaterThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        rentService.findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-
-    given(rentDAO.findGreaterThanRentWithUserStatusHistoryCarModelBrand(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> rentService.findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap));
-  }
-
-  @Test
   void findContainRentWithUserStatusHistoryCarModelBrandDTO() {
     given(rentDAO.findContainRentWithUserStatusHistoryCarModelBrand(fieldContainMap))
         .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findContainRentWithUserStatusHistoryCarModelBrandDTO(fieldContainMap));
 
     given(rentDAO.findContainRentWithUserStatusHistoryCarModelBrand(fieldContainMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -294,10 +242,10 @@ class RentServiceTest {
             rentDAO.findAndSortRentWithUserStatusHistoryCarModelBrand(
                 fieldDirectionMap, fieldCriterionMap))
         .willReturn(rents);
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
-        .willReturn(rentWithUserStatusHistoryCarModelBrandDTOList);
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
+        .willReturn(rentDTOList);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTOList,
+        rentDTOList,
         rentService.findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
             fieldDirectionStringMap, fieldCriterionMap));
 
@@ -305,7 +253,7 @@ class RentServiceTest {
             rentDAO.findAndSortRentWithUserStatusHistoryCarModelBrand(
                 fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(rents, RentWithUserStatusHistoryCarModelBrandDTO.class))
+    given(objectMapperUtils.mapAll(rents, RentDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -326,47 +274,47 @@ class RentServiceTest {
   @Test
   void create() {
     given(rentDAO.create(rent)).willReturn(rent);
-    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+    given(objectMapperUtils.map(rentDTO, Rent.class))
         .willReturn(rent);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTO,
-        rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+        rentDTO,
+        rentService.create(rentDTO));
 
     given(rentDAO.create(rent)).willReturn(null);
-    assertNull(rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+    assertNull(rentService.create(rentDTO));
 
     given(rentDAO.create(rent)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> rentService.create(rentWithUserStatusHistoryCarModelBrandDTO));
+        Exception.class, () -> rentService.create(rentDTO));
   }
 
   @Test
   void update() {
     given(rentDAO.update(rent)).willReturn(rent);
-    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+    given(objectMapperUtils.map(rentDTO, Rent.class))
         .willReturn(rent);
     assertEquals(
-        rentWithUserStatusHistoryCarModelBrandDTO,
-        rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+        rentDTO,
+        rentService.update(rentDTO));
 
     given(rentDAO.update(rent)).willReturn(null);
-    assertNull(rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+    assertNull(rentService.update(rentDTO));
 
     given(rentDAO.update(rent)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+        Exception.class, () -> rentService.update(rentDTO));
   }
 
   @Test
   void delete() {
-    given(objectMapperUtils.map(rentWithUserStatusHistoryCarModelBrandDTO, Rent.class))
+    given(objectMapperUtils.map(rentDTO, Rent.class))
         .willReturn(rent);
-    rentService.delete(rentWithUserStatusHistoryCarModelBrandDTO);
+    rentService.delete(rentDTO);
     verify(rentDAO, atLeastOnce()).delete(rent);
 
     given(rentDAO.update(rent)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> rentService.update(rentWithUserStatusHistoryCarModelBrandDTO));
+        Exception.class, () -> rentService.update(rentDTO));
   }
 
   @Test

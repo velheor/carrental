@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.pricehistory.PriceHistoryDTO;
-import com.senla.training.dto.pricehistory.PriceHistoryWithCarModelBrandDTO;
+import com.senla.training.dto.PriceHistoryDTO;
 import com.senla.training.service.api.IPriceHistoryService;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +26,12 @@ public class PriceHistoryController {
   }
 
   @GetMapping("/{id}")
-  public PriceHistoryWithCarModelBrandDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
+  public PriceHistoryDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return priceHistoryService.findByIdPriceHistoryWithCarModelBrandDTO(id);
   }
 
   @GetMapping
-  public List<PriceHistoryWithCarModelBrandDTO> sortWithDirectionUsersWithRoles(
+  public List<PriceHistoryDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return priceHistoryService.findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
         allParams);
@@ -61,43 +60,31 @@ public class PriceHistoryController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public PriceHistoryWithCarModelBrandDTO findOneByCriteriaUserWithRoles(
+  public PriceHistoryDTO findOneByCriteriaUserWithRoles(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return priceHistoryService.findOneByCriteriaPriceHistoryWithCarModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<PriceHistoryWithCarModelBrandDTO> findAllByCriteriaPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findAllByCriteriaPriceHistoryWithCarModelBrandDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return priceHistoryService.findAllByCriteriaPriceHistoryWithCarModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<PriceHistoryWithCarModelBrandDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return priceHistoryService.findByNotNullPriceHistoryWithCarModelBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<PriceHistoryWithCarModelBrandDTO> findByNullPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findByNullPriceHistoryWithCarModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return priceHistoryService.findByNullPriceHistoryWithCarModelBrandDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
-  public List<PriceHistoryWithCarModelBrandDTO> findLessThanPriceHistoryWithCarModelBrandDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return priceHistoryService.findLessThanPriceHistoryWithCarModelBrandDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<PriceHistoryWithCarModelBrandDTO> findGreaterThanPriceHistoryWithCarModelBrandDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return priceHistoryService.findGreaterThanPriceHistoryWithCarModelBrandDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<PriceHistoryWithCarModelBrandDTO> findAndSortPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findAndSortPriceHistoryWithCarModelBrandDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return priceHistoryService.findAndSortPriceHistoryWithCarModelBrandDTO(
@@ -105,7 +92,7 @@ public class PriceHistoryController {
   }
 
   @GetMapping("/findContain")
-  public List<PriceHistoryWithCarModelBrandDTO> findContainPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findContainPriceHistoryWithCarModelBrandDTO(
       @RequestParam Map<String, String> fieldStringMap) {
     return priceHistoryService.findContainPriceHistoryWithCarModelBrandDTO(fieldStringMap);
   }

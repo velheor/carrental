@@ -2,9 +2,8 @@ package com.senla.training.service.impl;
 
 import com.senla.training.constants.EmailValidator;
 import com.senla.training.dao.api.IUserDAO;
-import com.senla.training.dto.user.UserDTO;
-import com.senla.training.dto.user.UserWithRolesDTO;
-import com.senla.training.dto.user.UserWithTokenDTO;
+import com.senla.training.dto.UserDTO;
+import com.senla.training.dto.UserWithTokenDTO;
 import com.senla.training.models.User;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.security.jwt.JwtTokenProvider;
@@ -12,18 +11,18 @@ import com.senla.training.service.api.IUserService;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
 public class UserService implements IUserService {
+
   private final IUserDAO userDAO;
   private final ObjectMapperUtils objectMapperUtils;
   private final JwtTokenProvider jwtTokenProvider;
@@ -45,70 +44,57 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public UserWithRolesDTO findByIdUserWithRolesDTO(int id) {
-    return objectMapperUtils.map(userDAO.findByIdUserWithRoles(id), UserWithRolesDTO.class);
+  public UserDTO findByIdUserWithRolesDTO(int id) {
+    return objectMapperUtils.map(userDAO.findByIdUserWithRoles(id), UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findAllAndSortWithDirectionUserWithRolesDTO(
+  public List<UserDTO> findAllAndSortWithDirectionUserWithRolesDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         userDAO.findAllAndSortWithDirectionUserWithRoles(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        UserWithRolesDTO.class);
+        UserDTO.class);
   }
 
   @Override
-  public UserWithRolesDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap) {
+  public UserDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap) {
     return objectMapperUtils.map(
-        userDAO.findOneByCriteriaUserWithRoles(fieldCriterionMap), UserWithRolesDTO.class);
+        userDAO.findOneByCriteriaUserWithRoles(fieldCriterionMap), UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findAllByCriteriaUserWithRolesDTO(
+  public List<UserDTO> findAllByCriteriaUserWithRolesDTO(
       Map<String, Object> fieldCriterionMap) {
     return objectMapperUtils.mapAll(
-        userDAO.findAllByCriteriaUserWithRoles(fieldCriterionMap), UserWithRolesDTO.class);
+        userDAO.findAllByCriteriaUserWithRoles(fieldCriterionMap), UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findByNotNullUserWithRolesDTO(List<String> fields) {
+  public List<UserDTO> findByNotNullUserWithRolesDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        userDAO.findByNotNullUserWithRoles(fields), UserWithRolesDTO.class);
+        userDAO.findByNotNullUserWithRoles(fields), UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findByNullUserWithRolesDTO(List<String> fields) {
+  public List<UserDTO> findByNullUserWithRolesDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        userDAO.findByNullUserWithRoles(fields), UserWithRolesDTO.class);
+        userDAO.findByNullUserWithRoles(fields), UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findLessThanUserWithRolesDTO(Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.findLessThanUserWithRoles(fieldNumberMap), UserWithRolesDTO.class);
-  }
-
-  @Override
-  public List<UserWithRolesDTO> findGreaterThanUserWithRolesDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        userDAO.findGreaterThanUserWithRoles(fieldNumberMap), UserWithRolesDTO.class);
-  }
-
-  @Override
-  public List<UserWithRolesDTO> findAndSortUserWithRolesDTO(
+  public List<UserDTO> findAndSortUserWithRolesDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         userDAO.findAndSortUserWithRoles(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        UserWithRolesDTO.class);
+        UserDTO.class);
   }
 
   @Override
-  public List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap) {
+  public List<UserDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
-        userDAO.findContainUserWithRoles(fieldStringMap), UserWithRolesDTO.class);
+        userDAO.findContainUserWithRoles(fieldStringMap), UserDTO.class);
   }
 
   @Override
@@ -142,12 +128,37 @@ public class UserService implements IUserService {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             userWithTokenDTO.getEmail(), userWithTokenDTO.getPassword()));
-    UserWithRolesDTO user = objectMapperUtils.map(userDAO.findByEmailUserWithRoles(userWithTokenDTO.getEmail()), UserWithRolesDTO.class);
+    UserDTO user =
+        objectMapperUtils.map(
+            userDAO.findByEmailUserWithRoles(userWithTokenDTO.getEmail()), UserDTO.class);
     userWithTokenDTO.setToken(jwtTokenProvider.createToken(user.getEmail(), user.getRoles()));
     return userWithTokenDTO;
   }
 
-  protected Boolean isValidEmail(String email){
+  @Override
+  public UserDTO findCurrentUser(UserDetails userDetails) {
+    return objectMapperUtils.map(userDAO
+            .findByEmailUserWithRents(userDetails.getUsername()),
+        UserDTO.class);
+  }
+
+  @Override
+  public UserDTO updateCurrentUser(UserDetails userDetails, UserDTO userDTO) {
+    if (!userDetails.getUsername().equals(userDTO.getEmail())) {
+      return null;
+    }
+    userDAO.update(objectMapperUtils.map(userDTO, User.class));
+    return userDTO;
+  }
+
+  @Override
+  public UserDTO deleteCurrentUser(UserDetails userDetails) {
+    User user = userDAO.findByEmailUserWithRents(userDetails.getUsername());
+    userDAO.delete(user);
+    return objectMapperUtils.map(user, UserDTO.class);
+  }
+
+  protected Boolean isValidEmail(String email) {
     return !this.checkForExistEmail(email) && !checkForRegexEmail(email);
   }
 

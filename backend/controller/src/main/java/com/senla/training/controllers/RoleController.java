@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.role.RoleDTO;
-import com.senla.training.dto.role.RoleWithUsersDTO;
+import com.senla.training.dto.RoleDTO;
 import com.senla.training.service.api.IRoleService;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +27,12 @@ public class RoleController {
   }
 
   @GetMapping("/{id}")
-  public RoleWithUsersDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
+  public RoleDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return roleService.findByIdRoleWithUsersDTO(id);
   }
 
   @GetMapping
-  public List<RoleWithUsersDTO> sortWithDirectionUsersWithRoles(
+  public List<RoleDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return roleService.findAllAndSortWithDirectionRoleWithUsersDTO(allParams);
   }
@@ -61,50 +60,38 @@ public class RoleController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public RoleWithUsersDTO findOneByCriteriaUserWithRoles(
+  public RoleDTO findOneByCriteriaUserWithRoles(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return roleService.findOneByCriteriaRoleWithUsersDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<RoleWithUsersDTO> findAllByCriteriaRoleWithUsersDTO(
+  public List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return roleService.findAllByCriteriaRoleWithUsersDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<RoleWithUsersDTO> findByNotNullRoleWithUsersDTO(
+  public List<RoleDTO> findByNotNullRoleWithUsersDTO(
       @RequestParam("field") List<String> fields) {
     return roleService.findByNotNullRoleWithUsersDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<RoleWithUsersDTO> findByNullRoleWithUsersDTO(
+  public List<RoleDTO> findByNullRoleWithUsersDTO(
       @RequestParam("field") List<String> fields) {
     return roleService.findByNullRoleWithUsersDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
-  public List<RoleWithUsersDTO> findLessThanRoleWithUsersDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return roleService.findLessThanRoleWithUsersDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<RoleWithUsersDTO> findGreaterThanRoleWithUsersDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return roleService.findGreaterThanRoleWithUsersDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<RoleWithUsersDTO> findAndSortRoleWithUsersDTO(
+  public List<RoleDTO> findAndSortRoleWithUsersDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return roleService.findAndSortRoleWithUsersDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 
   @GetMapping("/findContain")
-  public List<RoleWithUsersDTO> findContainRoleWithUsersDTO(
+  public List<RoleDTO> findContainRoleWithUsersDTO(
       @RequestParam Map<String, String> fieldStringMap) {
     return roleService.findContainRoleWithUsersDTO(fieldStringMap);
   }

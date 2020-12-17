@@ -1,17 +1,15 @@
 package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.IRoleDAO;
-import com.senla.training.dto.role.RoleDTO;
-import com.senla.training.dto.role.RoleWithUsersDTO;
+import com.senla.training.dto.RoleDTO;
 import com.senla.training.models.Role;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.IRoleService;
 import java.util.List;
 import java.util.Map;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -27,70 +25,57 @@ public class RoleService implements IRoleService {
   }
 
   @Override
-  public RoleWithUsersDTO findByIdRoleWithUsersDTO(int id) {
-    return objectMapperUtils.map(roleDAO.findByIdRoleWithUsers(id), RoleWithUsersDTO.class);
+  public RoleDTO findByIdRoleWithUsersDTO(int id) {
+    return objectMapperUtils.map(roleDAO.findByIdRoleWithUsers(id), RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
+  public List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         roleDAO.findAllAndSortWithDirectionRoleWithUsers(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        RoleWithUsersDTO.class);
+        RoleDTO.class);
   }
 
   @Override
-  public RoleWithUsersDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap) {
+  public RoleDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
-        roleDAO.findOneByCriteriaRoleWithUsers(fieldCriteriaMap), RoleWithUsersDTO.class);
+        roleDAO.findOneByCriteriaRoleWithUsers(fieldCriteriaMap), RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findAllByCriteriaRoleWithUsersDTO(
+  public List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
-        roleDAO.findAllByCriteriaRoleWithUsers(fieldCriteriaMap), RoleWithUsersDTO.class);
+        roleDAO.findAllByCriteriaRoleWithUsers(fieldCriteriaMap), RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findByNotNullRoleWithUsersDTO(List<String> fields) {
+  public List<RoleDTO> findByNotNullRoleWithUsersDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        roleDAO.findByNotNullRoleWithUsers(fields), RoleWithUsersDTO.class);
+        roleDAO.findByNotNullRoleWithUsers(fields), RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findByNullRoleWithUsersDTO(List<String> fields) {
+  public List<RoleDTO> findByNullRoleWithUsersDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        roleDAO.findByNullRoleWithUsers(fields), RoleWithUsersDTO.class);
+        roleDAO.findByNullRoleWithUsers(fields), RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findLessThanRoleWithUsersDTO(Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findLessThanRoleWithUsers(fieldNumberMap), RoleWithUsersDTO.class);
-  }
-
-  @Override
-  public List<RoleWithUsersDTO> findGreaterThanRoleWithUsersDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findGreaterThanRoleWithUsers(fieldNumberMap), RoleWithUsersDTO.class);
-  }
-
-  @Override
-  public List<RoleWithUsersDTO> findAndSortRoleWithUsersDTO(
+  public List<RoleDTO> findAndSortRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         roleDAO.findAndSortRoleWithUsers(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        RoleWithUsersDTO.class);
+        RoleDTO.class);
   }
 
   @Override
-  public List<RoleWithUsersDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap) {
+  public List<RoleDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
-        roleDAO.findContainRoleWithUsers(fieldStringMap), RoleWithUsersDTO.class);
+        roleDAO.findContainRoleWithUsers(fieldStringMap), RoleDTO.class);
   }
 
   @Override

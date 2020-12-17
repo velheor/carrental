@@ -49,20 +49,6 @@ public class CarDAO extends EntityGraphAbstractDAO<Car> implements ICarDAO {
   }
 
   @Override
-  public List<Car> findLessThanCarWithModelCategoryPriceHistoryBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Car> findGreaterThanCarWithModelCategoryPriceHistoryBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Car> findAndSortCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");

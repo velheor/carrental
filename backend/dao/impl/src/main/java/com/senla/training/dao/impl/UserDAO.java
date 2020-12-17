@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
+
   @Override
   public User findByIdUserWithRoles(int id) {
     super.setEntityGraphName("userWithRoles");
@@ -47,18 +48,6 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
   }
 
   @Override
-  public List<User> findLessThanUserWithRoles(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("userWithRoles");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<User> findGreaterThanUserWithRoles(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("userWithRoles");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<User> findAndSortUserWithRoles(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("userWithRoles");
@@ -76,4 +65,11 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
     super.setEntityGraphName("userWithRoles");
     return this.findOneByCriteriaUserWithRoles(Map.of("email", email));
   }
+
+  @Override
+  public User findByEmailUserWithRents(String email) {
+    super.setEntityGraphName("userWithRents");
+    return this.findOneByCriteriaUserWithRoles(Map.of("email", email));
+  }
+
 }

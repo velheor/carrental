@@ -37,6 +37,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "price_history")
 public class PriceHistory implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false, insertable = false, updatable = false)
   private Integer id;
@@ -82,8 +83,12 @@ public class PriceHistory implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     PriceHistory that = (PriceHistory) o;
     return id.equals(that.id)
         && Double.compare(that.price, price) == 0

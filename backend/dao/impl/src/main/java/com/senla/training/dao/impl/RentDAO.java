@@ -49,20 +49,6 @@ public class RentDAO extends EntityGraphAbstractDAO<Rent> implements IRentDAO {
   }
 
   @Override
-  public List<Rent> findLessThanRentWithUserStatusHistoryCarModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Rent> findGreaterThanRentWithUserStatusHistoryCarModelBrand(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Rent> findAndSortRentWithUserStatusHistoryCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("rentWithUserStatusHistoryCarModelBrand");

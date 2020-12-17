@@ -7,7 +7,6 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.ICarDAO;
-import com.senla.training.dto.car.CarWithModelCategoryPriceHistoryBrandDTO;
 import com.senla.training.models.Car;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
@@ -26,50 +25,48 @@ class CarServiceTest {
   @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final Car car;
-  private final CarWithModelCategoryPriceHistoryBrandDTO carWithModelCategoryPriceHistoryBrandDTO;
+  private final CarDTO carDTO;
 
   private final List<Car> cars;
-  private final List<CarWithModelCategoryPriceHistoryBrandDTO>
-      carWithModelCategoryPriceHistoryBrandDTOList;
+  private final List<CarDTO>
+      carDTOList;
 
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, Number> fieldNumberMap;
   private final Map<String, String> fieldContainMap;
 
   public CarServiceTest() {
     MockitoAnnotations.initMocks(this);
 
     car = new Car();
-    carWithModelCategoryPriceHistoryBrandDTO = new CarWithModelCategoryPriceHistoryBrandDTO();
+    carDTO = new CarDTO();
 
     cars = new ArrayList<>();
-    carWithModelCategoryPriceHistoryBrandDTOList = new ArrayList<>();
+    carDTOList = new ArrayList<>();
 
     cars.add(car);
     cars.add(new Car());
 
-    carWithModelCategoryPriceHistoryBrandDTOList.add(carWithModelCategoryPriceHistoryBrandDTO);
-    carWithModelCategoryPriceHistoryBrandDTOList.add(
-        new CarWithModelCategoryPriceHistoryBrandDTO());
+    carDTOList.add(carDTO);
+    carDTOList.add(
+        new CarDTO());
 
     fieldDirectionStringMap = new HashMap<>();
     fieldCriterionMap = new HashMap<>();
     fieldDirectionMap = new HashMap<>();
     fields = new ArrayList<>();
-    fieldNumberMap = new HashMap<>();
     fieldContainMap = new HashMap<>();
   }
 
   @Test
   void findByIdCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findByIdCarWithModelCategoryPriceHistoryBrand(1)).willReturn(car);
-    given(objectMapperUtils.map(car, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTO);
+    given(objectMapperUtils.map(car, CarDTO.class))
+        .willReturn(carDTO);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTO,
+        carDTO,
         carService.findByIdCarWithModelCategoryPriceHistoryBrandDTO(1));
 
     given(carDAO.findByIdCarWithModelCategoryPriceHistoryBrand(1)).willReturn(null);
@@ -86,10 +83,10 @@ class CarServiceTest {
             carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
                 fieldDirectionMap))
         .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
             fieldDirectionStringMap));
 
@@ -97,7 +94,7 @@ class CarServiceTest {
             carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
                 fieldDirectionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -119,15 +116,15 @@ class CarServiceTest {
   void findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriterionMap))
         .willReturn(car);
-    given(objectMapperUtils.map(car, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTO);
+    given(objectMapperUtils.map(car, CarDTO.class))
+        .willReturn(carDTO);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTO,
+        carDTO,
         carService.findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(fieldCriterionMap));
 
     given(carDAO.findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriterionMap))
         .willReturn(null);
-    given(objectMapperUtils.map(car, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.map(car, CarDTO.class))
         .willReturn(null);
     assertNull(
         carService.findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(fieldCriterionMap));
@@ -145,15 +142,15 @@ class CarServiceTest {
   void findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriterionMap))
         .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(fieldCriterionMap));
 
     given(carDAO.findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -171,15 +168,15 @@ class CarServiceTest {
   @Test
   void findByNotNullCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findByNotNullCarWithModelCategoryPriceHistoryBrand(fields)).willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(fields));
 
     given(carDAO.findByNotNullCarWithModelCategoryPriceHistoryBrand(fields))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -195,15 +192,15 @@ class CarServiceTest {
   @Test
   void findByNullCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findByNullCarWithModelCategoryPriceHistoryBrand(fields)).willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findByNullCarWithModelCategoryPriceHistoryBrandDTO(fields));
 
     given(carDAO.findByNullCarWithModelCategoryPriceHistoryBrand(fields))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(), carService.findByNullCarWithModelCategoryPriceHistoryBrandDTO(fields));
@@ -216,68 +213,18 @@ class CarServiceTest {
   }
 
   @Test
-  void findLessThanCarWithModelCategoryPriceHistoryBrandDTO() {
-    given(carDAO.findLessThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
-    assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
-        carService.findLessThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-
-    given(carDAO.findLessThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        carService.findLessThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-
-    given(carDAO.findLessThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> carService.findLessThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-  }
-
-  @Test
-  void findGreaterThanCarWithModelCategoryPriceHistoryBrandDTO() {
-    given(carDAO.findGreaterThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
-    assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
-        carService.findGreaterThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-
-    given(carDAO.findGreaterThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        carService.findGreaterThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-
-    given(carDAO.findGreaterThanCarWithModelCategoryPriceHistoryBrand(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> carService.findGreaterThanCarWithModelCategoryPriceHistoryBrandDTO(fieldNumberMap));
-  }
-
-  @Test
   void findContainCarWithModelCategoryPriceHistoryBrandDTO() {
     given(carDAO.findContainCarWithModelCategoryPriceHistoryBrand(fieldContainMap))
         .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findContainCarWithModelCategoryPriceHistoryBrandDTO(fieldContainMap));
 
     given(carDAO.findContainCarWithModelCategoryPriceHistoryBrand(fieldContainMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -296,10 +243,10 @@ class CarServiceTest {
             carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
                 fieldDirectionMap, fieldCriterionMap))
         .willReturn(cars);
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
-        .willReturn(carWithModelCategoryPriceHistoryBrandDTOList);
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
+        .willReturn(carDTOList);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTOList,
+        carDTOList,
         carService.findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
             fieldDirectionStringMap, fieldCriterionMap));
 
@@ -307,7 +254,7 @@ class CarServiceTest {
             carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
                 fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(cars, CarWithModelCategoryPriceHistoryBrandDTO.class))
+    given(objectMapperUtils.mapAll(cars, CarDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -328,47 +275,47 @@ class CarServiceTest {
   @Test
   void create() {
     given(carDAO.create(car)).willReturn(car);
-    given(objectMapperUtils.map(carWithModelCategoryPriceHistoryBrandDTO, Car.class))
+    given(objectMapperUtils.map(carDTO, Car.class))
         .willReturn(car);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTO,
-        carService.create(carWithModelCategoryPriceHistoryBrandDTO));
+        carDTO,
+        carService.create(carDTO));
 
     given(carDAO.create(car)).willReturn(null);
-    assertNull(carService.create(carWithModelCategoryPriceHistoryBrandDTO));
+    assertNull(carService.create(carDTO));
 
     given(carDAO.create(car)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> carService.create(carWithModelCategoryPriceHistoryBrandDTO));
+        Exception.class, () -> carService.create(carDTO));
   }
 
   @Test
   void update() {
     given(carDAO.update(car)).willReturn(car);
-    given(objectMapperUtils.map(carWithModelCategoryPriceHistoryBrandDTO, Car.class))
+    given(objectMapperUtils.map(carDTO, Car.class))
         .willReturn(car);
     assertEquals(
-        carWithModelCategoryPriceHistoryBrandDTO,
-        carService.update(carWithModelCategoryPriceHistoryBrandDTO));
+        carDTO,
+        carService.update(carDTO));
 
     given(carDAO.update(car)).willReturn(null);
-    assertNull(carService.update(carWithModelCategoryPriceHistoryBrandDTO));
+    assertNull(carService.update(carDTO));
 
     given(carDAO.update(car)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> carService.update(carWithModelCategoryPriceHistoryBrandDTO));
+        Exception.class, () -> carService.update(carDTO));
   }
 
   @Test
   void delete() {
-    given(objectMapperUtils.map(carWithModelCategoryPriceHistoryBrandDTO, Car.class))
+    given(objectMapperUtils.map(carDTO, Car.class))
         .willReturn(car);
-    carService.delete(carWithModelCategoryPriceHistoryBrandDTO);
+    carService.delete(carDTO);
     verify(carDAO, atLeastOnce()).delete(car);
 
     given(carDAO.update(car)).willThrow(Exception.class);
     assertThrows(
-        Exception.class, () -> carService.update(carWithModelCategoryPriceHistoryBrandDTO));
+        Exception.class, () -> carService.update(carDTO));
   }
 
   @Test

@@ -1,6 +1,6 @@
 package com.senla.training.security.jwt;
 
-import com.senla.training.dto.role.RoleDTO;
+import com.senla.training.dto.RoleDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -73,7 +73,7 @@ public class JwtTokenProvider {
   }
 
   public Authentication getAuthentication(String token) {
-    UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+    UserDetails userDetails = this.userDetailsService.loadUserByUsername(this.getUsername(token));
     return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
   }
 
@@ -88,8 +88,7 @@ public class JwtTokenProvider {
   private List<String> getRoleNames(Set<RoleDTO> userRoles) {
     List<String> result = new ArrayList<>();
 
-    userRoles.forEach(
-        role -> result.add(role.getName()));
+    userRoles.forEach(role -> result.add(role.getName()));
 
     return result;
   }

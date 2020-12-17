@@ -1,35 +1,28 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.statusHistory.StatusHistoryDTO;
-import com.senla.training.dto.statusHistory.StatusHistoryWithRentDTO;
+import com.senla.training.dto.StatusHistoryDTO;
 import java.util.List;
 import java.util.Map;
 
 public interface IStatusHistoryService extends IGenericService<StatusHistoryDTO> {
-  StatusHistoryWithRentDTO findByIdStatusHistoryWithRentDTO(int id);
+  StatusHistoryDTO findByIdStatusHistoryWithRentDTO(int id);
 
-  List<StatusHistoryWithRentDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
+  List<StatusHistoryDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap);
 
-  StatusHistoryWithRentDTO findOneByCriteriaStatusHistoryWithRentDTO(
+  StatusHistoryDTO findOneByCriteriaStatusHistoryWithRentDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<StatusHistoryWithRentDTO> findAllByCriteriaStatusHistoryWithRentDTO(
+  List<StatusHistoryDTO> findAllByCriteriaStatusHistoryWithRentDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<StatusHistoryWithRentDTO> findByNotNullStatusHistoryWithRentDTO(List<String> fields);
+  List<StatusHistoryDTO> findByNotNullStatusHistoryWithRentDTO(List<String> fields);
 
-  List<StatusHistoryWithRentDTO> findByNullStatusHistoryWithRentDTO(List<String> fields);
+  List<StatusHistoryDTO> findByNullStatusHistoryWithRentDTO(List<String> fields);
 
-  List<StatusHistoryWithRentDTO> findLessThanStatusHistoryWithRentDTO(
-      Map<String, Number> fieldNumberMap);
-
-  List<StatusHistoryWithRentDTO> findGreaterThanStatusHistoryWithRentDTO(
-      Map<String, Number> fieldNumberMap);
-
-  List<StatusHistoryWithRentDTO> findAndSortStatusHistoryWithRentDTO(
+  List<StatusHistoryDTO> findAndSortStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<StatusHistoryWithRentDTO> findContainStatusHistoryWithRentDTO(
+  List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
       Map<String, String> fieldStringMap);
 }

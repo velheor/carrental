@@ -1,10 +1,7 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.EStatusUser;
-import org.springframework.lang.NonNull;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -26,14 +23,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-  @NamedEntityGraph(name = "user"),
-  @NamedEntityGraph(
-      name = "userWithRoles",
-      attributeNodes = {@NamedAttributeNode(value = "roles")})
+    @NamedEntityGraph(
+        name = "userWithRoles",
+        attributeNodes = {@NamedAttributeNode(value = "roles")}),
+    @NamedEntityGraph(
+        name = "userWithRents",
+        attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
@@ -65,14 +65,14 @@ public class User implements Serializable {
       name = "users_roles",
       joinColumns = @JoinColumn(name = "users_id"),
       inverseJoinColumns = @JoinColumn(name = "roles_id"))
-  @JsonManagedReference
   private Set<Role> roles;
 
   @OneToMany(mappedBy = "user")
-  @JsonBackReference
+  @JsonManagedReference
   private Set<Rent> rents;
 
-  public User() {}
+  public User() {
+  }
 
   public User(
       Integer id,
@@ -143,8 +143,12 @@ public class User implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof User)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof User)) {
+      return false;
+    }
     User user = (User) o;
     return getId().equals(user.getId())
         && getFirstName().equals(user.getFirstName())

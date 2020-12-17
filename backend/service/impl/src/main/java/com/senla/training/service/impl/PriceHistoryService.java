@@ -1,17 +1,15 @@
 package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.IPriceHistoryDAO;
-import com.senla.training.dto.pricehistory.PriceHistoryDTO;
-import com.senla.training.dto.pricehistory.PriceHistoryWithCarModelBrandDTO;
+import com.senla.training.dto.PriceHistoryDTO;
 import com.senla.training.models.PriceHistory;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.IPriceHistoryService;
 import java.util.List;
 import java.util.Map;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -27,85 +25,69 @@ public class PriceHistoryService implements IPriceHistoryService {
   }
 
   @Override
-  public PriceHistoryWithCarModelBrandDTO findByIdPriceHistoryWithCarModelBrandDTO(int id) {
+  public PriceHistoryDTO findByIdPriceHistoryWithCarModelBrandDTO(int id) {
     return objectMapperUtils.map(
         priceHistoryDAO.findByIdPriceHistoryWithCarModelBrand(id),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO>
+  public List<PriceHistoryDTO>
       findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
           Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public PriceHistoryWithCarModelBrandDTO findOneByCriteriaPriceHistoryWithCarModelBrandDTO(
+  public PriceHistoryDTO findOneByCriteriaPriceHistoryWithCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
         priceHistoryDAO.findOneByCriteriaPriceHistoryWithCarModelBrand(fieldCriteriaMap),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findAllByCriteriaPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findAllByCriteriaPriceHistoryWithCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAllByCriteriaPriceHistoryWithCarModelBrand(fieldCriteriaMap),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(
       List<String> fields) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findByNotNullPriceHistoryWithCarModelBrand(fields),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findByNullPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findByNullPriceHistoryWithCarModelBrandDTO(
       List<String> fields) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findByNullPriceHistoryWithCarModelBrand(fields),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findLessThanPriceHistoryWithCarModelBrandDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        priceHistoryDAO.findLessThanPriceHistoryWithCarModelBrand(fieldNumberMap),
-        PriceHistoryWithCarModelBrandDTO.class);
-  }
-
-  @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findGreaterThanPriceHistoryWithCarModelBrandDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        priceHistoryDAO.findGreaterThanPriceHistoryWithCarModelBrand(fieldNumberMap),
-        PriceHistoryWithCarModelBrandDTO.class);
-  }
-
-  @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findAndSortPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findAndSortPriceHistoryWithCarModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryWithCarModelBrandDTO> findContainPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findContainPriceHistoryWithCarModelBrandDTO(
       Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findContainPriceHistoryWithCarModelBrand(fieldStringMap),
-        PriceHistoryWithCarModelBrandDTO.class);
+        PriceHistoryDTO.class);
   }
 
   @Override

@@ -47,18 +47,6 @@ public class ModelDAO extends EntityGraphAbstractDAO<Model> implements IModelDAO
   }
 
   @Override
-  public List<Model> findLessThanModelWithBrand(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("modelWithBrand");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Model> findGreaterThanModelWithBrand(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("modelWithBrand");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Model> findAndSortModelWithBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("modelWithBrand");

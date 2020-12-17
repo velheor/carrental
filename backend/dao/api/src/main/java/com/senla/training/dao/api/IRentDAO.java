@@ -21,11 +21,6 @@ public interface IRentDAO extends ICrudDAO<Rent> {
 
   List<Rent> findByNullRentWithUserStatusHistoryCarModelBrand(List<String> fields);
 
-  List<Rent> findLessThanRentWithUserStatusHistoryCarModelBrand(Map<String, Number> fieldNumberMap);
-
-  List<Rent> findGreaterThanRentWithUserStatusHistoryCarModelBrand(
-      Map<String, Number> fieldNumberMap);
-
   List<Rent> findAndSortRentWithUserStatusHistoryCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

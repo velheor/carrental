@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.rent.RentDTO;
-import com.senla.training.dto.rent.RentWithUserStatusHistoryCarModelBrandDTO;
+import com.senla.training.dto.RentDTO;
 import com.senla.training.service.api.IRentService;
 import java.util.List;
 import java.util.Map;
@@ -28,13 +27,13 @@ public class RentController {
   }
 
   @GetMapping("/{id}")
-  public RentWithUserStatusHistoryCarModelBrandDTO getByIdUserWithRoles(
+  public RentDTO getByIdUserWithRoles(
       @PathVariable("id") Integer id) {
     return rentService.findByIdRentWithUserStatusHistoryCarModelBrandDTO(id);
   }
 
   @GetMapping
-  public List<RentWithUserStatusHistoryCarModelBrandDTO> sortWithDirectionUsersWithRoles(
+  public List<RentDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return rentService.findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
         allParams);
@@ -42,17 +41,17 @@ public class RentController {
 
   @PutMapping
   public RentDTO update(@RequestBody RentDTO rentDTO) {
-    return rentService.update(rentDTO);
+    return rentService.update((RentDTO) rentDTO);
   }
 
   @PostMapping
   public RentDTO save(@RequestBody RentDTO rentDTO) {
-    return rentService.create(rentDTO);
+    return rentService.create((RentDTO) rentDTO);
   }
 
   @DeleteMapping
   public RentDTO delete(@RequestBody RentDTO rentDTO) {
-    rentService.delete(rentDTO);
+    rentService.delete((RentDTO) rentDTO);
     return rentDTO;
   }
 
@@ -63,61 +62,47 @@ public class RentController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public RentWithUserStatusHistoryCarModelBrandDTO findOneByCriteriaUserWithRoles(
+  public RentDTO findOneByCriteriaUserWithRoles(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return rentService.findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
         fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam Map<String, Object> fieldCriterionMap) {
+  public List<RentDTO>
+  findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+      @RequestParam Map<String, Object> fieldCriterionMap) {
     return rentService.findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
         fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam("field") List<String> fields) {
+  public List<RentDTO>
+  findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(
+      @RequestParam("field") List<String> fields) {
     return rentService.findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findByNullRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam("field") List<String> fields) {
+  public List<RentDTO>
+  findByNullRentWithUserStatusHistoryCarModelBrandDTO(
+      @RequestParam("field") List<String> fields) {
     return rentService.findByNullRentWithUserStatusHistoryCarModelBrandDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findLessThanRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam Map<String, Number> fieldNumberMap) {
-    return rentService.findLessThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam Map<String, Number> fieldNumberMap) {
-    return rentService.findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam Map<String, String> fieldDirectionMap,
-          @RequestParam Map<String, Object> fieldCriteriaMap) {
+  public List<RentDTO>
+  findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
+      @RequestParam Map<String, String> fieldDirectionMap,
+      @RequestParam Map<String, Object> fieldCriteriaMap) {
     return rentService.findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
 
   @GetMapping("/findContain")
-  public List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findContainRentWithUserStatusHistoryCarModelBrandDTO(
-          @RequestParam Map<String, String> fieldStringMap) {
+  public List<RentDTO>
+  findContainRentWithUserStatusHistoryCarModelBrandDTO(
+      @RequestParam Map<String, String> fieldStringMap) {
     return rentService.findContainRentWithUserStatusHistoryCarModelBrandDTO(fieldStringMap);
   }
 }

@@ -1,6 +1,6 @@
 dependencies {
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jupiterTestVersion}"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${jupiterTestVersion}"
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
 

@@ -20,11 +20,6 @@ public interface ICarDAO extends IGenericDAO<Car> {
 
   List<Car> findByNullCarWithModelCategoryPriceHistoryBrand(List<String> fields);
 
-  List<Car> findLessThanCarWithModelCategoryPriceHistoryBrand(Map<String, Number> fieldNumberMap);
-
-  List<Car> findGreaterThanCarWithModelCategoryPriceHistoryBrand(
-      Map<String, Number> fieldNumberMap);
-
   List<Car> findAndSortCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

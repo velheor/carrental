@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.category.CategoryDTO;
-import com.senla.training.dto.category.CategoryWithCarsModelBrandDTO;
+import com.senla.training.dto.CategoryDTO;
 import com.senla.training.service.api.ICategoryService;
 import java.util.List;
 import java.util.Map;
@@ -28,13 +27,13 @@ public class CategoryController {
   }
 
   @GetMapping("/{id}")
-  public CategoryWithCarsModelBrandDTO getByIdCategoryWithCarsModelBrand(
+  public CategoryDTO getByIdCategoryWithCarsModelBrand(
       @PathVariable("id") Integer id) {
     return categoryService.findByIdCategoryWithCarsModelBrandDTO(id);
   }
 
   @GetMapping
-  public List<CategoryWithCarsModelBrandDTO> sortWithDirectionUsersWithRoles(
+  public List<CategoryDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return categoryService.findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(allParams);
   }
@@ -62,43 +61,31 @@ public class CategoryController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public CategoryWithCarsModelBrandDTO findOneByCriteriaCategoryWithCarsModelBrand(
+  public CategoryDTO findOneByCriteriaCategoryWithCarsModelBrand(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return categoryService.findOneByCriteriaCategoryWithCarsModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<CategoryWithCarsModelBrandDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return categoryService.findAllByCriteriaCategoryWithCarsModelBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<CategoryWithCarsModelBrandDTO> findByNotNullCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findByNotNullCategoryWithCarsModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return categoryService.findByNotNullCategoryWithCarsModelBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<CategoryWithCarsModelBrandDTO> findByNullCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findByNullCategoryWithCarsModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return categoryService.findByNullCategoryWithCarsModelBrandDTO(fields);
   }
 
-  @GetMapping("/finLessThan")
-  public List<CategoryWithCarsModelBrandDTO> findLessThanCategoryWithCarsModelBrandDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return categoryService.findLessThanCategoryWithCarsModelBrandDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<CategoryWithCarsModelBrandDTO> findGreaterThanCategoryWithCarsModelBrandDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return categoryService.findGreaterThanCategoryWithCarsModelBrandDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<CategoryWithCarsModelBrandDTO> findAndSortCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findAndSortCategoryWithCarsModelBrandDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return categoryService.findAndSortCategoryWithCarsModelBrandDTO(
@@ -106,7 +93,7 @@ public class CategoryController {
   }
 
   @GetMapping("/findContain")
-  public List<CategoryWithCarsModelBrandDTO> findContainCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findContainCategoryWithCarsModelBrandDTO(
       @RequestParam Map<String, String> fieldStringMap) {
     return categoryService.findContainCategoryWithCarsModelBrandDTO(fieldStringMap);
   }

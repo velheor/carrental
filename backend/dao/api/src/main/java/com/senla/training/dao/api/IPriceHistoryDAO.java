@@ -20,11 +20,6 @@ public interface IPriceHistoryDAO extends IGenericDAO<PriceHistory> {
 
   List<PriceHistory> findByNullPriceHistoryWithCarModelBrand(List<String> fields);
 
-  List<PriceHistory> findLessThanPriceHistoryWithCarModelBrand(Map<String, Number> fieldNumberMap);
-
-  List<PriceHistory> findGreaterThanPriceHistoryWithCarModelBrand(
-      Map<String, Number> fieldNumberMap);
-
   List<PriceHistory> findAndSortPriceHistoryWithCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

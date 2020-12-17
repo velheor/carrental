@@ -1,5 +1,6 @@
 package com.senla.training.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
@@ -37,12 +38,13 @@ import javax.persistence.TemporalType;
             }),
         @NamedSubgraph(
             name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
+            attributeNodes = {@NamedAttributeNode(value = "brand")}),
       })
 })
 @Entity
 @Table(name = "rents")
 public class Rent implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
@@ -73,12 +75,12 @@ public class Rent implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "users_id", referencedColumnName = "id", nullable = false)
-  @JsonManagedReference
+  @JsonBackReference
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
-  @JsonManagedReference
+  @JsonBackReference
   private Car car;
 
   @OneToMany(mappedBy = "rent")
@@ -137,8 +139,12 @@ public class Rent implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Rent rent = (Rent) o;
     return id.equals(rent.id)
         && Double.compare(rent.totalPrice, totalPrice) == 0

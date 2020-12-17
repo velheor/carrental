@@ -1,42 +1,35 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.rent.RentDTO;
-import com.senla.training.dto.rent.RentWithUserStatusHistoryCarModelBrandDTO;
+import com.senla.training.dto.RentDTO;
 import java.util.List;
 import java.util.Map;
 
 public interface IRentService extends IGenericService<RentDTO> {
-  RentWithUserStatusHistoryCarModelBrandDTO findByIdRentWithUserStatusHistoryCarModelBrandDTO(
+  RentDTO findByIdRentWithUserStatusHistoryCarModelBrandDTO(
       int id);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
           Map<String, String> fieldDirectionMap);
 
-  RentWithUserStatusHistoryCarModelBrandDTO
+  RentDTO
       findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
           Map<String, Object> fieldCriteriaMap);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
           Map<String, Object> fieldCriteriaMap);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findByNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findLessThanRentWithUserStatusHistoryCarModelBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
-      findGreaterThanRentWithUserStatusHistoryCarModelBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
           Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<RentWithUserStatusHistoryCarModelBrandDTO>
+  List<RentDTO>
       findContainRentWithUserStatusHistoryCarModelBrandDTO(Map<String, String> fieldStringMap);
 }

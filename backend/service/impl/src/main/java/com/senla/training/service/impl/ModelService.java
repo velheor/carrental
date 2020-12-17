@@ -1,17 +1,15 @@
 package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.IModelDAO;
-import com.senla.training.dto.model.ModelDTO;
-import com.senla.training.dto.model.ModelWithBrandDTO;
+import com.senla.training.dto.ModelDTO;
 import com.senla.training.models.Model;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.IModelService;
 import java.util.List;
 import java.util.Map;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -27,71 +25,58 @@ public class ModelService implements IModelService {
   }
 
   @Override
-  public ModelWithBrandDTO findByIdModelWithBrandDTO(int id) {
-    return objectMapperUtils.map(modelDAO.findByIdModelWithBrand(id), ModelWithBrandDTO.class);
+  public ModelDTO findByIdModelWithBrandDTO(int id) {
+    return objectMapperUtils.map(modelDAO.findByIdModelWithBrand(id), ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findAllAndSortWithDirectionModelWithBrandDTO(
+  public List<ModelDTO> findAllAndSortWithDirectionModelWithBrandDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         modelDAO.findAllAndSortWithDirectionModelWithBrand(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        ModelWithBrandDTO.class);
+        ModelDTO.class);
   }
 
   @Override
-  public ModelWithBrandDTO findOneByCriteriaModelWithBrandDTO(
+  public ModelDTO findOneByCriteriaModelWithBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
-        modelDAO.findOneByCriteriaModelWithBrand(fieldCriteriaMap), ModelWithBrandDTO.class);
+        modelDAO.findOneByCriteriaModelWithBrand(fieldCriteriaMap), ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findAllByCriteriaModelWithBrandDTO(
+  public List<ModelDTO> findAllByCriteriaModelWithBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
-        modelDAO.findAllByCriteriaModelWithBrand(fieldCriteriaMap), ModelWithBrandDTO.class);
+        modelDAO.findAllByCriteriaModelWithBrand(fieldCriteriaMap), ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findByNotNullModelWithBrandDTO(List<String> fields) {
+  public List<ModelDTO> findByNotNullModelWithBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        modelDAO.findByNotNullModelWithBrand(fields), ModelWithBrandDTO.class);
+        modelDAO.findByNotNullModelWithBrand(fields), ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findByNullModelWithBrandDTO(List<String> fields) {
+  public List<ModelDTO> findByNullModelWithBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        modelDAO.findByNullModelWithBrand(fields), ModelWithBrandDTO.class);
+        modelDAO.findByNullModelWithBrand(fields), ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findLessThanModelWithBrandDTO(Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        modelDAO.findLessThanModelWithBrand(fieldNumberMap), ModelWithBrandDTO.class);
-  }
-
-  @Override
-  public List<ModelWithBrandDTO> findGreaterThanModelWithBrandDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        modelDAO.findGreaterThanModelWithBrand(fieldNumberMap), ModelWithBrandDTO.class);
-  }
-
-  @Override
-  public List<ModelWithBrandDTO> findAndSortModelWithBrandDTO(
+  public List<ModelDTO> findAndSortModelWithBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         modelDAO.findAndSortModelWithBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        ModelWithBrandDTO.class);
+        ModelDTO.class);
   }
 
   @Override
-  public List<ModelWithBrandDTO> findContainModelWithBrandDTO(Map<String, String> fieldStringMap) {
+  public List<ModelDTO> findContainModelWithBrandDTO(Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
-        modelDAO.findContainModelWithBrand(fieldStringMap), ModelWithBrandDTO.class);
+        modelDAO.findContainModelWithBrand(fieldStringMap), ModelDTO.class);
   }
 
   @Override

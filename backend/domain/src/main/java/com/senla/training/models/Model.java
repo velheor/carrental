@@ -14,15 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraph(
-    name = "modelWithBrand",
-    attributeNodes = {@NamedAttributeNode(value = "brand")})
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "modelWithBrand",
+      attributeNodes = {@NamedAttributeNode(value = "brand")}),
+  @NamedEntityGraph(
+      name = "modelWithCars",
+      attributeNodes = {@NamedAttributeNode(value = "cars")}),
+})
 @Entity
 @Table(name = "models")
 public class Model implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
@@ -36,12 +43,12 @@ public class Model implements Serializable {
   private String manufacturerCountry;
 
   @OneToMany(mappedBy = "model")
-  @JsonBackReference
+  @JsonManagedReference
   private List<Car> cars;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "brands_id", referencedColumnName = "id", nullable = false)
-  @JsonManagedReference
+  @JsonBackReference
   private Brand brand;
 
   public Model() {}
@@ -72,8 +79,12 @@ public class Model implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Model model = (Model) o;
     return id.equals(model.id)
         && Objects.equals(name, model.name)

@@ -16,16 +16,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@NamedEntityGraph(
-    name = "statusHistoryWithRent",
-    attributeNodes = {@NamedAttributeNode("rent")})
+@NamedEntityGraphs({
+  @NamedEntityGraph(
+      name = "statusHistoryWithRent",
+      attributeNodes = {@NamedAttributeNode(value = "rent")})
+})
 @Entity
 @Table(name = "status_history")
 public class StatusHistory implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false, insertable = false, updatable = false)
   private Integer id;
@@ -73,8 +77,12 @@ public class StatusHistory implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     StatusHistory that = (StatusHistory) o;
     return id.equals(that.id)
         && Objects.equals(name, that.name)

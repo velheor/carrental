@@ -1,30 +1,25 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.model.ModelDTO;
-import com.senla.training.dto.model.ModelWithBrandDTO;
+import com.senla.training.dto.ModelDTO;
 import java.util.List;
 import java.util.Map;
 
 public interface IModelService extends IGenericService<ModelDTO> {
-  ModelWithBrandDTO findByIdModelWithBrandDTO(int id);
+  ModelDTO findByIdModelWithBrandDTO(int id);
 
-  List<ModelWithBrandDTO> findAllAndSortWithDirectionModelWithBrandDTO(
+  List<ModelDTO> findAllAndSortWithDirectionModelWithBrandDTO(
       Map<String, String> fieldDirectionMap);
 
-  ModelWithBrandDTO findOneByCriteriaModelWithBrandDTO(Map<String, Object> fieldCriteriaMap);
+  ModelDTO findOneByCriteriaModelWithBrandDTO(Map<String, Object> fieldCriteriaMap);
 
-  List<ModelWithBrandDTO> findAllByCriteriaModelWithBrandDTO(Map<String, Object> fieldCriteriaMap);
+  List<ModelDTO> findAllByCriteriaModelWithBrandDTO(Map<String, Object> fieldCriteriaMap);
 
-  List<ModelWithBrandDTO> findByNotNullModelWithBrandDTO(List<String> fields);
+  List<ModelDTO> findByNotNullModelWithBrandDTO(List<String> fields);
 
-  List<ModelWithBrandDTO> findByNullModelWithBrandDTO(List<String> fields);
+  List<ModelDTO> findByNullModelWithBrandDTO(List<String> fields);
 
-  List<ModelWithBrandDTO> findLessThanModelWithBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<ModelWithBrandDTO> findGreaterThanModelWithBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<ModelWithBrandDTO> findAndSortModelWithBrandDTO(
+  List<ModelDTO> findAndSortModelWithBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<ModelWithBrandDTO> findContainModelWithBrandDTO(Map<String, String> fieldStringMap);
+  List<ModelDTO> findContainModelWithBrandDTO(Map<String, String> fieldStringMap);
 }

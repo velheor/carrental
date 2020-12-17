@@ -47,18 +47,6 @@ public class RoleDAO extends EntityGraphAbstractDAO<Role> implements IRoleDAO {
   }
 
   @Override
-  public List<Role> findLessThanRoleWithUsers(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("roleWithUsers");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Role> findGreaterThanRoleWithUsers(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("roleWithUsers");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Role> findAndSortRoleWithUsers(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("roleWithUsers");

@@ -19,10 +19,6 @@ public interface ICategoryDAO extends IGenericDAO<Category> {
 
   List<Category> findByNullCategoryWithCarsModelBrand(List<String> fields);
 
-  List<Category> findLessThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap);
-
-  List<Category> findGreaterThanCategoryWithCarsModelBrand(Map<String, Number> fieldNumberMap);
-
   List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

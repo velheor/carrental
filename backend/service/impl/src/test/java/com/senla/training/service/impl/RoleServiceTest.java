@@ -7,7 +7,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IRoleDAO;
-import com.senla.training.dto.role.RoleWithUsersDTO;
+import com.senla.training.dto.RoleDTO;
 import com.senla.training.models.Role;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
@@ -26,46 +26,44 @@ class RoleServiceTest {
   @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final Role role;
-  private final RoleWithUsersDTO roleWithUsersDTO;
+  private final RoleDTO roleDTO;
 
   private final List<Role> roles;
-  private final List<RoleWithUsersDTO> roleWithUsersDTOList;
+  private final List<RoleDTO> roleDTOList;
 
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, Number> fieldNumberMap;
   private final Map<String, String> fieldContainMap;
 
   public RoleServiceTest() {
     MockitoAnnotations.initMocks(this);
 
     role = new Role();
-    roleWithUsersDTO = new RoleWithUsersDTO();
+    roleDTO = new RoleDTO();
 
     roles = new ArrayList<>();
-    roleWithUsersDTOList = new ArrayList<>();
+    roleDTOList = new ArrayList<>();
 
     roles.add(role);
     roles.add(new Role());
 
-    roleWithUsersDTOList.add(roleWithUsersDTO);
-    roleWithUsersDTOList.add(new RoleWithUsersDTO());
+    roleDTOList.add(roleDTO);
+    roleDTOList.add(new RoleDTO());
 
     fieldDirectionStringMap = new HashMap<>();
     fieldCriterionMap = new HashMap<>();
     fieldDirectionMap = new HashMap<>();
     fields = new ArrayList<>();
-    fieldNumberMap = new HashMap<>();
     fieldContainMap = new HashMap<>();
   }
 
   @Test
   void findByIdRoleWithUsersDTO() {
     given(roleDAO.findByIdRoleWithUsers(1)).willReturn(role);
-    given(objectMapperUtils.map(role, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTO);
-    assertEquals(roleWithUsersDTO, roleService.findByIdRoleWithUsersDTO(1));
+    given(objectMapperUtils.map(role, RoleDTO.class)).willReturn(roleDTO);
+    assertEquals(roleDTO, roleService.findByIdRoleWithUsersDTO(1));
     given(roleDAO.findByIdRoleWithUsers(1)).willReturn(null);
     assertNull(roleService.findByIdRoleWithUsersDTO(1));
     given(roleDAO.findByIdRoleWithUsers(1)).willThrow(Exception.class);
@@ -75,14 +73,14 @@ class RoleServiceTest {
   @Test
   void findAllAndSortWithDirectionRoleWithUsersDTO() {
     given(roleDAO.findAllAndSortWithDirectionRoleWithUsers(fieldDirectionMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
     assertEquals(
-        roleWithUsersDTOList,
+        roleDTOList,
         roleService.findAllAndSortWithDirectionRoleWithUsersDTO(fieldDirectionStringMap));
 
     given(roleDAO.findAllAndSortWithDirectionRoleWithUsers(fieldDirectionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
         roleService.findAllAndSortWithDirectionRoleWithUsersDTO(fieldDirectionStringMap));
@@ -97,12 +95,12 @@ class RoleServiceTest {
   @Test
   void findOneByCriteriaRoleWithUsersDTO() {
     given(roleDAO.findOneByCriteriaRoleWithUsers(fieldCriterionMap)).willReturn(role);
-    given(objectMapperUtils.map(role, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTO);
+    given(objectMapperUtils.map(role, RoleDTO.class)).willReturn(roleDTO);
     assertEquals(
-        roleWithUsersDTO, roleService.findOneByCriteriaRoleWithUsersDTO(fieldCriterionMap));
+        roleDTO, roleService.findOneByCriteriaRoleWithUsersDTO(fieldCriterionMap));
 
     given(roleDAO.findOneByCriteriaRoleWithUsers(fieldCriterionMap)).willReturn(null);
-    given(objectMapperUtils.map(role, RoleWithUsersDTO.class)).willReturn(null);
+    given(objectMapperUtils.map(role, RoleDTO.class)).willReturn(null);
     assertNull(roleService.findOneByCriteriaRoleWithUsersDTO(fieldCriterionMap));
 
     given(roleDAO.findOneByCriteriaRoleWithUsers(fieldCriterionMap)).willThrow(Exception.class);
@@ -113,12 +111,12 @@ class RoleServiceTest {
   @Test
   void findAllByCriteriaRoleWithUsersDTO() {
     given(roleDAO.findAllByCriteriaRoleWithUsers(fieldCriterionMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
     assertEquals(
-        roleWithUsersDTOList, roleService.findAllByCriteriaRoleWithUsersDTO(fieldCriterionMap));
+        roleDTOList, roleService.findAllByCriteriaRoleWithUsersDTO(fieldCriterionMap));
 
     given(roleDAO.findAllByCriteriaRoleWithUsers(fieldCriterionMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(new ArrayList<>(), roleService.findAllByCriteriaRoleWithUsersDTO(fieldCriterionMap));
 
     given(roleDAO.findAllByCriteriaRoleWithUsers(fieldCriterionMap)).willThrow(Exception.class);
@@ -129,11 +127,11 @@ class RoleServiceTest {
   @Test
   void findByNotNullRoleWithUsersDTO() {
     given(roleDAO.findByNotNullRoleWithUsers(fields)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
-    assertEquals(roleWithUsersDTOList, roleService.findByNotNullRoleWithUsersDTO(fields));
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
+    assertEquals(roleDTOList, roleService.findByNotNullRoleWithUsersDTO(fields));
 
     given(roleDAO.findByNotNullRoleWithUsers(fields)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(new ArrayList<>(), roleService.findByNotNullRoleWithUsersDTO(fields));
 
     given(roleDAO.findByNotNullRoleWithUsers(fields)).willThrow(Exception.class);
@@ -143,11 +141,11 @@ class RoleServiceTest {
   @Test
   void findByNullRoleWithUsersDTO() {
     given(roleDAO.findByNullRoleWithUsers(fields)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
-    assertEquals(roleWithUsersDTOList, roleService.findByNullRoleWithUsersDTO(fields));
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
+    assertEquals(roleDTOList, roleService.findByNullRoleWithUsersDTO(fields));
 
     given(roleDAO.findByNullRoleWithUsers(fields)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(new ArrayList<>(), roleService.findByNullRoleWithUsersDTO(fields));
 
     given(roleDAO.findByNullRoleWithUsers(fields)).willThrow(Exception.class);
@@ -155,42 +153,13 @@ class RoleServiceTest {
   }
 
   @Test
-  void findLessThanRoleWithUsersDTO() {
-    given(roleDAO.findLessThanRoleWithUsers(fieldNumberMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
-    assertEquals(roleWithUsersDTOList, roleService.findLessThanRoleWithUsersDTO(fieldNumberMap));
-
-    given(roleDAO.findLessThanRoleWithUsers(fieldNumberMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
-    deepEquals(new ArrayList<>(), roleService.findLessThanRoleWithUsersDTO(fieldNumberMap));
-
-    given(roleDAO.findLessThanRoleWithUsers(fieldNumberMap)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> roleService.findLessThanRoleWithUsersDTO(fieldNumberMap));
-  }
-
-  @Test
-  void findGreaterThanRoleWithUsersDTO() {
-    given(roleDAO.findGreaterThanRoleWithUsers(fieldNumberMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
-    assertEquals(roleWithUsersDTOList, roleService.findGreaterThanRoleWithUsersDTO(fieldNumberMap));
-
-    given(roleDAO.findGreaterThanRoleWithUsers(fieldNumberMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
-    deepEquals(new ArrayList<>(), roleService.findGreaterThanRoleWithUsersDTO(fieldNumberMap));
-
-    given(roleDAO.findGreaterThanRoleWithUsers(fieldNumberMap)).willThrow(Exception.class);
-    assertThrows(
-        Exception.class, () -> roleService.findGreaterThanRoleWithUsersDTO(fieldNumberMap));
-  }
-
-  @Test
   void findContainRoleWithUsersDTO() {
     given(roleDAO.findContainRoleWithUsers(fieldContainMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
-    assertEquals(roleWithUsersDTOList, roleService.findContainRoleWithUsersDTO(fieldContainMap));
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
+    assertEquals(roleDTOList, roleService.findContainRoleWithUsersDTO(fieldContainMap));
 
     given(roleDAO.findContainRoleWithUsers(fieldContainMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(new ArrayList<>(), roleService.findContainRoleWithUsersDTO(fieldContainMap));
 
     given(roleDAO.findContainRoleWithUsers(fieldContainMap)).willThrow(Exception.class);
@@ -200,14 +169,14 @@ class RoleServiceTest {
   @Test
   void findAndSortRoleWithUsersDTO() {
     given(roleDAO.findAndSortRoleWithUsers(fieldDirectionMap, fieldCriterionMap)).willReturn(roles);
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(roleWithUsersDTOList);
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(roleDTOList);
     assertEquals(
-        roleWithUsersDTOList,
+        roleDTOList,
         roleService.findAndSortRoleWithUsersDTO(fieldDirectionStringMap, fieldCriterionMap));
 
     given(roleDAO.findAndSortRoleWithUsers(fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(roles, RoleWithUsersDTO.class)).willReturn(new ArrayList<>());
+    given(objectMapperUtils.mapAll(roles, RoleDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
         roleService.findAndSortRoleWithUsersDTO(fieldDirectionStringMap, fieldCriterionMap));
@@ -222,37 +191,37 @@ class RoleServiceTest {
   @Test
   void create() {
     given(roleDAO.create(role)).willReturn(role);
-    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
-    assertEquals(roleWithUsersDTO, roleService.create(roleWithUsersDTO));
+    given(objectMapperUtils.map(roleDTO, Role.class)).willReturn(role);
+    assertEquals(roleDTO, roleService.create(roleDTO));
 
     given(roleDAO.create(role)).willReturn(null);
-    assertNull(roleService.create(roleWithUsersDTO));
+    assertNull(roleService.create(roleDTO));
 
     given(roleDAO.create(role)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> roleService.create(roleWithUsersDTO));
+    assertThrows(Exception.class, () -> roleService.create(roleDTO));
   }
 
   @Test
   void update() {
     given(roleDAO.update(role)).willReturn(role);
-    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
-    assertEquals(roleWithUsersDTO, roleService.update(roleWithUsersDTO));
+    given(objectMapperUtils.map(roleDTO, Role.class)).willReturn(role);
+    assertEquals(roleDTO, roleService.update(roleDTO));
 
     given(roleDAO.update(role)).willReturn(null);
-    assertNull(roleService.update(roleWithUsersDTO));
+    assertNull(roleService.update(roleDTO));
 
     given(roleDAO.update(role)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> roleService.update(roleWithUsersDTO));
+    assertThrows(Exception.class, () -> roleService.update(roleDTO));
   }
 
   @Test
   void delete() {
-    given(objectMapperUtils.map(roleWithUsersDTO, Role.class)).willReturn(role);
-    roleService.delete(roleWithUsersDTO);
+    given(objectMapperUtils.map(roleDTO, Role.class)).willReturn(role);
+    roleService.delete(roleDTO);
     verify(roleDAO, atLeastOnce()).delete(role);
 
     given(roleDAO.update(role)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> roleService.update(roleWithUsersDTO));
+    assertThrows(Exception.class, () -> roleService.update(roleDTO));
   }
 
   @Test

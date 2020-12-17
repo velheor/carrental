@@ -18,10 +18,6 @@ public interface IBrandDAO extends IGenericDAO<Brand> {
 
   List<Brand> findByNullBrandWithModels(List<String> fields);
 
-  List<Brand> findLessThanBrandWithModels(Map<String, Number> fieldNumberMap);
-
-  List<Brand> findGreaterThanBrandWithModels(Map<String, Number> fieldNumberMap);
-
   List<Brand> findAndSortBrandWithModels(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

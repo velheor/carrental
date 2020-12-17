@@ -1,8 +1,16 @@
 dependencies {
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jupiterTestVersion}"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${jupiterTestVersion}"
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+
     compile group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
+    testCompile group: 'org.springframework', name: 'spring-test', version: "${springVersion}"
+
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
+
     implementation project(':backend:service:serviceApi'), project(':backend:service:serviceImpl'),
-            project(':backend:dto')
+            project(':backend:dto'), project(':spring:security')
 }

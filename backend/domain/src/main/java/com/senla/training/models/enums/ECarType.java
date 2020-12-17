@@ -6,5 +6,6 @@ public enum ECarType {
   PICKUP,
   CABRIOLET,
   MINIVAN,
-  COUPE
+  COUPE,
+  WAGON
 }

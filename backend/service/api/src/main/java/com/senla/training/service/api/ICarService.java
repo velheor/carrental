@@ -1,41 +1,34 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.car.CarDTO;
-import com.senla.training.dto.car.CarWithModelCategoryPriceHistoryBrandDTO;
+import com.senla.training.dto.CarDTO;
 import java.util.List;
 import java.util.Map;
 
-public interface ICarService extends IGenericService<CarDTO> {
-  CarWithModelCategoryPriceHistoryBrandDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(int id);
+public interface ICarService extends IGenericService<com.senla.training.dto.CarDTO> {
+  CarDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(int id);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
+  List<CarDTO>
       findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
           Map<String, String> fieldDirectionMap);
 
-  CarWithModelCategoryPriceHistoryBrandDTO
+  CarDTO
       findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
           Map<String, Object> fieldCriteriaMap);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
+  List<CarDTO>
       findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
           Map<String, Object> fieldCriteriaMap);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
+  List<CarDTO>
       findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(
+  List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(
       List<String> fields);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
-      findLessThanCarWithModelCategoryPriceHistoryBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
-      findGreaterThanCarWithModelCategoryPriceHistoryBrandDTO(Map<String, Number> fieldNumberMap);
-
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
+  List<CarDTO>
       findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
           Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<CarWithModelCategoryPriceHistoryBrandDTO>
+  List<CarDTO>
       findContainCarWithModelCategoryPriceHistoryBrandDTO(Map<String, String> fieldStringMap);
 }

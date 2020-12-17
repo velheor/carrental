@@ -50,19 +50,6 @@ public class StatusHistoryDAO extends EntityGraphAbstractDAO<StatusHistory>
   }
 
   @Override
-  public List<StatusHistory> findLessThanStatusHistoryWithRent(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("statusHistoryWithRent");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<StatusHistory> findGreaterThanStatusHistoryWithRent(
-      Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("statusHistoryWithRent");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<StatusHistory> findAndSortStatusHistoryWithRent(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("statusHistoryWithRent");

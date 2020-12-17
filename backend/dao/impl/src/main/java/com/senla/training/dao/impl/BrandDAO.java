@@ -47,18 +47,6 @@ public class BrandDAO extends EntityGraphAbstractDAO<Brand> implements IBrandDAO
   }
 
   @Override
-  public List<Brand> findLessThanBrandWithModels(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("brandWithModels");
-    return super.findLessThan(fieldNumberMap);
-  }
-
-  @Override
-  public List<Brand> findGreaterThanBrandWithModels(Map<String, Number> fieldNumberMap) {
-    super.setEntityGraphName("brandWithModels");
-    return super.findGreaterThan(fieldNumberMap);
-  }
-
-  @Override
   public List<Brand> findAndSortBrandWithModels(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     super.setEntityGraphName("brandWithModels");

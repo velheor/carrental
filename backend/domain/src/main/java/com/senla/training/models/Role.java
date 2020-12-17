@@ -1,6 +1,7 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.senla.training.models.enums.ERole;
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +27,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -36,7 +38,6 @@ public class Role implements Serializable {
   private ERole name;
 
   @ManyToMany(mappedBy = "roles")
-  @JsonBackReference
   private List<User> users;
 
   public Role() {}

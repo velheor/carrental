@@ -1,6 +1,5 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.ECarType;
 import com.senla.training.models.enums.EFuelType;
@@ -36,11 +35,15 @@ import javax.persistence.Table;
         @NamedSubgraph(
             name = "modelWithBrand",
             attributeNodes = {@NamedAttributeNode(value = "brand")})
-      })
+      }),
+  @NamedEntityGraph(
+      name = "carWithRents",
+      attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
@@ -78,7 +81,7 @@ public class Car implements Serializable {
   private List<PriceHistory> priceHistoryList;
 
   @OneToMany(mappedBy = "car")
-  @JsonBackReference
+  @JsonManagedReference
   private List<Rent> rents;
 
   public Car() {}
@@ -125,8 +128,12 @@ public class Car implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Car car = (Car) o;
     return id.equals(car.id)
         && transmission == car.transmission

@@ -1,34 +1,35 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.user.UserDTO;
-import com.senla.training.dto.user.UserWithRolesDTO;
-import com.senla.training.dto.user.UserWithTokenDTO;
-
+import com.senla.training.dto.UserDTO;
+import com.senla.training.dto.UserWithTokenDTO;
 import java.util.List;
 import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface IUserService extends IGenericService<UserDTO> {
-  UserWithRolesDTO findByIdUserWithRolesDTO(int id);
+  UserDTO findByIdUserWithRolesDTO(int id);
 
-  List<UserWithRolesDTO> findAllAndSortWithDirectionUserWithRolesDTO(
+  List<UserDTO> findAllAndSortWithDirectionUserWithRolesDTO(
       Map<String, String> fieldDirectionMap);
 
-  UserWithRolesDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
+  UserDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
 
-  List<UserWithRolesDTO> findAllByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
+  List<UserDTO> findAllByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
 
-  List<UserWithRolesDTO> findByNotNullUserWithRolesDTO(List<String> fields);
+  List<UserDTO> findByNotNullUserWithRolesDTO(List<String> fields);
 
-  List<UserWithRolesDTO> findByNullUserWithRolesDTO(List<String> fields);
+  List<UserDTO> findByNullUserWithRolesDTO(List<String> fields);
 
-  List<UserWithRolesDTO> findLessThanUserWithRolesDTO(Map<String, Number> fieldNumberMap);
-
-  List<UserWithRolesDTO> findGreaterThanUserWithRolesDTO(Map<String, Number> fieldNumberMap);
-
-  List<UserWithRolesDTO> findAndSortUserWithRolesDTO(
+  List<UserDTO> findAndSortUserWithRolesDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<UserWithRolesDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
+  List<UserDTO> findContainUserWithRolesDTO(Map<String, String> fieldStringMap);
 
   UserWithTokenDTO getUserWithTokenDTO(UserWithTokenDTO userWithTokenDTO);
+
+  UserDTO findCurrentUser(UserDetails userDetails);
+
+  UserDTO updateCurrentUser(UserDetails userDetails, UserDTO userDTO);
+
+  UserDTO deleteCurrentUser(UserDetails userDetails);
 }

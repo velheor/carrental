@@ -7,7 +7,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IStatusHistoryDAO;
-import com.senla.training.dto.statusHistory.StatusHistoryWithRentDTO;
+import com.senla.training.dto.StatusHistoryDTO;
 import com.senla.training.models.StatusHistory;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
@@ -27,48 +27,46 @@ class StatusHistoryServiceTest {
   @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final StatusHistory statusHistory;
-  private final StatusHistoryWithRentDTO statusHistoryWithRentDTO;
+  private final StatusHistoryDTO statusHistoryDTO;
 
   private final List<StatusHistory> statusHistoryList;
-  private final List<StatusHistoryWithRentDTO> statusHistoryWithRentDTOList;
+  private final List<StatusHistoryDTO> statusHistoryDTOList;
 
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, Number> fieldNumberMap;
   private final Map<String, String> fieldContainMap;
 
   public StatusHistoryServiceTest() {
     MockitoAnnotations.initMocks(this);
 
     statusHistory = new StatusHistory();
-    statusHistoryWithRentDTO = new StatusHistoryWithRentDTO();
+    statusHistoryDTO = new StatusHistoryDTO();
 
     statusHistoryList = new ArrayList<>();
-    statusHistoryWithRentDTOList = new ArrayList<>();
+    statusHistoryDTOList = new ArrayList<>();
 
     statusHistoryList.add(statusHistory);
     statusHistoryList.add(new StatusHistory());
 
-    statusHistoryWithRentDTOList.add(statusHistoryWithRentDTO);
-    statusHistoryWithRentDTOList.add(new StatusHistoryWithRentDTO());
+    statusHistoryDTOList.add(statusHistoryDTO);
+    statusHistoryDTOList.add(new StatusHistoryDTO());
 
     fieldDirectionStringMap = new HashMap<>();
     fieldCriterionMap = new HashMap<>();
     fieldDirectionMap = new HashMap<>();
     fields = new ArrayList<>();
-    fieldNumberMap = new HashMap<>();
     fieldContainMap = new HashMap<>();
   }
 
   @Test
   void findByIdStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findByIdStatusHistoryWithRent(1)).willReturn(statusHistory);
-    given(objectMapperUtils.map(statusHistory, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTO);
+    given(objectMapperUtils.map(statusHistory, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTO);
     assertEquals(
-        statusHistoryWithRentDTO, statusHistoryService.findByIdStatusHistoryWithRentDTO(1));
+        statusHistoryDTO, statusHistoryService.findByIdStatusHistoryWithRentDTO(1));
     given(statusHistoryDAO.findByIdStatusHistoryWithRent(1)).willReturn(null);
     assertNull(statusHistoryService.findByIdStatusHistoryWithRentDTO(1));
     given(statusHistoryDAO.findByIdStatusHistoryWithRent(1)).willThrow(Exception.class);
@@ -79,16 +77,16 @@ class StatusHistoryServiceTest {
   void findAllAndSortWithDirectionStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findAllAndSortWithDirectionStatusHistoryWithRent(fieldDirectionMap))
         .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findAllAndSortWithDirectionStatusHistoryWithRentDTO(
             fieldDirectionStringMap));
 
     given(statusHistoryDAO.findAllAndSortWithDirectionStatusHistoryWithRent(fieldDirectionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -108,15 +106,15 @@ class StatusHistoryServiceTest {
   void findOneByCriteriaStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findOneByCriteriaStatusHistoryWithRent(fieldCriterionMap))
         .willReturn(statusHistory);
-    given(objectMapperUtils.map(statusHistory, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTO);
+    given(objectMapperUtils.map(statusHistory, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTO);
     assertEquals(
-        statusHistoryWithRentDTO,
+        statusHistoryDTO,
         statusHistoryService.findOneByCriteriaStatusHistoryWithRentDTO(fieldCriterionMap));
 
     given(statusHistoryDAO.findOneByCriteriaStatusHistoryWithRent(fieldCriterionMap))
         .willReturn(null);
-    given(objectMapperUtils.map(statusHistory, StatusHistoryWithRentDTO.class)).willReturn(null);
+    given(objectMapperUtils.map(statusHistory, StatusHistoryDTO.class)).willReturn(null);
     assertNull(statusHistoryService.findOneByCriteriaStatusHistoryWithRentDTO(fieldCriterionMap));
 
     given(statusHistoryDAO.findOneByCriteriaStatusHistoryWithRent(fieldCriterionMap))
@@ -130,15 +128,15 @@ class StatusHistoryServiceTest {
   void findAllByCriteriaStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findAllByCriteriaStatusHistoryWithRent(fieldCriterionMap))
         .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findAllByCriteriaStatusHistoryWithRentDTO(fieldCriterionMap));
 
     given(statusHistoryDAO.findAllByCriteriaStatusHistoryWithRent(fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -155,15 +153,15 @@ class StatusHistoryServiceTest {
   void findByNotNullStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findByNotNullStatusHistoryWithRent(fields))
         .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findByNotNullStatusHistoryWithRentDTO(fields));
 
     given(statusHistoryDAO.findByNotNullStatusHistoryWithRent(fields))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(), statusHistoryService.findByNotNullStatusHistoryWithRentDTO(fields));
@@ -176,14 +174,14 @@ class StatusHistoryServiceTest {
   @Test
   void findByNullStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findByNullStatusHistoryWithRent(fields)).willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findByNullStatusHistoryWithRentDTO(fields));
 
     given(statusHistoryDAO.findByNullStatusHistoryWithRent(fields)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(new ArrayList<>(), statusHistoryService.findByNullStatusHistoryWithRentDTO(fields));
 
@@ -193,68 +191,18 @@ class StatusHistoryServiceTest {
   }
 
   @Test
-  void findLessThanStatusHistoryWithRentDTO() {
-    given(statusHistoryDAO.findLessThanStatusHistoryWithRent(fieldNumberMap))
-        .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
-    assertEquals(
-        statusHistoryWithRentDTOList,
-        statusHistoryService.findLessThanStatusHistoryWithRentDTO(fieldNumberMap));
-
-    given(statusHistoryDAO.findLessThanStatusHistoryWithRent(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        statusHistoryService.findLessThanStatusHistoryWithRentDTO(fieldNumberMap));
-
-    given(statusHistoryDAO.findLessThanStatusHistoryWithRent(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> statusHistoryService.findLessThanStatusHistoryWithRentDTO(fieldNumberMap));
-  }
-
-  @Test
-  void findGreaterThanStatusHistoryWithRentDTO() {
-    given(statusHistoryDAO.findGreaterThanStatusHistoryWithRent(fieldNumberMap))
-        .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
-    assertEquals(
-        statusHistoryWithRentDTOList,
-        statusHistoryService.findGreaterThanStatusHistoryWithRentDTO(fieldNumberMap));
-
-    given(statusHistoryDAO.findGreaterThanStatusHistoryWithRent(fieldNumberMap))
-        .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(new ArrayList<>());
-    deepEquals(
-        new ArrayList<>(),
-        statusHistoryService.findGreaterThanStatusHistoryWithRentDTO(fieldNumberMap));
-
-    given(statusHistoryDAO.findGreaterThanStatusHistoryWithRent(fieldNumberMap))
-        .willThrow(Exception.class);
-    assertThrows(
-        Exception.class,
-        () -> statusHistoryService.findGreaterThanStatusHistoryWithRentDTO(fieldNumberMap));
-  }
-
-  @Test
   void findContainStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findContainStatusHistoryWithRent(fieldContainMap))
         .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findContainStatusHistoryWithRentDTO(fieldContainMap));
 
     given(statusHistoryDAO.findContainStatusHistoryWithRent(fieldContainMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -271,16 +219,16 @@ class StatusHistoryServiceTest {
   void findAndSortStatusHistoryWithRentDTO() {
     given(statusHistoryDAO.findAndSortStatusHistoryWithRent(fieldDirectionMap, fieldCriterionMap))
         .willReturn(statusHistoryList);
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
-        .willReturn(statusHistoryWithRentDTOList);
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
+        .willReturn(statusHistoryDTOList);
     assertEquals(
-        statusHistoryWithRentDTOList,
+        statusHistoryDTOList,
         statusHistoryService.findAndSortStatusHistoryWithRentDTO(
             fieldDirectionStringMap, fieldCriterionMap));
 
     given(statusHistoryDAO.findAndSortStatusHistoryWithRent(fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryWithRentDTO.class))
+    given(objectMapperUtils.mapAll(statusHistoryList, StatusHistoryDTO.class))
         .willReturn(new ArrayList<>());
     deepEquals(
         new ArrayList<>(),
@@ -299,40 +247,40 @@ class StatusHistoryServiceTest {
   @Test
   void create() {
     given(statusHistoryDAO.create(statusHistory)).willReturn(statusHistory);
-    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+    given(objectMapperUtils.map(statusHistoryDTO, StatusHistory.class))
         .willReturn(statusHistory);
-    assertEquals(statusHistoryWithRentDTO, statusHistoryService.create(statusHistoryWithRentDTO));
+    assertEquals(statusHistoryDTO, statusHistoryService.create(statusHistoryDTO));
 
     given(statusHistoryDAO.create(statusHistory)).willReturn(null);
-    assertNull(statusHistoryService.create(statusHistoryWithRentDTO));
+    assertNull(statusHistoryService.create(statusHistoryDTO));
 
     given(statusHistoryDAO.create(statusHistory)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> statusHistoryService.create(statusHistoryWithRentDTO));
+    assertThrows(Exception.class, () -> statusHistoryService.create(statusHistoryDTO));
   }
 
   @Test
   void update() {
     given(statusHistoryDAO.update(statusHistory)).willReturn(statusHistory);
-    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+    given(objectMapperUtils.map(statusHistoryDTO, StatusHistory.class))
         .willReturn(statusHistory);
-    assertEquals(statusHistoryWithRentDTO, statusHistoryService.update(statusHistoryWithRentDTO));
+    assertEquals(statusHistoryDTO, statusHistoryService.update(statusHistoryDTO));
 
     given(statusHistoryDAO.update(statusHistory)).willReturn(null);
-    assertNull(statusHistoryService.update(statusHistoryWithRentDTO));
+    assertNull(statusHistoryService.update(statusHistoryDTO));
 
     given(statusHistoryDAO.update(statusHistory)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryWithRentDTO));
+    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryDTO));
   }
 
   @Test
   void delete() {
-    given(objectMapperUtils.map(statusHistoryWithRentDTO, StatusHistory.class))
+    given(objectMapperUtils.map(statusHistoryDTO, StatusHistory.class))
         .willReturn(statusHistory);
-    statusHistoryService.delete(statusHistoryWithRentDTO);
+    statusHistoryService.delete(statusHistoryDTO);
     verify(statusHistoryDAO, atLeastOnce()).delete(statusHistory);
 
     given(statusHistoryDAO.update(statusHistory)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryWithRentDTO));
+    assertThrows(Exception.class, () -> statusHistoryService.update(statusHistoryDTO));
   }
 
   @Test

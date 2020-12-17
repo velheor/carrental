@@ -1,7 +1,6 @@
 package com.senla.training.controllers;
 
-import com.senla.training.dto.brand.BrandDTO;
-import com.senla.training.dto.brand.BrandWithModelsDTO;
+import com.senla.training.dto.BrandDTO;
 import com.senla.training.service.api.IBrandService;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +27,12 @@ public class BrandController {
   }
 
   @GetMapping("/{id}")
-  public BrandWithModelsDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
+  public BrandDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return brandService.findByIdBrandWithModelsDTO(id);
   }
 
   @GetMapping
-  public List<BrandWithModelsDTO> sortWithDirectionUsersWithRoles(
+  public List<BrandDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
     return brandService.findAllAndSortWithDirectionBrandWithModelsDTO(allParams);
   }
@@ -61,50 +60,32 @@ public class BrandController {
   }
 
   @GetMapping("/findOneByCriteria")
-  public BrandWithModelsDTO findOneByCriteriaUserWithRoles(
+  public BrandDTO findOneByCriteriaUserWithRoles(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<BrandWithModelsDTO> findAllByCriteriaBrandWithModelsDTO(
+  public List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<BrandWithModelsDTO> findByNotNullBrandWithModelsDTO(
+  public List<BrandDTO> findByNotNullBrandWithModelsDTO(
       @RequestParam("field") List<String> fields) {
     return brandService.findByNotNullBrandWithModelsDTO(fields);
   }
 
-  @GetMapping("/findByNull")
-  public List<BrandWithModelsDTO> findByNullBrandWithModelsDTO(
-      @RequestParam("field") List<String> fields) {
-    return brandService.findByNullBrandWithModelsDTO(fields);
-  }
-
-  @GetMapping("/finLessThan")
-  public List<BrandWithModelsDTO> findLessThanBrandWithModelsDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return brandService.findLessThanBrandWithModelsDTO(fieldNumberMap);
-  }
-
-  @GetMapping("/findGreaterThan")
-  public List<BrandWithModelsDTO> findGreaterThanBrandWithModelsDTO(
-      @RequestParam Map<String, Number> fieldNumberMap) {
-    return brandService.findGreaterThanBrandWithModelsDTO(fieldNumberMap);
-  }
-
   @GetMapping("/findAndSort")
-  public List<BrandWithModelsDTO> findAndSortBrandWithModelsDTO(
+  public List<BrandDTO> findAndSortBrandWithModelsDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return brandService.findAndSortBrandWithModelsDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 
   @GetMapping("/findContain")
-  public List<BrandWithModelsDTO> findContainBrandWithModelsDTO(
+  public List<BrandDTO> findContainBrandWithModelsDTO(
       @RequestParam Map<String, String> fieldStringMap) {
     return brandService.findContainBrandWithModelsDTO(fieldStringMap);
   }

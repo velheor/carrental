@@ -1,21 +1,20 @@
 package com.senla.training.service.impl;
 
 import com.senla.training.dao.api.IStatusHistoryDAO;
-import com.senla.training.dto.statusHistory.StatusHistoryDTO;
-import com.senla.training.dto.statusHistory.StatusHistoryWithRentDTO;
+import com.senla.training.dto.StatusHistoryDTO;
 import com.senla.training.models.StatusHistory;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import com.senla.training.service.api.IStatusHistoryService;
 import java.util.List;
 import java.util.Map;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
 public class StatusHistoryService implements IStatusHistoryService {
+
   private final IStatusHistoryDAO statusHistoryDAO;
 
   private final ObjectMapperUtils objectMapperUtils;
@@ -27,80 +26,64 @@ public class StatusHistoryService implements IStatusHistoryService {
   }
 
   @Override
-  public StatusHistoryWithRentDTO findByIdStatusHistoryWithRentDTO(int id) {
+  public StatusHistoryDTO findByIdStatusHistoryWithRentDTO(int id) {
     return objectMapperUtils.map(
-        statusHistoryDAO.findByIdStatusHistoryWithRent(id), StatusHistoryWithRentDTO.class);
+        statusHistoryDAO.findByIdStatusHistoryWithRent(id), StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         statusHistoryDAO.findAllAndSortWithDirectionStatusHistoryWithRent(
             DirectionAdapter.converterMap(fieldDirectionMap)),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override
-  public StatusHistoryWithRentDTO findOneByCriteriaStatusHistoryWithRentDTO(
+  public StatusHistoryDTO findOneByCriteriaStatusHistoryWithRentDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
         statusHistoryDAO.findOneByCriteriaStatusHistoryWithRent(fieldCriteriaMap),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findAllByCriteriaStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findAllByCriteriaStatusHistoryWithRentDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         statusHistoryDAO.findAllByCriteriaStatusHistoryWithRent(fieldCriteriaMap),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findByNotNullStatusHistoryWithRentDTO(List<String> fields) {
+  public List<StatusHistoryDTO> findByNotNullStatusHistoryWithRentDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
         statusHistoryDAO.findByNotNullStatusHistoryWithRent(fields),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findByNullStatusHistoryWithRentDTO(List<String> fields) {
+  public List<StatusHistoryDTO> findByNullStatusHistoryWithRentDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        statusHistoryDAO.findByNullStatusHistoryWithRent(fields), StatusHistoryWithRentDTO.class);
+        statusHistoryDAO.findByNullStatusHistoryWithRent(fields), StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findLessThanStatusHistoryWithRentDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        statusHistoryDAO.findLessThanStatusHistoryWithRent(fieldNumberMap),
-        StatusHistoryWithRentDTO.class);
-  }
-
-  @Override
-  public List<StatusHistoryWithRentDTO> findGreaterThanStatusHistoryWithRentDTO(
-      Map<String, Number> fieldNumberMap) {
-    return objectMapperUtils.mapAll(
-        statusHistoryDAO.findGreaterThanStatusHistoryWithRent(fieldNumberMap),
-        StatusHistoryWithRentDTO.class);
-  }
-
-  @Override
-  public List<StatusHistoryWithRentDTO> findAndSortStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findAndSortStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         statusHistoryDAO.findAndSortStatusHistoryWithRent(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override
-  public List<StatusHistoryWithRentDTO> findContainStatusHistoryWithRentDTO(
+  public List<StatusHistoryDTO> findContainStatusHistoryWithRentDTO(
       Map<String, String> fieldStringMap) {
     return objectMapperUtils.mapAll(
         statusHistoryDAO.findContainStatusHistoryWithRent(fieldStringMap),
-        StatusHistoryWithRentDTO.class);
+        StatusHistoryDTO.class);
   }
 
   @Override

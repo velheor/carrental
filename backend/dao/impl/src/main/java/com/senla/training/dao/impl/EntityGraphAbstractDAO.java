@@ -2,8 +2,6 @@ package com.senla.training.dao.impl;
 
 import com.senla.training.dao.api.IGenericDAO;
 import com.senla.training.models.enums.Direction;
-import org.springframework.stereotype.Repository;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
-@Repository
 public abstract class EntityGraphAbstractDAO<T extends Serializable>
     extends CriteriaApiAbstractDAO<T> implements IGenericDAO<T> {
 
@@ -76,16 +73,6 @@ public abstract class EntityGraphAbstractDAO<T extends Serializable>
   @Override
   public List<T> findByNull(List<String> fields) {
     return createTypedQuery(super.findByNullCriteriaQuery(fields)).getResultList();
-  }
-
-  @Override
-  public List<T> findLessThan(Map<String, Number> fieldNumberMap) {
-    return createTypedQuery(super.findLessThanCriteriaQuery(fieldNumberMap)).getResultList();
-  }
-
-  @Override
-  public List<T> findGreaterThan(Map<String, Number> fieldNumberMap) {
-    return createTypedQuery(super.findGreaterThanCriteriaQuery(fieldNumberMap)).getResultList();
   }
 
   @Override

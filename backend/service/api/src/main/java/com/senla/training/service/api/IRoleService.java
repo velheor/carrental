@@ -1,30 +1,25 @@
 package com.senla.training.service.api;
 
-import com.senla.training.dto.role.RoleDTO;
-import com.senla.training.dto.role.RoleWithUsersDTO;
+import com.senla.training.dto.RoleDTO;
 import java.util.List;
 import java.util.Map;
 
 public interface IRoleService extends IGenericService<RoleDTO> {
-  RoleWithUsersDTO findByIdRoleWithUsersDTO(int id);
+  RoleDTO findByIdRoleWithUsersDTO(int id);
 
-  List<RoleWithUsersDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
+  List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap);
 
-  RoleWithUsersDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap);
+  RoleDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap);
 
-  List<RoleWithUsersDTO> findAllByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap);
+  List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap);
 
-  List<RoleWithUsersDTO> findByNotNullRoleWithUsersDTO(List<String> fields);
+  List<RoleDTO> findByNotNullRoleWithUsersDTO(List<String> fields);
 
-  List<RoleWithUsersDTO> findByNullRoleWithUsersDTO(List<String> fields);
+  List<RoleDTO> findByNullRoleWithUsersDTO(List<String> fields);
 
-  List<RoleWithUsersDTO> findLessThanRoleWithUsersDTO(Map<String, Number> fieldNumberMap);
-
-  List<RoleWithUsersDTO> findGreaterThanRoleWithUsersDTO(Map<String, Number> fieldNumberMap);
-
-  List<RoleWithUsersDTO> findAndSortRoleWithUsersDTO(
+  List<RoleDTO> findAndSortRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
-  List<RoleWithUsersDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap);
+  List<RoleDTO> findContainRoleWithUsersDTO(Map<String, String> fieldStringMap);
 }

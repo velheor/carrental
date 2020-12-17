@@ -1,6 +1,6 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.enums.EBrand;
 import java.io.Serializable;
 import java.util.List;
@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "brands")
 public class Brand implements Serializable {
+
   @Id
   @Column(name = "id", nullable = false)
   private Integer id;
@@ -33,10 +34,11 @@ public class Brand implements Serializable {
   private EBrand name;
 
   @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-  @JsonBackReference
+  @JsonManagedReference
   private List<Model> models;
 
-  public Brand() {}
+  public Brand() {
+  }
 
   public Integer getId() {
     return id;
@@ -56,8 +58,12 @@ public class Brand implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Brand brand = (Brand) o;
     return id.equals(brand.id) && Objects.equals(name, brand.name);
   }

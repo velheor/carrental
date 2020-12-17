@@ -1,5 +1,5 @@
 package com.senla.training.constants;
 
 public class EmailValidator {
-    public static String emailRegex = "^(.+)@(.+)$";
+  public static String emailRegex = "^(.+)@(.+)$";
 }

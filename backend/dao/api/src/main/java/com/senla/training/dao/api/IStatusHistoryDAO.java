@@ -19,10 +19,6 @@ public interface IStatusHistoryDAO extends IGenericDAO<StatusHistory> {
 
   List<StatusHistory> findByNullStatusHistoryWithRent(List<String> fields);
 
-  List<StatusHistory> findLessThanStatusHistoryWithRent(Map<String, Number> fieldNumberMap);
-
-  List<StatusHistory> findGreaterThanStatusHistoryWithRent(Map<String, Number> fieldNumberMap);
-
   List<StatusHistory> findAndSortStatusHistoryWithRent(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

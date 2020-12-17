@@ -17,10 +17,6 @@ public interface IGenericDAO<T> extends ICrudDAO<T> {
 
   List<T> findByNull(List<String> fields);
 
-  List<T> findLessThan(Map<String, Number> fieldNumberMap);
-
-  List<T> findGreaterThan(Map<String, Number> fieldNumberMap);
-
   List<T> findAndSort(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

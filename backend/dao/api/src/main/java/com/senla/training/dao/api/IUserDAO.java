@@ -18,14 +18,12 @@ public interface IUserDAO extends ICrudDAO<User> {
 
   List<User> findByNullUserWithRoles(List<String> fields);
 
-  List<User> findLessThanUserWithRoles(Map<String, Number> fieldNumberMap);
-
-  List<User> findGreaterThanUserWithRoles(Map<String, Number> fieldNumberMap);
-
   List<User> findAndSortUserWithRoles(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 
   List<User> findContainUserWithRoles(Map<String, String> fieldStringMap);
 
   User findByEmailUserWithRoles(String email);
+
+  User findByEmailUserWithRents(String email);
 }

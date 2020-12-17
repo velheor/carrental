@@ -18,10 +18,6 @@ public interface IModelDAO extends IGenericDAO<Model> {
 
   List<Model> findByNullModelWithBrand(List<String> fields);
 
-  List<Model> findLessThanModelWithBrand(Map<String, Number> fieldNumberMap);
-
-  List<Model> findGreaterThanModelWithBrand(Map<String, Number> fieldNumberMap);
-
   List<Model> findAndSortModelWithBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 

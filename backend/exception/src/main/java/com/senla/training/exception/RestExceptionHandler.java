@@ -44,6 +44,6 @@ public class RestExceptionHandler {
   @ResponseStatus(value = HttpStatus.FORBIDDEN)
   public ErrorMessage authenticationException(AuthenticationException ex, WebRequest request) {
     return new ErrorMessage(
-            HttpStatus.FORBIDDEN.value(), new Date(), ex.getMessage(), request.getDescription(false));
+        HttpStatus.FORBIDDEN.value(), new Date(), ex.getMessage(), request.getDescription(false));
   }
 }
