@@ -27,8 +27,7 @@ public class RentController {
   }
 
   @GetMapping("/{id}")
-  public RentDTO getByIdUserWithRoles(
-      @PathVariable("id") Integer id) {
+  public RentDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return rentService.findByIdRentWithUserStatusHistoryCarModelBrandDTO(id);
   }
 
@@ -69,34 +68,29 @@ public class RentController {
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<RentDTO>
-  findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
       @RequestParam Map<String, Object> fieldCriterionMap) {
     return rentService.findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
         fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<RentDTO>
-  findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return rentService.findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<RentDTO>
-  findByNullRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findByNullRentWithUserStatusHistoryCarModelBrandDTO(
       @RequestParam("field") List<String> fields) {
     return rentService.findByNullRentWithUserStatusHistoryCarModelBrandDTO(fields);
   }
 
   @GetMapping("/findAndSort")
-  public List<RentDTO>
-  findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
       @RequestParam Map<String, String> fieldDirectionMap,
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return rentService.findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

@@ -21,9 +21,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "statusHistoryWithRent",
-        attributeNodes = {@NamedAttributeNode(value = "rent")})
+  @NamedEntityGraph(
+      name = "statusHistoryWithRent",
+      attributeNodes = {@NamedAttributeNode(value = "rent")})
 })
 @Entity
 @Table(name = "status_history")
@@ -47,8 +47,7 @@ public class StatusHistory implements Serializable {
   @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
   private Rent rent;
 
-  public StatusHistory() {
-  }
+  public StatusHistory() {}
 
   public Integer getId() {
     return id;

@@ -40,29 +40,25 @@ public class BrandService implements IBrandService {
   }
 
   @Override
-  public BrandDTO findOneByCriteriaBrandWithModelsDTO(
-      Map<String, Object> fieldCriteriaMap) {
+  public BrandDTO findOneByCriteriaBrandWithModelsDTO(Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
         brandDAO.findOneByCriteriaBrandWithModels(fieldCriteriaMap), BrandDTO.class);
   }
 
   @Override
-  public List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(
-      Map<String, Object> fieldCriteriaMap) {
+  public List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         brandDAO.findAllByCriteriaBrandWithModels(fieldCriteriaMap), BrandDTO.class);
   }
 
   @Override
   public List<BrandDTO> findByNotNullBrandWithModelsDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        brandDAO.findByNotNullBrandWithModels(fields), BrandDTO.class);
+    return objectMapperUtils.mapAll(brandDAO.findByNotNullBrandWithModels(fields), BrandDTO.class);
   }
 
   @Override
   public List<BrandDTO> findByNullBrandWithModelsDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        brandDAO.findByNullBrandWithModels(fields), BrandDTO.class);
+    return objectMapperUtils.mapAll(brandDAO.findByNullBrandWithModels(fields), BrandDTO.class);
   }
 
   @Override
@@ -76,14 +72,12 @@ public class BrandService implements IBrandService {
 
   @Override
   public BrandDTO create(BrandDTO entityDTO) {
-    brandDAO.create(objectMapperUtils.map(entityDTO, Brand.class));
-    return entityDTO;
+    return objectMapperUtils.map(brandDAO.create(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
   }
 
   @Override
   public BrandDTO update(BrandDTO entityDTO) {
-    brandDAO.update(objectMapperUtils.map(entityDTO, Brand.class));
-    return entityDTO;
+    return objectMapperUtils.map(brandDAO.update(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
   }
 
   @Override

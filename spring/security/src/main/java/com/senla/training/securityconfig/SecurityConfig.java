@@ -16,6 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+  private static final String ADMIN_ENDPOINT = "/**";
+  private static final String USER_ENDPOINT = "/myaccount/**";
+  private static final String ALL_ENDPOINT = "/auth/**";
 
   private final JwtConfigurer jwtConfigurer;
 
@@ -30,11 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .authorizeRequests()
-        .antMatchers("/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated()
+        .authorizeRequests().antMatchers(ALL_ENDPOINT).permitAll()
+        .antMatchers(USER_ENDPOINT).hasAuthority("USER")
+        .antMatchers(ADMIN_ENDPOINT).hasAuthority("ADMIN")
+        .anyRequest().authenticated()
         .and()
         .apply(jwtConfigurer);
   }

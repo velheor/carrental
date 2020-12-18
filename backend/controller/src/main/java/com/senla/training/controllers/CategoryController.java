@@ -27,8 +27,7 @@ public class CategoryController {
   }
 
   @GetMapping("/{id}")
-  public CategoryDTO getByIdCategoryWithCarsModelBrand(
-      @PathVariable("id") Integer id) {
+  public CategoryDTO getByIdCategoryWithCarsModelBrand(@PathVariable("id") Integer id) {
     return categoryService.findByIdCategoryWithCarsModelBrandDTO(id);
   }
 
@@ -91,5 +90,4 @@ public class CategoryController {
     return categoryService.findAndSortCategoryWithCarsModelBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

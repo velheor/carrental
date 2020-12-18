@@ -11,8 +11,7 @@ public class PriceHistoryDTO {
 
   private Date priceDate;
 
-  @JsonBackReference
-  private CarDTO car;
+  @JsonBackReference private CarDTO car;
 
   public Integer getId() {
     return id;

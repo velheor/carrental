@@ -5,77 +5,85 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IUserDAO;
 import com.senla.training.dto.UserDTO;
+import com.senla.training.dto.UserWithTokenDTO;
 import com.senla.training.models.Role;
 import com.senla.training.models.User;
 import com.senla.training.models.enums.Direction;
-import com.senla.training.models.enums.ERole;
-import com.senla.training.models.enums.EStatusUser;
 import com.senla.training.objectmapper.ObjectMapperUtils;
+import com.senla.training.security.jwt.JwtTokenProvider;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 class UserServiceTest {
 
   private final User user;
+
   private final UserDTO userDTO;
 
-  @InjectMocks private UserService userService;
-  @Mock private IUserDAO userDAO;
-  @Mock private ObjectMapperUtils objectMapperUtils;
+  private final UserWithTokenDTO userWithTokenDTO;
+
+  private final UserDetails userDetails;
 
   private final List<User> users;
   private final List<UserDTO> usersDTO;
-
+  private final Set<Role> roles;
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, String> fieldContainMap;
+
+  @InjectMocks private UserService userService;
+  @Mock private IUserDAO userDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
+  @Mock private PasswordEncoder passwordEncoder;
+  @Mock private JwtTokenProvider jwtTokenProvider;
+  @Mock private AuthenticationManager authenticationManager;
 
   UserServiceTest() {
     MockitoAnnotations.initMocks(this);
-    Role role = new Role();
-    role.setName(ERole.ADMIN);
 
-    usersDTO = new ArrayList<>();
-    users = new ArrayList<>();
+    this.userWithTokenDTO = Mockito.spy(UserWithTokenDTO.class);
+    this.userDetails = Mockito.spy(UserDetails.class);
 
-    user =
-        new User(
-            1, "Ivan", "Ivanov", "dj@gmail.com", "137", EStatusUser.ACTIVE, Set.of(role), null);
-    users.add(user);
+    this.users = new ArrayList<>();
+    this.user = Mockito.spy(User.class);
+    User user = Mockito.spy(User.class);
+    this.users.add(user);
+    this.users.add(user);
 
-    users.add(
-        new User(
-            2, "Ivan", "Neivanov", "auf@gmail.com", "111", EStatusUser.ACTIVE, Set.of(role), null));
+    this.usersDTO = new ArrayList<>();
+    this.userDTO = Mockito.spy(UserDTO.class);
+    UserDTO userDTO = Mockito.spy(UserDTO.class);
+    this.usersDTO.add(userDTO);
+    this.usersDTO.add(userDTO);
 
-    RoleDTO roleDTO = new RoleDTO(1, ERole.ADMIN.name());
-    userDTO =
-        new UserDTO(
-            1, "Ivan", "Ivanov", "dj@gmail.com", "137", EStatusUser.ACTIVE, Set.of(roleDTO));
-    usersDTO.add(userDTO);
-    usersDTO.add(
-        new UserDTO(
-            2, "Ivan", "Neivanov", "auf@gmail.com", "111", EStatusUser.ACTIVE, Set.of(roleDTO)));
+    this.roles = new HashSet<>();
+    Role role = Mockito.spy(Role.class);
+    this.roles.add(role);
 
-    fieldDirectionStringMap = new HashMap<>();
-    fieldCriterionMap = new HashMap<>();
-    fieldDirectionMap = new HashMap<>();
-    fields = new ArrayList<>();
-    fieldContainMap = new HashMap<>();
+    this.fieldDirectionStringMap = new HashMap<>();
+    this.fieldCriterionMap = new HashMap<>();
+    this.fieldDirectionMap = new HashMap<>();
+    this.fields = new ArrayList<>();
   }
 
   @Test
@@ -169,20 +177,6 @@ class UserServiceTest {
   }
 
   @Test
-  void findContainUserWithRolesDTO() {
-    given(userDAO.findContainUserWithRoles(fieldContainMap)).willReturn(users);
-    given(objectMapperUtils.mapAll(users, UserDTO.class)).willReturn(usersDTO);
-    deepEquals(usersDTO, userService.findContainUserWithRolesDTO(fieldContainMap));
-
-    given(userDAO.findContainUserWithRoles(fieldContainMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(users, UserDTO.class)).willReturn(new ArrayList<>());
-    deepEquals(new ArrayList<>(), userService.findContainUserWithRolesDTO(fieldContainMap));
-
-    given(userDAO.findContainUserWithRoles(fieldContainMap)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> userService.findContainUserWithRolesDTO(fieldContainMap));
-  }
-
-  @Test
   void findAndSortUserWithRolesDTO() {
 
     given(userDAO.findAndSortUserWithRoles(fieldDirectionMap, fieldCriterionMap)).willReturn(users);
@@ -208,11 +202,14 @@ class UserServiceTest {
   @Test
   void create() {
     given(userDAO.create(user)).willReturn(user);
-    given(userDAO.findByEmailUserWithRoles(user.getEmail())).willReturn(null);
-    given(objectMapperUtils.map(userDTO, User.class)).willReturn(user);
-    deepEquals(user, userService.create(userDTO));
+    given(userDAO.findByEmailUserWithRoles(user.getEmail())).willReturn(user);
+    given(user.getPassword()).willReturn("password");
+    given(passwordEncoder.encode(user.getPassword())).willReturn("encodePassword");
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(userDTO);
+    deepEquals(userDTO, userService.create(userDTO));
 
     given(userDAO.create(user)).willReturn(null);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(null);
     assertNull(userService.create(userDTO));
 
     given(userDAO.create(user)).willThrow(Exception.class);
@@ -224,12 +221,14 @@ class UserServiceTest {
   void update() {
     given(userDAO.update(user)).willReturn(user);
     given(objectMapperUtils.map(userDTO, User.class)).willReturn(user);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(userDTO);
     assertEquals(userDTO, userService.update(userDTO));
 
     given(objectMapperUtils.map(userDTO, User.class)).willReturn(null);
-    given(userDAO.update(null)).willReturn(null);
-    assertNull(userService.update(null));
+    given(userDAO.update(user)).willReturn(null);
+    assertNull(userService.update(userDTO));
 
+    given(objectMapperUtils.map(userDTO, User.class)).willReturn(user);
     given(userDAO.update(user)).willThrow(Exception.class);
     assertThrows(Exception.class, () -> userService.update(userDTO));
   }
@@ -239,9 +238,6 @@ class UserServiceTest {
     given(objectMapperUtils.map(userDTO, User.class)).willReturn(user);
     userService.delete(userDTO);
     verify(userDAO, atLeastOnce()).delete(user);
-
-    given(userDAO.update(user)).willThrow(Exception.class);
-    assertThrows(Exception.class, () -> userService.update(userDTO));
   }
 
   @Test
@@ -256,13 +252,87 @@ class UserServiceTest {
   void checkForExistEmail() {
     String email = "test@gmail.com";
     given(userDAO.findByEmailUserWithRoles(email)).willReturn(user);
-    userService.checkForExistEmail(email);
-    verify(userDAO, atLeastOnce()).findByEmailUserWithRoles(email);
+    assertTrue(userService.checkForExistEmail(email));
 
     given(userDAO.findByEmailUserWithRoles(email)).willReturn(null);
     assertFalse(userService.checkForExistEmail(email));
 
     given(userDAO.findByEmailUserWithRoles(email)).willThrow(Exception.class);
     assertThrows(Exception.class, () -> userService.checkForExistEmail(email));
+  }
+
+  @Test
+  public void getUserWithTokenDTO() {
+    String email = "test@gmail.com";
+    String token = "jwt";
+    given(userWithTokenDTO.getEmail()).willReturn(email);
+    given(userDAO.findByEmailUserWithRoles(email)).willReturn(user);
+    given(user.getEmail()).willReturn(email);
+    given(user.getRoles()).willReturn(roles);
+    given(jwtTokenProvider.createToken(email, roles)).willReturn(token);
+    assertEquals(userWithTokenDTO, userService.getUserWithTokenDTO(userWithTokenDTO));
+
+    userService.getUserWithTokenDTO(userWithTokenDTO);
+    verify(userWithTokenDTO, atLeastOnce()).setToken(token);
+
+    given(userDAO.findByEmailUserWithRoles(email)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.getUserWithTokenDTO(userWithTokenDTO));
+  }
+
+  @Test
+  public void findCurrentUser() {
+    String email = "test@gmail.com";
+    given(userDetails.getUsername()).willReturn(email);
+    given(userDAO.findByEmailUserWithRents(email)).willReturn(user);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(userDTO);
+    assertEquals(userDTO, userService.findCurrentUser(userDetails));
+
+    given(userDetails.getUsername()).willReturn(email);
+    given(userDAO.findByEmailUserWithRents(email)).willReturn(null);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(null);
+    assertNull(userService.findCurrentUser(userDetails));
+
+    given(userDetails.getUsername()).willReturn(email);
+    given(userDAO.findByEmailUserWithRents(email)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.findCurrentUser(userDetails));
+  }
+
+  @Test
+  public void updateCurrentUser() {
+    String email = "test@gmail.com";
+
+    given(userDetails.getUsername()).willReturn(email);
+    given(userDTO.getEmail()).willReturn(email);
+    given(objectMapperUtils.map(userDTO, User.class)).willReturn(user);
+    given(userDAO.update(user)).willReturn(user);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(userDTO);
+    assertEquals(userDTO, userService.updateCurrentUser(userDetails, userDTO));
+
+    given(userDAO.update(user)).willReturn(null);
+    given(objectMapperUtils.map(userDAO.update(user), UserDTO.class)).willReturn(null);
+    assertNull(userService.updateCurrentUser(userDetails, userDTO));
+
+    given(userDAO.update(user)).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.updateCurrentUser(userDetails, userDTO));
+  }
+
+  @Test
+  public void deleteCurrentUser() {
+    given(userDetails.getUsername()).willReturn("user");
+    given(userDAO.findByEmailUserWithRents(userDetails.getUsername())).willReturn(user);
+    userService.deleteCurrentUser(userDetails);
+    verify(userDAO, atLeastOnce()).delete(user);
+    given(objectMapperUtils.map(user, UserDTO.class)).willReturn(userDTO);
+    assertEquals(userDTO, userService.deleteCurrentUser(userDetails));
+
+    given(userDAO.findByEmailUserWithRents(userDetails.getUsername())).willReturn(null);
+    given(
+            objectMapperUtils.map(
+                (userDAO.findByEmailUserWithRents(userDetails.getUsername())), UserDTO.class))
+        .willReturn(null);
+    assertNull(userService.deleteCurrentUser(userDetails));
+
+    given(userDAO.findByEmailUserWithRents(userDetails.getUsername())).willThrow(Exception.class);
+    assertThrows(Exception.class, () -> userService.deleteCurrentUser(userDetails));
   }
 }

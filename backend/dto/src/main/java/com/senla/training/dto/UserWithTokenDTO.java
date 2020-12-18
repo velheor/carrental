@@ -8,8 +8,7 @@ public class UserWithTokenDTO {
 
   private String token;
 
-  public UserWithTokenDTO() {
-  }
+  public UserWithTokenDTO() {}
 
   public String getEmail() {
     return email;

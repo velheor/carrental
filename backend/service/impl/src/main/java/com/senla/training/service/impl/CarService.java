@@ -26,16 +26,13 @@ public class CarService implements ICarService {
   }
 
   @Override
-  public CarDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(
-      int id) {
+  public CarDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(int id) {
     return objectMapperUtils.map(
-        carDAO.findByIdCarWithModelCategoryPriceHistoryBrand(id),
-        CarDTO.class);
+        carDAO.findByIdCarWithModelCategoryPriceHistoryBrand(id), CarDTO.class);
   }
 
   @Override
-  public List<CarDTO>
-  findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
+  public List<CarDTO> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
@@ -44,8 +41,7 @@ public class CarService implements ICarService {
   }
 
   @Override
-  public CarDTO
-  findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
+  public CarDTO findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
         carDAO.findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriteriaMap),
@@ -53,8 +49,7 @@ public class CarService implements ICarService {
   }
 
   @Override
-  public List<CarDTO>
-  findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
+  public List<CarDTO> findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         carDAO.findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriteriaMap),
@@ -62,24 +57,19 @@ public class CarService implements ICarService {
   }
 
   @Override
-  public List<CarDTO>
-  findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
+  public List<CarDTO> findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        carDAO.findByNotNullCarWithModelCategoryPriceHistoryBrand(fields),
-        CarDTO.class);
+        carDAO.findByNotNullCarWithModelCategoryPriceHistoryBrand(fields), CarDTO.class);
   }
 
   @Override
-  public List<CarDTO>
-  findByNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
+  public List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        carDAO.findByNullCarWithModelCategoryPriceHistoryBrand(fields),
-        CarDTO.class);
+        carDAO.findByNullCarWithModelCategoryPriceHistoryBrand(fields), CarDTO.class);
   }
 
   @Override
-  public List<CarDTO>
-  findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
+  public List<CarDTO> findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
@@ -88,15 +78,15 @@ public class CarService implements ICarService {
   }
 
   @Override
-  public com.senla.training.dto.CarDTO create(com.senla.training.dto.CarDTO entityDTO) {
-    carDAO.create(objectMapperUtils.map(entityDTO, Car.class));
-    return entityDTO;
+  public CarDTO create(com.senla.training.dto.CarDTO entityDTO) {
+    return objectMapperUtils
+        .map(carDAO.create(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
   }
 
   @Override
-  public com.senla.training.dto.CarDTO update(com.senla.training.dto.CarDTO entityDTO) {
-    carDAO.update(objectMapperUtils.map(entityDTO, Car.class));
-    return entityDTO;
+  public CarDTO update(com.senla.training.dto.CarDTO entityDTO) {
+    return objectMapperUtils
+        .map(carDAO.update(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
   }
 
   @Override

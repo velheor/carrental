@@ -72,14 +72,12 @@ public class UserController {
   }
 
   @GetMapping("/findByNotNull")
-  public List<UserDTO> findByNotNullUserWithRolesDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<UserDTO> findByNotNullUserWithRolesDTO(@RequestParam("field") List<String> fields) {
     return userService.findByNotNullUserWithRolesDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<UserDTO> findByNullUserWithRolesDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<UserDTO> findByNullUserWithRolesDTO(@RequestParam("field") List<String> fields) {
     return userService.findByNullUserWithRolesDTO(fields);
   }
 

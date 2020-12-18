@@ -1,15 +1,14 @@
 dependencies {
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    compile group: 'org.springframework', name: 'spring-web', version:"${springVersion}"
+
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jupiterTestVersion}"
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${jupiterTestVersion}"
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 
-    compile group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
-    testCompile group: 'org.springframework', name: 'spring-test', version: "${springVersion}"
-
-    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-
-
-    compile group: 'org.springframework.security', name: 'spring-security-core', version: "${springSecurityVersion}"
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
+    testCompile group: 'io.rest-assured', name: 'spring-mock-mvc', version: '4.3.1'
 
     implementation project(':backend:service:serviceApi'), project(':backend:service:serviceImpl'),
             project(':backend:dto'), project(':spring:security')

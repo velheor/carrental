@@ -38,16 +38,13 @@ public class RentService implements IRentService {
   }
 
   @Override
-  public RentDTO
-  findByIdRentWithUserStatusHistoryCarModelBrandDTO(int id) {
+  public RentDTO findByIdRentWithUserStatusHistoryCarModelBrandDTO(int id) {
     return objectMapperUtils.map(
-        rentDAO.findByIdRentWithUserStatusHistoryCarModelBrand(id),
-        RentDTO.class);
+        rentDAO.findByIdRentWithUserStatusHistoryCarModelBrand(id), RentDTO.class);
   }
 
   @Override
-  public List<RentDTO>
-  findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         rentDAO.findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrand(
@@ -56,8 +53,7 @@ public class RentService implements IRentService {
   }
 
   @Override
-  public RentDTO
-  findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+  public RentDTO findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.map(
         rentDAO.findOneByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriteriaMap),
@@ -65,8 +61,7 @@ public class RentService implements IRentService {
   }
 
   @Override
-  public List<RentDTO>
-  findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         rentDAO.findAllByCriteriaRentWithUserStatusHistoryCarModelBrand(fieldCriteriaMap),
@@ -74,24 +69,19 @@ public class RentService implements IRentService {
   }
 
   @Override
-  public List<RentDTO>
-  findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields) {
+  public List<RentDTO> findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        rentDAO.findByNotNullRentWithUserStatusHistoryCarModelBrand(fields),
-        RentDTO.class);
+        rentDAO.findByNotNullRentWithUserStatusHistoryCarModelBrand(fields), RentDTO.class);
   }
 
   @Override
-  public List<RentDTO>
-  findByNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields) {
+  public List<RentDTO> findByNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        rentDAO.findByNullRentWithUserStatusHistoryCarModelBrand(fields),
-        RentDTO.class);
+        rentDAO.findByNullRentWithUserStatusHistoryCarModelBrand(fields), RentDTO.class);
   }
 
   @Override
-  public List<RentDTO>
-  findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
+  public List<RentDTO> findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         rentDAO.findAndSortRentWithUserStatusHistoryCarModelBrand(
@@ -100,17 +90,13 @@ public class RentService implements IRentService {
   }
 
   @Override
-  public RentDTO create(
-      RentDTO entityDTO) {
-    rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class));
-    return entityDTO;
+  public RentDTO create(RentDTO entityDTO) {
+    return objectMapperUtils.map(rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
   }
 
   @Override
-  public RentDTO update(
-      RentDTO entityDTO) {
-    rentDAO.update(objectMapperUtils.map(entityDTO, Rent.class));
-    return entityDTO;
+  public RentDTO update(RentDTO entityDTO) {
+    return objectMapperUtils.map(rentDAO.update(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
   }
 
   @Override

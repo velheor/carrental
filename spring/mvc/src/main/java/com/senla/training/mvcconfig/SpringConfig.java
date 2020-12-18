@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 @ComponentScan("com.senla.training")
 public class SpringConfig implements WebMvcConfigurer {
+
   private final ApplicationContext applicationContext;
 
   @Autowired

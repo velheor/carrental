@@ -1,6 +1,6 @@
 package com.senla.training.security.jwt;
 
-import com.senla.training.dto.RoleDTO;
+import com.senla.training.models.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -48,9 +48,9 @@ public class JwtTokenProvider {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
   }
 
-  public String createToken(String username, Set<RoleDTO> roles) {
+  public String createToken(String username, Set<Role> roles) {
     Claims claims = Jwts.claims().setSubject(username);
-    claims.put("role", getRoleNames(roles));
+    claims.put("roles", getRoleNames(roles));
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInMilliseconds * 1000);
 
@@ -85,10 +85,10 @@ public class JwtTokenProvider {
     return request.getHeader(authorizationHeader);
   }
 
-  private List<String> getRoleNames(Set<RoleDTO> userRoles) {
+  private List<String> getRoleNames(Set<Role> userRoles) {
     List<String> result = new ArrayList<>();
 
-    userRoles.forEach(role -> result.add(role.getName()));
+    userRoles.forEach(role -> result.add(role.getName().toString()));
 
     return result;
   }

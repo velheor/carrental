@@ -1,48 +1,86 @@
 package com.senla.training.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 class UserControllerTest {
 
-  private MockMvc mockMvc;
+  private static final Logger logger = Logger.getLogger(UserControllerTest.class);
+
+  private final MockMvc mockMvc;
+
+  UserControllerTest() {
+    mockMvc = MockMvcBuilders.standaloneSetup(UserController.class).build();
+  }
 
   @Test
-  void sortWithDirectionUsersWithRoles() {}
+  void getByIdUserWithRoles() {
+
+  }
 
   @Test
-  void update() {}
+  void sortWithDirectionUsersWithRoles() {
+    try {
+      mockMvc.perform(get("/users"))
+          .andExpect(status().isOk());
+    } catch (Exception e) {
+      logger.error("Test /users");
+    }
+
+    try {
+      mockMvc.perform(get("/users?id=DESC"))
+          .andExpect(status().isOk());
+    } catch (Exception e) {
+      logger.error("Test /users?id=DESC");
+    }
+
+    try {
+      mockMvc.perform(get("/users?id=abcd"))
+          .andExpect(status().isBadRequest());
+    } catch (Exception e) {
+      logger.error("Test /users?id=abcd");
+    }
+
+  }
 
   @Test
-  void save() {}
+  void update() {
+  }
 
   @Test
-  void delete() {}
+  void save() {
+  }
 
   @Test
-  void deleteById() {}
+  void delete() {
+  }
 
   @Test
-  void findOneByCriteriaUserWithRoles() {}
+  void deleteById() {
+  }
 
   @Test
-  void findAllByCriteriaUserWithRolesDTO() {}
+  void findOneByCriteriaUserWithRoles() {
+  }
 
   @Test
-  void findByNotNullUserWithRolesDTO() {}
+  void findAllByCriteriaUserWithRolesDTO() {
+  }
 
   @Test
-  void findByNullUserWithRolesDTO() {}
+  void findByNotNullUserWithRolesDTO() {
+  }
 
   @Test
-  void findLessThanUserWithRolesDTO() {}
+  void findByNullUserWithRolesDTO() {
+  }
 
   @Test
-  void findGreaterThanUserWithRolesDTO() {}
-
-  @Test
-  void findAndSortUserWithRolesDTO() {}
-
-  @Test
-  void findContainUserWithRolesDTO() {}
+  void findAndSortUserWithRolesDTO() {
+  }
 }

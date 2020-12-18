@@ -90,5 +90,4 @@ public class PriceHistoryController {
     return priceHistoryService.findAndSortPriceHistoryWithCarModelBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

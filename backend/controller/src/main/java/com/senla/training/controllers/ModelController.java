@@ -72,14 +72,12 @@ public class ModelController {
   }
 
   @GetMapping("/findByNotNull")
-  public List<ModelDTO> findByNotNullModelWithBrandDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<ModelDTO> findByNotNullModelWithBrandDTO(@RequestParam("field") List<String> fields) {
     return modelService.findByNotNullModelWithBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<ModelDTO> findByNullModelWithBrandDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<ModelDTO> findByNullModelWithBrandDTO(@RequestParam("field") List<String> fields) {
     return modelService.findByNullModelWithBrandDTO(fields);
   }
 
@@ -89,5 +87,4 @@ public class ModelController {
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return modelService.findAndSortModelWithBrandDTO(fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

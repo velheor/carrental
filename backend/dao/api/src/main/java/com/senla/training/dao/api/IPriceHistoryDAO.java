@@ -23,5 +23,4 @@ public interface IPriceHistoryDAO extends IGenericDAO<PriceHistory> {
 
   List<PriceHistory> findAndSortPriceHistoryWithCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

@@ -11,8 +11,7 @@ public interface IStatusHistoryService extends IGenericService<StatusHistoryDTO>
   List<StatusHistoryDTO> findAllAndSortWithDirectionStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap);
 
-  StatusHistoryDTO findOneByCriteriaStatusHistoryWithRentDTO(
-      Map<String, Object> fieldCriteriaMap);
+  StatusHistoryDTO findOneByCriteriaStatusHistoryWithRentDTO(Map<String, Object> fieldCriteriaMap);
 
   List<StatusHistoryDTO> findAllByCriteriaStatusHistoryWithRentDTO(
       Map<String, Object> fieldCriteriaMap);
@@ -23,5 +22,4 @@ public interface IStatusHistoryService extends IGenericService<StatusHistoryDTO>
 
   List<StatusHistoryDTO> findAndSortStatusHistoryWithRentDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

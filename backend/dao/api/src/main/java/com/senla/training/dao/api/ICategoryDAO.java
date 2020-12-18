@@ -22,5 +22,4 @@ public interface ICategoryDAO extends IGenericDAO<Category> {
 
   List<Category> findAndSortCategoryWithCarsModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

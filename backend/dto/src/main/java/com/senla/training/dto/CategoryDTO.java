@@ -12,14 +12,11 @@ public class CategoryDTO {
 
   private List<CarDTO> cars;
 
-  @JsonBackReference
-  private CategoryDTO category;
+  @JsonBackReference private CategoryDTO category;
 
-  @JsonManagedReference
-  private List<CategoryDTO> categories;
+  @JsonManagedReference private List<CategoryDTO> categories;
 
-  public CategoryDTO() {
-  }
+  public CategoryDTO() {}
 
   public Integer getId() {
     return id;

@@ -20,5 +20,4 @@ public interface IGenericDAO<T> extends ICrudDAO<T> {
 
   List<T> findAndSort(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

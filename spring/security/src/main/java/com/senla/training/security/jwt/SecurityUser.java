@@ -41,7 +41,7 @@ public class SecurityUser implements UserDetails {
 
   private static List<GrantedAuthority> mapToGrantedAuthorities(Set<Role> userRoles) {
     return userRoles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+        .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
         .collect(Collectors.toList());
   }
 

@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource({"classpath:hibernate.properties"})
 @ComponentScan({"com.senla.training"})
 public class PersistenceConfig {
+
   private Environment env;
 
   @Autowired

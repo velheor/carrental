@@ -17,8 +17,7 @@ public abstract class CriteriaApiAbstractDAO<T> {
 
   private final Class<T> type;
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   CriteriaApiAbstractDAO() {
     this.type =
@@ -48,21 +47,21 @@ public abstract class CriteriaApiAbstractDAO<T> {
     Root<T> c = q.from(getType());
     return q.select(c)
         .where(
-            this.getPredicateFindByCriteria(cb, c, fieldCriteriaMap).toArray(new Predicate[]{}));
+            this.getPredicateFindByCriteria(cb, c, fieldCriteriaMap).toArray(new Predicate[] {}));
   }
 
   protected CriteriaQuery<T> findByNotNullCriteriaQuery(List<String> fields) {
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(getPredicateByNotNull(cb, c, fields).toArray(new Predicate[]{}));
+    return q.select(c).where(getPredicateByNotNull(cb, c, fields).toArray(new Predicate[] {}));
   }
 
   protected CriteriaQuery<T> findByNullCriteriaQuery(List<String> fields) {
     CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
     CriteriaQuery<T> q = cb.createQuery(getType());
     Root<T> c = q.from(getType());
-    return q.select(c).where(this.getPredicateByNull(cb, c, fields).toArray(new Predicate[]{}));
+    return q.select(c).where(this.getPredicateByNull(cb, c, fields).toArray(new Predicate[] {}));
   }
 
   protected CriteriaQuery<T> findAndSortCriteriaQuery(

@@ -10,8 +10,7 @@ public interface IUserService extends IGenericService<UserDTO> {
 
   UserDTO findByIdUserWithRolesDTO(int id);
 
-  List<UserDTO> findAllAndSortWithDirectionUserWithRolesDTO(
-      Map<String, String> fieldDirectionMap);
+  List<UserDTO> findAllAndSortWithDirectionUserWithRolesDTO(Map<String, String> fieldDirectionMap);
 
   UserDTO findOneByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap);
 

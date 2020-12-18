@@ -1,27 +1,19 @@
 package com.senla.training.dto;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.senla.training.models.enums.ERole;
 import java.util.List;
 
 public class RoleDTO {
 
   private Integer id;
 
-  private String name;
+  private ERole name;
 
   @JsonIgnoreProperties("roles")
   private List<UserDTO> users;
 
-  public RoleDTO() {
-  }
-
-  public RoleDTO(Integer id, String name, List<UserDTO> users) {
-    this.id = id;
-    this.name = name;
-    this.users = users;
-  }
+  public RoleDTO() {}
 
   public Integer getId() {
     return id;
@@ -31,11 +23,11 @@ public class RoleDTO {
     this.id = id;
   }
 
-  public String getName() {
+  public ERole getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(ERole name) {
     this.name = name;
   }
 

@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.senla.training.models.enums.EStatusUser;
 import java.util.Set;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = UserDTO.class)
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id",
+    scope = UserDTO.class)
 public class UserDTO {
 
   private Integer id;
@@ -24,11 +27,15 @@ public class UserDTO {
   @JsonIgnoreProperties("users")
   private Set<RoleDTO> roles;
 
-  public UserDTO() {
-  }
+  public UserDTO() {}
 
-  public UserDTO(Integer id, String firstName, String secondName, String email,
-      String password, EStatusUser statusUser,
+  public UserDTO(
+      Integer id,
+      String firstName,
+      String secondName,
+      String email,
+      String password,
+      EStatusUser statusUser,
       Set<RoleDTO> roles) {
     this.id = id;
     this.firstName = firstName;

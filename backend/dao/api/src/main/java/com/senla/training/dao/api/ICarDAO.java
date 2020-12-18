@@ -23,5 +23,4 @@ public interface ICarDAO extends IGenericDAO<Car> {
 
   List<Car> findAndSortCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

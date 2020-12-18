@@ -19,14 +19,11 @@ public class RentDTO {
 
   private Double totalPrice;
 
-  @JsonBackReference
-  private UserDTO user;
+  @JsonBackReference private UserDTO user;
 
-  @JsonBackReference
-  private CarDTO car;
+  @JsonBackReference private CarDTO car;
 
-  @JsonManagedReference
-  private List<StatusHistoryDTO> statusHistoryList;
+  @JsonManagedReference private List<StatusHistoryDTO> statusHistoryList;
 
   public Integer getId() {
     return id;
@@ -96,8 +93,7 @@ public class RentDTO {
     return statusHistoryList;
   }
 
-  public void setStatusHistoryList(
-      List<StatusHistoryDTO> statusHistoryList) {
+  public void setStatusHistoryList(List<StatusHistoryDTO> statusHistoryList) {
     this.statusHistoryList = statusHistoryList;
   }
 }

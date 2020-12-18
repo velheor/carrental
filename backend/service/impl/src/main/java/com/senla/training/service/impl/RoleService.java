@@ -46,22 +46,19 @@ public class RoleService implements IRoleService {
   }
 
   @Override
-  public List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(
-      Map<String, Object> fieldCriteriaMap) {
+  public List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap) {
     return objectMapperUtils.mapAll(
         roleDAO.findAllByCriteriaRoleWithUsers(fieldCriteriaMap), RoleDTO.class);
   }
 
   @Override
   public List<RoleDTO> findByNotNullRoleWithUsersDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findByNotNullRoleWithUsers(fields), RoleDTO.class);
+    return objectMapperUtils.mapAll(roleDAO.findByNotNullRoleWithUsers(fields), RoleDTO.class);
   }
 
   @Override
   public List<RoleDTO> findByNullRoleWithUsersDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findByNullRoleWithUsers(fields), RoleDTO.class);
+    return objectMapperUtils.mapAll(roleDAO.findByNullRoleWithUsers(fields), RoleDTO.class);
   }
 
   @Override
@@ -75,14 +72,13 @@ public class RoleService implements IRoleService {
 
   @Override
   public RoleDTO create(RoleDTO entityDTO) {
-    roleDAO.create(objectMapperUtils.map(entityDTO, Role.class));
-    return entityDTO;
+    return objectMapperUtils.map(roleDAO.create(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
   }
 
   @Override
   public RoleDTO update(RoleDTO entityDTO) {
-    roleDAO.update(objectMapperUtils.map(entityDTO, Role.class));
-    return entityDTO;
+    return objectMapperUtils.map(roleDAO.update(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+
   }
 
   @Override

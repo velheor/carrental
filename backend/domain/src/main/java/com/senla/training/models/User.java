@@ -22,12 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "userWithRoles",
-        attributeNodes = {@NamedAttributeNode(value = "roles")}),
-    @NamedEntityGraph(
-        name = "userWithRents",
-        attributeNodes = {@NamedAttributeNode(value = "rents")})
+  @NamedEntityGraph(
+      name = "userWithRoles",
+      attributeNodes = {@NamedAttributeNode(value = "roles")}),
+  @NamedEntityGraph(
+      name = "userWithRents",
+      attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "users")
@@ -69,27 +69,7 @@ public class User implements Serializable {
   @OneToMany(mappedBy = "user")
   private Set<Rent> rents;
 
-  public User() {
-  }
-
-  public User(
-      Integer id,
-      String firstName,
-      String secondName,
-      String email,
-      String password,
-      EStatusUser statusUser,
-      Set<Role> roles,
-      Set<Rent> rents) {
-    this.id = id;
-    this.firstName = firstName;
-    this.secondName = secondName;
-    this.email = email;
-    this.password = password;
-    this.statusUser = statusUser;
-    this.roles = roles;
-    this.rents = rents;
-  }
+  public User() {}
 
   public Integer getId() {
     return id;

@@ -29,8 +29,8 @@ public class AccountController {
   }
 
   @PutMapping
-  public UserDTO update(@AuthenticationPrincipal UserDetails userDetails,
-      @RequestBody UserDTO userDTO) {
+  public UserDTO update(
+      @AuthenticationPrincipal UserDetails userDetails, @RequestBody UserDTO userDTO) {
     return userService.updateCurrentUser(userDetails, userDTO);
   }
 
@@ -38,5 +38,4 @@ public class AccountController {
   public UserDTO delete(@AuthenticationPrincipal UserDetails userDetails) {
     return userService.deleteCurrentUser(userDetails);
   }
-
 }

@@ -28,13 +28,11 @@ public class PriceHistoryService implements IPriceHistoryService {
   @Override
   public PriceHistoryDTO findByIdPriceHistoryWithCarModelBrandDTO(int id) {
     return objectMapperUtils.map(
-        priceHistoryDAO.findByIdPriceHistoryWithCarModelBrand(id),
-        PriceHistoryDTO.class);
+        priceHistoryDAO.findByIdPriceHistoryWithCarModelBrand(id), PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryDTO>
-  findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
+  public List<PriceHistoryDTO> findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
@@ -59,19 +57,15 @@ public class PriceHistoryService implements IPriceHistoryService {
   }
 
   @Override
-  public List<PriceHistoryDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(
-      List<String> fields) {
+  public List<PriceHistoryDTO> findByNotNullPriceHistoryWithCarModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        priceHistoryDAO.findByNotNullPriceHistoryWithCarModelBrand(fields),
-        PriceHistoryDTO.class);
+        priceHistoryDAO.findByNotNullPriceHistoryWithCarModelBrand(fields), PriceHistoryDTO.class);
   }
 
   @Override
-  public List<PriceHistoryDTO> findByNullPriceHistoryWithCarModelBrandDTO(
-      List<String> fields) {
+  public List<PriceHistoryDTO> findByNullPriceHistoryWithCarModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        priceHistoryDAO.findByNullPriceHistoryWithCarModelBrand(fields),
-        PriceHistoryDTO.class);
+        priceHistoryDAO.findByNullPriceHistoryWithCarModelBrand(fields), PriceHistoryDTO.class);
   }
 
   @Override
@@ -85,14 +79,12 @@ public class PriceHistoryService implements IPriceHistoryService {
 
   @Override
   public PriceHistoryDTO create(PriceHistoryDTO entityDTO) {
-    priceHistoryDAO.create(objectMapperUtils.map(entityDTO, PriceHistory.class));
-    return entityDTO;
+    return objectMapperUtils.map(priceHistoryDAO.create(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
   }
 
   @Override
   public PriceHistoryDTO update(PriceHistoryDTO entityDTO) {
-    priceHistoryDAO.update(objectMapperUtils.map(entityDTO, PriceHistory.class));
-    return entityDTO;
+    return objectMapperUtils.map(priceHistoryDAO.update(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
   }
 
   @Override

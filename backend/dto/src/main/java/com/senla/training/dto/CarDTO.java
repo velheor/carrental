@@ -3,7 +3,6 @@ package com.senla.training.dto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.senla.training.models.Rent;
-import com.senla.training.models.enums.ECarType;
 import com.senla.training.models.enums.EFuelType;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +11,7 @@ public class CarDTO {
 
   private Integer id;
 
-  private ECarType carType;
+  private String carType;
 
   private EFuelType fuelType;
 
@@ -20,20 +19,15 @@ public class CarDTO {
 
   private Boolean transmission;
 
-  @JsonBackReference
-  private ModelDTO model;
+  @JsonBackReference private ModelDTO model;
 
-  @JsonBackReference
-  private CategoryDTO category;
+  @JsonBackReference private CategoryDTO category;
 
-  @JsonManagedReference
-  private List<PriceHistoryDTO> priceHistoryList;
+  @JsonManagedReference private List<PriceHistoryDTO> priceHistoryList;
 
-  @JsonManagedReference
-  private List<Rent> rents;
+  @JsonManagedReference private List<Rent> rents;
 
-  public CarDTO() {
-  }
+  public CarDTO() {}
 
   public Integer getId() {
     return id;
@@ -43,11 +37,11 @@ public class CarDTO {
     this.id = id;
   }
 
-  public ECarType getCarType() {
+  public String getCarType() {
     return carType;
   }
 
-  public void setCarType(ECarType carType) {
+  public void setCarType(String carType) {
     this.carType = carType;
   }
 
@@ -95,8 +89,7 @@ public class CarDTO {
     return priceHistoryList;
   }
 
-  public void setPriceHistoryList(
-      List<PriceHistoryDTO> priceHistoryList) {
+  public void setPriceHistoryList(List<PriceHistoryDTO> priceHistoryList) {
     this.priceHistoryList = priceHistoryList;
   }
 

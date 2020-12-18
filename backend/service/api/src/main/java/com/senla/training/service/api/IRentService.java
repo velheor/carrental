@@ -6,28 +6,21 @@ import java.util.Map;
 
 public interface IRentService extends IGenericService<RentDTO> {
 
-  RentDTO findByIdRentWithUserStatusHistoryCarModelBrandDTO(
-      int id);
+  RentDTO findByIdRentWithUserStatusHistoryCarModelBrandDTO(int id);
 
-  List<RentDTO>
-  findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
+  List<RentDTO> findAllAndSortWithDirectionRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, String> fieldDirectionMap);
 
-  RentDTO
-  findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+  RentDTO findOneByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<RentDTO>
-  findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
+  List<RentDTO> findAllByCriteriaRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<RentDTO>
-  findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
+  List<RentDTO> findByNotNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
 
-  List<RentDTO>
-  findByNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
+  List<RentDTO> findByNullRentWithUserStatusHistoryCarModelBrandDTO(List<String> fields);
 
-  List<RentDTO>
-  findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
+  List<RentDTO> findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
 }

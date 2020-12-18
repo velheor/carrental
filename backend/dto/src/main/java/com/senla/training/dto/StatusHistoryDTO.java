@@ -12,8 +12,7 @@ public class StatusHistoryDTO {
 
   private Date statusDate;
 
-  @JsonBackReference
-  private RentDTO rent;
+  @JsonBackReference private RentDTO rent;
 
   public Integer getId() {
     return id;

@@ -59,8 +59,7 @@ public class StatusHistoryService implements IStatusHistoryService {
   @Override
   public List<StatusHistoryDTO> findByNotNullStatusHistoryWithRentDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        statusHistoryDAO.findByNotNullStatusHistoryWithRent(fields),
-        StatusHistoryDTO.class);
+        statusHistoryDAO.findByNotNullStatusHistoryWithRent(fields), StatusHistoryDTO.class);
   }
 
   @Override
@@ -80,14 +79,12 @@ public class StatusHistoryService implements IStatusHistoryService {
 
   @Override
   public StatusHistoryDTO create(StatusHistoryDTO entityDTO) {
-    statusHistoryDAO.create(objectMapperUtils.map(entityDTO, StatusHistory.class));
-    return entityDTO;
+    return objectMapperUtils.map(statusHistoryDAO.create(objectMapperUtils.map(entityDTO, StatusHistory.class)), StatusHistoryDTO.class);
   }
 
   @Override
   public StatusHistoryDTO update(StatusHistoryDTO entityDTO) {
-    statusHistoryDAO.update(objectMapperUtils.map(entityDTO, StatusHistory.class));
-    return entityDTO;
+    return objectMapperUtils.map(statusHistoryDAO.update(objectMapperUtils.map(entityDTO, StatusHistory.class)), StatusHistoryDTO.class);
   }
 
   @Override

@@ -64,22 +64,19 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public List<UserDTO> findAllByCriteriaUserWithRolesDTO(
-      Map<String, Object> fieldCriterionMap) {
+  public List<UserDTO> findAllByCriteriaUserWithRolesDTO(Map<String, Object> fieldCriterionMap) {
     return objectMapperUtils.mapAll(
         userDAO.findAllByCriteriaUserWithRoles(fieldCriterionMap), UserDTO.class);
   }
 
   @Override
   public List<UserDTO> findByNotNullUserWithRolesDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        userDAO.findByNotNullUserWithRoles(fields), UserDTO.class);
+    return objectMapperUtils.mapAll(userDAO.findByNotNullUserWithRoles(fields), UserDTO.class);
   }
 
   @Override
   public List<UserDTO> findByNullUserWithRolesDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        userDAO.findByNullUserWithRoles(fields), UserDTO.class);
+    return objectMapperUtils.mapAll(userDAO.findByNullUserWithRoles(fields), UserDTO.class);
   }
 
   @Override
@@ -97,14 +94,14 @@ public class UserService implements IUserService {
       return null;
     }
     entityDTO.setPassword(passwordEncoder.encode(entityDTO.getPassword()));
-    userDAO.create(objectMapperUtils.map(entityDTO, User.class));
-    return entityDTO;
+    return objectMapperUtils.map(
+        userDAO.create(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
   }
 
   @Override
   public UserDTO update(UserDTO entityDTO) {
-    userDAO.update(objectMapperUtils.map(entityDTO, User.class));
-    return entityDTO;
+    return objectMapperUtils.map(
+        userDAO.update(objectMapperUtils.map(entityDTO, User.class)), UserDTO.class);
   }
 
   @Override
@@ -122,18 +119,15 @@ public class UserService implements IUserService {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             userWithTokenDTO.getEmail(), userWithTokenDTO.getPassword()));
-    UserDTO user =
-        objectMapperUtils.map(
-            userDAO.findByEmailUserWithRoles(userWithTokenDTO.getEmail()), UserDTO.class);
+    User user = userDAO.findByEmailUserWithRoles(userWithTokenDTO.getEmail());
     userWithTokenDTO.setToken(jwtTokenProvider.createToken(user.getEmail(), user.getRoles()));
     return userWithTokenDTO;
   }
 
   @Override
   public UserDTO findCurrentUser(UserDetails userDetails) {
-    return objectMapperUtils.map(userDAO
-            .findByEmailUserWithRents(userDetails.getUsername()),
-        UserDTO.class);
+    return objectMapperUtils.map(
+        userDAO.findByEmailUserWithRents(userDetails.getUsername()), UserDTO.class);
   }
 
   @Override
@@ -141,8 +135,8 @@ public class UserService implements IUserService {
     if (!userDetails.getUsername().equals(userDTO.getEmail())) {
       return null;
     }
-    userDAO.update(objectMapperUtils.map(userDTO, User.class));
-    return userDTO;
+    return objectMapperUtils.map(
+        userDAO.update(objectMapperUtils.map(userDTO, User.class)), UserDTO.class);
   }
 
   @Override
@@ -153,7 +147,7 @@ public class UserService implements IUserService {
   }
 
   protected Boolean isValidEmail(String email) {
-    return !this.checkForExistEmail(email) && !checkForRegexEmail(email);
+    return !this.checkForExistEmail(email) && this.checkForRegexEmail(email);
   }
 
   protected Boolean checkForExistEmail(String email) {

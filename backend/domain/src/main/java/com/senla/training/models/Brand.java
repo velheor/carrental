@@ -1,15 +1,11 @@
 package com.senla.training.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.senla.training.models.enums.EBrand;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedAttributeNode;
@@ -30,14 +26,12 @@ public class Brand implements Serializable {
 
   @Basic
   @Column(name = "name", nullable = false, length = 45)
-  @Enumerated(value = EnumType.STRING)
-  private EBrand name;
+  private String name;
 
   @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
   private List<Model> models;
 
-  public Brand() {
-  }
+  public Brand() {}
 
   public Integer getId() {
     return id;
@@ -47,11 +41,11 @@ public class Brand implements Serializable {
     this.id = id;
   }
 
-  public EBrand getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(EBrand name) {
+  public void setName(String name) {
     this.name = name;
   }
 

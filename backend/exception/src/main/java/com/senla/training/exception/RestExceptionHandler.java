@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException.Forbidden;
 import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
+
   @ExceptionHandler(IllegalArgumentException.class)
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   public ErrorMessage illegalArgumentException(IllegalArgumentException ex, WebRequest request) {
@@ -43,6 +45,13 @@ public class RestExceptionHandler {
   @ExceptionHandler(AuthenticationException.class)
   @ResponseStatus(value = HttpStatus.FORBIDDEN)
   public ErrorMessage authenticationException(AuthenticationException ex, WebRequest request) {
+    return new ErrorMessage(
+        HttpStatus.FORBIDDEN.value(), new Date(), ex.getMessage(), request.getDescription(false));
+  }
+
+  @ExceptionHandler(Forbidden.class)
+  @ResponseStatus(value = HttpStatus.FORBIDDEN)
+  public ErrorMessage forbiddenException(Forbidden ex, WebRequest request) {
     return new ErrorMessage(
         HttpStatus.FORBIDDEN.value(), new Date(), ex.getMessage(), request.getDescription(false));
   }

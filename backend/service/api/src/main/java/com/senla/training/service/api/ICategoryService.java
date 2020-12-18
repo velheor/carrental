@@ -11,14 +11,12 @@ public interface ICategoryService extends IGenericService<CategoryDTO> {
   List<CategoryDTO> findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
       Map<String, String> fieldDirectionMap);
 
-  CategoryDTO findOneByCriteriaCategoryWithCarsModelBrandDTO(
-      Map<String, Object> fieldCriteriaMap);
+  CategoryDTO findOneByCriteriaCategoryWithCarsModelBrandDTO(Map<String, Object> fieldCriteriaMap);
 
   List<CategoryDTO> findAllByCriteriaCategoryWithCarsModelBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<CategoryDTO> findByNotNullCategoryWithCarsModelBrandDTO(
-      List<String> fields);
+  List<CategoryDTO> findByNotNullCategoryWithCarsModelBrandDTO(List<String> fields);
 
   List<CategoryDTO> findByNullCategoryWithCarsModelBrandDTO(List<String> fields);
 

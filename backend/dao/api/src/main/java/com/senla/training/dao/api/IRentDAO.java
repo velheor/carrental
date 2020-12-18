@@ -24,5 +24,4 @@ public interface IRentDAO extends ICrudDAO<Rent> {
 
   List<Rent> findAndSortRentWithUserStatusHistoryCarModelBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

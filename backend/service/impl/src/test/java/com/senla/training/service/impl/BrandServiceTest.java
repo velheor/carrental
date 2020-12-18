@@ -1,14 +1,18 @@
 package com.senla.training.service.impl;
 
 import static java.util.Objects.deepEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IBrandDAO;
 import com.senla.training.dto.BrandDTO;
+import com.senla.training.dto.CarDTO;
 import com.senla.training.models.Brand;
+import com.senla.training.models.Car;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import java.util.ArrayList;
@@ -18,45 +22,47 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 class BrandServiceTest {
-  @InjectMocks private BrandService brandService;
-  @Mock private IBrandDAO brandDAO;
-  @Mock private ObjectMapperUtils objectMapperUtils;
 
   private final Brand brand;
   private final BrandDTO brandDTO;
-
   private final List<Brand> brands;
   private final List<BrandDTO> brandDTOList;
-
   private final Map<String, String> fieldDirectionStringMap;
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  private final Map<String, String> fieldContainMap;
+  @InjectMocks
+  private BrandService brandService;
+  @Mock
+  private IBrandDAO brandDAO;
+  @Mock
+  private ObjectMapperUtils objectMapperUtils;
 
   public BrandServiceTest() {
     MockitoAnnotations.initMocks(this);
 
-    brand = new Brand();
-    brandDTO = new BrandDTO();
-
     brands = new ArrayList<>();
-    brandDTOList = new ArrayList<>();
+    this.brand = Mockito.spy(Brand.class);
+    Brand brand = Mockito.spy(Brand.class);
 
+    brands.add(this.brand);
     brands.add(brand);
-    brands.add(new Brand());
 
+    brandDTOList = new ArrayList<>();
+    this.brandDTO = Mockito.spy(BrandDTO.class);
+    BrandDTO brandDTO = Mockito.spy(BrandDTO.class);
+
+    brandDTOList.add(this.brandDTO);
     brandDTOList.add(brandDTO);
-    brandDTOList.add(new BrandDTO());
 
     fieldDirectionStringMap = new HashMap<>();
     fieldCriterionMap = new HashMap<>();
     fieldDirectionMap = new HashMap<>();
     fields = new ArrayList<>();
-    fieldContainMap = new HashMap<>();
   }
 
   @Test
@@ -76,8 +82,7 @@ class BrandServiceTest {
   void findAllAndSortWithDirectionBrandWithModelsDTO() {
     given(brandDAO.findAllAndSortWithDirectionBrandWithModels(fieldDirectionMap))
         .willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
+    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(brandDTOList);
     assertEquals(
         brandDTOList,
         brandService.findAllAndSortWithDirectionBrandWithModelsDTO(fieldDirectionStringMap));
@@ -100,8 +105,7 @@ class BrandServiceTest {
   void findOneByCriteriaBrandWithModelsDTO() {
     given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(brand);
     given(objectMapperUtils.map(brand, BrandDTO.class)).willReturn(brandDTO);
-    assertEquals(
-        brandDTO, brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+    assertEquals(brandDTO, brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
     given(brandDAO.findOneByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(null);
     given(objectMapperUtils.map(brand, BrandDTO.class)).willReturn(null);
@@ -115,11 +119,8 @@ class BrandServiceTest {
   @Test
   void findAllByCriteriaBrandWithModelsDTO() {
     given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap)).willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
-    assertEquals(
-        brandDTOList,
-        brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
+    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(brandDTOList);
+    assertEquals(brandDTOList, brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap));
 
     given(brandDAO.findAllByCriteriaBrandWithModels(fieldCriterionMap))
         .willReturn(new ArrayList<>());
@@ -135,8 +136,7 @@ class BrandServiceTest {
   @Test
   void findByNotNullBrandWithModelsDTO() {
     given(brandDAO.findByNotNullBrandWithModels(fields)).willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
+    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(brandDTOList);
     assertEquals(brandDTOList, brandService.findByNotNullBrandWithModelsDTO(fields));
 
     given(brandDAO.findByNotNullBrandWithModels(fields)).willReturn(new ArrayList<>());
@@ -150,8 +150,7 @@ class BrandServiceTest {
   @Test
   void findByNullBrandWithModelsDTO() {
     given(brandDAO.findByNullBrandWithModels(fields)).willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
+    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(brandDTOList);
     assertEquals(brandDTOList, brandService.findByNullBrandWithModelsDTO(fields));
 
     given(brandDAO.findByNullBrandWithModels(fields)).willReturn(new ArrayList<>());
@@ -163,28 +162,10 @@ class BrandServiceTest {
   }
 
   @Test
-  void findContainBrandWithModelsDTO() {
-    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
-    assertEquals(
-        brandDTOList, brandService.findContainBrandWithModelsDTO(fieldContainMap));
-
-    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willReturn(new ArrayList<>());
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(new ArrayList<>());
-    deepEquals(new ArrayList<>(), brandService.findContainBrandWithModelsDTO(fieldContainMap));
-
-    given(brandDAO.findContainBrandWithModels(fieldContainMap)).willThrow(Exception.class);
-    assertThrows(
-        Exception.class, () -> brandService.findContainBrandWithModelsDTO(fieldContainMap));
-  }
-
-  @Test
   void findAndSortBrandWithModelsDTO() {
     given(brandDAO.findAndSortBrandWithModels(fieldDirectionMap, fieldCriterionMap))
         .willReturn(brands);
-    given(objectMapperUtils.mapAll(brands, BrandDTO.class))
-        .willReturn(brandDTOList);
+    given(objectMapperUtils.mapAll(brands, BrandDTO.class)).willReturn(brandDTOList);
     assertEquals(
         brandDTOList,
         brandService.findAndSortBrandWithModelsDTO(fieldDirectionStringMap, fieldCriterionMap));
@@ -208,6 +189,7 @@ class BrandServiceTest {
   void create() {
     given(brandDAO.create(brand)).willReturn(brand);
     given(objectMapperUtils.map(brandDTO, Brand.class)).willReturn(brand);
+    given(objectMapperUtils.map(brand, BrandDTO.class)).willReturn(brandDTO);
     assertEquals(brandDTO, brandService.create(brandDTO));
 
     given(brandDAO.create(brand)).willReturn(null);
@@ -221,6 +203,7 @@ class BrandServiceTest {
   void update() {
     given(brandDAO.update(brand)).willReturn(brand);
     given(objectMapperUtils.map(brandDTO, Brand.class)).willReturn(brand);
+    given(objectMapperUtils.map(brand, BrandDTO.class)).willReturn(brandDTO);
     assertEquals(brandDTO, brandService.update(brandDTO));
 
     given(brandDAO.update(brand)).willReturn(null);

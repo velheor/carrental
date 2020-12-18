@@ -27,14 +27,12 @@ public class CarController {
   }
 
   @GetMapping("/{id}")
-  public CarDTO getByIdUserWithRoles(
-      @PathVariable("id") Integer id) {
+  public CarDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
     return carService.findByIdCarWithModelCategoryPriceHistoryBrandDTO(id);
   }
 
   @GetMapping
-  public List<CarDTO> sortWithDirectionUsersWithRoles(
-      @RequestParam Map<String, String> allParams) {
+  public List<CarDTO> sortWithDirectionUsersWithRoles(@RequestParam Map<String, String> allParams) {
     return carService.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
         allParams);
   }
@@ -68,33 +66,28 @@ public class CarController {
   }
 
   @GetMapping("/findAllByCriteriaMap")
-  public List<CarDTO>
-      findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
-          @RequestParam Map<String, Object> fieldCriterionMap) {
+  public List<CarDTO> findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
+      @RequestParam Map<String, Object> fieldCriterionMap) {
     return carService.findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(fieldCriterionMap);
   }
 
   @GetMapping("/findByNotNull")
-  public List<CarDTO>
-      findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(
-          @RequestParam("field") List<String> fields) {
+  public List<CarDTO> findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(
+      @RequestParam("field") List<String> fields) {
     return carService.findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<CarDTO>
-      findByNullCarWithModelCategoryPriceHistoryBrandDTO(
-          @RequestParam("field") List<String> fields) {
+  public List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(
+      @RequestParam("field") List<String> fields) {
     return carService.findByNullCarWithModelCategoryPriceHistoryBrandDTO(fields);
   }
 
   @GetMapping("/findAndSort")
-  public List<CarDTO>
-      findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
-          @RequestParam Map<String, String> fieldDirectionMap,
-          @RequestParam Map<String, Object> fieldCriteriaMap) {
+  public List<CarDTO> findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
+      @RequestParam Map<String, String> fieldDirectionMap,
+      @RequestParam Map<String, Object> fieldCriteriaMap) {
     return carService.findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
         fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

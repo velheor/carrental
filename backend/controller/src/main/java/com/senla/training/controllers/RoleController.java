@@ -72,14 +72,12 @@ public class RoleController {
   }
 
   @GetMapping("/findByNotNull")
-  public List<RoleDTO> findByNotNullRoleWithUsersDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<RoleDTO> findByNotNullRoleWithUsersDTO(@RequestParam("field") List<String> fields) {
     return roleService.findByNotNullRoleWithUsersDTO(fields);
   }
 
   @GetMapping("/findByNull")
-  public List<RoleDTO> findByNullRoleWithUsersDTO(
-      @RequestParam("field") List<String> fields) {
+  public List<RoleDTO> findByNullRoleWithUsersDTO(@RequestParam("field") List<String> fields) {
     return roleService.findByNullRoleWithUsersDTO(fields);
   }
 
@@ -89,5 +87,4 @@ public class RoleController {
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return roleService.findAndSortRoleWithUsersDTO(fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

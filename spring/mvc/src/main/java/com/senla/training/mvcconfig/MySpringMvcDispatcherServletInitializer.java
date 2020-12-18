@@ -5,9 +5,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class MySpringMvcDispatcherServletInitializer
     extends AbstractAnnotationConfigDispatcherServletInitializer {
+
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return new Class[] {SecurityConfig.class, SpringConfig.class};
+    return new Class[]{SecurityConfig.class, SpringConfig.class};
   }
 
   @Override
@@ -17,6 +18,6 @@ public class MySpringMvcDispatcherServletInitializer
 
   @Override
   protected String[] getServletMappings() {
-    return new String[] {"/"};
+    return new String[]{"/"};
   }
 }

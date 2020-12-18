@@ -8,8 +8,7 @@ public interface IRoleService extends IGenericService<RoleDTO> {
 
   RoleDTO findByIdRoleWithUsersDTO(int id);
 
-  List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
-      Map<String, String> fieldDirectionMap);
+  List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(Map<String, String> fieldDirectionMap);
 
   RoleDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap);
 
@@ -21,5 +20,4 @@ public interface IRoleService extends IGenericService<RoleDTO> {
 
   List<RoleDTO> findAndSortRoleWithUsersDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

@@ -32,8 +32,7 @@ public class CategoryService implements ICategoryService {
   }
 
   @Override
-  public List<CategoryDTO>
-  findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
+  public List<CategoryDTO> findAllAndSortWithDirectionCategoryWithCarsModelBrandDTO(
       Map<String, String> fieldDirectionMap) {
     return objectMapperUtils.mapAll(
         categoryDAO.findAllAndSortWithDirectionCategoryWithCarsModelBrand(
@@ -58,19 +57,15 @@ public class CategoryService implements ICategoryService {
   }
 
   @Override
-  public List<CategoryDTO> findByNotNullCategoryWithCarsModelBrandDTO(
-      List<String> fields) {
+  public List<CategoryDTO> findByNotNullCategoryWithCarsModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findByNotNullCategoryWithCarsModelBrand(fields),
-        CategoryDTO.class);
+        categoryDAO.findByNotNullCategoryWithCarsModelBrand(fields), CategoryDTO.class);
   }
 
   @Override
-  public List<CategoryDTO> findByNullCategoryWithCarsModelBrandDTO(
-      List<String> fields) {
+  public List<CategoryDTO> findByNullCategoryWithCarsModelBrandDTO(List<String> fields) {
     return objectMapperUtils.mapAll(
-        categoryDAO.findByNullCategoryWithCarsModelBrand(fields),
-        CategoryDTO.class);
+        categoryDAO.findByNullCategoryWithCarsModelBrand(fields), CategoryDTO.class);
   }
 
   @Override
@@ -84,14 +79,12 @@ public class CategoryService implements ICategoryService {
 
   @Override
   public CategoryDTO create(CategoryDTO entityDTO) {
-    categoryDAO.create(objectMapperUtils.map(entityDTO, Category.class));
-    return entityDTO;
+    return objectMapperUtils.map(categoryDAO.create(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
   }
 
   @Override
   public CategoryDTO update(CategoryDTO entityDTO) {
-    categoryDAO.update(objectMapperUtils.map(entityDTO, Category.class));
-    return entityDTO;
+    return objectMapperUtils.map(categoryDAO.update(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
   }
 
   @Override

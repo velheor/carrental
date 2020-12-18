@@ -83,5 +83,4 @@ public class BrandController {
       @RequestParam Map<String, Object> fieldCriteriaMap) {
     return brandService.findAndSortBrandWithModelsDTO(fieldDirectionMap, fieldCriteriaMap);
   }
-
 }

@@ -21,5 +21,4 @@ public interface IModelDAO extends IGenericDAO<Model> {
 
   List<Model> findAndSortModelWithBrand(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

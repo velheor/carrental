@@ -8,26 +8,19 @@ public interface ICarService extends IGenericService<com.senla.training.dto.CarD
 
   CarDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(int id);
 
-  List<CarDTO>
-  findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
+  List<CarDTO> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, String> fieldDirectionMap);
 
-  CarDTO
-  findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
+  CarDTO findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<CarDTO>
-  findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
+  List<CarDTO> findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, Object> fieldCriteriaMap);
 
-  List<CarDTO>
-  findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields);
+  List<CarDTO> findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields);
 
-  List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(
-      List<String> fields);
+  List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields);
 
-  List<CarDTO>
-  findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
+  List<CarDTO> findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

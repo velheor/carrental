@@ -1,14 +1,13 @@
 package com.senla.training.dto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.senla.training.models.enums.EBrand;
 import java.util.List;
 
 public class BrandDTO {
 
   private Integer id;
 
-  private EBrand name;
+  private String name;
 
   @JsonManagedReference
   private List<ModelDTO> models;
@@ -24,11 +23,11 @@ public class BrandDTO {
     this.id = id;
   }
 
-  public EBrand getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(EBrand name) {
+  public void setName(String name) {
     this.name = name;
   }
 

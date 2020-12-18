@@ -1,6 +1,5 @@
 package com.senla.training.models;
 
-import com.senla.training.models.enums.ECarType;
 import com.senla.training.models.enums.EFuelType;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,21 +22,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
-        attributeNodes = {
-            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            @NamedAttributeNode("category"),
-            @NamedAttributeNode("priceHistoryList")
-        },
-        subgraphs = {
-            @NamedSubgraph(
-                name = "modelWithBrand",
-                attributeNodes = {@NamedAttributeNode(value = "brand")})
-        }),
-    @NamedEntityGraph(
-        name = "carWithRents",
-        attributeNodes = {@NamedAttributeNode(value = "rents")})
+  @NamedEntityGraph(
+      name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
+      attributeNodes = {
+        @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+        @NamedAttributeNode("category"),
+        @NamedAttributeNode("priceHistoryList")
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")})
+      }),
+  @NamedEntityGraph(
+      name = "carWithRents",
+      attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "cars")
@@ -49,8 +48,7 @@ public class Car implements Serializable {
 
   @Basic
   @Column(name = "car_type", nullable = false, length = 25)
-  @Enumerated(value = EnumType.STRING)
-  private ECarType carType;
+  private String carType;
 
   @Basic
   @Column(name = "fuel_type", nullable = false, length = 25)
@@ -70,7 +68,12 @@ public class Car implements Serializable {
   private Model model;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+  @JoinColumn(
+      name = "id",
+      referencedColumnName = "id",
+      nullable = false,
+      insertable = false,
+      updatable = false)
   private Category category;
 
   @OneToMany(mappedBy = "car")
@@ -79,8 +82,7 @@ public class Car implements Serializable {
   @OneToMany(mappedBy = "car")
   private List<Rent> rents;
 
-  public Car() {
-  }
+  public Car() {}
 
   public Integer getId() {
     return id;
@@ -90,11 +92,11 @@ public class Car implements Serializable {
     this.id = id;
   }
 
-  public ECarType getCarType() {
+  public String getCarType() {
     return carType;
   }
 
-  public void setCarType(ECarType carType) {
+  public void setCarType(String carType) {
     this.carType = carType;
   }
 

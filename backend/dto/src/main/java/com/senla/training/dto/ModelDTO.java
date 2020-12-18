@@ -12,11 +12,9 @@ public class ModelDTO {
 
   private String manufacturerCountry;
 
-  @JsonManagedReference
-  private List<CarDTO> cars;
+  @JsonManagedReference private List<CarDTO> cars;
 
-  @JsonBackReference
-  private BrandDTO brand;
+  @JsonBackReference private BrandDTO brand;
 
   public Integer getId() {
     return id;

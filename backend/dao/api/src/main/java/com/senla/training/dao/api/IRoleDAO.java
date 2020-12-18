@@ -21,5 +21,4 @@ public interface IRoleDAO extends ICrudDAO<Role> {
 
   List<Role> findAndSortRoleWithUsers(
       Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }

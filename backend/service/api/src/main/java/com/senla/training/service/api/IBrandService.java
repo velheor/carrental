@@ -13,8 +13,7 @@ public interface IBrandService extends IGenericService<BrandDTO> {
 
   BrandDTO findOneByCriteriaBrandWithModelsDTO(Map<String, Object> fieldCriteriaMap);
 
-  List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(
-      Map<String, Object> fieldCriteriaMap);
+  List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(Map<String, Object> fieldCriteriaMap);
 
   List<BrandDTO> findByNotNullBrandWithModelsDTO(List<String> fields);
 
@@ -22,5 +21,4 @@ public interface IBrandService extends IGenericService<BrandDTO> {
 
   List<BrandDTO> findAndSortBrandWithModelsDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-
 }
