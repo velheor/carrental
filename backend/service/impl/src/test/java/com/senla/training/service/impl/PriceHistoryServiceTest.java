@@ -33,12 +33,9 @@ class PriceHistoryServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private PriceHistoryService priceHistoryService;
-  @Mock
-  private IPriceHistoryDAO priceHistoryDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private PriceHistoryService priceHistoryService;
+  @Mock private IPriceHistoryDAO priceHistoryDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public PriceHistoryServiceTest() {
     MockitoAnnotations.initMocks(this);
@@ -80,8 +77,8 @@ class PriceHistoryServiceTest {
   @Test
   void findAllAndSortWithDirectionPriceHistoryWithCarModelBrandDTO() {
     given(
-        priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
-            fieldDirectionMap))
+            priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
+                fieldDirectionMap))
         .willReturn(priceHistoryList);
     given(objectMapperUtils.mapAll(priceHistoryList, PriceHistoryDTO.class))
         .willReturn(priceHistoryDTOList);
@@ -91,8 +88,8 @@ class PriceHistoryServiceTest {
             fieldDirectionStringMap));
 
     given(
-        priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
-            fieldDirectionMap))
+            priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
+                fieldDirectionMap))
         .willReturn(new ArrayList<>());
     given(objectMapperUtils.mapAll(priceHistoryList, PriceHistoryDTO.class))
         .willReturn(new ArrayList<>());
@@ -102,8 +99,8 @@ class PriceHistoryServiceTest {
             fieldDirectionStringMap));
 
     given(
-        priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
-            fieldDirectionMap))
+            priceHistoryDAO.findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
+                fieldDirectionMap))
         .willThrow(Exception.class);
     assertThrows(
         Exception.class,
@@ -215,8 +212,8 @@ class PriceHistoryServiceTest {
   @Test
   void findAndSortPriceHistoryWithCarModelBrandDTO() {
     given(
-        priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willReturn(priceHistoryList);
     given(objectMapperUtils.mapAll(priceHistoryList, PriceHistoryDTO.class))
         .willReturn(priceHistoryDTOList);
@@ -226,8 +223,8 @@ class PriceHistoryServiceTest {
             fieldDirectionStringMap, fieldCriterionMap));
 
     given(
-        priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
     given(objectMapperUtils.mapAll(priceHistoryList, PriceHistoryDTO.class))
         .willReturn(new ArrayList<>());
@@ -237,8 +234,8 @@ class PriceHistoryServiceTest {
             fieldDirectionStringMap, fieldCriterionMap));
 
     given(
-        priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            priceHistoryDAO.findAndSortPriceHistoryWithCarModelBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willThrow(Exception.class);
     assertThrows(
         Exception.class,

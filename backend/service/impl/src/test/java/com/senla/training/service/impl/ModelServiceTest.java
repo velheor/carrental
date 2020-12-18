@@ -33,12 +33,9 @@ class ModelServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private ModelService modelService;
-  @Mock
-  private IModelDAO modelDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private ModelService modelService;
+  @Mock private IModelDAO modelDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public ModelServiceTest() {
     MockitoAnnotations.initMocks(this);

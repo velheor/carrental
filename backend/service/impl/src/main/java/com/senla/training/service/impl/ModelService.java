@@ -72,12 +72,14 @@ public class ModelService implements IModelService {
 
   @Override
   public ModelDTO create(ModelDTO entityDTO) {
-    return objectMapperUtils.map(modelDAO.create(objectMapperUtils.map(entityDTO, Model.class)), ModelDTO.class);
+    return objectMapperUtils.map(
+        modelDAO.create(objectMapperUtils.map(entityDTO, Model.class)), ModelDTO.class);
   }
 
   @Override
   public ModelDTO update(ModelDTO entityDTO) {
-    return objectMapperUtils.map(modelDAO.update(objectMapperUtils.map(entityDTO, Model.class)), ModelDTO.class);
+    return objectMapperUtils.map(
+        modelDAO.update(objectMapperUtils.map(entityDTO, Model.class)), ModelDTO.class);
   }
 
   @Override

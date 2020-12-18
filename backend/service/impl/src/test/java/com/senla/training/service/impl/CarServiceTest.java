@@ -33,12 +33,9 @@ class CarServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private CarService carService;
-  @Mock
-  private ICarDAO carDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private CarService carService;
+  @Mock private ICarDAO carDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public CarServiceTest() {
     MockitoAnnotations.initMocks(this);
@@ -80,8 +77,8 @@ class CarServiceTest {
   @Test
   void findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO() {
     given(
-        carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap))
+            carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap))
         .willReturn(cars);
     given(objectMapperUtils.mapAll(cars, CarDTO.class)).willReturn(carDTOList);
     assertEquals(
@@ -90,8 +87,8 @@ class CarServiceTest {
             fieldDirectionStringMap));
 
     given(
-        carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap))
+            carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap))
         .willReturn(new ArrayList<>());
     given(objectMapperUtils.mapAll(cars, CarDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
@@ -100,8 +97,8 @@ class CarServiceTest {
             fieldDirectionStringMap));
 
     given(
-        carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap))
+            carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap))
         .willThrow(Exception.class);
     assertThrows(
         Exception.class,
@@ -202,8 +199,8 @@ class CarServiceTest {
   @Test
   void findAndSortCarWithModelCategoryPriceHistoryBrandDTO() {
     given(
-        carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willReturn(cars);
     given(objectMapperUtils.mapAll(cars, CarDTO.class)).willReturn(carDTOList);
     assertEquals(
@@ -212,8 +209,8 @@ class CarServiceTest {
             fieldDirectionStringMap, fieldCriterionMap));
 
     given(
-        carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willReturn(new ArrayList<>());
     given(objectMapperUtils.mapAll(cars, CarDTO.class)).willReturn(new ArrayList<>());
     deepEquals(
@@ -222,8 +219,8 @@ class CarServiceTest {
             fieldDirectionStringMap, fieldCriterionMap));
 
     given(
-        carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
-            fieldDirectionMap, fieldCriterionMap))
+            carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
+                fieldDirectionMap, fieldCriterionMap))
         .willThrow(Exception.class);
     assertThrows(
         Exception.class,

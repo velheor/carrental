@@ -33,12 +33,9 @@ class RoleServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private RoleService roleService;
-  @Mock
-  private IRoleDAO roleDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private RoleService roleService;
+  @Mock private IRoleDAO roleDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public RoleServiceTest() {
     MockitoAnnotations.initMocks(this);

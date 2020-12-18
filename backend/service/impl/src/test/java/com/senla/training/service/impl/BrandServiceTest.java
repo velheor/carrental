@@ -10,9 +10,7 @@ import static org.mockito.Mockito.verify;
 
 import com.senla.training.dao.api.IBrandDAO;
 import com.senla.training.dto.BrandDTO;
-import com.senla.training.dto.CarDTO;
 import com.senla.training.models.Brand;
-import com.senla.training.models.Car;
 import com.senla.training.models.enums.Direction;
 import com.senla.training.objectmapper.ObjectMapperUtils;
 import java.util.ArrayList;
@@ -35,12 +33,9 @@ class BrandServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private BrandService brandService;
-  @Mock
-  private IBrandDAO brandDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private BrandService brandService;
+  @Mock private IBrandDAO brandDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public BrandServiceTest() {
     MockitoAnnotations.initMocks(this);

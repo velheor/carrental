@@ -79,12 +79,14 @@ public class CategoryService implements ICategoryService {
 
   @Override
   public CategoryDTO create(CategoryDTO entityDTO) {
-    return objectMapperUtils.map(categoryDAO.create(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
+    return objectMapperUtils.map(
+        categoryDAO.create(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
   }
 
   @Override
   public CategoryDTO update(CategoryDTO entityDTO) {
-    return objectMapperUtils.map(categoryDAO.update(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
+    return objectMapperUtils.map(
+        categoryDAO.update(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
   }
 
   @Override

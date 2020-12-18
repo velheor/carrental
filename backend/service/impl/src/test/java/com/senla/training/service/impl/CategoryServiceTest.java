@@ -33,12 +33,9 @@ class CategoryServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private CategoryService carService;
-  @Mock
-  private ICategoryDAO carDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private CategoryService carService;
+  @Mock private ICategoryDAO carDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public CategoryServiceTest() {
     MockitoAnnotations.initMocks(this);

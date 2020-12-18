@@ -9,11 +9,9 @@ public class BrandDTO {
 
   private String name;
 
-  @JsonManagedReference
-  private List<ModelDTO> models;
+  @JsonManagedReference private List<ModelDTO> models;
 
-  public BrandDTO() {
-  }
+  public BrandDTO() {}
 
   public Integer getId() {
     return id;

@@ -72,12 +72,14 @@ public class BrandService implements IBrandService {
 
   @Override
   public BrandDTO create(BrandDTO entityDTO) {
-    return objectMapperUtils.map(brandDAO.create(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
+    return objectMapperUtils.map(
+        brandDAO.create(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
   }
 
   @Override
   public BrandDTO update(BrandDTO entityDTO) {
-    return objectMapperUtils.map(brandDAO.update(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
+    return objectMapperUtils.map(
+        brandDAO.update(objectMapperUtils.map(entityDTO, Brand.class)), BrandDTO.class);
   }
 
   @Override

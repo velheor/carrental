@@ -33,12 +33,9 @@ class StatusHistoryServiceTest {
   private final Map<String, Object> fieldCriterionMap;
   private final Map<String, Direction> fieldDirectionMap;
   private final List<String> fields;
-  @InjectMocks
-  private StatusHistoryService statusHistoryService;
-  @Mock
-  private IStatusHistoryDAO statusHistoryDAO;
-  @Mock
-  private ObjectMapperUtils objectMapperUtils;
+  @InjectMocks private StatusHistoryService statusHistoryService;
+  @Mock private IStatusHistoryDAO statusHistoryDAO;
+  @Mock private ObjectMapperUtils objectMapperUtils;
 
   public StatusHistoryServiceTest() {
     MockitoAnnotations.initMocks(this);

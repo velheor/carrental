@@ -79,14 +79,14 @@ public class CarService implements ICarService {
 
   @Override
   public CarDTO create(com.senla.training.dto.CarDTO entityDTO) {
-    return objectMapperUtils
-        .map(carDAO.create(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    return objectMapperUtils.map(
+        carDAO.create(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
   }
 
   @Override
   public CarDTO update(com.senla.training.dto.CarDTO entityDTO) {
-    return objectMapperUtils
-        .map(carDAO.update(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    return objectMapperUtils.map(
+        carDAO.update(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
   }
 
   @Override

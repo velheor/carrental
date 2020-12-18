@@ -79,12 +79,16 @@ public class PriceHistoryService implements IPriceHistoryService {
 
   @Override
   public PriceHistoryDTO create(PriceHistoryDTO entityDTO) {
-    return objectMapperUtils.map(priceHistoryDAO.create(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
+    return objectMapperUtils.map(
+        priceHistoryDAO.create(objectMapperUtils.map(entityDTO, PriceHistory.class)),
+        PriceHistoryDTO.class);
   }
 
   @Override
   public PriceHistoryDTO update(PriceHistoryDTO entityDTO) {
-    return objectMapperUtils.map(priceHistoryDAO.update(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
+    return objectMapperUtils.map(
+        priceHistoryDAO.update(objectMapperUtils.map(entityDTO, PriceHistory.class)),
+        PriceHistoryDTO.class);
   }
 
   @Override
