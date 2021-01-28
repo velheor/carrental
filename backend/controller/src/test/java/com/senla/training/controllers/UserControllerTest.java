@@ -21,19 +21,17 @@ class UserControllerTest {
   private String userDTOJson;
 
   UserControllerTest() {
-    userDTOJson = "{\"id\":1,\"firstName\":\"vlad\",\"secondName\":\"vlad\",\"email\":\"test@gmail.com\",\"password\":\"$2a$12$xx/TNW9/lGWqgK8GyAGSy.TKzSnLAi1ub.h0crYrL4qdFpBz75nda\",\"statusUser\":\"ACTIVE\",\"roles\":[{\"id\":1,\"name\":\"ADMIN\"}]}";
+    userDTOJson =
+        "{\"id\":1,\"firstName\":\"vlad\",\"secondName\":\"vlad\",\"email\":\"test@gmail.com\",\"password\":\"$2a$12$xx/TNW9/lGWqgK8GyAGSy.TKzSnLAi1ub.h0crYrL4qdFpBz75nda\",\"statusUser\":\"ACTIVE\",\"roles\":[{\"id\":1,\"name\":\"ADMIN\"}]}";
     mockMvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
   }
 
   @Test
   void getByIdUserWithRoles() {
     try {
-      mockMvc.perform(get("/users"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(get("/users")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id", "1"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id", "1")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test /users/1");
     }
@@ -63,28 +61,24 @@ class UserControllerTest {
   @Test
   void update() {
     try {
-      mockMvc.perform(put("/users"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(put("/users")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(put("/users")
-          .contentType(MediaType.APPLICATION_JSON_VALUE)
-          .content(userDTOJson))
+      mockMvc
+          .perform(put("/users").contentType(MediaType.APPLICATION_JSON_VALUE).content(userDTOJson))
           .andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test update user");
-
     }
   }
 
   @Test
   void save() {
     try {
-      mockMvc.perform(post("/users"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(post("/users")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(post("/users")
-          .contentType(MediaType.APPLICATION_JSON_VALUE)
-          .content(userDTOJson))
+      mockMvc
+          .perform(
+              post("/users").contentType(MediaType.APPLICATION_JSON_VALUE).content(userDTOJson))
           .andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test save user");
@@ -94,12 +88,11 @@ class UserControllerTest {
   @Test
   void deleteTest() {
     try {
-      mockMvc.perform(delete("/users"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(delete("/users")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(delete("/users")
-          .contentType(MediaType.APPLICATION_JSON_VALUE)
-          .content(userDTOJson))
+      mockMvc
+          .perform(
+              delete("/users").contentType(MediaType.APPLICATION_JSON_VALUE).content(userDTOJson))
           .andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test delete user");
@@ -109,12 +102,11 @@ class UserControllerTest {
   @Test
   void findOneByCriteriaUserWithRoles() {
     try {
-      mockMvc.perform(get("/users/findOneByCriteriaUserWithRoles"))
+      mockMvc
+          .perform(get("/users/findOneByCriteriaUserWithRoles"))
           .andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id", "1"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id", "1")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test  findOneByCriteriaUserWithRoles /users/1");
     }
@@ -123,12 +115,11 @@ class UserControllerTest {
   @Test
   void findAllByCriteriaUserWithRolesDTO() {
     try {
-      mockMvc.perform(get("/users/findAllByCriteriaUserWithRolesDTO"))
+      mockMvc
+          .perform(get("/users/findAllByCriteriaUserWithRolesDTO"))
           .andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id", "1"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id", "1")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test  findAllByCriteriaUserWithRolesDTO /users/1");
     }
@@ -137,12 +128,11 @@ class UserControllerTest {
   @Test
   void findByNotNullUserWithRolesDTO() {
     try {
-      mockMvc.perform(get("/users/findByNotNullUserWithRolesDTO"))
+      mockMvc
+          .perform(get("/users/findByNotNullUserWithRolesDTO"))
           .andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test  findByNotNullUserWithRolesDTO /users/1");
     }
@@ -151,12 +141,9 @@ class UserControllerTest {
   @Test
   void findByNullUserWithRolesDTO() {
     try {
-      mockMvc.perform(get("/users/findByNullUserWithRolesDTO"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(get("/users/findByNullUserWithRolesDTO")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test  findByNullUserWithRolesDTO /users/1");
     }
@@ -165,12 +152,9 @@ class UserControllerTest {
   @Test
   void findAndSortUserWithRolesDTO() {
     try {
-      mockMvc.perform(get("/users/findAndSortUserWithRolesDTO"))
-          .andExpect(status().isBadRequest());
+      mockMvc.perform(get("/users/findAndSortUserWithRolesDTO")).andExpect(status().isBadRequest());
 
-      mockMvc.perform(get("/users")
-          .param("id"))
-          .andExpect(status().isOk());
+      mockMvc.perform(get("/users").param("id")).andExpect(status().isOk());
     } catch (Exception e) {
       logger.error("Test  findAndSortUserWithRolesDTO /users/1");
     }

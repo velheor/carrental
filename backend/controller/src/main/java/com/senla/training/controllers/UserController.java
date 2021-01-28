@@ -21,7 +21,7 @@ public class UserController {
 
   private IUserService userService;
 
-  UserController(){}
+  UserController() {}
 
   @Autowired
   UserController(IUserService userService) {
