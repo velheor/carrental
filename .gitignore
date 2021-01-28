@@ -5,3 +5,5 @@ manifest.mf
 \build
 carrentalbd.mwb
 carrentalbd.mwb.bak
+java-google-style.xml
+init_carrenta_db_script.sql
