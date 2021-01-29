@@ -9,6 +9,10 @@
 - JUnit 5
 ### Security:
 - Based on JWT token
+### Server:
+- Tomcat
+### Logging:
+- Log4j
 ### Database:
 - Hibernate
 - Criteria API
