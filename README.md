@@ -4,11 +4,13 @@
 - Ioc
 - Security
 - MVC
-### Database:
-- Hibernate
-- MySql
 ### Testing:
 - Mockito
 - JUnit 5
 ### Security:
 - JWT token
+### Database:
+- Hibernate
+- MySql
+### Database scheme:
+![Image alt](https://github.com/velheor/carrental/blob/master/database.png)
