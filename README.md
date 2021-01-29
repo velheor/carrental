@@ -8,9 +8,15 @@
 - Mockito
 - JUnit 5
 ### Security:
-- JWT token
+- Based on JWT token
+### Server:
+- Tomcat
+### Logging:
+- Log4j
 ### Database:
 - Hibernate
+- Criteria API
+- Entity graph
 - MySql
 ### Database scheme:
 ![Image alt](https://github.com/velheor/carrental/blob/master/database.png)
