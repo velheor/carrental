@@ -10,8 +10,6 @@ public class ModelDTO {
 
   private String name;
 
-  private String manufacturerCountry;
-
   @JsonManagedReference private List<CarDTO> cars;
 
   @JsonBackReference private BrandDTO brand;
@@ -30,14 +28,6 @@ public class ModelDTO {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public String getManufacturerCountry() {
-    return manufacturerCountry;
-  }
-
-  public void setManufacturerCountry(String manufacturerCountry) {
-    this.manufacturerCountry = manufacturerCountry;
   }
 
   public List<CarDTO> getCars() {

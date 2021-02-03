@@ -21,23 +21,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "rentWithUserStatusHistoryCarModelBrand",
-      attributeNodes = {
-        @NamedAttributeNode("user"),
-        @NamedAttributeNode("statusHistoryList"),
-        @NamedAttributeNode(value = "car", subgraph = "carWithModel")
-      },
-      subgraphs = {
-        @NamedSubgraph(
-            name = "carWithModel",
-            attributeNodes = {
-              @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            }),
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")}),
-      })
+    @NamedEntityGraph(
+        name = "rentWithUserStatusHistoryCarModelBrand",
+        attributeNodes = {
+            @NamedAttributeNode("user"),
+            @NamedAttributeNode("statusHistoryList"),
+            @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+        },
+        subgraphs = {
+            @NamedSubgraph(
+                name = "carWithModel",
+                attributeNodes = {
+                    @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+                }),
+            @NamedSubgraph(
+                name = "modelWithBrand",
+                attributeNodes = {@NamedAttributeNode(value = "brand")}),
+        })
 })
 @Entity
 @Table(name = "rents")
@@ -58,16 +58,6 @@ public class Rent implements Serializable {
   private Date toDate;
 
   @Basic
-  @Column(name = "checkin_date", nullable = false)
-  @Temporal(TemporalType.DATE)
-  private Date checkinDate;
-
-  @Basic
-  @Column(name = "checkout_date", nullable = false)
-  @Temporal(TemporalType.DATE)
-  private Date checkoutDate;
-
-  @Basic
   @Column(name = "total_price", nullable = false)
   private Double totalPrice;
 
@@ -82,7 +72,8 @@ public class Rent implements Serializable {
   @OneToMany(mappedBy = "rent")
   private List<StatusHistory> statusHistoryList;
 
-  public Rent() {}
+  public Rent() {
+  }
 
   public Integer getId() {
     return id;
@@ -108,22 +99,6 @@ public class Rent implements Serializable {
     this.toDate = toDate;
   }
 
-  public Date getCheckinDate() {
-    return checkinDate;
-  }
-
-  public void setCheckinDate(Date checkinDate) {
-    this.checkinDate = checkinDate;
-  }
-
-  public Date getCheckoutDate() {
-    return checkoutDate;
-  }
-
-  public void setCheckoutDate(Date checkoutDate) {
-    this.checkoutDate = checkoutDate;
-  }
-
   public Double getTotalPrice() {
     return totalPrice;
   }
@@ -144,22 +119,20 @@ public class Rent implements Serializable {
     return id.equals(rent.id)
         && Double.compare(rent.totalPrice, totalPrice) == 0
         && Objects.equals(fromDate, rent.fromDate)
-        && Objects.equals(toDate, rent.toDate)
-        && Objects.equals(checkinDate, rent.checkinDate)
-        && Objects.equals(checkoutDate, rent.checkoutDate);
+        && Objects.equals(toDate, rent.toDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromDate, toDate, checkinDate, checkoutDate, totalPrice);
+    return Objects.hash(id, fromDate, toDate, totalPrice);
   }
 
-  public User getUsersByUsersId() {
+  public User getUser() {
     return user;
   }
 
-  public void setUsersByUsersId(User usersByUsersId) {
-    this.user = usersByUsersId;
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public Car getCar() {

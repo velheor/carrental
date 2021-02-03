@@ -36,10 +36,6 @@ public class Model implements Serializable {
   @Column(name = "name", nullable = false, length = 45)
   private String name;
 
-  @Basic
-  @Column(name = "manufacturer_country", nullable = false, length = 45)
-  private String manufacturerCountry;
-
   @OneToMany(mappedBy = "model")
   private List<Car> cars;
 
@@ -65,14 +61,6 @@ public class Model implements Serializable {
     this.name = name;
   }
 
-  public String getManufacturerCountry() {
-    return manufacturerCountry;
-  }
-
-  public void setManufacturerCountry(String manufacturerCountry) {
-    this.manufacturerCountry = manufacturerCountry;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -83,13 +71,12 @@ public class Model implements Serializable {
     }
     Model model = (Model) o;
     return id.equals(model.id)
-        && Objects.equals(name, model.name)
-        && Objects.equals(manufacturerCountry, model.manufacturerCountry);
+        && Objects.equals(name, model.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, manufacturerCountry);
+    return Objects.hash(id, name);
   }
 
   public List<Car> getCars() {

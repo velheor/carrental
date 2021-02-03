@@ -13,10 +13,6 @@ public class RentDTO {
 
   private Date toDate;
 
-  private Date checkinDate;
-
-  private Date checkoutDate;
-
   private Double totalPrice;
 
   @JsonBackReference private UserDTO user;
@@ -47,22 +43,6 @@ public class RentDTO {
 
   public void setToDate(Date toDate) {
     this.toDate = toDate;
-  }
-
-  public Date getCheckinDate() {
-    return checkinDate;
-  }
-
-  public void setCheckinDate(Date checkinDate) {
-    this.checkinDate = checkinDate;
-  }
-
-  public Date getCheckoutDate() {
-    return checkoutDate;
-  }
-
-  public void setCheckoutDate(Date checkoutDate) {
-    this.checkoutDate = checkoutDate;
   }
 
   public Double getTotalPrice() {
