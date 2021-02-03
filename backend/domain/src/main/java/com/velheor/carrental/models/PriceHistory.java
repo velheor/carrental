@@ -79,30 +79,31 @@ public class PriceHistory implements Serializable {
     this.priceDate = priceDate;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PriceHistory that = (PriceHistory) o;
-    return id.equals(that.id)
-        && Double.compare(that.price, price) == 0
-        && Objects.equals(priceDate, that.priceDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, price, priceDate);
-  }
-
   public Car getCar() {
     return car;
   }
 
   public void setCar(Car car) {
     this.car = car;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PriceHistory)) {
+      return false;
+    }
+    PriceHistory that = (PriceHistory) o;
+    return Objects.equals(getId(), that.getId())
+        && Objects.equals(getPrice(), that.getPrice())
+        && Objects.equals(getPriceDate(), that.getPriceDate())
+        && Objects.equals(getCar(), that.getCar());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getPrice(), getPriceDate(), getCar());
   }
 }

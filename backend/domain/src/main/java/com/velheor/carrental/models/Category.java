@@ -84,23 +84,6 @@ public class Category implements Serializable {
     this.name = name;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Category that = (Category) o;
-    return id.equals(that.id) && Objects.equals(name, that.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name);
-  }
-
   public List<Car> getCars() {
     return cars;
   }
@@ -123,5 +106,26 @@ public class Category implements Serializable {
 
   public void setCategories(List<Category> categories) {
     this.categories = categories;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Category)) {
+      return false;
+    }
+    Category category1 = (Category) o;
+    return Objects.equals(getId(), category1.getId())
+        && Objects.equals(getName(), category1.getName())
+        && Objects.equals(getCars(), category1.getCars())
+        && Objects.equals(getCategory(), category1.getCategory())
+        && Objects.equals(getCategories(), category1.getCategories());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getCars(), getCategory(), getCategories());
   }
 }

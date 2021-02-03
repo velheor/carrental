@@ -119,38 +119,6 @@ public class User implements Serializable {
     this.statusUser = statusUser;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof User)) {
-      return false;
-    }
-    User user = (User) o;
-    return getId().equals(user.getId())
-        && getFirstName().equals(user.getFirstName())
-        && getSecondName().equals(user.getSecondName())
-        && getEmail().equals(user.getEmail())
-        && getPassword().equals(user.getPassword())
-        && getStatusUser() == user.getStatusUser()
-        && getRoles().equals(user.getRoles())
-        && getRents().equals(user.getRents());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(
-        getId(),
-        getFirstName(),
-        getSecondName(),
-        getEmail(),
-        getPassword(),
-        getStatusUser(),
-        getRoles(),
-        getRents());
-  }
-
   public Set<Role> getRoles() {
     return roles;
   }
@@ -165,5 +133,37 @@ public class User implements Serializable {
 
   public void setRents(Set<Rent> rents) {
     this.rents = rents;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof User)) {
+      return false;
+    }
+    User user = (User) o;
+    return Objects.equals(getId(), user.getId())
+        && Objects.equals(getFirstName(), user.getFirstName())
+        && Objects.equals(getSecondName(), user.getSecondName())
+        && Objects.equals(getEmail(), user.getEmail())
+        && Objects.equals(getPassword(), user.getPassword())
+        && getStatusUser() == user.getStatusUser()
+        && Objects.equals(getRoles(), user.getRoles())
+        && Objects.equals(getRents(), user.getRents());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        getId(),
+        getFirstName(),
+        getSecondName(),
+        getEmail(),
+        getPassword(),
+        getStatusUser(),
+        getRoles(),
+        getRents());
   }
 }

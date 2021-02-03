@@ -21,23 +21,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "rentWithUserStatusHistoryCarModelBrand",
-        attributeNodes = {
-            @NamedAttributeNode("user"),
-            @NamedAttributeNode("statusHistoryList"),
-            @NamedAttributeNode(value = "car", subgraph = "carWithModel")
-        },
-        subgraphs = {
-            @NamedSubgraph(
-                name = "carWithModel",
-                attributeNodes = {
-                    @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-                }),
-            @NamedSubgraph(
-                name = "modelWithBrand",
-                attributeNodes = {@NamedAttributeNode(value = "brand")}),
-        })
+  @NamedEntityGraph(
+      name = "rentWithUserStatusHistoryCarModelBrand",
+      attributeNodes = {
+        @NamedAttributeNode("user"),
+        @NamedAttributeNode("statusHistoryList"),
+        @NamedAttributeNode(value = "car", subgraph = "carWithModel")
+      },
+      subgraphs = {
+        @NamedSubgraph(
+            name = "carWithModel",
+            attributeNodes = {
+              @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+            }),
+        @NamedSubgraph(
+            name = "modelWithBrand",
+            attributeNodes = {@NamedAttributeNode(value = "brand")}),
+      })
 })
 @Entity
 @Table(name = "rents")
@@ -72,8 +72,7 @@ public class Rent implements Serializable {
   @OneToMany(mappedBy = "rent")
   private List<StatusHistory> statusHistoryList;
 
-  public Rent() {
-  }
+  public Rent() {}
 
   public Integer getId() {
     return id;
@@ -107,26 +106,6 @@ public class Rent implements Serializable {
     this.totalPrice = totalPrice;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Rent rent = (Rent) o;
-    return id.equals(rent.id)
-        && Double.compare(rent.totalPrice, totalPrice) == 0
-        && Objects.equals(fromDate, rent.fromDate)
-        && Objects.equals(toDate, rent.toDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, fromDate, toDate, totalPrice);
-  }
-
   public User getUser() {
     return user;
   }
@@ -149,5 +128,25 @@ public class Rent implements Serializable {
 
   public void setStatusHistoryList(List<StatusHistory> statusHistoryList) {
     this.statusHistoryList = statusHistoryList;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Rent rent = (Rent) o;
+    return id.equals(rent.id)
+        && Double.compare(rent.totalPrice, totalPrice) == 0
+        && Objects.equals(fromDate, rent.fromDate)
+        && Objects.equals(toDate, rent.toDate);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, fromDate, toDate, totalPrice);
   }
 }

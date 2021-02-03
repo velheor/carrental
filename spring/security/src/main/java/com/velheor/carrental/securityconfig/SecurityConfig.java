@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private static final String ADMIN_ENDPOINT = "/**";
   private static final String USER_ENDPOINT = "/myaccount/**";
-  private static final String ALL_ENDPOINT = "/auth/**";
+  private static final String ALL_ENDPOINT = "/**";
 
   private final JwtConfigurer jwtConfigurer;
 
@@ -36,10 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(ALL_ENDPOINT)
         .permitAll()
-        .antMatchers(USER_ENDPOINT)
-        .hasAuthority("USER")
-        .antMatchers(ADMIN_ENDPOINT)
-        .hasAuthority("ADMIN")
         .anyRequest()
         .authenticated()
         .and()

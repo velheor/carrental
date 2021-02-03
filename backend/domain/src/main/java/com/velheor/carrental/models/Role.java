@@ -3,6 +3,7 @@ package com.velheor.carrental.models;
 import com.velheor.carrental.models.enums.ERole;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,5 +63,24 @@ public class Role implements Serializable {
 
   public void setUsers(List<User> users) {
     this.users = users;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Role)) {
+      return false;
+    }
+    Role role = (Role) o;
+    return Objects.equals(getId(), role.getId())
+        && getName() == role.getName()
+        && Objects.equals(getUsers(), role.getUsers());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getUsers());
   }
 }

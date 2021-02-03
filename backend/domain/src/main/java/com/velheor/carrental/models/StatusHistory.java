@@ -73,30 +73,31 @@ public class StatusHistory implements Serializable {
     this.statusDate = statusDate;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    StatusHistory that = (StatusHistory) o;
-    return id.equals(that.id)
-        && Objects.equals(name, that.name)
-        && Objects.equals(statusDate, that.statusDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, statusDate);
-  }
-
   public Rent getRent() {
     return rent;
   }
 
   public void setRent(Rent rent) {
     this.rent = rent;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof StatusHistory)) {
+      return false;
+    }
+    StatusHistory that = (StatusHistory) o;
+    return Objects.equals(getId(), that.getId())
+        && getName() == that.getName()
+        && Objects.equals(getStatusDate(), that.getStatusDate())
+        && Objects.equals(getRent(), that.getRent());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getStatusDate(), getRent());
   }
 }

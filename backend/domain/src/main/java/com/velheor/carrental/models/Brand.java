@@ -49,28 +49,30 @@ public class Brand implements Serializable {
     this.name = name;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Brand brand = (Brand) o;
-    return id.equals(brand.id) && Objects.equals(name, brand.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name);
-  }
-
   public List<Model> getModels() {
     return models;
   }
 
   public void setModels(List<Model> model) {
     this.models = model;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Brand)) {
+      return false;
+    }
+    Brand brand = (Brand) o;
+    return Objects.equals(getId(), brand.getId())
+        && Objects.equals(getName(), brand.getName())
+        && Objects.equals(getModels(), brand.getModels());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getModels());
   }
 }

@@ -124,27 +124,6 @@ public class Car implements Serializable {
     this.transmission = transmission;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Car car = (Car) o;
-    return id.equals(car.id)
-        && transmission == car.transmission
-        && Objects.equals(carType, car.carType)
-        && Objects.equals(fuelType, car.fuelType)
-        && Objects.equals(productionDate, car.productionDate);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, carType, fuelType, productionDate, transmission);
-  }
-
   public Model getModel() {
     return model;
   }
@@ -175,5 +154,39 @@ public class Car implements Serializable {
 
   public void setRents(List<Rent> rents) {
     this.rents = rents;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Car)) {
+      return false;
+    }
+    Car car = (Car) o;
+    return Objects.equals(getId(), car.getId())
+        && Objects.equals(getCarType(), car.getCarType())
+        && getFuelType() == car.getFuelType()
+        && Objects.equals(getProductionDate(), car.getProductionDate())
+        && Objects.equals(getTransmission(), car.getTransmission())
+        && Objects.equals(getModel(), car.getModel())
+        && Objects.equals(getCategory(), car.getCategory())
+        && Objects.equals(priceHistoryList, car.priceHistoryList)
+        && Objects.equals(getRents(), car.getRents());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        getId(),
+        getCarType(),
+        getFuelType(),
+        getProductionDate(),
+        getTransmission(),
+        getModel(),
+        getCategory(),
+        priceHistoryList,
+        getRents());
   }
 }

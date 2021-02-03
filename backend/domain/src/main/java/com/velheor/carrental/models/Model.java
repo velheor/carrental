@@ -61,24 +61,6 @@ public class Model implements Serializable {
     this.name = name;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Model model = (Model) o;
-    return id.equals(model.id)
-        && Objects.equals(name, model.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name);
-  }
-
   public List<Car> getCars() {
     return cars;
   }
@@ -93,5 +75,25 @@ public class Model implements Serializable {
 
   public void setBrand(Brand brand) {
     this.brand = brand;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Model)) {
+      return false;
+    }
+    Model model = (Model) o;
+    return Objects.equals(getId(), model.getId())
+        && Objects.equals(getName(), model.getName())
+        && Objects.equals(getCars(), model.getCars())
+        && Objects.equals(getBrand(), model.getBrand());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getCars(), getBrand());
   }
 }
