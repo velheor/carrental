@@ -3,8 +3,10 @@ package com.velheor.carrental.service.impl;
 import com.velheor.carrental.dao.api.ICarDAO;
 import com.velheor.carrental.dto.CarDTO;
 import com.velheor.carrental.models.Car;
+import com.velheor.carrental.models.Rent;
 import com.velheor.carrental.objectmapper.ObjectMapperUtils;
 import com.velheor.carrental.service.api.ICarService;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.transaction.Transactional;
@@ -75,6 +77,16 @@ public class CarService implements ICarService {
         carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
             DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
         CarDTO.class);
+  }
+
+  @Override
+  public Boolean isAvailableCarOnDate(int id, Date fromDate, Date toDate) {
+    for (Rent rent : carDAO.findByIdCarWithRents(id).getRents()) {
+      if (rent.getFromDate().compareTo(fromDate) <= 0 && rent.getToDate().compareTo(toDate) >= 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override

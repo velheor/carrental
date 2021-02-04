@@ -40,17 +40,17 @@ public class RentController {
 
   @PutMapping
   public RentDTO update(@RequestBody RentDTO rentDTO) {
-    return rentService.update((RentDTO) rentDTO);
+    return rentService.update(rentDTO);
   }
 
   @PostMapping
   public RentDTO save(@RequestBody RentDTO rentDTO) {
-    return rentService.create((RentDTO) rentDTO);
+    return rentService.create(rentDTO);
   }
 
   @DeleteMapping
   public RentDTO delete(@RequestBody RentDTO rentDTO) {
-    rentService.delete((RentDTO) rentDTO);
+    rentService.delete(rentDTO);
     return rentDTO;
   }
 

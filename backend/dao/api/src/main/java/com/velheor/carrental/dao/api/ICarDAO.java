@@ -9,6 +9,8 @@ public interface ICarDAO extends IGenericDAO<Car> {
 
   Car findByIdCarWithModelCategoryPriceHistoryBrand(int id);
 
+  Car findByIdCarWithRents(int id);
+
   List<Car> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap);
 

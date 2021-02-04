@@ -17,6 +17,12 @@ public class CarDAO extends EntityGraphAbstractDAO<Car> implements ICarDAO {
   }
 
   @Override
+  public Car findByIdCarWithRents(int id) {
+    super.setEntityGraphName("carWithRents");
+    return super.findById(id);
+  }
+
+  @Override
   public List<Car> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
       Map<String, Direction> fieldDirectionMap) {
     super.setEntityGraphName("carWithModelAndCategoryAndPriceHistoryAndBrand");

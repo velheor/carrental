@@ -1,11 +1,11 @@
 package com.velheor.carrental.service.impl;
 
 import com.velheor.carrental.dao.api.ICarDAO;
-import com.velheor.carrental.dao.api.IPriceHistoryDAO;
 import com.velheor.carrental.dao.api.IRentDAO;
 import com.velheor.carrental.dto.RentDTO;
 import com.velheor.carrental.models.Rent;
 import com.velheor.carrental.objectmapper.ObjectMapperUtils;
+import com.velheor.carrental.service.api.ICarService;
 import com.velheor.carrental.service.api.IRentService;
 import java.util.List;
 import java.util.Map;
@@ -19,22 +19,18 @@ public class RentService implements IRentService {
 
   private final IRentDAO rentDAO;
 
-  private final ICarDAO carDAO;
-
-  private final IPriceHistoryDAO priceHistoryDAO;
+  private final ICarService carService;
 
   private final ObjectMapperUtils objectMapperUtils;
 
   @Autowired
   RentService(
       IRentDAO rentDAO,
-      ICarDAO carDAO,
-      IPriceHistoryDAO priceHistoryDAO,
+      ICarService carService,
       ObjectMapperUtils objectMapperUtils) {
-    this.priceHistoryDAO = priceHistoryDAO;
-    this.objectMapperUtils = objectMapperUtils;
     this.rentDAO = rentDAO;
-    this.carDAO = carDAO;
+    this.carService = carService;
+    this.objectMapperUtils = objectMapperUtils;
   }
 
   @Override
@@ -91,8 +87,11 @@ public class RentService implements IRentService {
 
   @Override
   public RentDTO create(RentDTO entityDTO) {
-    return objectMapperUtils.map(
-        rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
+    if (carService.isAvailableCarOnDate(entityDTO.getCar().getId(), entityDTO.getFromDate(), entityDTO.getToDate())) {
+      return objectMapperUtils.map(
+          rentDAO.create(objectMapperUtils.map(entityDTO, Rent.class)), RentDTO.class);
+    }
+    return null;
   }
 
   @Override

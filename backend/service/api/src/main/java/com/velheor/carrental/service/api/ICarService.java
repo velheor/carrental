@@ -1,6 +1,7 @@
 package com.velheor.carrental.service.api;
 
 import com.velheor.carrental.dto.CarDTO;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,6 @@ public interface ICarService extends IGenericService<CarDTO> {
 
   List<CarDTO> findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
+
+  Boolean isAvailableCarOnDate(int id, Date dateFrom, Date dateTo);
 }
