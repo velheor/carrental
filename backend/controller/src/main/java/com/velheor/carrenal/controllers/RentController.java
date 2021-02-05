@@ -5,6 +5,8 @@ import com.velheor.carrental.service.api.IRentService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +54,16 @@ public class RentController {
   public RentDTO delete(@RequestBody RentDTO rentDTO) {
     rentService.delete(rentDTO);
     return rentDTO;
+  }
+
+  @PutMapping("/checkIn/{id}")
+  public RentDTO checkIn(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetails userDetails) {
+    return rentService.checkIn(userDetails, id);
+  }
+
+  @PutMapping("/checkOut/{id}")
+  public RentDTO checkOut(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetails userDetails) {
+    return rentService.checkOut(userDetails, id);
   }
 
   @DeleteMapping("/{id}")

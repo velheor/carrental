@@ -9,6 +9,8 @@ public interface IUserDAO extends ICrudDAO<User> {
 
   User findByIdUserWithRoles(int id);
 
+  User findByIdUserWithRents(int id);
+
   List<User> findAllAndSortWithDirectionUserWithRoles(Map<String, Direction> fieldDirectionMap);
 
   User findOneByCriteriaUserWithRoles(Map<String, Object> fieldCriterionMap);
@@ -25,4 +27,5 @@ public interface IUserDAO extends ICrudDAO<User> {
   User findByEmailUserWithRoles(String email);
 
   User findByEmailUserWithRents(String email);
+  
 }

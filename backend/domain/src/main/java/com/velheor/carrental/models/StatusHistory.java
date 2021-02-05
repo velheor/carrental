@@ -49,6 +49,12 @@ public class StatusHistory implements Serializable {
 
   public StatusHistory() {}
 
+  public StatusHistory(int id, EStatusHistory name, Date date) {
+    this.id = id;
+    this.name = name;
+    this.statusDate = date;
+  }
+
   public Integer getId() {
     return id;
   }

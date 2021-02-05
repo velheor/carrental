@@ -135,18 +135,22 @@ public class Rent implements Serializable {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Rent)) {
       return false;
     }
     Rent rent = (Rent) o;
-    return id.equals(rent.id)
-        && Double.compare(rent.totalPrice, totalPrice) == 0
-        && Objects.equals(fromDate, rent.fromDate)
-        && Objects.equals(toDate, rent.toDate);
+    return Objects.equals(getId(), rent.getId()) &&
+        Objects.equals(getFromDate(), rent.getFromDate()) &&
+        Objects.equals(getToDate(), rent.getToDate()) &&
+        Objects.equals(getTotalPrice(), rent.getTotalPrice()) &&
+        Objects.equals(getUser(), rent.getUser()) &&
+        Objects.equals(getCar(), rent.getCar()) &&
+        Objects.equals(getStatusHistoryList(), rent.getStatusHistoryList());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromDate, toDate, totalPrice);
+    return Objects.hash(getId(), getFromDate(), getToDate(), getTotalPrice(), getUser(), getCar(),
+        getStatusHistoryList());
   }
 }

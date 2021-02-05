@@ -1,8 +1,12 @@
 package com.velheor.carrental.service.api;
 
 import com.velheor.carrental.dto.RentDTO;
+import com.velheor.carrental.dto.UserDTO;
+import com.velheor.carrental.models.Rent;
+import com.velheor.carrental.models.User;
 import java.util.List;
 import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface IRentService extends IGenericService<RentDTO> {
 
@@ -23,4 +27,8 @@ public interface IRentService extends IGenericService<RentDTO> {
 
   List<RentDTO> findAndSortRentWithUserStatusHistoryCarModelBrandDTO(
       Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
+  
+  RentDTO checkIn(UserDetails userDetails, int id);
+  
+  RentDTO checkOut(UserDetails userDetails, int id);
 }

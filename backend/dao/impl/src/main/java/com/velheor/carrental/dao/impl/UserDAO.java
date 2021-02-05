@@ -17,6 +17,12 @@ public class UserDAO extends EntityGraphAbstractDAO<User> implements IUserDAO {
   }
 
   @Override
+  public User findByIdUserWithRents(int id){
+    super.setEntityGraphName("userWithRents");
+    return super.findById(id);
+  }
+
+  @Override
   public List<User> findAllAndSortWithDirectionUserWithRoles(
       Map<String, Direction> fieldDirectionMap) {
     super.setEntityGraphName("userWithRoles");
