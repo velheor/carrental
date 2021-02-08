@@ -22,21 +22,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "carWithModelAndCategoryAndPriceHistoryAndBrand",
-      attributeNodes = {
-        @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-        @NamedAttributeNode("category"),
-        @NamedAttributeNode("priceHistoryList")
-      },
-      subgraphs = {
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
-      }),
-  @NamedEntityGraph(
-      name = "carWithRents",
-      attributeNodes = {@NamedAttributeNode(value = "rents")})
+    @NamedEntityGraph(
+        name = "carWithModelCategoryPriceHistoryCountryBrand",
+        attributeNodes = {
+            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
+            @NamedAttributeNode("category"),
+            @NamedAttributeNode("priceHistoryList"),
+            @NamedAttributeNode("manufacturerCountry")
+        },
+        subgraphs = {
+            @NamedSubgraph(
+                name = "modelWithBrand",
+                attributeNodes = {@NamedAttributeNode(value = "brand")})
+        }),
+    @NamedEntityGraph(
+        name = "carWithRents",
+        attributeNodes = {@NamedAttributeNode(value = "rents")})
 })
 @Entity
 @Table(name = "cars")
@@ -64,6 +65,10 @@ public class Car implements Serializable {
   private Boolean transmission;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "manufacturer_country_id", referencedColumnName = "id", nullable = false)
+  private ManufacturerCountry manufacturerCountry;
+
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "models_id", referencedColumnName = "id", nullable = false)
   private Model model;
 
@@ -82,7 +87,8 @@ public class Car implements Serializable {
   @OneToMany(mappedBy = "car")
   private List<Rent> rents;
 
-  public Car() {}
+  public Car() {
+  }
 
   public Integer getId() {
     return id;
@@ -124,6 +130,14 @@ public class Car implements Serializable {
     this.transmission = transmission;
   }
 
+  public ManufacturerCountry getManufacturerCountry() {
+    return manufacturerCountry;
+  }
+
+  public void setManufacturerCountry(ManufacturerCountry manufacturerCountry) {
+    this.manufacturerCountry = manufacturerCountry;
+  }
+
   public Model getModel() {
     return model;
   }
@@ -140,11 +154,12 @@ public class Car implements Serializable {
     this.category = category;
   }
 
-  public List<PriceHistory> getPriceHistories() {
+  public List<PriceHistory> getPriceHistoryList() {
     return priceHistoryList;
   }
 
-  public void setPriceHistories(List<PriceHistory> priceHistoryList) {
+  public void setPriceHistoryList(
+      List<PriceHistory> priceHistoryList) {
     this.priceHistoryList = priceHistoryList;
   }
 
@@ -165,28 +180,22 @@ public class Car implements Serializable {
       return false;
     }
     Car car = (Car) o;
-    return Objects.equals(getId(), car.getId())
-        && Objects.equals(getCarType(), car.getCarType())
-        && getFuelType() == car.getFuelType()
-        && Objects.equals(getProductionDate(), car.getProductionDate())
-        && Objects.equals(getTransmission(), car.getTransmission())
-        && Objects.equals(getModel(), car.getModel())
-        && Objects.equals(getCategory(), car.getCategory())
-        && Objects.equals(priceHistoryList, car.priceHistoryList)
-        && Objects.equals(getRents(), car.getRents());
+    return Objects.equals(getId(), car.getId()) &&
+        Objects.equals(getCarType(), car.getCarType()) &&
+        getFuelType() == car.getFuelType() &&
+        Objects.equals(getProductionDate(), car.getProductionDate()) &&
+        Objects.equals(getTransmission(), car.getTransmission()) &&
+        Objects.equals(getManufacturerCountry(), car.getManufacturerCountry()) &&
+        Objects.equals(getModel(), car.getModel()) &&
+        Objects.equals(getCategory(), car.getCategory()) &&
+        Objects.equals(getPriceHistoryList(), car.getPriceHistoryList()) &&
+        Objects.equals(getRents(), car.getRents());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        getId(),
-        getCarType(),
-        getFuelType(),
-        getProductionDate(),
-        getTransmission(),
-        getModel(),
-        getCategory(),
-        priceHistoryList,
-        getRents());
+    return Objects
+        .hash(getId(), getCarType(), getFuelType(), getProductionDate(), getTransmission(),
+            getManufacturerCountry(), getModel(), getCategory(), getPriceHistoryList(), getRents());
   }
 }
