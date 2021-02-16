@@ -1,59 +1,35 @@
 package com.velheor.carrental.models;
 
 import com.velheor.carrental.models.enums.EStatusHistory;
-import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "statusHistoryWithRent",
-      attributeNodes = {@NamedAttributeNode(value = "rent")})
-})
 @Entity
-@Table(name = "status_history")
-public class StatusHistory implements Serializable {
+@Table(name = "status_history", schema = "carrental")
+public class StatusHistory {
 
   @Id
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
+  @Column(name = "id", nullable = false)
   private Integer id;
 
   @Basic
   @Column(name = "name", nullable = false, length = 45)
-  @Enumerated(value = EnumType.STRING)
   private EStatusHistory name;
 
   @Basic
-  @Column(name = "status_date", nullable = false, length = 45)
-  @Temporal(TemporalType.DATE)
+  @Column(name = "status_date", nullable = false)
   private Date statusDate;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+  @ManyToOne
+  @JoinColumn(name = "rents_id", referencedColumnName = "id", nullable = false)
   private Rent rent;
-
-  public StatusHistory() {}
-
-  public StatusHistory(int id, EStatusHistory name, Date date) {
-    this.id = id;
-    this.name = name;
-    this.statusDate = date;
-  }
 
   public Integer getId() {
     return id;
@@ -79,31 +55,30 @@ public class StatusHistory implements Serializable {
     this.statusDate = statusDate;
   }
 
-  public Rent getRent() {
-    return rent;
-  }
-
-  public void setRent(Rent rent) {
-    this.rent = rent;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof StatusHistory)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     StatusHistory that = (StatusHistory) o;
-    return Objects.equals(getId(), that.getId())
-        && getName() == that.getName()
-        && Objects.equals(getStatusDate(), that.getStatusDate())
-        && Objects.equals(getRent(), that.getRent());
+    return id.equals(that.id)
+        && Objects.equals(name, that.name)
+        && Objects.equals(statusDate, that.statusDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getName(), getStatusDate(), getRent());
+    return Objects.hash(id, name, statusDate);
+  }
+
+  public Rent getRent() {
+    return rent;
+  }
+
+  public void setRent(Rent rentsByRentsId) {
+    this.rent = rentsByRentsId;
   }
 }

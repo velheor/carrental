@@ -1,45 +1,28 @@
 package com.velheor.carrental.models;
 
-import com.velheor.carrental.models.enums.ERole;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 
-@NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "roleWithUsers",
-      attributeNodes = {@NamedAttributeNode(value = "users")})
-})
 @Entity
-@Table(name = "roles")
-public class Role implements Serializable {
+@Table(name = "roles", schema = "carrental")
+public class Role {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
   private Integer id;
 
   @Basic
   @Column(name = "name", nullable = false, length = 45)
-  @Enumerated(value = EnumType.STRING)
-  private ERole name;
+  private String name;
 
   @ManyToMany(mappedBy = "roles")
   private List<User> users;
-
-  public Role() {}
 
   public Integer getId() {
     return id;
@@ -49,12 +32,29 @@ public class Role implements Serializable {
     this.id = id;
   }
 
-  public ERole getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(ERole name) {
+  public void setName(String name) {
     this.name = name;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Role role = (Role) o;
+    return id.equals(role.id) && Objects.equals(name, role.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name);
   }
 
   public List<User> getUsers() {
@@ -63,24 +63,5 @@ public class Role implements Serializable {
 
   public void setUsers(List<User> users) {
     this.users = users;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Role)) {
-      return false;
-    }
-    Role role = (Role) o;
-    return Objects.equals(getId(), role.getId())
-        && getName() == role.getName()
-        && Objects.equals(getUsers(), role.getUsers());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getName(), getUsers());
   }
 }

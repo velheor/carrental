@@ -1,40 +1,25 @@
 package com.velheor.carrental.models;
 
 import com.velheor.carrental.models.enums.EStatusUser;
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "userWithRoles",
-      attributeNodes = {@NamedAttributeNode(value = "roles")}),
-  @NamedEntityGraph(
-      name = "userWithRents",
-      attributeNodes = {@NamedAttributeNode(value = "rents")})
-})
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "users", schema = "carrental")
+public class User {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Integer id;
 
@@ -43,21 +28,20 @@ public class User implements Serializable {
   private String firstName;
 
   @Basic
-  @Column(name = "second_name", nullable = false, length = 45)
-  private String secondName;
+  @Column(name = "last_name", nullable = false, length = 45)
+  private String lastName;
 
   @Basic
   @Column(name = "email", nullable = false, length = 45)
   private String email;
 
   @Basic
-  @Column(name = "password", nullable = false, length = 45)
+  @Column(name = "password", nullable = false, length = 255)
   private String password;
 
   @Basic
-  @Enumerated(value = EnumType.STRING)
-  @Column(name = "status", nullable = false, length = 45)
-  private EStatusUser statusUser;
+  @Column(name = "status", nullable = false, length = 20)
+  private EStatusUser status;
 
   @ManyToMany
   @JoinTable(
@@ -67,24 +51,14 @@ public class User implements Serializable {
   private Set<Role> roles;
 
   @OneToMany(mappedBy = "user")
-  private Set<Rent> rents;
+  private List<Rent> rentsById;
 
-  public User() {}
-
-  public Integer getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(int id) {
     this.id = id;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public String getFirstName() {
@@ -95,12 +69,12 @@ public class User implements Serializable {
     this.firstName = firstName;
   }
 
-  public String getSecondName() {
-    return secondName;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setSecondName(String secondName) {
-    this.secondName = secondName;
+  public void setLastName(String secondName) {
+    this.lastName = secondName;
   }
 
   public String getEmail() {
@@ -111,12 +85,20 @@ public class User implements Serializable {
     this.email = email;
   }
 
-  public EStatusUser getStatusUser() {
-    return statusUser;
+  public String getPassword() {
+    return password;
   }
 
-  public void setStatusUser(EStatusUser statusUser) {
-    this.statusUser = statusUser;
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public EStatusUser getStatus() {
+    return status;
+  }
+
+  public void setStatus(EStatusUser status) {
+    this.status = status;
   }
 
   public Set<Role> getRoles() {
@@ -127,43 +109,34 @@ public class User implements Serializable {
     this.roles = roles;
   }
 
-  public Set<Rent> getRents() {
-    return rents;
-  }
-
-  public void setRents(Set<Rent> rents) {
-    this.rents = rents;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof User)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     User user = (User) o;
-    return Objects.equals(getId(), user.getId())
-        && Objects.equals(getFirstName(), user.getFirstName())
-        && Objects.equals(getSecondName(), user.getSecondName())
-        && Objects.equals(getEmail(), user.getEmail())
-        && Objects.equals(getPassword(), user.getPassword())
-        && getStatusUser() == user.getStatusUser()
-        && Objects.equals(getRoles(), user.getRoles())
-        && Objects.equals(getRents(), user.getRents());
+    return id.equals(user.id)
+        && Objects.equals(firstName, user.firstName)
+        && Objects.equals(lastName, user.lastName)
+        && Objects.equals(email, user.email)
+        && Objects.equals(password, user.password)
+        && Objects.equals(status, user.status)
+        && Objects.equals(roles, user.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        getId(),
-        getFirstName(),
-        getSecondName(),
-        getEmail(),
-        getPassword(),
-        getStatusUser(),
-        getRoles(),
-        getRents());
+    return Objects.hash(id, firstName, lastName, email, password, status);
+  }
+
+  public List<Rent> getRentsById() {
+    return rentsById;
+  }
+
+  public void setRentsById(List<Rent> rentsById) {
+    this.rentsById = rentsById;
   }
 }

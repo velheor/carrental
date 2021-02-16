@@ -1,47 +1,23 @@
 package com.velheor.carrental.models;
 
 import com.velheor.carrental.models.enums.EFuelType;
-import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = "carWithModelCategoryPriceHistoryCountryBrand",
-        attributeNodes = {
-            @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            @NamedAttributeNode("category"),
-            @NamedAttributeNode("priceHistoryList"),
-            @NamedAttributeNode("manufacturerCountry")
-        },
-        subgraphs = {
-            @NamedSubgraph(
-                name = "modelWithBrand",
-                attributeNodes = {@NamedAttributeNode(value = "brand")})
-        }),
-    @NamedEntityGraph(
-        name = "carWithRents",
-        attributeNodes = {@NamedAttributeNode(value = "rents")})
-})
 @Entity
-@Table(name = "cars")
-public class Car implements Serializable {
+@Table(name = "cars", schema = "carrental")
+public class Car {
 
   @Id
   @Column(name = "id", nullable = false)
@@ -53,7 +29,6 @@ public class Car implements Serializable {
 
   @Basic
   @Column(name = "fuel_type", nullable = false, length = 25)
-  @Enumerated(value = EnumType.STRING)
   private EFuelType fuelType;
 
   @Basic
@@ -65,30 +40,22 @@ public class Car implements Serializable {
   private Boolean transmission;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "manufacturer_country_id", referencedColumnName = "id", nullable = false)
-  private ManufacturerCountry manufacturerCountry;
-
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "models_id", referencedColumnName = "id", nullable = false)
   private Model model;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(
-      name = "id",
-      referencedColumnName = "id",
-      nullable = false,
-      insertable = false,
-      updatable = false)
+  @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
   private Category category;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "manufacturer_country_id", referencedColumnName = "id", nullable = false)
+  private ManufacturerCountry manufacturerCountry;
+
   @OneToMany(mappedBy = "car")
-  private List<PriceHistory> priceHistoryList;
+  private List<PriceHistory> priceHistories;
 
   @OneToMany(mappedBy = "car")
   private List<Rent> rents;
-
-  public Car() {
-  }
 
   public Integer getId() {
     return id;
@@ -130,72 +97,65 @@ public class Car implements Serializable {
     this.transmission = transmission;
   }
 
-  public ManufacturerCountry getManufacturerCountry() {
-    return manufacturerCountry;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Car car = (Car) o;
+    return id.equals(car.id)
+        && transmission == car.transmission
+        && Objects.equals(carType, car.carType)
+        && Objects.equals(fuelType, car.fuelType)
+        && Objects.equals(productionDate, car.productionDate);
   }
 
-  public void setManufacturerCountry(ManufacturerCountry manufacturerCountry) {
-    this.manufacturerCountry = manufacturerCountry;
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, carType, fuelType, productionDate, transmission);
   }
 
   public Model getModel() {
     return model;
   }
 
-  public void setModel(Model model) {
-    this.model = model;
+  public void setModel(Model modelsByModelId) {
+    this.model = modelsByModelId;
   }
 
   public Category getCategory() {
     return category;
   }
 
-  public void setCategory(Category category) {
-    this.category = category;
+  public void setCategory(Category categoriesByCategroriesId) {
+    this.category = categoriesByCategroriesId;
   }
 
-  public List<PriceHistory> getPriceHistoryList() {
-    return priceHistoryList;
+  public ManufacturerCountry getManufacturerCountry() {
+    return manufacturerCountry;
   }
 
-  public void setPriceHistoryList(
-      List<PriceHistory> priceHistoryList) {
-    this.priceHistoryList = priceHistoryList;
+  public void setManufacturerCountry(
+      ManufacturerCountry manufacturerCountryByManufacturerCountryId) {
+    this.manufacturerCountry = manufacturerCountryByManufacturerCountryId;
   }
 
-  public List<Rent> getRents() {
+  public List<PriceHistory> getPriceHistories() {
+    return priceHistories;
+  }
+
+  public void setPriceHistories(List<PriceHistory> priceHistoriesById) {
+    this.priceHistories = priceHistoriesById;
+  }
+
+  public Collection<Rent> getRents() {
     return rents;
   }
 
-  public void setRents(List<Rent> rents) {
-    this.rents = rents;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Car)) {
-      return false;
-    }
-    Car car = (Car) o;
-    return Objects.equals(getId(), car.getId()) &&
-        Objects.equals(getCarType(), car.getCarType()) &&
-        getFuelType() == car.getFuelType() &&
-        Objects.equals(getProductionDate(), car.getProductionDate()) &&
-        Objects.equals(getTransmission(), car.getTransmission()) &&
-        Objects.equals(getManufacturerCountry(), car.getManufacturerCountry()) &&
-        Objects.equals(getModel(), car.getModel()) &&
-        Objects.equals(getCategory(), car.getCategory()) &&
-        Objects.equals(getPriceHistoryList(), car.getPriceHistoryList()) &&
-        Objects.equals(getRents(), car.getRents());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects
-        .hash(getId(), getCarType(), getFuelType(), getProductionDate(), getTransmission(),
-            getManufacturerCountry(), getModel(), getCategory(), getPriceHistoryList(), getRents());
+  public void setRents(List<Rent> rentsById) {
+    this.rents = rentsById;
   }
 }

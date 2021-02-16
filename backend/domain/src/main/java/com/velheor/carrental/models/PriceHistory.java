@@ -1,73 +1,48 @@
 package com.velheor.carrental.models;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 
-@NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "priceHistoryWithCarModelBrand",
-      attributeNodes = {
-        @NamedAttributeNode(value = "car", subgraph = "carWithModel"),
-      },
-      subgraphs = {
-        @NamedSubgraph(
-            name = "carWithModel",
-            attributeNodes = {
-              @NamedAttributeNode(value = "model", subgraph = "modelWithBrand"),
-            }),
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
-      })
-})
 @Entity
-@Table(name = "price_history")
-public class PriceHistory implements Serializable {
+@Table(name = "price_history", schema = "carrental")
+public class PriceHistory {
 
   @Id
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
+  @Column(name = "id", nullable = false)
   private Integer id;
 
   @Basic
-  @Column(name = "price", nullable = false)
+  @Column(name = "price", nullable = false, precision = 0)
   private Double price;
 
   @Basic
   @Column(name = "price_date", nullable = false)
   private Date priceDate;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+  @ManyToOne
+  @JoinColumn(name = "cars_id", referencedColumnName = "id", nullable = false)
   private Car car;
 
-  public PriceHistory() {}
-
-  public Integer getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(int id) {
     this.id = id;
   }
 
-  public Double getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(Double price) {
+  public void setPrice(double price) {
     this.price = price;
   }
 
@@ -79,31 +54,30 @@ public class PriceHistory implements Serializable {
     this.priceDate = priceDate;
   }
 
-  public Car getCar() {
-    return car;
-  }
-
-  public void setCar(Car car) {
-    this.car = car;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PriceHistory)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     PriceHistory that = (PriceHistory) o;
-    return Objects.equals(getId(), that.getId())
-        && Objects.equals(getPrice(), that.getPrice())
-        && Objects.equals(getPriceDate(), that.getPriceDate())
-        && Objects.equals(getCar(), that.getCar());
+    return id.equals(that.id)
+        && Double.compare(that.price, price) == 0
+        && Objects.equals(priceDate, that.priceDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getPrice(), getPriceDate(), getCar());
+    return Objects.hash(id, price, priceDate);
+  }
+
+  public Car getCar() {
+    return car;
+  }
+
+  public void setCar(Car carsByCarsId) {
+    this.car = carsByCarsId;
   }
 }

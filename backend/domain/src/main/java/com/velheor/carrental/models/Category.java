@@ -1,6 +1,5 @@
 package com.velheor.carrental.models;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -10,43 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
-import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@NamedEntityGraphs({
-  @NamedEntityGraph(
-      name = "categoryWithCarsModelBrand",
-      attributeNodes = {@NamedAttributeNode(value = "cars", subgraph = "carsWithModel")},
-      subgraphs = {
-        @NamedSubgraph(
-            name = "carsWithModel",
-            attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
-      }),
-  @NamedEntityGraph(
-      name = "categoryWithCategoriesCarsModelBrand",
-      attributeNodes = {
-        @NamedAttributeNode(value = "categories"),
-        @NamedAttributeNode(value = "cars", subgraph = "carsWithModel")
-      },
-      subgraphs = {
-        @NamedSubgraph(
-            name = "carsWithModel",
-            attributeNodes = {@NamedAttributeNode(value = "model", subgraph = "modelWithBrand")}),
-        @NamedSubgraph(
-            name = "modelWithBrand",
-            attributeNodes = {@NamedAttributeNode(value = "brand")})
-      })
-})
 @Entity
-@Table(name = "categories")
-public class Category implements Serializable {
+@Table(name = "categories", schema = "carrental")
+public class Category {
 
   @Id
   @Column(name = "id", nullable = false)
@@ -60,19 +28,17 @@ public class Category implements Serializable {
   private List<Car> cars;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "categories_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "categories_id", referencedColumnName = "id")
   private Category category;
 
   @OneToMany(mappedBy = "category")
   private List<Category> categories;
 
-  public Category() {}
-
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -82,6 +48,25 @@ public class Category implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Category category = (Category) o;
+    return id.equals(category.id)
+        && Objects.equals(name, category.name)
+        && Objects.equals(this.category, category.category);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, category);
   }
 
   public List<Car> getCars() {
@@ -106,26 +91,5 @@ public class Category implements Serializable {
 
   public void setCategories(List<Category> categories) {
     this.categories = categories;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Category)) {
-      return false;
-    }
-    Category category1 = (Category) o;
-    return Objects.equals(getId(), category1.getId())
-        && Objects.equals(getName(), category1.getName())
-        && Objects.equals(getCars(), category1.getCars())
-        && Objects.equals(getCategory(), category1.getCategory())
-        && Objects.equals(getCategories(), category1.getCategories());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getName(), getCars(), getCategory(), getCategories());
   }
 }

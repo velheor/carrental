@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "manufacturer_country", schema = "carrental")
 public class ManufacturerCountry {
 
   @Id
@@ -17,11 +21,8 @@ public class ManufacturerCountry {
   @Column(name = "name", nullable = false, length = 45)
   private String name;
 
-  @OneToMany(mappedBy = "manufacturer_country_id")
+  @OneToMany(mappedBy = "manufacturerCountry")
   private List<Car> cars;
-
-  public ManufacturerCountry() {
-  }
 
   public Integer getId() {
     return id;
@@ -39,30 +40,28 @@ public class ManufacturerCountry {
     this.name = name;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ManufacturerCountry that = (ManufacturerCountry) o;
+    return id.equals(that.id) && Objects.equals(name, that.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name);
+  }
+
   public List<Car> getCars() {
     return cars;
   }
 
   public void setCars(List<Car> cars) {
     this.cars = cars;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof ManufacturerCountry)) {
-      return false;
-    }
-    ManufacturerCountry that = (ManufacturerCountry) o;
-    return Objects.equals(getId(), that.getId()) &&
-        Objects.equals(getName(), that.getName()) &&
-        Objects.equals(getCars(), that.getCars());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getName(), getCars());
   }
 }
