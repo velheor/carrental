@@ -1,7 +1,6 @@
 package com.velheor.carrental.models;
 
 import com.velheor.carrental.models.enums.EStatusUser;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;

@@ -1,26 +1,8 @@
 package com.velheor.carrental.dao.api;
 
 import com.velheor.carrental.models.PriceHistory;
-import com.velheor.carrental.models.enums.Direction;
-import java.util.List;
-import java.util.Map;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface IPriceHistoryDAO extends IGenericDAO<PriceHistory> {
-
-  PriceHistory findByIdPriceHistoryWithCarModelBrand(int id);
-
-  List<PriceHistory> findAllAndSortWithDirectionPriceHistoryWithCarModelBrand(
-      Map<String, Direction> fieldDirectionMap);
-
-  PriceHistory findOneByCriteriaPriceHistoryWithCarModelBrand(Map<String, Object> fieldCriteriaMap);
-
-  List<PriceHistory> findAllByCriteriaPriceHistoryWithCarModelBrand(
-      Map<String, Object> fieldCriteriaMap);
-
-  List<PriceHistory> findByNotNullPriceHistoryWithCarModelBrand(List<String> fields);
-
-  List<PriceHistory> findByNullPriceHistoryWithCarModelBrand(List<String> fields);
-
-  List<PriceHistory> findAndSortPriceHistoryWithCarModelBrand(
-      Map<String, Direction> fieldDirectionMap, Map<String, Object> fieldCriteriaMap);
-}
+@Repository
+public interface IPriceHistoryDAO extends JpaRepository<PriceHistory, Integer> {}

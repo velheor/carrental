@@ -1,4 +1,4 @@
-package com.velheor.carrental.hiberconfig;
+package com.velheor.carrental;
 
 import com.google.common.base.Preconditions;
 import java.util.Properties;

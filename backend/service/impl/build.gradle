@@ -4,7 +4,7 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
 
-    implementation project(':backend:dao:daoApi'), project(':backend:dao:daoImpl'),
-            project(':backend:domain'), project(':backend:dto'), project(':backend:utils'),
+    implementation project(':backend:dao:daoApi'), project(':backend:domain'),
+            project(':backend:dto'), project(':backend:utils'),
             project(':backend:service:serviceApi'), project(':spring:security')
 }
