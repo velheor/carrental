@@ -1,8 +1,8 @@
 package com.velheor.carrental.dao.api;
 
-import com.velheor.carrental.models.Rent;
+import com.velheor.carrental.models.StatusHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IRentDAO extends JpaRepository<Rent, Integer> {}
+public interface StatusHistoryRepository extends JpaRepository<StatusHistory, Integer> {}

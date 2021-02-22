@@ -1,8 +1,10 @@
 package com.velheor.carrental.dao.api;
 
-import com.velheor.carrental.models.Brand;
+import com.velheor.carrental.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IBrandDAO extends JpaRepository<Brand, Integer> {}
+public interface UserRepository extends JpaRepository<User, Integer> {
+  User findByEmail(String email);
+}

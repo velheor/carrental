@@ -1,8 +1,8 @@
 package com.velheor.carrental.dao.api;
 
-import com.velheor.carrental.models.Model;
+import com.velheor.carrental.models.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IModelDAO extends JpaRepository<Model, Integer> {}
+public interface BrandRepository extends JpaRepository<Brand, Integer> {}
