@@ -2,8 +2,6 @@ package com.velheor.carrental.service.impl;
 
 import com.velheor.carrental.dao.api.CategoryRepository;
 import com.velheor.carrental.dto.CategoryDTO;
-import com.velheor.carrental.dto.CategoryDTO;
-import com.velheor.carrental.models.Car;
 import com.velheor.carrental.models.Category;
 import com.velheor.carrental.objectmapper.ObjectMapperUtils;
 import com.velheor.carrental.service.api.ICategoryService;
@@ -25,21 +23,25 @@ public class CategoryService implements ICategoryService {
 
   @Override
   public CategoryDTO findById(Integer id) {
-    return categoryRepository.findById(id).map(car -> objectMapperUtils.map(car, CategoryDTO.class))
+    return categoryRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, CategoryDTO.class))
         .orElse(null);
   }
 
   @Override
   public CategoryDTO create(CategoryDTO entityDTO) {
     return objectMapperUtils.map(
-        categoryRepository.save(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
+        categoryRepository.save(objectMapperUtils.map(entityDTO, Category.class)),
+        CategoryDTO.class);
   }
 
   @Override
   public CategoryDTO update(CategoryDTO entityDTO) {
     if (categoryRepository.findById(entityDTO.getId()).isPresent()) {
       objectMapperUtils.map(
-          categoryRepository.save(objectMapperUtils.map(entityDTO, Category.class)), CategoryDTO.class);
+          categoryRepository.save(objectMapperUtils.map(entityDTO, Category.class)),
+          CategoryDTO.class);
     }
     return null;
   }

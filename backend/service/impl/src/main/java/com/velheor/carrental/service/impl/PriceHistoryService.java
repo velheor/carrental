@@ -24,21 +24,25 @@ public class PriceHistoryService implements IPriceHistoryService {
 
   @Override
   public PriceHistoryDTO findById(Integer id) {
-    return priceHistoryRepository.findById(id).map(car -> objectMapperUtils.map(car, PriceHistoryDTO.class))
+    return priceHistoryRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, PriceHistoryDTO.class))
         .orElse(null);
   }
 
   @Override
   public PriceHistoryDTO create(PriceHistoryDTO entityDTO) {
     return objectMapperUtils.map(
-        priceHistoryRepository.save(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
+        priceHistoryRepository.save(objectMapperUtils.map(entityDTO, PriceHistory.class)),
+        PriceHistoryDTO.class);
   }
 
   @Override
   public PriceHistoryDTO update(PriceHistoryDTO entityDTO) {
     if (priceHistoryRepository.findById(entityDTO.getId()).isPresent()) {
       objectMapperUtils.map(
-          priceHistoryRepository.save(objectMapperUtils.map(entityDTO, PriceHistory.class)), PriceHistoryDTO.class);
+          priceHistoryRepository.save(objectMapperUtils.map(entityDTO, PriceHistory.class)),
+          PriceHistoryDTO.class);
     }
     return null;
   }

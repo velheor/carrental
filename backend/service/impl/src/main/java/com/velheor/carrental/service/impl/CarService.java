@@ -23,7 +23,9 @@ public class CarService implements ICarService {
 
   @Override
   public CarDTO findById(Integer id) {
-    return carRepository.findById(id).map(car -> objectMapperUtils.map(car, CarDTO.class))
+    return carRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, CarDTO.class))
         .orElse(null);
   }
 

@@ -23,7 +23,9 @@ public class BrandService implements IBrandService {
 
   @Override
   public BrandDTO findById(Integer id) {
-    return brandRepository.findById(id).map(brand -> objectMapperUtils.map(brand, BrandDTO.class))
+    return brandRepository
+        .findById(id)
+        .map(brand -> objectMapperUtils.map(brand, BrandDTO.class))
         .orElse(null);
   }
 

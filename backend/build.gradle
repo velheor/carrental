@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':backend:domain'), project(':backend:dto'),
-            project(':backend:controller'), project(':backend:dao'),
+            project(':backend:controller'), project(':backend:repository'),
             project(':backend:service'), project(':backend:utils'),
             project(':backend:exception')
 }

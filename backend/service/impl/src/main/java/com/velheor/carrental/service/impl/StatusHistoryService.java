@@ -24,21 +24,25 @@ public class StatusHistoryService implements IStatusHistoryService {
 
   @Override
   public StatusHistoryDTO findById(Integer id) {
-    return statusHistoryRepository.findById(id).map(car -> objectMapperUtils.map(car, StatusHistoryDTO.class))
+    return statusHistoryRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, StatusHistoryDTO.class))
         .orElse(null);
   }
 
   @Override
   public StatusHistoryDTO create(StatusHistoryDTO entityDTO) {
     return objectMapperUtils.map(
-        statusHistoryRepository.save(objectMapperUtils.map(entityDTO, StatusHistory.class)), StatusHistoryDTO.class);
+        statusHistoryRepository.save(objectMapperUtils.map(entityDTO, StatusHistory.class)),
+        StatusHistoryDTO.class);
   }
 
   @Override
   public StatusHistoryDTO update(StatusHistoryDTO entityDTO) {
     if (statusHistoryRepository.findById(entityDTO.getId()).isPresent()) {
       objectMapperUtils.map(
-          statusHistoryRepository.save(objectMapperUtils.map(entityDTO, StatusHistory.class)), StatusHistoryDTO.class);
+          statusHistoryRepository.save(objectMapperUtils.map(entityDTO, StatusHistory.class)),
+          StatusHistoryDTO.class);
     }
     return null;
   }

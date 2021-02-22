@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,9 @@ public class UserService implements IUserService {
 
   @Override
   public UserDTO findById(Integer id) {
-    return userRepository.findById(id).map(car -> objectMapperUtils.map(car, UserDTO.class))
+    return userRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, UserDTO.class))
         .orElse(null);
   }
 

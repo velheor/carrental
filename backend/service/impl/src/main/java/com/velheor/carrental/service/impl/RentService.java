@@ -23,7 +23,9 @@ public class RentService implements IRentService {
 
   @Override
   public RentDTO findById(Integer id) {
-    return rentRepository.findById(id).map(car -> objectMapperUtils.map(car, RentDTO.class))
+    return rentRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, RentDTO.class))
         .orElse(null);
   }
 

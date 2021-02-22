@@ -23,7 +23,9 @@ public class ModelService implements IModelService {
 
   @Override
   public ModelDTO findById(Integer id) {
-    return modelRepository.findById(id).map(car -> objectMapperUtils.map(car, ModelDTO.class))
+    return modelRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, ModelDTO.class))
         .orElse(null);
   }
 

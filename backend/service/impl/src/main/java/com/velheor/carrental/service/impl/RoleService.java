@@ -23,7 +23,9 @@ public class RoleService implements IRoleService {
 
   @Override
   public RoleDTO findById(Integer id) {
-    return roleRepository.findById(id).map(car -> objectMapperUtils.map(car, RoleDTO.class))
+    return roleRepository
+        .findById(id)
+        .map(car -> objectMapperUtils.map(car, RoleDTO.class))
         .orElse(null);
   }
 
