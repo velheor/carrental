@@ -1,94 +1,54 @@
 package com.velheor.carrental.service.impl;
 
-import com.velheor.carrental.dao.api.IRoleDAO;
+import com.velheor.carrental.dao.api.RoleRepository;
 import com.velheor.carrental.dto.RoleDTO;
 import com.velheor.carrental.models.Role;
 import com.velheor.carrental.objectmapper.ObjectMapperUtils;
 import com.velheor.carrental.service.api.IRoleService;
-import java.util.List;
-import java.util.Map;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class RoleService implements IRoleService {
 
-  private final IRoleDAO roleDAO;
+  private final RoleRepository roleRepository;
 
   private final ObjectMapperUtils objectMapperUtils;
 
   @Autowired
-  RoleService(IRoleDAO roleDAO, ObjectMapperUtils objectMapperUtils) {
-    this.roleDAO = roleDAO;
+  RoleService(RoleRepository roleRepository, ObjectMapperUtils objectMapperUtils) {
+    this.roleRepository = roleRepository;
     this.objectMapperUtils = objectMapperUtils;
   }
 
   @Override
-  public RoleDTO findByIdRoleWithUsersDTO(int id) {
-    return objectMapperUtils.map(roleDAO.findByIdRoleWithUsers(id), RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findAllAndSortWithDirectionRoleWithUsersDTO(
-      Map<String, String> fieldDirectionMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findAllAndSortWithDirectionRoleWithUsers(
-            DirectionAdapter.converterMap(fieldDirectionMap)),
-        RoleDTO.class);
-  }
-
-  @Override
-  public RoleDTO findOneByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.map(
-        roleDAO.findOneByCriteriaRoleWithUsers(fieldCriteriaMap), RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findAllByCriteriaRoleWithUsersDTO(Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findAllByCriteriaRoleWithUsers(fieldCriteriaMap), RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findByNotNullRoleWithUsersDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(roleDAO.findByNotNullRoleWithUsers(fields), RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findByNullRoleWithUsersDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(roleDAO.findByNullRoleWithUsers(fields), RoleDTO.class);
-  }
-
-  @Override
-  public List<RoleDTO> findAndSortRoleWithUsersDTO(
-      Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        roleDAO.findAndSortRoleWithUsers(
-            DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        RoleDTO.class);
+  public RoleDTO findById(Integer id) {
+    return roleRepository.findById(id).map(car -> objectMapperUtils.map(car, RoleDTO.class))
+        .orElse(null);
   }
 
   @Override
   public RoleDTO create(RoleDTO entityDTO) {
     return objectMapperUtils.map(
-        roleDAO.create(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+        roleRepository.save(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
   }
 
   @Override
   public RoleDTO update(RoleDTO entityDTO) {
-    return objectMapperUtils.map(
-        roleDAO.update(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+    if (roleRepository.findById(entityDTO.getId()).isPresent()) {
+      objectMapperUtils.map(
+          roleRepository.save(objectMapperUtils.map(entityDTO, Role.class)), RoleDTO.class);
+    }
+    return null;
   }
 
   @Override
   public void delete(RoleDTO entityDTO) {
-    roleDAO.delete(objectMapperUtils.map(entityDTO, Role.class));
+    roleRepository.delete(objectMapperUtils.map(entityDTO, Role.class));
   }
 
   @Override
   public void deleteById(int id) {
-    roleDAO.deleteById(id);
+    roleRepository.deleteById(id);
   }
 }

@@ -32,16 +32,16 @@ public class SecurityUser implements UserDetails {
     return new org.springframework.security.core.userdetails.User(
         user.getEmail(),
         user.getPassword(),
-        user.getStatusUser().equals(EStatusUser.ACTIVE),
-        user.getStatusUser().equals(EStatusUser.ACTIVE),
-        user.getStatusUser().equals(EStatusUser.ACTIVE),
-        user.getStatusUser().equals(EStatusUser.ACTIVE),
+        user.getStatus().equals(EStatusUser.ACTIVE),
+        user.getStatus().equals(EStatusUser.ACTIVE),
+        user.getStatus().equals(EStatusUser.ACTIVE),
+        user.getStatus().equals(EStatusUser.ACTIVE),
         mapToGrantedAuthorities(user.getRoles()));
   }
 
   private static List<GrantedAuthority> mapToGrantedAuthorities(Set<Role> userRoles) {
     return userRoles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
+        .map(role -> new SimpleGrantedAuthority(role.getName()))
         .collect(Collectors.toList());
   }
 

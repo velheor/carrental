@@ -2,11 +2,13 @@ package com.velheor.carrental.service.api;
 
 public interface IGenericService<T> {
 
-  T create(T entity);
+  T findById(Integer id);
 
-  T update(T entity);
+  T create(T entityDTO);
 
-  void delete(T entity);
+  T update(T entityDTO);
+
+  void delete(T entityDTO);
 
   void deleteById(int id);
 }

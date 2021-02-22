@@ -1,113 +1,54 @@
 package com.velheor.carrental.service.impl;
 
-import com.velheor.carrental.dao.api.ICarDAO;
+import com.velheor.carrental.dao.api.CarRepository;
 import com.velheor.carrental.dto.CarDTO;
 import com.velheor.carrental.models.Car;
-import com.velheor.carrental.models.Rent;
 import com.velheor.carrental.objectmapper.ObjectMapperUtils;
 import com.velheor.carrental.service.api.ICarService;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class CarService implements ICarService {
 
-  private final ICarDAO carDAO;
+  private final CarRepository carRepository;
 
   private final ObjectMapperUtils objectMapperUtils;
 
   @Autowired
-  public CarService(ICarDAO carDAO, ObjectMapperUtils objectMapperUtils) {
-    this.carDAO = carDAO;
+  public CarService(CarRepository carRepository, ObjectMapperUtils objectMapperUtils) {
+    this.carRepository = carRepository;
     this.objectMapperUtils = objectMapperUtils;
   }
 
   @Override
-  public CarDTO findByIdCarWithModelCategoryPriceHistoryBrandDTO(int id) {
-    return objectMapperUtils.map(
-        carDAO.findByIdCarWithModelCategoryPriceHistoryBrand(id), CarDTO.class);
-  }
-
-  @Override
-  public List<CarDTO> findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrandDTO(
-      Map<String, String> fieldDirectionMap) {
-    return objectMapperUtils.mapAll(
-        carDAO.findAllAndSortWithDirectionCarWithModelCategoryPriceHistoryBrand(
-            DirectionAdapter.converterMap(fieldDirectionMap)),
-        CarDTO.class);
-  }
-
-  @Override
-  public CarDTO findOneByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
-      Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.map(
-        carDAO.findOneByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriteriaMap),
-        CarDTO.class);
-  }
-
-  @Override
-  public List<CarDTO> findAllByCriteriaCarWithModelCategoryPriceHistoryBrandDTO(
-      Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        carDAO.findAllByCriteriaCarWithModelCategoryPriceHistoryBrand(fieldCriteriaMap),
-        CarDTO.class);
-  }
-
-  @Override
-  public List<CarDTO> findByNotNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        carDAO.findByNotNullCarWithModelCategoryPriceHistoryBrand(fields), CarDTO.class);
-  }
-
-  @Override
-  public List<CarDTO> findByNullCarWithModelCategoryPriceHistoryBrandDTO(List<String> fields) {
-    return objectMapperUtils.mapAll(
-        carDAO.findByNullCarWithModelCategoryPriceHistoryBrand(fields), CarDTO.class);
-  }
-
-  @Override
-  public List<CarDTO> findAndSortCarWithModelCategoryPriceHistoryBrandDTO(
-      Map<String, String> fieldDirectionMap, Map<String, Object> fieldCriteriaMap) {
-    return objectMapperUtils.mapAll(
-        carDAO.findAndSortCarWithModelCategoryPriceHistoryBrand(
-            DirectionAdapter.converterMap(fieldDirectionMap), fieldCriteriaMap),
-        CarDTO.class);
-  }
-
-  @Override
-  public Boolean isAvailableCarOnDate(int id, Date fromDate, Date toDate) {
-    for (Rent rent : carDAO.findByIdCarWithRents(id).getRents()) {
-      if (rent.getFromDate().compareTo(fromDate) <= 0 && rent.getToDate().compareTo(toDate) >= 0) {
-        return false;
-      }
-    }
-    return true;
+  public CarDTO findById(Integer id) {
+    return carRepository.findById(id).map(car -> objectMapperUtils.map(car, CarDTO.class))
+        .orElse(null);
   }
 
   @Override
   public CarDTO create(CarDTO entityDTO) {
     return objectMapperUtils.map(
-        carDAO.create(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+        carRepository.save(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
   }
 
   @Override
   public CarDTO update(CarDTO entityDTO) {
-    return objectMapperUtils.map(
-        carDAO.update(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    if (carRepository.findById(entityDTO.getId()).isPresent()) {
+      objectMapperUtils.map(
+          carRepository.save(objectMapperUtils.map(entityDTO, Car.class)), CarDTO.class);
+    }
+    return null;
   }
 
   @Override
   public void delete(CarDTO entityDTO) {
-    carDAO.delete(objectMapperUtils.map(entityDTO, Car.class));
+    carRepository.delete(objectMapperUtils.map(entityDTO, Car.class));
   }
 
   @Override
   public void deleteById(int id) {
-    carDAO.deleteById(id);
+    carRepository.deleteById(id);
   }
 }

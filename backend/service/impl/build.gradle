@@ -1,10 +1,12 @@
 dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jupiterTestVersion}"
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${jupiterTestVersion}"
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: "${springDataVersion}"
+
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.3'
 
-    implementation project(':backend:dao:daoApi'), project(':backend:domain'),
+    implementation project(':backend:repository:repositoryApi'), project(':backend:domain'),
             project(':backend:dto'), project(':backend:utils'),
             project(':backend:service:serviceApi'), project(':spring:security')
 }
