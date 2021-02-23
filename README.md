@@ -15,8 +15,7 @@
 - Log4j
 ### Database:
 - Hibernate
-- Criteria API
-- Entity graph
+- Spring Data jpa
 - MySql
 ### Database scheme:
 ![Image alt](https://github.com/velheor/carrental/blob/master/database.png)
