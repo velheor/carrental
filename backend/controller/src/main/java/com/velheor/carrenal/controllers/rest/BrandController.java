@@ -1,10 +1,11 @@
-package com.velheor.carrenal.controllers;
+package com.velheor.carrenal.controllers.rest;
 
 import com.velheor.carrental.dto.BrandDTO;
 import com.velheor.carrental.service.api.IBrandService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,13 +30,13 @@ public class BrandController {
 
   @GetMapping("/{id}")
   public BrandDTO getByIdUserWithRoles(@PathVariable("id") Integer id) {
-    return brandService.findByIdBrandWithModelsDTO(id);
+    return brandService.findById(id);
   }
 
   @GetMapping
   public List<BrandDTO> sortWithDirectionUsersWithRoles(
       @RequestParam Map<String, String> allParams) {
-    return brandService.findAllAndSortWithDirectionBrandWithModelsDTO(allParams);
+    return null;
   }
 
   @PutMapping
@@ -48,39 +50,14 @@ public class BrandController {
   }
 
   @DeleteMapping
-  public BrandDTO delete(@RequestBody BrandDTO brandDTO) {
+  @ResponseStatus(value = HttpStatus.OK)
+  public void delete(@RequestBody BrandDTO brandDTO) {
     brandService.delete(brandDTO);
-    return brandDTO;
   }
 
   @DeleteMapping("/{id}")
-  public BrandDTO deleteById(@PathVariable("id") Integer id) {
+  @ResponseStatus(value = HttpStatus.OK)
+  public void deleteById(@PathVariable("id") Integer id) {
     brandService.deleteById(id);
-    return brandService.findByIdBrandWithModelsDTO(id);
-  }
-
-  @GetMapping("/findOneByCriteria")
-  public BrandDTO findOneByCriteriaUserWithRoles(
-      @RequestParam Map<String, Object> fieldCriterionMap) {
-    return brandService.findOneByCriteriaBrandWithModelsDTO(fieldCriterionMap);
-  }
-
-  @GetMapping("/findAllByCriteriaMap")
-  public List<BrandDTO> findAllByCriteriaBrandWithModelsDTO(
-      @RequestParam Map<String, Object> fieldCriterionMap) {
-    return brandService.findAllByCriteriaBrandWithModelsDTO(fieldCriterionMap);
-  }
-
-  @GetMapping("/findByNotNull")
-  public List<BrandDTO> findByNotNullBrandWithModelsDTO(
-      @RequestParam("field") List<String> fields) {
-    return brandService.findByNotNullBrandWithModelsDTO(fields);
-  }
-
-  @GetMapping("/findAndSort")
-  public List<BrandDTO> findAndSortBrandWithModelsDTO(
-      @RequestParam Map<String, String> fieldDirectionMap,
-      @RequestParam Map<String, Object> fieldCriteriaMap) {
-    return brandService.findAndSortBrandWithModelsDTO(fieldDirectionMap, fieldCriteriaMap);
   }
 }
